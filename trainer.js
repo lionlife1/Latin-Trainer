@@ -282,17 +282,17 @@ function generateRandomQuestion(config) {
     let hint = "";
     if (verb.deponent) hint = `Principal parts: ${verb.pres}or, ${verb.inf}, ${verb.perf}us sum`;
     else if (verb.irregular) {
-      if (verb.inf === "esse") hint = `Principal parts: sum, esse, fui, futurus`;
-      else if (verb.inf === "posse") hint = `Principal parts: possum, posse, potui`;
-      else if (verb.inf === "velle") hint = `Principal parts: volo, velle, volui`;
-      else if (verb.inf === "nolle") hint = `Principal parts: nolo, nolle, nolui`;
-      else if (verb.inf === "malle") hint = `Principal parts: malo, malle, malui`;
-      else if (verb.inf === "ferre") hint = `Principal parts: fero, ferre, tuli, latus`;
-      else if (verb.inf === "ire") hint = `Principal parts: eo, ire, ivi, itus`;
-      else if (verb.inf === "fieri") hint = `Principal parts: fio, fieri, factus sum`;
+        if (verb.inf === "esse") hint = `Principal parts: sum, esse, fui, futurus`;
+        else if (verb.inf === "posse") hint = `Principal parts: possum, posse, potui`;
+        else if (verb.inf === "velle") hint = `Principal parts: volo, velle, volui`;
+        else if (verb.inf === "nolle") hint = `Principal parts: nolo, nolle, nolui`;
+        else if (verb.inf === "malle") hint = `Principal parts: malo, malle, malui`;
+        else if (verb.inf === "ferre") hint = `Principal parts: fero, ferre, tuli, latus`;
+        else if (verb.inf === "ire") hint = `Principal parts: eo, ire, ivi, itus`;
+        else if (verb.inf === "fieri") hint = `Principal parts: fio, fieri, factus sum`;
     }
-    else hint = `Principal parts: ${verb.pres}o, ${verb.inf}, ${verb.perf}i, ${verb.ppp || '--'}us`;
-    
+    else hint = `Principal parts: ${getPP1(verb)}, ${verb.inf}, ${verb.perf}i, ${verb.ppp || '--'}us`;
+
     return {
         id: "endless_" + Date.now() + Math.random(),
         type: "typein",
@@ -302,4 +302,10 @@ function generateRandomQuestion(config) {
         answers: answers,
         explanation: `The correct algorithmic form is ${answer}.`
     };
+}
+
+function getPP1(verb) {
+    if (verb.conj === 2) return verb.pres + 'eo';
+    if (verb.conj === 3.5 || verb.conj === 4) return verb.pres + 'io';
+    return verb.pres + 'o'; // 1st and 3rd
 }

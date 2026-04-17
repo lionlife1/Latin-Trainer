@@ -132,7 +132,7 @@ const MODULE_DB = {
         "type": "typein",
         "badge": "CONJUGATE",
         "prompt": "Give the <strong>1st person plural present active subjunctive</strong> of <span class='latin-word'>audire</span> (to hear).",
-        "hint": "4th conjugation: add -ā- after the stem vowel. 1pl = -mus.",
+        "hint": "4th conjugation: add -iā- after the stem vowel. 1pl = -mus.",
         "answers": ["audiamus"],
         "explanation": "4th conjugation: aud- + iā + mus = audiāmus."
       },

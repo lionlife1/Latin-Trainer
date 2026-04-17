@@ -277,7 +277,7 @@ function renderQuestion() {
   // Update progress bar
   const pct = (session.index / total) * 100;
   $('drill-progress-fill').style.width = pct + '%';
-  $('drill-progress-label').textContent = `${session.index} / ${total}`;
+  $('drill-progress-label').textContent = `${session.index + 1} / ${total}`;
   $('drill-score').textContent = session.score + ' pts';
 
   // Question card
@@ -318,6 +318,7 @@ $('question-card').addEventListener('click', () => {
 /* ---- Type-in submission ---- */
 
 function submitTypeIn() {
+  if (!$('feedback-overlay').classList.contains('hidden')) return; // already submitted
   const q = session.questions[session.index];
   const raw = $('answer-input').value;
   if (!raw.trim()) return;
