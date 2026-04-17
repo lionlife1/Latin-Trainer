@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LatinIQ — TSJCL Grammar</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Source+Code+Pro:wght@400;600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       SCREEN: MODULE MAP (Home)
+  ============================================================ -->
+  <div id="screen-map" class="screen active">
+    <header class="app-header">
+      <div class="header-logo">
+        <span class="logo-latin">LATIN</span><span class="logo-iq">IQ</span>
+      </div>
+      <div class="header-subtitle">TSJCL Advanced Grammar · Subjunctive Mastery</div>
+      <div class="header-meta">
+        <button id="btn-theme" class="btn-ghost" style="font-size: 1.2rem; padding: 2px 8px; margin-right: 8px;"
+          title="Toggle Theme">☀️</button>
+
+        <button id="btn-endless" class="btn-primary" style="padding: 6px 14px; font-size: 0.8rem; margin-right: 12px;">⚡
+          Endless Train</button>
+        <span id="streak-display" class="streak-badge">🔥 <span id="streak-count">0</span> day streak</span>
+        <span id="xp-display" class="xp-badge">⚡ <span id="xp-count">0</span> XP</span>
+      </div>
+    </header>
+
+    <main class="module-map">
+      <div class="map-title">
+        <span class="map-title-line">SELECT MODULE</span>
+      </div>
+
+      <div class="module-grid" id="module-grid">
+        <!-- Modules injected by JS -->
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <button class="btn-ghost" id="btn-reset-progress">↺ Reset Progress</button>
+      <span class="footer-note">Runs 100% offline · localStorage only</span>
+    </footer>
+  </div>
+
+  <!-- ============================================================
+       SCREEN: MODULE INTRO
+  ============================================================ -->
+  <div id="screen-intro" class="screen">
+    <div class="intro-card">
+      <button class="btn-back" id="intro-back">← Back</button>
+      <div class="intro-module-badge" id="intro-badge">M0</div>
+      <h1 class="intro-title" id="intro-title">Forms Bootcamp</h1>
+      <p class="intro-desc" id="intro-desc"></p>
+      <div class="intro-stats" id="intro-stats"></div>
+      <div class="intro-concepts" id="intro-concepts"></div>
+
+      <div class="intro-config" style="margin-bottom: 24px; padding-top: 16px; border-top: 1px solid var(--border);">
+        <label for="cfg-q-count" style="font-size: 0.95rem; color: var(--text-secondary); margin-right: 12px;">Session
+          Length:</label>
+        <select id="cfg-q-count"
+          style="background: var(--bg-surface); color: var(--text-primary); border: 1px solid var(--border); padding: 8px 16px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 1.05rem; cursor: pointer; outline: none;">
+        </select>
+      </div>
+
+      <button class="btn-primary" id="btn-start-module">Begin Session →</button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCREEN: DRILL SESSION
+  ============================================================ -->
+  <div id="screen-drill" class="screen">
+    <div class="drill-topbar">
+      <button class="btn-back-small" id="drill-back">✕</button>
+      <div class="drill-progress-wrap">
+        <div class="drill-progress-bar">
+          <div class="drill-progress-fill" id="drill-progress-fill"></div>
+        </div>
+        <span class="drill-progress-label" id="drill-progress-label">0 / 0</span>
+      </div>
+      <div class="drill-score" id="drill-score">0 pts</div>
+    </div>
+
+    <div class="drill-body">
+
+      <!-- Question card -->
+      <div class="question-card" id="question-card">
+        <div class="q-type-badge" id="q-type-badge">CONJUGATE</div>
+        <div class="q-prompt" id="q-prompt"></div>
+        <div class="q-hint" id="q-hint"></div>
+      </div>
+
+      <!-- Type-in answer area -->
+      <div class="answer-area" id="answer-area-typein">
+        <div class="input-wrap">
+          <input type="text" id="answer-input" class="answer-input" placeholder="Type your answer…" autocomplete="off"
+            autocorrect="off" autocapitalize="off" spellcheck="false" />
+          <button class="btn-submit" id="btn-submit">⏎ Check</button>
+        </div>
+        <div class="macron-toolbar" id="macron-toolbar">
+          <span class="macron-hint">Macrons optional — type without them:</span>
+          <span class="macron-note">ā=a ē=e ī=i ō=o ū=u</span>
+        </div>
+      </div>
+
+      <!-- Multiple choice area (for identify/translate Qs) -->
+      <div class="answer-area hidden" id="answer-area-mc">
+        <div class="mc-grid" id="mc-grid">
+          <!-- buttons injected by JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Feedback overlay -->
+    <div class="feedback-overlay hidden" id="feedback-overlay">
+      <div class="feedback-card" id="feedback-card">
+        <div class="feedback-icon" id="feedback-icon"></div>
+        <div class="feedback-verdict" id="feedback-verdict"></div>
+        <div class="feedback-correct" id="feedback-correct"></div>
+        <div class="feedback-explanation" id="feedback-explanation"></div>
+        <button class="btn-next" id="btn-next">Next →</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       SCREEN: SESSION COMPLETE
+  ============================================================ -->
+  <div id="screen-complete" class="screen">
+    <div class="complete-card">
+      <div class="complete-trophy">🏆</div>
+      <h1 class="complete-title">Session Complete!</h1>
+      <div class="complete-stats" id="complete-stats"></div>
+      <div class="complete-breakdown" id="complete-breakdown"></div>
+      <div class="complete-buttons">
+        <button class="btn-primary" id="btn-retry-wrong">Drill Wrong Answers</button>
+        <button class="btn-secondary" id="btn-back-map">← Module Map</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-endless" class="feedback-overlay hidden" style="align-items: center;">
+    <div class="feedback-card" style="max-width: 400px; padding: 32px;">
+      <h2 class="intro-title" style="font-size: 1.5rem; margin-bottom: 8px;">Endless Configuration</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 0.9rem;">Select the verb types you want to
+        grind.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; font-size: 1.05rem;">
+        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+          <input type="checkbox" id="cfg-std-act" checked style="width: 18px; height: 18px; accent-color: var(--gold);">
+          Standard (Active)
+        </label>
+        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+          <input type="checkbox" id="cfg-std-pass" checked
+            style="width: 18px; height: 18px; accent-color: var(--gold);">
+          Standard (Passive)
+        </label>
+        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+          <input type="checkbox" id="cfg-dep" checked style="width: 18px; height: 18px; accent-color: var(--gold);">
+          Deponents
+        </label>
+        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+          <input type="checkbox" id="cfg-irr" checked style="width: 18px; height: 18px; accent-color: var(--gold);">
+          Irregulars
+        </label>
+      </div>
+
+      <div style="display: flex; gap: 12px; justify-content: flex-end;">
+        <button class="btn-secondary" id="btn-cancel-endless" style="padding: 10px 16px;">Cancel</button>
+        <button class="btn-primary" id="btn-start-endless-drill" style="padding: 10px 20px;">Start Grinding ⚡</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="trainer.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

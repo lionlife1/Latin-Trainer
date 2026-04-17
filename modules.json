@@ -1,0 +1,92 @@
+[
+  {
+    "id": "forms_bootcamp",
+    "badge": "M0",
+    "title": "Forms Bootcamp",
+    "tagline": "Conjugate all four subjunctive tenses, active & passive",
+    "file": "module0.json",
+    "prerequisites": [],
+    "xp_reward": 120
+  },
+  {
+    "id": "sequence_of_tenses",
+    "badge": "M1",
+    "title": "Sequence of Tenses",
+    "tagline": "Primary vs. Secondary — the grammar backbone",
+    "file": "module1.json",
+    "prerequisites": ["forms_bootcamp"],
+    "xp_reward": 100
+  },
+  {
+    "id": "independent_uses",
+    "badge": "M2",
+    "title": "Independent Subjunctive",
+    "tagline": "Hortatory, Jussive, Optative, Deliberative",
+    "file": "module2.json",
+    "prerequisites": ["forms_bootcamp"],
+    "xp_reward": 100
+  },
+  {
+    "id": "purpose_result_indirect",
+    "badge": "M3",
+    "title": "Purpose · Result · Indirect Command",
+    "tagline": "ut/nē discrimination drills",
+    "file": "module3.json",
+    "prerequisites": ["sequence_of_tenses", "independent_uses"],
+    "xp_reward": 110
+  },
+  {
+    "id": "cum_clauses",
+    "badge": "M4",
+    "title": "Cum Clauses",
+    "tagline": "Circumstantial, Causal, Concessive, Inversum",
+    "file": "module4.json",
+    "prerequisites": ["sequence_of_tenses"],
+    "xp_reward": 100
+  },
+  {
+    "id": "indirect_question",
+    "badge": "M5",
+    "title": "Indirect Question",
+    "tagline": "Interrogative words + subjunctive in reported speech",
+    "file": "module5.json",
+    "prerequisites": ["sequence_of_tenses"],
+    "xp_reward": 90
+  },
+  {
+    "id": "fear_clauses",
+    "badge": "M6",
+    "title": "Fear Clauses",
+    "tagline": "timēre/verērī + nē / ut",
+    "file": "module6.json",
+    "prerequisites": ["sequence_of_tenses"],
+    "xp_reward": 80
+  },
+  {
+    "id": "conditionals",
+    "badge": "M7",
+    "title": "Conditionals",
+    "tagline": "All six types — Simple to Contrary-to-Fact",
+    "file": "module7.json",
+    "prerequisites": ["sequence_of_tenses"],
+    "xp_reward": 120
+  },
+  {
+    "id": "quin_clauses",
+    "badge": "M8",
+    "title": "Quin Clauses",
+    "tagline": "Doubting and preventing with quin",
+    "file": "module8.json",
+    "prerequisites": ["purpose_result_indirect"],
+    "xp_reward": 90
+  },
+  {
+    "id": "relative_subjunctive",
+    "badge": "M9",
+    "title": "Relative Clause Subjunctive",
+    "tagline": "Purpose, Result, Characteristic relative clauses",
+    "file": "module9.json",
+    "prerequisites": ["purpose_result_indirect"],
+    "xp_reward": 100
+  }
+]
