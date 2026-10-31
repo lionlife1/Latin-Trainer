@@ -5,6 +5,7 @@ import { StudentJoin } from './features/auth/StudentJoin';
 import { StudentLogin } from './features/auth/StudentLogin';
 import { TeacherLogin } from './features/auth/TeacherLogin';
 import { SoloHome } from './features/solo/SoloHome';
+import { StudentRoutes } from './features/student/StudentRoutes';
 import { TeacherRoutes } from './features/teacher/TeacherRoutes';
 import { hasBackend } from './lib/supabase';
 
@@ -19,7 +20,7 @@ export default function App() {
               <Route path="/join" element={<StudentJoin />} />
               <Route path="/student/login" element={<StudentLogin />} />
               <Route path="/teacher/login" element={<TeacherLogin />} />
-              <Route path="/s/*" element={<RequireRole role="student"><div className="page">Student area</div></RequireRole>} />
+              <Route path="/s/*" element={<RequireRole role="student"><StudentRoutes /></RequireRole>} />
               <Route path="/t/*" element={<RequireRole role="teacher"><TeacherRoutes /></RequireRole>} />
             </>
           )}
