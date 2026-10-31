@@ -1,3 +1,12 @@
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import { SoloHome } from './features/solo/SoloHome';
+
 export default function App() {
-  return <div className="app-loading">LatinIQ</div>;
+  return (
+    <HashRouter>
+      <Routes>
+        <Route path="*" element={<SoloHome />} />
+      </Routes>
+    </HashRouter>
+  );
 }
