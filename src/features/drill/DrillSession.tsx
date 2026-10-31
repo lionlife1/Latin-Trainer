@@ -65,6 +65,7 @@ export function DrillSession({ questions, mode, onAnswer, generate, onFinish, on
         <Feedback
           correct={lastResult.correct === true}
           answer={correctDisplay(current)}
+          answerIsHtml={current.type === 'mc'}
           explanation={current.explanation}
           onNext={drill.next}
         />

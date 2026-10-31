@@ -106,5 +106,8 @@ select tests.as_admin();
 select tests.ok((select role from profiles where id = tests.uid('s4')) = 'student', 'joined user has student profile');
 select tests.ok((select display_name from profiles where id = tests.uid('s4')) = 'Marcus', 'profile display name trimmed');
 
+-- Lexicon search text ignores macrons
+select tests.ok(exists (select 1 from lexicon where search_text like '%capio%' and owner_id is null), 'lexicon search_text is macron-free');
+
 rollback;
 \echo functions ok

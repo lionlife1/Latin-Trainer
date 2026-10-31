@@ -3,6 +3,9 @@
 // when present, otherwise content/starter-lexicon.json.
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { MODULES } from '../src/content/modules';
+import { lemmaOf } from '../src/lib/lexicon';
+
+export { lemmaOf };
 
 export interface LexiconRow {
   headword: string;
@@ -15,10 +18,6 @@ export interface LexiconRow {
 const lit = (v: unknown): string =>
   v === null || v === undefined ? 'null' : typeof v === 'number' ? String(v) : `'${String(v).replace(/'/g, "''")}'`;
 const json = (v: unknown): string => (v === undefined || v === null ? 'null' : `${lit(JSON.stringify(v))}::jsonb`);
-
-export function lemmaOf(headword: string): string {
-  return headword.trim().split(/[,\s]/)[0];
-}
 
 /** Minimal RFC 4180 CSV parser (quoted fields, doubled quotes, CRLF). */
 export function parseCsv(text: string): string[][] {

@@ -3,11 +3,13 @@ import { useEffect } from 'react';
 interface Props {
   correct: boolean;
   answer: string;
+  /** MC choices may contain markup from built-in content; typed answers are plain text. */
+  answerIsHtml?: boolean;
   explanation?: string;
   onNext: () => void;
 }
 
-export function Feedback({ correct, answer, explanation, onNext }: Props) {
+export function Feedback({ correct, answer, answerIsHtml, explanation, onNext }: Props) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Enter') onNext();
@@ -27,7 +29,7 @@ export function Feedback({ correct, answer, explanation, onNext }: Props) {
         <div className="feedback-verdict">{correct ? 'Correct!' : 'Not quite.'}</div>
         <div className="feedback-correct">
           {correct ? 'Answer: ' : 'Correct answer: '}
-          <strong dangerouslySetInnerHTML={{ __html: answer }} />
+          {answerIsHtml ? <strong dangerouslySetInnerHTML={{ __html: answer }} /> : <strong>{answer}</strong>}
         </div>
         {explanation && <div className="feedback-explanation">{explanation}</div>}
         <button className="btn-next" onClick={onNext}>Next →</button>
