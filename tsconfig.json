@@ -13,7 +13,8 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "noEmit": true,
+    "allowImportingTsExtensions": true,
     "types": ["vitest/globals", "@testing-library/jest-dom", "node"]
   },
-  "include": ["src", "tests/fixtures", "scripts", "supabase/functions/_shared"]
+  "include": ["src", "tests/fixtures", "scripts", "supabase/functions/_shared/validate*.ts", "supabase/functions/_shared/handlers*.ts"]
 }

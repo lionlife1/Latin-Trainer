@@ -1,12 +1,30 @@
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './features/auth/AuthProvider';
+import { RequireRole } from './features/auth/RequireRole';
+import { StudentJoin } from './features/auth/StudentJoin';
+import { StudentLogin } from './features/auth/StudentLogin';
+import { TeacherLogin } from './features/auth/TeacherLogin';
 import { SoloHome } from './features/solo/SoloHome';
+import { hasBackend } from './lib/supabase';
 
 export default function App() {
   return (
     <HashRouter>
-      <Routes>
-        <Route path="*" element={<SoloHome />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<SoloHome />} />
+          {hasBackend && (
+            <>
+              <Route path="/join" element={<StudentJoin />} />
+              <Route path="/student/login" element={<StudentLogin />} />
+              <Route path="/teacher/login" element={<TeacherLogin />} />
+              <Route path="/s/*" element={<RequireRole role="student"><div className="page">Student area</div></RequireRole>} />
+              <Route path="/t/*" element={<RequireRole role="teacher"><div className="page">Teacher area</div></RequireRole>} />
+            </>
+          )}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AuthProvider>
     </HashRouter>
   );
 }
