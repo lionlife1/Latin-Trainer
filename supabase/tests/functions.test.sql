@@ -77,6 +77,16 @@ select tests.ok((submit_test((select id from o_att), jsonb_build_array(jsonb_bui
   'over-time submission still graded');
 select tests.ok((select over_time from attempts where id = (select id from o_att)), 'over_time flagged');
 
+-- Reveal policy: with attempts left and no due date passed, a submitted test must not reveal answers
+-- (otherwise: submit blank, read answers, retake).
+select tests.ok(not exists (select 1 from get_attempt_items((select id from o_att)) g where g.question ? 'answers'),
+  'answers hidden while the student can still retake');
+select tests.as_admin();
+update assignments set due_at = now() - interval '1 minute' where id = tests.uid('a4');
+select tests.as_user('s2');
+select tests.ok(exists (select 1 from get_attempt_items((select id from o_att)) g where g.question ? 'answers'),
+  'answers revealed once the due date has passed');
+
 -- Teacher reports
 select tests.as_user('s1');
 select tests.throws(format($$select * from item_analysis(%L)$$, tests.uid('a1')), 'student cannot run item analysis', '42501');

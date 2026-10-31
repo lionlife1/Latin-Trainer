@@ -107,7 +107,18 @@ export function AssignmentBuilder({ classId, onPublished }: Props) {
         <span>Mode</span>
         <div className="row">
           <label><input type="radio" name="mode" checked={mode === 'practice'} onChange={() => setMode('practice')} /> Practice (instant feedback)</label>
-          <label><input type="radio" name="mode" checked={mode === 'test'} onChange={() => setMode('test')} /> Test (graded on submit)</label>
+          <label>
+            <input
+              type="radio"
+              name="mode"
+              checked={mode === 'test'}
+              onChange={() => {
+                setMode('test');
+                if (maxAttempts === '') setMaxAttempts('1');
+              }}
+            />{' '}
+            Test (graded on submit)
+          </label>
         </div>
       </div>
 
@@ -163,6 +174,13 @@ export function AssignmentBuilder({ classId, onPublished }: Props) {
         </>
       )}
 
+      {mode === 'test' && kind === 'modules' && (
+        <p className="pill warn" role="note">
+          Built-in module questions also appear in solo practice, so students can look these answers up. Use them for
+          low-stakes quizzes; for a secure test, use your own vocab list.
+        </p>
+      )}
+
       <p className="muted" data-testid="pool-size">Pool: {poolSize} questions</p>
 
       <div className="row">
@@ -187,7 +205,8 @@ export function AssignmentBuilder({ classId, onPublished }: Props) {
       </div>
       {mode === 'test' && (
         <label className="small">
-          <input type="checkbox" checked={reveal} onChange={e => setReveal(e.target.checked)} /> Show students the correct answers after they submit
+          <input type="checkbox" checked={reveal} onChange={e => setReveal(e.target.checked)} /> Show students the correct
+          answers after the due date or once a student has used all attempts
         </label>
       )}
 

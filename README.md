@@ -68,7 +68,13 @@ CSV to `content/raw/dcc-core.csv`, run `npm run seed`, apply `supabase/seed.sql`
 This stores student display names, answers and scores. Before using it with a real class, get your
 teacher's and, if required, the district's approval. Student data rules (FERPA and Texas state law) can
 apply even to free tools. The design keeps data minimal on purpose: no student emails, nicknames allowed.
-Student PINs are short, so keep Supabase's auth rate limits enabled.
+Student PINs are short, so keep Supabase's auth rate limits enabled. A whole class usually signs in from
+one school IP address, though, so raise the sign-in limit (Authentication → Rate Limits, "sign-ins and
+sign-ups", or `[auth.rate_limit] sign_in_sign_ups` in `supabase/config.toml`) to roughly
+2 × class size per 5 minutes. That's enough for a class to join at once while still throttling PIN guessing.
+
+Tests built from the built-in grammar modules are not secret: the same questions are in solo practice.
+Use them for low-stakes quizzes, and use your own vocab lists for anything that counts.
 
 ## Project layout
 

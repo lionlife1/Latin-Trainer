@@ -1,6 +1,6 @@
-import { enqueue, flush, pending, type QueueJob } from './offlineQueue';
+import { enqueue, flush, pending, PermanentError, type QueueJob } from './offlineQueue';
 
-const job = (n: number): QueueJob => ({ attemptId: 'a', poolId: `p${n}`, given: `g${n}`, ms: n });
+const job = (n: number, userId = 'u1', attemptId = 'a'): QueueJob => ({ userId, attemptId, poolId: `p${n}`, given: `g${n}`, ms: n });
 
 beforeEach(() => localStorage.clear());
 
@@ -30,6 +30,30 @@ describe('offlineQueue', () => {
       if (j.poolId === 'p2') throw new Error('offline');
     });
     expect(res).toEqual({ sent: 1, remaining: 2 });
+    expect(pending().map(j => j.poolId)).toEqual(['p2', 'p3']);
+  });
+
+  it('drops jobs that can never succeed and keeps going', async () => {
+    enqueue(job(1));
+    enqueue(job(2));
+    const sent: string[] = [];
+    const res = await flush(async j => {
+      if (j.poolId === 'p1') throw new PermanentError('attempt already submitted');
+      sent.push(j.poolId);
+    });
+    expect(sent).toEqual(['p2']);
+    expect(res).toEqual({ sent: 1, remaining: 0 });
+    expect(pending()).toEqual([]);
+  });
+
+  it('only sends jobs matching the filter and leaves the rest (other users on a shared device)', async () => {
+    enqueue(job(1, 'u1', 'a'));
+    enqueue(job(2, 'u2', 'b'));
+    enqueue(job(3, 'u1', 'c'));
+    const sent: string[] = [];
+    const res = await flush(async j => { sent.push(j.poolId); }, j => j.userId === 'u1' && j.attemptId === 'a');
+    expect(sent).toEqual(['p1']);
+    expect(res).toEqual({ sent: 1, remaining: 0 });
     expect(pending().map(j => j.poolId)).toEqual(['p2', 'p3']);
   });
 });

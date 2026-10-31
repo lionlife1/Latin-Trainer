@@ -1,4 +1,4 @@
-import { flush, type QueueJob } from '../../lib/offlineQueue';
+import { flush, PermanentError, type QueueJob } from '../../lib/offlineQueue';
 import { requireSupabase } from '../../lib/supabase';
 import type { AssignmentMode, DrillQuestion, PublicQuestion } from '../../lib/types';
 
@@ -48,10 +48,19 @@ export const getAttemptItems = async (attemptId: string) =>
 export const getResponses = async (attemptId: string) =>
   must<ResponseRow[]>(await sb().from('responses').select('pool_id, given, correct').eq('attempt_id', attemptId));
 
+/** Throws PermanentError when the server rejects the answer for good (not your attempt, already submitted). */
 export async function recordPractice(job: QueueJob): Promise<void> {
-  must(await sb().rpc('record_practice_response', { p_attempt_id: job.attemptId, p_pool_id: job.poolId, p_given: job.given, p_ms: job.ms }));
+  const { error } = await sb().rpc('record_practice_response', {
+    p_attempt_id: job.attemptId, p_pool_id: job.poolId, p_given: job.given, p_ms: job.ms,
+  });
+  if (!error) return;
+  if (error.code === '42501' || error.code === 'P0001') throw new PermanentError(error.message);
+  throw new Error(error.message);
 }
-export const flushPracticeQueue = () => flush(recordPractice);
+
+/** Retries queued practice answers for this user (optionally one attempt only). */
+export const flushPracticeQueue = (userId: string, attemptId?: string) =>
+  flush(recordPractice, j => j.userId === userId && (!attemptId || j.attemptId === attemptId));
 
 export const finishPractice = async (attemptId: string) =>
   must<{ score: number; total: number }>(await sb().rpc('finish_practice', { p_attempt_id: attemptId }));

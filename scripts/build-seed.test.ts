@@ -9,6 +9,8 @@ describe('build-seed helpers', () => {
     expect(lemmaOf('ab, ā + abl.')).toBe('ab');
     expect(lemmaOf('nōn')).toBe('nōn');
     expect(lemmaOf('in + acc./abl.')).toBe('in');
+    expect(lemmaOf('rēs pūblica, reī pūblicae, f.')).toBe('rēs pūblica');
+    expect(lemmaOf('cum + abl.')).toBe('cum');
   });
   it('maps DCC columns by header name', () => {
     const csv = 'Headword,Definition,Part of Speech,Frequency Rank\n"capiō, capere, cēpī, captum","take, seize",Verb,34\n';

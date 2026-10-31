@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { enqueue } from '../../lib/offlineQueue';
+import { enqueue, PermanentError, type QueueJob } from '../../lib/offlineQueue';
 import type { DrillQuestion } from '../../lib/types';
 import { useAsync } from '../../lib/useAsync';
+import { useAuth } from '../auth/AuthProvider';
 import { DrillSession } from '../drill/DrillSession';
 import {
   finishPractice, flushPracticeQueue, getAssignment, getAttempt, getAttemptItems, recordPractice, startAttempt,
@@ -19,13 +20,40 @@ export function RunAssignment() {
   const [run, setRun] = useState<Run | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [finishing, setFinishing] = useState<'no' | 'saving' | 'failed'>('no');
+  const inFlight = useRef(new Set<Promise<void>>());
+  const userId = useAuth().profile?.id ?? '';
 
   useEffect(() => {
-    const retry = () => void flushPracticeQueue();
+    if (!userId) return;
+    const retry = () => void flushPracticeQueue(userId);
     retry();
     window.addEventListener('online', retry);
     return () => window.removeEventListener('online', retry);
-  }, []);
+  }, [userId]);
+
+  const savePractice = (job: QueueJob) => {
+    const p = recordPractice(job).catch(e => {
+      if (!(e instanceof PermanentError)) enqueue(job);
+    });
+    inFlight.current.add(p);
+    void p.finally(() => inFlight.current.delete(p));
+  };
+
+  const finishRun = async (attemptId: string) => {
+    setFinishing('saving');
+    setError(null);
+    try {
+      await Promise.all([...inFlight.current]);
+      const { remaining } = await flushPracticeQueue(userId, attemptId);
+      if (remaining > 0) throw new Error('Some answers have not reached the server yet. Check your connection.');
+      await finishPractice(attemptId);
+      navigate(`/s/attempt/${attemptId}`);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+      setFinishing('failed');
+    }
+  };
 
   const begin = async () => {
     setBusy(true);
@@ -44,26 +72,32 @@ export function RunAssignment() {
   const a = assignment.data;
   if (!a) return <p className="muted">Loading…</p>;
 
+  if (run && a.mode === 'practice' && finishing !== 'no') {
+    return (
+      <div className="complete-card" style={{ margin: '0 auto' }}>
+        {finishing === 'saving' ? (
+          <p className="muted">Saving your answers…</p>
+        ) : (
+          <>
+            <p className="form-error" role="alert">{error}</p>
+            <button className="btn-primary" onClick={() => finishRun(run.attempt.id)}>Try again</button>
+          </>
+        )}
+      </div>
+    );
+  }
+
   if (run && a.mode === 'practice') {
     const poolIdOf = new Map<DrillQuestion, string>(run.items.map(i => [i.question as DrillQuestion, i.pool_id]));
     return (
       <DrillSession
         questions={run.items.map(i => i.question as DrillQuestion)}
         mode="practice"
-        onAnswer={(q, given, _correct, ms) => {
-          const job = { attemptId: run.attempt.id, poolId: poolIdOf.get(q)!, given, ms };
-          recordPractice(job).catch(() => enqueue(job));
-        }}
+        onAnswer={(q, given, _correct, ms) =>
+          savePractice({ userId, attemptId: run.attempt.id, poolId: poolIdOf.get(q)!, given, ms })
+        }
         onExit={() => navigate('/s')}
-        onFinish={async () => {
-          const { remaining } = await flushPracticeQueue();
-          if (remaining > 0) {
-            setError('Some answers have not reached the server yet. Check your connection; they will be sent automatically.');
-            return;
-          }
-          await finishPractice(run.attempt.id);
-          navigate(`/s/attempt/${run.attempt.id}`);
-        }}
+        onFinish={() => void finishRun(run.attempt.id)}
       />
     );
   }

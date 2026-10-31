@@ -56,7 +56,7 @@ begin
   return att;
 end $$;
 
--- Questions for an attempt. Answers are stripped for tests until submitted (and only shown if reveal_answers).
+-- Questions for an attempt. Test answers are stripped unless reveal_answers and the student can't retake.
 create function public.get_attempt_items(p_attempt_id uuid)
 returns table (pool_id uuid, "position" int, question jsonb)
 language plpgsql stable security definer set search_path = public as $$
@@ -71,7 +71,13 @@ begin
   if t.student_id <> auth.uid() and not is_class_teacher(a.class_id) then
     raise exception 'not your attempt' using errcode = '42501';
   end if;
-  reveal := a.mode = 'practice' or is_class_teacher(a.class_id) or (t.submitted_at is not null and a.reveal_answers);
+  -- Test answers are revealed only when the student can no longer retake (attempts used up or due date
+  -- passed); otherwise a student could submit blank, read the answers and retake.
+  reveal := a.mode = 'practice' or is_class_teacher(a.class_id) or (
+    t.submitted_at is not null and a.reveal_answers and (
+      coalesce(now() > a.due_at, false)
+      or (a.max_attempts is not null and
+          (select count(*) from attempts x where x.assignment_id = a.id and x.student_id = t.student_id) >= a.max_attempts)));
   return query
     select i.pool_id, i.position,
            case when reveal then p.question else p.question - 'answers' - 'correct' - 'explanation' end

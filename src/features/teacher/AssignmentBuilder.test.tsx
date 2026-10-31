@@ -47,6 +47,15 @@ describe('AssignmentBuilder', () => {
     expect(screen.getByLabelText(/time limit/i)).toBeInTheDocument();
   });
 
+  it('defaults tests to one attempt and warns that module answers are public', async () => {
+    renderBuilder();
+    expect(screen.queryByText(/students can look these answers up/i)).not.toBeInTheDocument();
+    await userEvent.click(screen.getByLabelText(/^test/i));
+    expect(screen.getByLabelText(/max attempts/i)).toHaveValue(1);
+    expect(screen.getByText(/students can look these answers up/i)).toBeInTheDocument();
+    expect(screen.getByText(/after the due date or once a student has used all attempts/i)).toBeInTheDocument();
+  });
+
   it('publishes a pool snapshot with answers', async () => {
     renderBuilder();
     await userEvent.type(screen.getByLabelText(/title/i), 'Forms quiz');
