@@ -62,7 +62,7 @@
 
 ### Task 3: Migration and RLS tests
 
-**Files:** Create `supabase/migrations/20261101000001_practice_sessions.sql`. Modify `supabase/tests/rls.test.sql`.
+**Files:** Create `supabase/migrations/20261101152412_practice_sessions.sql`. Modify `supabase/tests/rls.test.sql`.
 
 - [ ] SQL exactly as in the spec, plus RLS enabled, `practice_sessions_select` / `practice_sessions_insert` policies `to authenticated` on `user_id = auth.uid()`, and `grant select, insert on public.practice_sessions to authenticated`.
 - [ ] RLS tests: s1 inserts own row (ok), s1 inserts with user_id s2 (throws), s2 sees 0 of s1's rows, s1 update/delete affects 0 rows.

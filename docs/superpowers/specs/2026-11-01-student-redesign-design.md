@@ -115,7 +115,7 @@ interface PracticeSession {
 
 ### Server table
 
-Migration `20261101000001_practice_sessions.sql`:
+Migration `20261101152412_practice_sessions.sql`:
 
 ```sql
 create table public.practice_sessions (
