@@ -94,7 +94,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-small { padding: 7px 12px; font-size: 0.85rem; }
 .btn-back {
   background: none; border: none; color: var(--ink-2); font-weight: 500; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 4px; padding: 4px 0; margin-bottom: 20px;
+  display: flex; width: fit-content; align-items: center; gap: 4px; padding: 4px 0; margin-bottom: 20px;
 }
 .btn-back:hover { color: var(--ink); }
 
@@ -115,6 +115,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .intro-stat-label { font-size: 0.8rem; color: var(--ink-2); }
 .intro-concepts { margin-bottom: 24px; }
 .intro-concepts-title { font-size: 0.8rem; font-weight: 600; color: var(--ink-2); margin-bottom: 8px; }
+@media (max-width: 560px) { .intro-card, .complete-card { padding: 24px 20px; margin-top: 16px; } }
 .concept-tag {
   display: inline-block; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 99px;
   padding: 3px 10px; margin: 0 6px 6px 0; color: var(--ink-2);

@@ -135,7 +135,12 @@ a.subject:hover { border-color: var(--primary); }
 .path-sub { font-size: 0.88rem; color: var(--ink-2); }
 .path-status { font-size: 0.85rem; color: var(--ink-2); flex-shrink: 0; text-align: right; }
 .path-step.next .path-link { background: var(--primary-tint); padding-left: 0; }
-@media (max-width: 480px) { .path-status { display: none; } .path-status.always { display: block; } }
+@media (max-width: 480px) {
+  .path-link { flex-wrap: wrap; row-gap: 0; }
+  .path-text { flex-basis: calc(100% - 60px); }
+  .path-status { flex-basis: 100%; padding-left: 60px; text-align: left; margin-top: -2px; }
+  .path-status:not(.always) { display: none; }
+}
 
 /* ---- Class gate and auth ---- */
 .gate { max-width: 440px; margin: 24px auto; padding: 28px; text-align: center; }
@@ -151,3 +156,5 @@ a.subject:hover { border-color: var(--primary); }
 .header-subtitle { color: var(--ink-2); font-weight: 500; font-size: 0.92rem; }
 .header-meta { margin-left: auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .header-meta .link.active { font-weight: 700; }
+.auth-card > p.muted { margin-bottom: 18px; }
+.auth-card .btn-primary { width: 100%; margin-top: 4px; }
