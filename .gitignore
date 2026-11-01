@@ -7,3 +7,36 @@ test-results
 playwright-report
 supabase/.temp
 *.tsbuildinfo
+
+# Environment files (keep the example)
+.env.*
+!.env.example
+*.local
+
+# Build and tool caches
+.vite/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test output
+coverage/
+blob-report/
+playwright/.cache/
+
+# Supabase CLI local state and secrets
+supabase/.branches
+supabase/.env
+supabase/functions/.env
+
+# Downloaded dictionary source (see README "Dictionary data")
+content/raw/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
