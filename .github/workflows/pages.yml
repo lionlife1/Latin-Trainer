@@ -1,0 +1,48 @@
+# Builds the site and publishes dist/ to the gh-pages branch.
+# One-time setup: Settings → Pages → Source: "Deploy from a branch" → gh-pages / (root).
+# Classroom mode: add repo Variables VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY
+# (Settings → Secrets and variables → Actions → Variables). Without them the site runs in solo mode.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm test
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          VITE_LEXICON_ATTRIBUTION: ${{ vars.VITE_LEXICON_ATTRIBUTION }}
+
+      # Pages runs Jekyll on branch deploys by default; skip it so files are served as-is.
+      - run: touch dist/.nojekyll
+
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true

@@ -50,11 +50,24 @@ npm run dev
 
 ## Deploying
 
+### Website (GitHub Pages)
+
+Every push to `main` runs `.github/workflows/pages.yml`, which tests, builds, and publishes the built
+site to the `gh-pages` branch. One-time setup after the first run:
+
+1. Settings → Pages → Source: **Deploy from a branch** → `gh-pages` / `(root)`.
+2. The site is at `https://<user>.github.io/Latin-Trainer/`. Without step 3 it runs in solo mode.
+
+### Classroom backend (Supabase)
+
 1. Create a Supabase project. Link it and push the schema: `supabase link`, `supabase db push`,
    then run `supabase/seed.sql` in the SQL editor (or `psql`).
 2. Deploy the edge functions: `supabase functions deploy student-join student-login reset-pin`.
-3. Build the site with `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` set and host `dist/` anywhere
-   static (Netlify config included; GitHub Pages also works since the app uses hash routing).
+3. In GitHub: Settings → Secrets and variables → Actions → **Variables**, add `VITE_SUPABASE_URL` and
+   `VITE_SUPABASE_ANON_KEY` (the anon key is meant to be public), then re-run the workflow.
+4. In Supabase: Authentication → URL Configuration → Site URL = your Pages URL.
+
+Netlify works too (`netlify.toml` included); set the same two variables there.
 
 ## Dictionary data
 
