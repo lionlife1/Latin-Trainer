@@ -1,0 +1,153 @@
+/* Student shell, Practice and Class pages. */
+
+/* ---- Shell ---- */
+.shell { min-height: 100vh; display: flex; flex-direction: column; }
+.topbar {
+  position: sticky; top: 0; z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line);
+}
+.topbar-inner {
+  max-width: 1040px; margin: 0 auto; padding: 0 16px; height: 60px;
+  display: flex; align-items: center; gap: 24px;
+}
+.wordmark { font-weight: 700; font-size: 1.2rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.wordmark span { color: var(--primary); }
+.tabs { display: flex; gap: 4px; height: 100%; }
+.tab {
+  display: inline-flex; align-items: center; gap: 8px; padding: 0 12px; height: 100%;
+  color: var(--ink-2); text-decoration: none; font-weight: 600; font-size: 0.95rem;
+  border-bottom: 3px solid transparent; margin-bottom: -1px;
+}
+.tab:hover { color: var(--ink); }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+.account { margin-left: auto; display: flex; align-items: center; gap: 8px; position: relative; }
+.account-btn {
+  display: inline-flex; align-items: center; gap: 8px; background: none; border: 1px solid transparent;
+  border-radius: 99px; padding: 4px 10px 4px 4px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
+}
+.account-btn:hover { background: var(--surface-subtle); }
+.avatar {
+  width: 30px; height: 30px; border-radius: 50%; background: var(--primary-tint); color: var(--primary);
+  display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;
+}
+.account-menu {
+  position: absolute; right: 0; top: calc(100% + 6px); background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r-control); box-shadow: var(--shadow-raised); min-width: 180px; padding: 6px; z-index: 30;
+}
+.account-menu button, .account-menu a {
+  display: block; width: 100%; text-align: left; background: none; border: none; padding: 9px 10px;
+  border-radius: 6px; cursor: pointer; color: var(--ink); text-decoration: none; font-size: 0.92rem;
+}
+.account-menu button:hover, .account-menu a:hover { background: var(--surface-subtle); }
+.shell-main { flex: 1; width: 100%; max-width: 1040px; margin: 0 auto; padding: 28px 16px 64px; }
+
+@media (max-width: 639px) {
+  .topbar .tabs { display: none; }
+  .shell-main { padding-bottom: 96px; }
+  .bottom-tabs {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex;
+    background: var(--surface); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom);
+  }
+  .bottom-tabs .tab {
+    flex: 1; flex-direction: column; justify-content: center; gap: 2px; height: 60px; font-size: 0.75rem;
+    border-bottom: none; border-top: 3px solid transparent; margin: 0;
+  }
+  .bottom-tabs .tab.active { border-top-color: var(--primary); }
+}
+@media (min-width: 640px) { .bottom-tabs { display: none; } }
+
+/* ---- Page furniture ---- */
+.page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.page-head p { color: var(--ink-2); margin-top: 4px; }
+.section { margin-top: 32px; }
+.section > h2 { margin-bottom: 12px; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); padding: 14px 16px; }
+.stat-val { font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+.stat-label { font-size: 0.85rem; color: var(--ink-2); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); box-shadow: var(--shadow); }
+.empty { padding: 20px; color: var(--ink-2); }
+.label-sm { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+
+/* ---- Rows (recents, assignments) ---- */
+.rows { list-style: none; }
+.rows > li + li { border-top: 1px solid var(--line); }
+.row-item {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px; width: 100%;
+  background: none; border: none; text-align: left; color: inherit; text-decoration: none;
+}
+button.row-item, a.row-item { cursor: pointer; }
+button.row-item:hover, a.row-item:hover { background: var(--surface-subtle); }
+.row-main { flex: 1; min-width: 0; }
+.row-title { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row-sub { font-size: 0.85rem; color: var(--ink-2); }
+.row-side { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.score { font-weight: 700; font-variant-numeric: tabular-nums; }
+.score.good { color: var(--success); }
+.score.mid { color: var(--warning); }
+.score.low { color: var(--error); }
+
+.tag {
+  display: inline-block; font-size: 0.75rem; font-weight: 600; border-radius: 99px; padding: 2px 9px;
+  background: var(--surface-subtle); color: var(--ink-2); white-space: nowrap;
+}
+.tag.ok { background: var(--success-tint); color: var(--success); }
+.tag.warn { background: var(--warning-tint); color: var(--warning); }
+.tag.bad { background: var(--error-tint); color: var(--error); }
+.tag.info { background: var(--primary-tint); color: var(--primary); }
+
+/* ---- Subject cards ---- */
+.subjects { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.subject {
+  display: flex; flex-direction: column; gap: 6px; padding: 18px; text-decoration: none; color: inherit;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); box-shadow: var(--shadow);
+}
+a.subject:hover { border-color: var(--primary); }
+.subject.soon { box-shadow: none; background: transparent; border-style: dashed; color: var(--ink-3); }
+.subject-icon {
+  width: 36px; height: 36px; border-radius: 10px; background: var(--primary-tint); color: var(--primary);
+  display: inline-flex; align-items: center; justify-content: center; margin-bottom: 6px;
+}
+.subject.soon .subject-icon { background: var(--surface-subtle); color: var(--ink-3); }
+.subject-title { font-weight: 700; font-size: 1.05rem; }
+.subject-sub { font-size: 0.88rem; color: var(--ink-2); }
+.subject.soon .subject-sub { color: var(--ink-3); }
+
+/* ---- Course path ---- */
+.path { list-style: none; position: relative; max-width: 640px; }
+.path::before {
+  content: ''; position: absolute; left: 21px; top: 22px; bottom: 22px; width: 2px; background: var(--line);
+}
+.path-step { position: relative; }
+.path-link {
+  display: flex; align-items: center; gap: 16px; padding: 10px 12px 10px 0; text-decoration: none; color: inherit;
+  border-radius: var(--r-card);
+}
+.path-link:hover .path-title { color: var(--primary); }
+.node {
+  position: relative; z-index: 1; flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;
+  background: var(--surface); border: 2px solid var(--line-strong); color: var(--ink-2);
+}
+.node.practiced { border: 3px solid var(--primary); color: var(--primary); }
+.node.complete { background: var(--primary); border-color: var(--primary); color: #fff; }
+.path-text { flex: 1; min-width: 0; }
+.path-title { font-weight: 600; }
+.path-sub { font-size: 0.88rem; color: var(--ink-2); }
+.path-status { font-size: 0.85rem; color: var(--ink-2); flex-shrink: 0; text-align: right; }
+.path-step.next .path-link { background: var(--primary-tint); padding-left: 0; }
+@media (max-width: 480px) { .path-status { display: none; } .path-status.always { display: block; } }
+
+/* ---- Class gate and auth ---- */
+.gate { max-width: 440px; margin: 24px auto; padding: 28px; text-align: center; }
+.gate p { color: var(--ink-2); margin: 8px 0 20px; }
+.gate .actions { display: flex; flex-direction: column; gap: 10px; }
+
+/* ---- Teacher header (AppHeader) ---- */
+.app-header { background: var(--surface); border-bottom: 1px solid var(--line); }
+.app-header-inner {
+  max-width: 1040px; margin: 0 auto; padding: 0 16px; min-height: 60px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.header-subtitle { color: var(--ink-2); font-weight: 500; font-size: 0.92rem; }
+.header-meta { margin-left: auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.header-meta .link.active { font-weight: 700; }

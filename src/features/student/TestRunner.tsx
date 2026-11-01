@@ -121,9 +121,9 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
         )}
 
         <div className="row" style={{ justifyContent: 'space-between', width: '100%' }}>
-          <button className="btn-secondary" disabled={index === 0} onClick={() => setIndex(index - 1)}>← Previous</button>
+          <button className="btn-secondary" disabled={index === 0} onClick={() => setIndex(index - 1)}>Previous</button>
           {index < items.length - 1 ? (
-            <button className="btn-secondary" onClick={() => setIndex(index + 1)}>Next →</button>
+            <button className="btn-secondary" onClick={() => setIndex(index + 1)}>Next</button>
           ) : (
             <span />
           )}

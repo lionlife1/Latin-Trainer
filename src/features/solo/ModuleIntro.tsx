@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ChevronLeft } from '../../components/icons';
 import type { ModuleContent } from '../../lib/types';
 import type { ModuleProgress } from './progressStore';
 
@@ -12,8 +13,8 @@ interface Props {
 export function sessionLengthOptions(totalQ: number): { value: number | 'all'; label: string }[] {
   const opts: { value: number | 'all'; label: string }[] = [5, 10, 20, 40]
     .filter(n => n < totalQ)
-    .map(n => ({ value: n, label: `${n} Questions` }));
-  opts.push({ value: 'all', label: `All ${totalQ} Questions` });
+    .map(n => ({ value: n, label: `${n} questions` }));
+  opts.push({ value: 'all', label: `All ${totalQ} questions` });
   return opts;
 }
 
@@ -27,26 +28,26 @@ export function ModuleIntro({ mod, progress, onBack, onStart }: Props) {
   return (
     <div className="screen active">
       <div className="intro-card">
-        <button className="btn-back" onClick={onBack}>← Back</button>
+        <button className="btn-back" onClick={onBack}><ChevronLeft size={18} />Grammar</button>
         <div className="intro-module-badge">{mod.badge}</div>
         <h1 className="intro-title">{mod.title}</h1>
         <p className="intro-desc">{mod.description}</p>
         <div className="intro-stats">
           <div className="intro-stat"><div className="intro-stat-val">{totalQ}</div><div className="intro-stat-label">Questions</div></div>
-          <div className="intro-stat"><div className="intro-stat-val">+{mod.xp_reward}</div><div className="intro-stat-label">XP Reward</div></div>
+          <div className="intro-stat"><div className="intro-stat-val">+{mod.xp_reward}</div><div className="intro-stat-label">XP</div></div>
           {progress?.completed && (
-            <div className="intro-stat"><div className="intro-stat-val" style={{ color: 'var(--green)' }}>✓</div><div className="intro-stat-label">Completed</div></div>
+            <div className="intro-stat"><div className="intro-stat-val" style={{ color: 'var(--success)' }}>Done</div><div className="intro-stat-label">Status</div></div>
           )}
           {wrongCount > 0 && (
-            <div className="intro-stat"><div className="intro-stat-val" style={{ color: 'var(--red)' }}>{wrongCount}</div><div className="intro-stat-label">To Review</div></div>
+            <div className="intro-stat"><div className="intro-stat-val" style={{ color: 'var(--red)' }}>{wrongCount}</div><div className="intro-stat-label">To review</div></div>
           )}
         </div>
         <div className="intro-concepts">
-          <div className="intro-concepts-title">Concepts Covered</div>
+          <div className="intro-concepts-title">Concepts</div>
           {mod.concepts.map(c => <span key={c} className="concept-tag">{c}</span>)}
         </div>
         <div className="intro-config">
-          <label htmlFor="cfg-q-count">Session Length:</label>
+          <label htmlFor="cfg-q-count">Session length</label>
           <select
             id="cfg-q-count"
             className="select"
@@ -55,12 +56,12 @@ export function ModuleIntro({ mod, progress, onBack, onStart }: Props) {
           >
             {options.map(o => (
               <option key={String(o.value)} value={String(o.value)}>
-                {o.label}{o.value === recommended ? ' (Recommended)' : ''}
+                {o.label}{o.value === recommended ? ' (recommended)' : ''}
               </option>
             ))}
           </select>
         </div>
-        <button className="btn-primary" onClick={() => onStart(count)}>Begin Session →</button>
+        <button className="btn-primary" onClick={() => onStart(count)}>Start session</button>
       </div>
     </div>
   );

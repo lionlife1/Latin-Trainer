@@ -1,8 +1,6 @@
 /* Utilities and classroom screens (teacher/student). Builds on global.css variables. */
 .muted { color: var(--text-secondary); }
 .small { font-size: 0.85rem; }
-.btn-small { padding: 6px 14px; font-size: 0.8rem; margin-right: 12px; }
-.theme-btn { font-size: 1.2rem; padding: 2px 8px; margin-right: 8px; }
 .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 .row-end { display: flex; gap: 12px; justify-content: flex-end; margin-top: 16px; }
 .form-error { color: var(--red); margin: 8px 0; }
@@ -15,17 +13,16 @@
 .intro-config label { font-size: 0.95rem; color: var(--text-secondary); margin-right: 12px; }
 .select, .input, textarea.input {
   background: var(--bg-surface); color: var(--text-primary); border: 1px solid var(--border);
-  padding: 8px 12px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 1.05rem; outline: none;
+  padding: 8px 12px; border-radius: var(--radius-md); font-size: 1rem; outline: none;
 }
-.input:focus, .select:focus { border-color: var(--gold-dim); }
-.mc-btn.selected-choice { border-color: var(--gold); box-shadow: var(--shadow-glow-gold); }
+.input:focus, .select:focus { border-color: var(--primary); }
 .class-links { display: flex; gap: 18px; justify-content: center; padding: 10px; font-size: 0.95rem; color: var(--text-secondary); }
 .class-links a, .link { color: var(--gold); text-decoration: none; }
 .class-links a:hover, .link:hover { text-decoration: underline; }
 
 .page { max-width: 1040px; margin: 0 auto; padding: 24px 20px 64px; }
-.page h1 { font-family: var(--font-display); color: var(--gold); font-size: 1.6rem; margin-bottom: 4px; }
-.page h2 { font-family: var(--font-display); font-size: 1.15rem; margin: 28px 0 12px; }
+.page h1 { font-size: 1.6rem; margin-bottom: 4px; }
+.page h2 { font-size: 1.15rem; margin: 28px 0 12px; }
 .crumbs { font-size: 0.9rem; margin-bottom: 12px; }
 .card {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
@@ -34,16 +31,16 @@
 .auth-card { max-width: 420px; margin: 48px auto; }
 .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
 .field > span { font-size: 0.9rem; color: var(--text-secondary); }
-.join-code { font-family: var(--font-mono); font-size: 2.4rem; letter-spacing: 0.3em; color: var(--gold); }
+.join-code { font-size: 2.4rem; font-weight: 700; letter-spacing: 0.3em; color: var(--gold); }
 .table { width: 100%; border-collapse: collapse; font-size: 0.98rem; }
 .table th, .table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
-.table th { font-family: var(--font-display); font-size: 0.8rem; letter-spacing: 0.05em; color: var(--text-secondary); }
+.table th { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
 .table tr.clickable { cursor: pointer; }
 .table tr.clickable:hover { background: var(--bg-elevated); }
 .scroll-x { overflow-x: auto; }
 .pill { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 0.78rem; border: 1px solid var(--border); }
 .pill.ok { color: var(--green); border-color: var(--green-dim); }
-.pill.warn { color: var(--gold); border-color: var(--gold-dim); }
+.pill.warn { color: var(--warning); border-color: #ecd3a6; }
 .pill.bad { color: var(--red); border-color: var(--red-dim); }
 .bar { height: 8px; background: var(--bg-elevated); border-radius: 4px; overflow: hidden; min-width: 80px; }
 .bar > div { height: 100%; background: var(--gold); }
@@ -57,5 +54,5 @@
 }
 .q-nav button.answered { border-color: var(--gold-dim); color: var(--gold); }
 .q-nav button.current { outline: 2px solid var(--gold); }
-.timer { font-family: var(--font-mono); color: var(--gold); }
+.timer { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--primary); }
 .timer.low { color: var(--red); }

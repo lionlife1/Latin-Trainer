@@ -1,18 +1,20 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { useAuth } from '../auth/AuthProvider';
 import { supabase } from '../../lib/supabase';
 import { syncSessions } from './sync';
 
 const listeners = new Set<() => void>();
 
-/** Ask the mounted sync hook to push now (e.g. right after a drill). No-op when signed out. */
+/** Ask the mounted provider to sync now (e.g. right after a drill). No-op when signed out. */
 export const requestSync = () => listeners.forEach(l => l());
+
+const VersionContext = createContext(0);
 
 /**
  * Syncs practice sessions whenever a signed-in user appears and on requestSync().
- * Returns a counter that bumps after each sync so pages can re-read local progress.
+ * Provides a counter that bumps after each sync so pages re-read local progress.
  */
-export function useSessionSync(): number {
+export function SessionSyncProvider({ children }: { children: ReactNode }) {
   const { session } = useAuth();
   const userId = session?.user.id ?? null;
   const [version, setVersion] = useState(0);
@@ -30,5 +32,7 @@ export function useSessionSync(): number {
     };
   }, [userId]);
 
-  return version;
+  return <VersionContext.Provider value={version}>{children}</VersionContext.Provider>;
 }
+
+export const useSyncVersion = () => useContext(VersionContext);
