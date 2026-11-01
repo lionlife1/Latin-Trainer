@@ -30,7 +30,7 @@ async function answerOnlyQuestion() {
   );
   await userEvent.click(await screen.findByRole('button', { name: /begin/i }));
   await userEvent.type(await screen.findByPlaceholderText(/type your answer/i), 'amem{Enter}');
-  await userEvent.click(screen.getByRole('button', { name: /next/i }));
+  await userEvent.click(screen.getByRole('button', { name: /continue/i }));
 }
 
 beforeEach(() => {

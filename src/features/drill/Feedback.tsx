@@ -25,14 +25,13 @@ export function Feedback({ correct, answer, answerIsHtml, explanation, onNext }:
   return (
     <div className="feedback-overlay" role="dialog" aria-live="polite">
       <div className={`feedback-card ${correct ? 'is-correct' : 'is-wrong'}`}>
-        <div className="feedback-icon">{correct ? '✓' : '✗'}</div>
-        <div className="feedback-verdict">{correct ? 'Correct!' : 'Not quite.'}</div>
+        <div className="feedback-verdict">{correct ? 'Correct' : 'Not quite'}</div>
         <div className="feedback-correct">
           {correct ? 'Answer: ' : 'Correct answer: '}
           {answerIsHtml ? <strong dangerouslySetInnerHTML={{ __html: answer }} /> : <strong>{answer}</strong>}
         </div>
         {explanation && <div className="feedback-explanation">{explanation}</div>}
-        <button className="btn-next" onClick={onNext}>Next →</button>
+        <button className="btn-next" onClick={onNext}>Continue</button>
       </div>
     </div>
   );

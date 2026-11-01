@@ -21,7 +21,7 @@ export function AttemptReview({ attemptId }: { attemptId: string }) {
           <li key={i.pool_id} className="card">
             <div className="q-prompt small" dangerouslySetInnerHTML={{ __html: q.prompt }} />
             <p>
-              {r?.correct ? '✓' : '✗'} Your answer: <strong>{r?.given || '(blank)'}</strong>
+              <span className={`tag ${r?.correct ? 'ok' : 'bad'}`}>{r?.correct ? 'Right' : 'Wrong'}</span> Your answer: <strong>{r?.given || '(blank)'}</strong>
             </p>
             {revealed && !r?.correct && (
               <p className="muted">
@@ -49,10 +49,10 @@ export function AttemptResult() {
   const pct = t.total ? Math.round(((t.score ?? 0) / t.total) * 100) : 0;
   return (
     <>
-      <div className="crumbs"><Link className="link" to="/s">← Assignments</Link></div>
+      <div className="crumbs"><Link className="link" to="/s">Class</Link></div>
       <div className="complete-card" style={{ margin: '0 auto 24px' }}>
         <h1 className="complete-title">{t.submitted_at ? 'Submitted' : 'In progress'}</h1>
-        <div className="complete-stats">
+        <div className="complete-stats" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
           <div className="c-stat"><div className="c-stat-val">{t.score ?? 0}/{t.total}</div><div className="c-stat-label">Score</div></div>
           <div className="c-stat"><div className="c-stat-val">{pct}%</div><div className="c-stat-label">Accuracy</div></div>
         </div>

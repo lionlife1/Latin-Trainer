@@ -1,4 +1,5 @@
-import { loadProgress, loadStreak, loadTotalXP, recordSession, updateStreak, isUnlocked } from './progressStore';
+import { legacyImports, loadProgress, loadStreak, loadTotalXP, rebuildFromSessions, recordSession, streakFrom, updateStreak, isUnlocked } from './progressStore';
+import { loadSessions, type PracticeSession } from '../practice/sessionLog';
 import type { ModuleContent } from '../../lib/types';
 
 const mod = (id: string, nQuestions: number, prerequisites: string[] = []): ModuleContent => ({
@@ -42,6 +43,40 @@ describe('recordSession', () => {
     const out = recordSession(m, [{ q: m.questions[0], given: 'x', correct: true }]);
     expect(out.completed).toBe(false);
     expect(loadTotalXP()).toBe(0);
+  });
+});
+
+describe('session log integration', () => {
+  const sess = (over: Partial<PracticeSession>): PracticeSession => ({
+    id: crypto.randomUUID(), kind: 'module', module_id: 'm0', correct: 8, total: 10, xp: 0, completed: false,
+    finished_at: '2026-10-10T12:00:00Z', synced: true, ...over,
+  });
+
+  it('recordSession appends one log entry', () => {
+    const m = mod('m0', 20);
+    recordSession(m, Array.from({ length: 10 }, (_, i) => ({ q: m.questions[i], given: 'x', correct: true })));
+    const [s] = loadSessions();
+    expect(s).toMatchObject({ kind: 'module', module_id: 'm0', correct: 10, total: 10, xp: 50, completed: true, synced: false });
+  });
+
+  it('rebuild: completed if any completed session, XP summed, wrong_ids kept', () => {
+    localStorage.setItem('latiniq_progress', JSON.stringify({ m0: { wrong_ids: ['a'] } }));
+    rebuildFromSessions([sess({ completed: true, xp: 40 }), sess({ xp: 0 }), sess({ module_id: 'm1', xp: 10, completed: true })], '2026-10-10');
+    expect(loadProgress()).toEqual({ m0: { wrong_ids: ['a'], completed: true, xp: 40 }, m1: { completed: true, xp: 10 } });
+    expect(loadTotalXP()).toBe(50);
+  });
+
+  it('streak counts runs ending today or yesterday and resets after a gap', () => {
+    expect(streakFrom(['2026-10-08', '2026-10-09', '2026-10-10'], '2026-10-10').count).toBe(3);
+    expect(streakFrom(['2026-10-08', '2026-10-09'], '2026-10-10').count).toBe(2);
+    expect(streakFrom(['2026-10-05', '2026-10-07', '2026-10-08'], '2026-10-08').count).toBe(2);
+    expect(streakFrom(['2026-10-01'], '2026-10-10').count).toBe(0);
+  });
+
+  it('legacyImports covers only completed modules without a completed session', () => {
+    const progress = { m0: { completed: true, xp: 30 }, m1: { completed: true, xp: 20 }, m2: { wrong_ids: [] } };
+    const out = legacyImports(progress, [sess({ module_id: 'm1', completed: true })]);
+    expect(out).toEqual([{ kind: 'import', module_id: 'm0', correct: 0, total: 0, xp: 30, completed: true }]);
   });
 });
 

@@ -20,7 +20,7 @@ export function QuestionCard({ badge, prompt, hint }: Props) {
               <strong>Hint:</strong> <span dangerouslySetInnerHTML={{ __html: hint }} />
             </>
           ) : (
-            <span style={{ opacity: 0.6 }}>💡 Click card to reveal hint</span>
+            <span>Tap the card for a hint</span>
           ))}
       </div>
     </div>

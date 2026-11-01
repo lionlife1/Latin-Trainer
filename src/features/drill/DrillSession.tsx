@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Close } from '../../components/icons';
 import { correctDisplay } from '../../lib/grading';
 import type { DrillQuestion } from '../../lib/types';
 import { Feedback } from './Feedback';
@@ -13,7 +14,8 @@ interface Props {
   onAnswer?: DrillOptions['onAnswer'];
   generate?: DrillOptions['generate'];
   onFinish: (results: DrillResult[]) => void;
-  onExit: () => void;
+  /** Gets the answers so far, so endless sessions can be logged on exit. */
+  onExit: (results: DrillResult[]) => void;
 }
 
 /** Practice-mode drill with instant feedback. Test mode uses TestRunner instead. */
@@ -35,21 +37,21 @@ export function DrillSession({ questions, mode, onAnswer, generate, onFinish, on
           className="btn-back-small"
           aria-label="Exit session"
           onClick={() => {
-            if (endless || window.confirm('Exit this session? Progress will be lost.')) onExit();
+            if (endless || window.confirm('Exit this session? Your answers so far won\'t be saved.')) onExit(results);
           }}
         >
-          ✕
+          <Close />
         </button>
         <div className="drill-progress-wrap">
           <div className="drill-progress-bar">
             <div
               className="drill-progress-fill"
-              style={endless ? { width: '100%', background: 'var(--gold)' } : { width: `${(index / total) * 100}%` }}
+              style={{ width: endless ? '100%' : `${(index / total) * 100}%` }}
             />
           </div>
-          <span className="drill-progress-label">{endless ? 'ENDLESS MODE' : `${index + 1} / ${total}`}</span>
+          <span className="drill-progress-label">{endless ? `Endless · ${results.length} answered` : `${index + 1} / ${total}`}</span>
         </div>
-        <div className="drill-score">{score * 10} pts</div>
+        <div className="drill-score">{score} correct</div>
       </div>
 
       <div className="drill-body" key={current.id + index}>

@@ -37,8 +37,25 @@ insert into classes (name) values ('Second section');
 select tests.ok((select count(*) from classes) = 2, 'teacher can create a class (teacher_id defaults to self)');
 select tests.ok((select join_code ~ '^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{6}$' from classes where name = 'Second section'), 'join code generated from safe alphabet');
 
+-- Independent practice sessions
+select tests.as_user('s1');
+insert into practice_sessions (id, kind, module_id, correct, total, finished_at)
+  values (gen_random_uuid(), 'endless', null, 3, 4, now());
+select tests.ok((select count(*) from practice_sessions) = 1, 'student can log own practice session');
+select tests.throws(format($$insert into practice_sessions (id, user_id, kind, correct, total, finished_at)
+  values (gen_random_uuid(), %L, 'endless', 1, 1, now())$$, tests.uid('s2')), 'student cannot log a session for someone else');
+select tests.throws($$insert into practice_sessions (id, kind, correct, total, xp, finished_at)
+  values (gen_random_uuid(), 'endless', 1, 1, 5000, now())$$, 'xp above 1000 is rejected');
+select tests.throws($$update practice_sessions set correct = 4$$, 'student cannot update practice sessions', '42501');
+select tests.throws($$delete from practice_sessions$$, 'student cannot delete practice sessions', '42501');
+select tests.as_user('s2');
+select tests.ok((select count(*) from practice_sessions) = 0, 'student cannot see another student''s practice');
+select tests.as_user('tA');
+select tests.ok((select count(*) from practice_sessions) = 0, 'teacher cannot see independent practice');
+
 -- Anonymous
 select tests.as_anon();
+select tests.throws($$select count(*) from practice_sessions$$, 'anon cannot read practice sessions', '42501');
 select tests.throws($$select count(*) from classes$$, 'anon cannot read classes', '42501');
 select tests.throws($$select count(*) from profiles$$, 'anon cannot read profiles', '42501');
 select tests.throws($$select count(*) from assignment_pool$$, 'anon cannot read pools', '42501');

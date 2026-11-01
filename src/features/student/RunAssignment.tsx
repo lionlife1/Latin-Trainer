@@ -129,9 +129,9 @@ export function RunAssignment() {
 
   return (
     <>
-      <div className="crumbs"><Link className="link" to="/s">← Assignments</Link></div>
+      <div className="crumbs"><Link className="link" to="/s">Class</Link></div>
       <div className="intro-card" style={{ margin: '0 auto' }}>
-        <div className="intro-module-badge">{a.mode === 'test' ? 'TEST' : 'PRACTICE'}</div>
+        <div className="intro-module-badge">{a.mode === 'test' ? 'Test' : 'Practice'}</div>
         <h1 className="intro-title">{a.title}</h1>
         <div className="intro-stats">
           <div className="intro-stat"><div className="intro-stat-val">{a.question_count}</div><div className="intro-stat-label">Questions</div></div>
@@ -149,7 +149,7 @@ export function RunAssignment() {
           {a.due_at && ` Due ${new Date(a.due_at).toLocaleString()}.`}
         </p>
         {error && <p className="form-error" role="alert">{error}</p>}
-        <button className="btn-primary" disabled={busy} onClick={begin}>{busy ? 'Starting…' : 'Begin →'}</button>
+        <button className="btn-primary" disabled={busy} onClick={begin}>{busy ? 'Starting…' : 'Begin'}</button>
       </div>
     </>
   );

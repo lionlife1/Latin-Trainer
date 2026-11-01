@@ -42,10 +42,10 @@ export function TypeInAnswer({ disabled, verdict, onSubmit }: Props) {
             }
           }}
         />
-        <button className="btn-submit" onClick={submit} disabled={disabled}>⏎ Check</button>
+        <button className="btn-submit" onClick={submit} disabled={disabled}>Check</button>
       </div>
       <div className="macron-toolbar">
-        <span className="macron-hint">Macrons optional — type without them:</span>
+        <span className="macron-hint">Macrons are optional.</span>
         <span className="macron-note">ā=a ē=e ī=i ō=o ū=u</span>
       </div>
     </div>

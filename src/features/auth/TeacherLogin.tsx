@@ -59,7 +59,7 @@ export function TeacherLogin() {
           </label>
           {msg && <p className={msg.kind === 'error' ? 'form-error' : 'form-ok'} role="alert">{msg.text}</p>}
           <button className="btn-primary" type="submit" disabled={busy}>
-            {busy ? 'Please wait…' : mode === 'signin' ? 'Sign in →' : 'Create account →'}
+            {busy ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}
           </button>
         </form>
         <p className="small muted" style={{ marginTop: 16 }}>
