@@ -1,0 +1,1584 @@
+[
+ {
+  "headword": "amō, amāre, amāvī, amātum",
+  "lemma": "amō",
+  "definition": "to love",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "habeō, habēre, habuī, habitum",
+  "lemma": "habeō",
+  "definition": "to have, hold",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "videō, vidēre, vīdī, vīsum",
+  "lemma": "videō",
+  "definition": "to see",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "dīcō, dīcere, dīxī, dictum",
+  "lemma": "dīcō",
+  "definition": "to say",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "faciō, facere, fēcī, factum",
+  "lemma": "faciō",
+  "definition": "to make, do",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "capiō, capere, cēpī, captum",
+  "lemma": "capiō",
+  "definition": "to take, seize",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "veniō, venīre, vēnī, ventum",
+  "lemma": "veniō",
+  "definition": "to come",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "audiō, audīre, audīvī, audītum",
+  "lemma": "audiō",
+  "definition": "to hear",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "sum, esse, fuī, futūrus",
+  "lemma": "sum",
+  "definition": "to be",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "possum, posse, potuī",
+  "lemma": "possum",
+  "definition": "to be able",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "eō, īre, iī, itum",
+  "lemma": "eō",
+  "definition": "to go",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "ferō, ferre, tulī, lātum",
+  "lemma": "ferō",
+  "definition": "to carry, bear",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "volō, velle, voluī",
+  "lemma": "volō",
+  "definition": "to want, wish",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "nōlō, nōlle, nōluī",
+  "lemma": "nōlō",
+  "definition": "to be unwilling",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "mālō, mālle, māluī",
+  "lemma": "mālō",
+  "definition": "to prefer",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "fīō, fierī, factus sum",
+  "lemma": "fīō",
+  "definition": "to become, happen",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "dō, dare, dedī, datum",
+  "lemma": "dō",
+  "definition": "to give",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "stō, stāre, stetī, statum",
+  "lemma": "stō",
+  "definition": "to stand",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "agō, agere, ēgī, āctum",
+  "lemma": "agō",
+  "definition": "to do, drive",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "dūcō, dūcere, dūxī, ductum",
+  "lemma": "dūcō",
+  "definition": "to lead",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "mittō, mittere, mīsī, missum",
+  "lemma": "mittō",
+  "definition": "to send",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "pōnō, pōnere, posuī, positum",
+  "lemma": "pōnō",
+  "definition": "to put, place",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "regō, regere, rēxī, rēctum",
+  "lemma": "regō",
+  "definition": "to rule",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "scrībō, scrībere, scrīpsī, scrīptum",
+  "lemma": "scrībō",
+  "definition": "to write",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "legō, legere, lēgī, lēctum",
+  "lemma": "legō",
+  "definition": "to read, choose",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "vincō, vincere, vīcī, victum",
+  "lemma": "vincō",
+  "definition": "to conquer",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "petō, petere, petīvī, petītum",
+  "lemma": "petō",
+  "definition": "to seek, attack",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "quaerō, quaerere, quaesīvī, quaesītum",
+  "lemma": "quaerō",
+  "definition": "to seek, ask",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "relinquō, relinquere, relīquī, relictum",
+  "lemma": "relinquō",
+  "definition": "to leave behind",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "trādō, trādere, trādidī, trāditum",
+  "lemma": "trādō",
+  "definition": "to hand over",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "crēdō, crēdere, crēdidī, crēditum",
+  "lemma": "crēdō",
+  "definition": "to believe, trust",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "cognōscō, cognōscere, cognōvī, cognitum",
+  "lemma": "cognōscō",
+  "definition": "to learn, recognize",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "intellegō, intellegere, intellēxī, intellēctum",
+  "lemma": "intellegō",
+  "definition": "to understand",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "cōgō, cōgere, coēgī, coāctum",
+  "lemma": "cōgō",
+  "definition": "to compel, collect",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "gerō, gerere, gessī, gestum",
+  "lemma": "gerō",
+  "definition": "to carry on, wage",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "moneō, monēre, monuī, monitum",
+  "lemma": "moneō",
+  "definition": "to warn, advise",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "teneō, tenēre, tenuī, tentum",
+  "lemma": "teneō",
+  "definition": "to hold",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "timeō, timēre, timuī",
+  "lemma": "timeō",
+  "definition": "to fear",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "metuō, metuere, metuī",
+  "lemma": "metuō",
+  "definition": "to fear",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "iubeō, iubēre, iussī, iussum",
+  "lemma": "iubeō",
+  "definition": "to order",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "maneō, manēre, mānsī, mānsum",
+  "lemma": "maneō",
+  "definition": "to remain",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "moveō, movēre, mōvī, mōtum",
+  "lemma": "moveō",
+  "definition": "to move",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "respondeō, respondēre, respondī, respōnsum",
+  "lemma": "respondeō",
+  "definition": "to answer",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "dēbeō, dēbēre, dēbuī, dēbitum",
+  "lemma": "dēbeō",
+  "definition": "to owe, ought",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "doceō, docēre, docuī, doctum",
+  "lemma": "doceō",
+  "definition": "to teach",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "terreō, terrēre, terruī, territum",
+  "lemma": "terreō",
+  "definition": "to frighten",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "vocō, vocāre, vocāvī, vocātum",
+  "lemma": "vocō",
+  "definition": "to call",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "laudō, laudāre, laudāvī, laudātum",
+  "lemma": "laudō",
+  "definition": "to praise",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "pugnō, pugnāre, pugnāvī, pugnātum",
+  "lemma": "pugnō",
+  "definition": "to fight",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "parō, parāre, parāvī, parātum",
+  "lemma": "parō",
+  "definition": "to prepare",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "putō, putāre, putāvī, putātum",
+  "lemma": "putō",
+  "definition": "to think",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "rogō, rogāre, rogāvī, rogātum",
+  "lemma": "rogō",
+  "definition": "to ask",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "servō, servāre, servāvī, servātum",
+  "lemma": "servō",
+  "definition": "to save, keep",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "spērō, spērāre, spērāvī, spērātum",
+  "lemma": "spērō",
+  "definition": "to hope",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "superō, superāre, superāvī, superātum",
+  "lemma": "superō",
+  "definition": "to overcome",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "imperō, imperāre, imperāvī, imperātum",
+  "lemma": "imperō",
+  "definition": "to command",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "dubitō, dubitāre, dubitāvī, dubitātum",
+  "lemma": "dubitō",
+  "definition": "to doubt, hesitate",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "occupō, occupāre, occupāvī, occupātum",
+  "lemma": "occupō",
+  "definition": "to seize, occupy",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "iaciō, iacere, iēcī, iactum",
+  "lemma": "iaciō",
+  "definition": "to throw",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "fugiō, fugere, fūgī, fugitūrus",
+  "lemma": "fugiō",
+  "definition": "to flee",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "incipiō, incipere, incēpī, inceptum",
+  "lemma": "incipiō",
+  "definition": "to begin",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "interficiō, interficere, interfēcī, interfectum",
+  "lemma": "interficiō",
+  "definition": "to kill",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "accipiō, accipere, accēpī, acceptum",
+  "lemma": "accipiō",
+  "definition": "to receive",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "rapiō, rapere, rapuī, raptum",
+  "lemma": "rapiō",
+  "definition": "to snatch, carry off",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "cupiō, cupere, cupīvī, cupītum",
+  "lemma": "cupiō",
+  "definition": "to desire",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "inveniō, invenīre, invēnī, inventum",
+  "lemma": "inveniō",
+  "definition": "to find",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "sciō, scīre, scīvī, scītum",
+  "lemma": "sciō",
+  "definition": "to know",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "sentiō, sentīre, sēnsī, sēnsum",
+  "lemma": "sentiō",
+  "definition": "to feel, perceive",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "impediō, impedīre, impedīvī, impedītum",
+  "lemma": "impediō",
+  "definition": "to hinder",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "prohibeō, prohibēre, prohibuī, prohibitum",
+  "lemma": "prohibeō",
+  "definition": "to prevent",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "cadō, cadere, cecidī, cāsūrus",
+  "lemma": "cadō",
+  "definition": "to fall",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "currō, currere, cucurrī, cursum",
+  "lemma": "currō",
+  "definition": "to run",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "vīvō, vīvere, vīxī, vīctum",
+  "lemma": "vīvō",
+  "definition": "to live",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "surgō, surgere, surrēxī, surrēctum",
+  "lemma": "surgō",
+  "definition": "to rise",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "dēfendō, dēfendere, dēfendī, dēfēnsum",
+  "lemma": "dēfendō",
+  "definition": "to defend",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "ostendō, ostendere, ostendī, ostentum",
+  "lemma": "ostendō",
+  "definition": "to show",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "cōnor, cōnārī, cōnātus sum",
+  "lemma": "cōnor",
+  "definition": "to try",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "hortor, hortārī, hortātus sum",
+  "lemma": "hortor",
+  "definition": "to urge, encourage",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "vereor, verērī, veritus sum",
+  "lemma": "vereor",
+  "definition": "to fear, respect",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "sequor, sequī, secūtus sum",
+  "lemma": "sequor",
+  "definition": "to follow",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "loquor, loquī, locūtus sum",
+  "lemma": "loquor",
+  "definition": "to speak",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "ūtor, ūtī, ūsus sum",
+  "lemma": "ūtor",
+  "definition": "to use",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "patior, patī, passus sum",
+  "lemma": "patior",
+  "definition": "to suffer, allow",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "morior, morī, mortuus sum",
+  "lemma": "morior",
+  "definition": "to die",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "ēgredior, ēgredī, ēgressus sum",
+  "lemma": "ēgredior",
+  "definition": "to go out",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "orior, orīrī, ortus sum",
+  "lemma": "orior",
+  "definition": "to rise",
+  "pos": "verb",
+  "frequency": null
+ },
+ {
+  "headword": "puella, puellae, f.",
+  "lemma": "puella",
+  "definition": "girl",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "fēmina, fēminae, f.",
+  "lemma": "fēmina",
+  "definition": "woman",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "terra, terrae, f.",
+  "lemma": "terra",
+  "definition": "land, earth",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "aqua, aquae, f.",
+  "lemma": "aqua",
+  "definition": "water",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "via, viae, f.",
+  "lemma": "via",
+  "definition": "road, way",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "vīta, vītae, f.",
+  "lemma": "vīta",
+  "definition": "life",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "patria, patriae, f.",
+  "lemma": "patria",
+  "definition": "fatherland, country",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "fāma, fāmae, f.",
+  "lemma": "fāma",
+  "definition": "report, reputation",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "fortūna, fortūnae, f.",
+  "lemma": "fortūna",
+  "definition": "fortune, luck",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "īnsula, īnsulae, f.",
+  "lemma": "īnsula",
+  "definition": "island",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "poēta, poētae, m.",
+  "lemma": "poēta",
+  "definition": "poet",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "nauta, nautae, m.",
+  "lemma": "nauta",
+  "definition": "sailor",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "agricola, agricolae, m.",
+  "lemma": "agricola",
+  "definition": "farmer",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "amīcus, amīcī, m.",
+  "lemma": "amīcus",
+  "definition": "friend",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "animus, animī, m.",
+  "lemma": "animus",
+  "definition": "mind, spirit",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "deus, deī, m.",
+  "lemma": "deus",
+  "definition": "god",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "dominus, dominī, m.",
+  "lemma": "dominus",
+  "definition": "master, lord",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "equus, equī, m.",
+  "lemma": "equus",
+  "definition": "horse",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "fīlius, fīliī, m.",
+  "lemma": "fīlius",
+  "definition": "son",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "fīlia, fīliae, f.",
+  "lemma": "fīlia",
+  "definition": "daughter",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "populus, populī, m.",
+  "lemma": "populus",
+  "definition": "people",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "puer, puerī, m.",
+  "lemma": "puer",
+  "definition": "boy",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "vir, virī, m.",
+  "lemma": "vir",
+  "definition": "man, husband",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "ager, agrī, m.",
+  "lemma": "ager",
+  "definition": "field",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "liber, librī, m.",
+  "lemma": "liber",
+  "definition": "book",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "bellum, bellī, n.",
+  "lemma": "bellum",
+  "definition": "war",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "cōnsilium, cōnsiliī, n.",
+  "lemma": "cōnsilium",
+  "definition": "plan, advice",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "dōnum, dōnī, n.",
+  "lemma": "dōnum",
+  "definition": "gift",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "oppidum, oppidī, n.",
+  "lemma": "oppidum",
+  "definition": "town",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "verbum, verbī, n.",
+  "lemma": "verbum",
+  "definition": "word",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "rēgnum, rēgnī, n.",
+  "lemma": "rēgnum",
+  "definition": "kingdom",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "auxilium, auxiliī, n.",
+  "lemma": "auxilium",
+  "definition": "help, aid",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "perīculum, perīculī, n.",
+  "lemma": "perīculum",
+  "definition": "danger",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "rēx, rēgis, m.",
+  "lemma": "rēx",
+  "definition": "king",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "dux, ducis, m.",
+  "lemma": "dux",
+  "definition": "leader, general",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "homō, hominis, m.",
+  "lemma": "homō",
+  "definition": "person, human being",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "mīles, mīlitis, m.",
+  "lemma": "mīles",
+  "definition": "soldier",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "pater, patris, m.",
+  "lemma": "pater",
+  "definition": "father",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "māter, mātris, f.",
+  "lemma": "māter",
+  "definition": "mother",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "frāter, frātris, m.",
+  "lemma": "frāter",
+  "definition": "brother",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "soror, sorōris, f.",
+  "lemma": "soror",
+  "definition": "sister",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "corpus, corporis, n.",
+  "lemma": "corpus",
+  "definition": "body",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "nōmen, nōminis, n.",
+  "lemma": "nōmen",
+  "definition": "name",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "tempus, temporis, n.",
+  "lemma": "tempus",
+  "definition": "time",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "lēx, lēgis, f.",
+  "lemma": "lēx",
+  "definition": "law",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "pāx, pācis, f.",
+  "lemma": "pāx",
+  "definition": "peace",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "lūx, lūcis, f.",
+  "lemma": "lūx",
+  "definition": "light",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "urbs, urbis, f.",
+  "lemma": "urbs",
+  "definition": "city",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "cīvis, cīvis, m./f.",
+  "lemma": "cīvis",
+  "definition": "citizen",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "hostis, hostis, m.",
+  "lemma": "hostis",
+  "definition": "enemy (of the state)",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "mare, maris, n.",
+  "lemma": "mare",
+  "definition": "sea",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "nox, noctis, f.",
+  "lemma": "nox",
+  "definition": "night",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "mors, mortis, f.",
+  "lemma": "mors",
+  "definition": "death",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "pars, partis, f.",
+  "lemma": "pars",
+  "definition": "part",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "vōx, vōcis, f.",
+  "lemma": "vōx",
+  "definition": "voice",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "caput, capitis, n.",
+  "lemma": "caput",
+  "definition": "head",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "iter, itineris, n.",
+  "lemma": "iter",
+  "definition": "journey, route",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "manus, manūs, f.",
+  "lemma": "manus",
+  "definition": "hand; band of men",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "exercitus, exercitūs, m.",
+  "lemma": "exercitus",
+  "definition": "army",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "domus, domūs, f.",
+  "lemma": "domus",
+  "definition": "house, home",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "senātus, senātūs, m.",
+  "lemma": "senātus",
+  "definition": "senate",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "rēs, reī, f.",
+  "lemma": "rēs",
+  "definition": "thing, matter, affair",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "diēs, diēī, m.",
+  "lemma": "diēs",
+  "definition": "day",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "spēs, speī, f.",
+  "lemma": "spēs",
+  "definition": "hope",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "fidēs, fideī, f.",
+  "lemma": "fidēs",
+  "definition": "faith, trust",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "virtūs, virtūtis, f.",
+  "lemma": "virtūs",
+  "definition": "courage, excellence",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "amor, amōris, m.",
+  "lemma": "amor",
+  "definition": "love",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "timor, timōris, m.",
+  "lemma": "timor",
+  "definition": "fear",
+  "pos": "noun",
+  "frequency": null
+ },
+ {
+  "headword": "bonus, bona, bonum",
+  "lemma": "bonus",
+  "definition": "good",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "malus, mala, malum",
+  "lemma": "malus",
+  "definition": "bad, evil",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "magnus, magna, magnum",
+  "lemma": "magnus",
+  "definition": "great, large",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "parvus, parva, parvum",
+  "lemma": "parvus",
+  "definition": "small",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "multus, multa, multum",
+  "lemma": "multus",
+  "definition": "much, many",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "novus, nova, novum",
+  "lemma": "novus",
+  "definition": "new",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "longus, longa, longum",
+  "lemma": "longus",
+  "definition": "long",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "altus, alta, altum",
+  "lemma": "altus",
+  "definition": "high, deep",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "līber, lībera, līberum",
+  "lemma": "līber",
+  "definition": "free",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "miser, misera, miserum",
+  "lemma": "miser",
+  "definition": "wretched, unhappy",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "pulcher, pulchra, pulchrum",
+  "lemma": "pulcher",
+  "definition": "beautiful",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "sacer, sacra, sacrum",
+  "lemma": "sacer",
+  "definition": "sacred",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "dignus, digna, dignum",
+  "lemma": "dignus",
+  "definition": "worthy",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "tūtus, tūta, tūtum",
+  "lemma": "tūtus",
+  "definition": "safe",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "cārus, cāra, cārum",
+  "lemma": "cārus",
+  "definition": "dear",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "omnis, omne",
+  "lemma": "omnis",
+  "definition": "every, all",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "fortis, forte",
+  "lemma": "fortis",
+  "definition": "brave, strong",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "gravis, grave",
+  "lemma": "gravis",
+  "definition": "heavy, serious",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "brevis, breve",
+  "lemma": "brevis",
+  "definition": "short, brief",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "facilis, facile",
+  "lemma": "facilis",
+  "definition": "easy",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "difficilis, difficile",
+  "lemma": "difficilis",
+  "definition": "difficult",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "ingēns, ingentis",
+  "lemma": "ingēns",
+  "definition": "huge",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "potēns, potentis",
+  "lemma": "potēns",
+  "definition": "powerful",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "fēlīx, fēlīcis",
+  "lemma": "fēlīx",
+  "definition": "lucky, happy",
+  "pos": "adjective",
+  "frequency": null
+ },
+ {
+  "headword": "nōn",
+  "lemma": "nōn",
+  "definition": "not",
+  "pos": "adverb",
+  "frequency": null
+ },
+ {
+  "headword": "semper",
+  "lemma": "semper",
+  "definition": "always",
+  "pos": "adverb",
+  "frequency": null
+ },
+ {
+  "headword": "numquam",
+  "lemma": "numquam",
+  "definition": "never",
+  "pos": "adverb",
+  "frequency": null
+ },
+ {
+  "headword": "iam",
+  "lemma": "iam",
+  "definition": "now, already",
+  "pos": "adverb",
+  "frequency": null
+ },
+ {
+  "headword": "tum",
+  "lemma": "tum",
+  "definition": "then",
+  "pos": "adverb",
+  "frequency": null
+ },
+ {
+  "headword": "saepe",
+  "lemma": "saepe",
+  "definition": "often",
+  "pos": "adverb",
+  "frequency": null
+ },
+ {
+  "headword": "nunc",
+  "lemma": "nunc",
+  "definition": "now",
+  "pos": "adverb",
+  "frequency": null
+ },
+ {
+  "headword": "etiam",
+  "lemma": "etiam",
+  "definition": "also, even",
+  "pos": "adverb",
+  "frequency": null
+ },
+ {
+  "headword": "ita",
+  "lemma": "ita",
+  "definition": "so, thus",
+  "pos": "adverb",
+  "frequency": null
+ },
+ {
+  "headword": "tamen",
+  "lemma": "tamen",
+  "definition": "nevertheless",
+  "pos": "adverb",
+  "frequency": null
+ },
+ {
+  "headword": "et",
+  "lemma": "et",
+  "definition": "and",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "sed",
+  "lemma": "sed",
+  "definition": "but",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "aut",
+  "lemma": "aut",
+  "definition": "or",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "nam",
+  "lemma": "nam",
+  "definition": "for",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "quod",
+  "lemma": "quod",
+  "definition": "because",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "ut",
+  "lemma": "ut",
+  "definition": "so that, in order that; as",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "nē",
+  "lemma": "nē",
+  "definition": "so that not, lest",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "cum",
+  "lemma": "cum",
+  "definition": "when, since, although",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "sī",
+  "lemma": "sī",
+  "definition": "if",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "nisi",
+  "lemma": "nisi",
+  "definition": "unless, if not",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "quīn",
+  "lemma": "quīn",
+  "definition": "but that, without",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "dum",
+  "lemma": "dum",
+  "definition": "while, until",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "postquam",
+  "lemma": "postquam",
+  "definition": "after",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "quamquam",
+  "lemma": "quamquam",
+  "definition": "although",
+  "pos": "conjunction",
+  "frequency": null
+ },
+ {
+  "headword": "in + acc./abl.",
+  "lemma": "in",
+  "definition": "into, against (acc.); in, on (abl.)",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "ad + acc.",
+  "lemma": "ad",
+  "definition": "to, toward",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "ab, ā + abl.",
+  "lemma": "ab",
+  "definition": "from, away from; by",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "ex, ē + abl.",
+  "lemma": "ex",
+  "definition": "out of, from",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "dē + abl.",
+  "lemma": "dē",
+  "definition": "down from; about",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "cum + abl.",
+  "lemma": "cum",
+  "definition": "with",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "per + acc.",
+  "lemma": "per",
+  "definition": "through",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "sine + abl.",
+  "lemma": "sine",
+  "definition": "without",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "prō + abl.",
+  "lemma": "prō",
+  "definition": "in front of; on behalf of",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "post + acc.",
+  "lemma": "post",
+  "definition": "after, behind",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "ante + acc.",
+  "lemma": "ante",
+  "definition": "before, in front of",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "contrā + acc.",
+  "lemma": "contrā",
+  "definition": "against",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "inter + acc.",
+  "lemma": "inter",
+  "definition": "between, among",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "propter + acc.",
+  "lemma": "propter",
+  "definition": "on account of",
+  "pos": "preposition",
+  "frequency": null
+ },
+ {
+  "headword": "ego, meī",
+  "lemma": "ego",
+  "definition": "I",
+  "pos": "pronoun",
+  "frequency": null
+ },
+ {
+  "headword": "tū, tuī",
+  "lemma": "tū",
+  "definition": "you (sg.)",
+  "pos": "pronoun",
+  "frequency": null
+ },
+ {
+  "headword": "is, ea, id",
+  "lemma": "is",
+  "definition": "he, she, it; this, that",
+  "pos": "pronoun",
+  "frequency": null
+ },
+ {
+  "headword": "hic, haec, hoc",
+  "lemma": "hic",
+  "definition": "this",
+  "pos": "pronoun",
+  "frequency": null
+ },
+ {
+  "headword": "ille, illa, illud",
+  "lemma": "ille",
+  "definition": "that",
+  "pos": "pronoun",
+  "frequency": null
+ },
+ {
+  "headword": "quī, quae, quod",
+  "lemma": "quī",
+  "definition": "who, which, that",
+  "pos": "pronoun",
+  "frequency": null
+ },
+ {
+  "headword": "quis, quid",
+  "lemma": "quis",
+  "definition": "who? what?",
+  "pos": "pronoun",
+  "frequency": null
+ },
+ {
+  "headword": "ipse, ipsa, ipsum",
+  "lemma": "ipse",
+  "definition": "-self; the very",
+  "pos": "pronoun",
+  "frequency": null
+ },
+ {
+  "headword": "nēmō, nūllīus",
+  "lemma": "nēmō",
+  "definition": "no one",
+  "pos": "pronoun",
+  "frequency": null
+ },
+ {
+  "headword": "nihil",
+  "lemma": "nihil",
+  "definition": "nothing",
+  "pos": "pronoun",
+  "frequency": null
+ }
+]

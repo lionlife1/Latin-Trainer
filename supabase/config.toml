@@ -1,0 +1,24 @@
+# Supabase CLI config for local development (`supabase start`).
+project_id = "latiniq"
+
+[db]
+major_version = 16
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[auth]
+site_url = "http://localhost:5173"
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false
+
+# Students have no session yet when joining or signing in.
+[functions.student-join]
+verify_jwt = false
+
+[functions.student-login]
+verify_jwt = false
