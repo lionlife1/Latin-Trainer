@@ -1,5 +1,6 @@
 import type { ModuleContent, ModuleMeta } from '../../lib/types';
 import type { DrillResult } from '../drill/useDrill';
+import { appendSession, type NewSession, type PracticeSession } from '../practice/sessionLog';
 
 // Same keys as the legacy app so existing learners keep their progress.
 const KEY_PROGRESS = 'latiniq_progress';
@@ -67,9 +68,57 @@ export function recordSession(mod: ModuleContent, results: DrillResult[]) {
     progress[mod.id].wrong_ids = wrongIds;
   }
   localStorage.setItem(KEY_PROGRESS, JSON.stringify(progress));
+  appendSession({
+    kind: 'module', module_id: mod.id, correct, total, xp: qualifies ? earnedXP : 0, completed: qualifies,
+  });
   return { completed: qualifies, earnedXP: qualifies ? earnedXP : 0, pct };
 }
 
+/** Consecutive days with practice, ending today or yesterday. */
+export function streakFrom(dates: string[], today = todayISO()): Streak {
+  const days = new Set(dates);
+  const prev = (iso: string) => {
+    const d = new Date(iso + 'T00:00:00Z');
+    d.setUTCDate(d.getUTCDate() - 1);
+    return todayISO(d);
+  };
+  let day = days.has(today) ? today : prev(today);
+  if (!days.has(day)) return { lastDate: [...days].sort().pop() ?? '', count: 0 };
+  const lastDate = day;
+  let count = 0;
+  while (days.has(day)) {
+    count++;
+    day = prev(day);
+  }
+  return { lastDate, count };
+}
+
+/** One 'import' session per module the legacy app completed that has no completed session in the log. */
+export function legacyImports(progress: Progress, sessions: PracticeSession[]): NewSession[] {
+  const covered = new Set(sessions.filter(s => s.completed && s.module_id).map(s => s.module_id));
+  return Object.entries(progress)
+    .filter(([id, p]) => p.completed && !covered.has(id))
+    .map(([id, p]) => ({ kind: 'import', module_id: id, correct: 0, total: 0, xp: p.xp ?? 0, completed: true }));
+}
+
+/** Recomputes completion, XP and streak from the session log. Keeps this device's wrong_ids. */
+export function rebuildFromSessions(sessions: PracticeSession[], today = todayISO()) {
+  const progress: Progress = {};
+  for (const [id, p] of Object.entries(loadProgress())) if (p.wrong_ids) progress[id] = { wrong_ids: p.wrong_ids };
+  let total = 0;
+  for (const s of sessions) {
+    total += s.xp;
+    if (!s.module_id || (!s.completed && !s.xp)) continue;
+    const p = (progress[s.module_id] ??= {});
+    if (s.completed) p.completed = true;
+    p.xp = (p.xp ?? 0) + s.xp;
+  }
+  const dates = sessions.filter(s => s.kind !== 'import').map(s => todayISO(new Date(s.finished_at)));
+  localStorage.setItem(KEY_PROGRESS, JSON.stringify(progress));
+  localStorage.setItem(KEY_XP, String(total));
+  localStorage.setItem(KEY_STREAK, JSON.stringify(streakFrom(dates, today)));
+}
+
 export function resetAll() {
-  [KEY_PROGRESS, KEY_STREAK, KEY_XP].forEach(k => localStorage.removeItem(k));
+  [KEY_PROGRESS, KEY_STREAK, KEY_XP, 'latiniq_sessions'].forEach(k => localStorage.removeItem(k));
 }
