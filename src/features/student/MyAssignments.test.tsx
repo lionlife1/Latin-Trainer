@@ -9,7 +9,7 @@ const row = (id: string, due_at: string | null, best = false): Rows[number] => (
   attempts: [],
   best: best ? { id: 't', assignment_id: id, started_at: '', submitted_at: 'x', score: 1, total: 1, is_late: false, over_time: false } : null,
   open: null,
-  latest: null,
+  latest: null as unknown as Rows[number]['latest'], // api types this non-null; it can be null at runtime
 });
 
 describe('groupAssignments', () => {
