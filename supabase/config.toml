@@ -6,7 +6,7 @@ major_version = 16
 
 [db.seed]
 enabled = true
-sql_paths = ["./seed.sql"]
+sql_paths = ["./seed.sql", "./seed-lexicon.sql"]
 
 [auth]
 site_url = "http://localhost:5173"

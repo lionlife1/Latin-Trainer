@@ -71,10 +71,10 @@ Netlify works too (`netlify.toml` included); set the same two variables there.
 
 ## Dictionary data
 
-`content/starter-lexicon.json` is a small (226-word) starter dictionary of common words. To use the
-Dickinson College Commentaries Latin Core Vocabulary (~1000 words, CC BY-SA 3.0) instead, download its
-CSV to `content/raw/dcc-core.csv`, run `npm run seed`, apply `supabase/seed.sql` again, and set
-`VITE_LEXICON_ATTRIBUTION` as shown in `.env.example` so the required attribution is displayed.
+The dictionary is built from three vendored sources under `content/sources/` (see its README): D'Ooge's
+Latin-English vocabulary, Whitaker's Words `DICTLINE.GEN`, and Lodge's 2,000-word core list. Run
+`npm run seed` to regenerate `supabase/seed.sql` (modules and questions) and `supabase/seed-lexicon.sql`
+(the lexicon), then apply both. Re-applying the lexicon seed keeps words that vocab lists use.
 
 ## Privacy and school use
 
