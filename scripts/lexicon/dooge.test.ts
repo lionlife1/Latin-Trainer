@@ -3,6 +3,8 @@ import { parseDooge } from './dooge';
 
 const one = (s: string) => parseDooge(s + '\n');
 
+const MULTI_WORD_LEMMAS = new Set(['agrī cultūra', 'quā dē causā', 'quā rē', 'simul ac']);
+
 describe('parseDooge', () => {
   it('parses a plain verb', () => {
     expect(one('«ab-dō, -ere, -didī, -ditus», _hide, conceal_')).toEqual([
@@ -61,6 +63,39 @@ describe('parseDooge', () => {
     expect(one('«Aesōpus, -ī», m. _Æsop_, a writer of fables')).toEqual([]);
   });
 
+  it('drops parentheticals inside definition spans (homō)', () => {
+    expect(one('«homō, -inis», m. and f. _(human being), man, person_')[0]).toEqual({
+      headword: 'homō, -inis, m. and f.',
+      lemma: 'homō',
+      definition: 'man, person',
+      pos: 'noun',
+    });
+  });
+
+  it('repairs the cibus source typo (gender glued to the span)', () => {
+    expect(one('«cibus, -ī», _m.food, victuals_')[0]).toMatchObject({
+      headword: 'cibus, -ī, m.',
+      definition: 'food, victuals',
+      pos: 'noun',
+    });
+  });
+
+  it('tolerates a period where the source has a comma (placeō)', () => {
+    expect(one('«placeō. -ēre, -uī, -itus», _please, be pleasing_, with dat. (§501.14)')[0]).toMatchObject({
+      headword: 'placeō, -ēre, -uī, -itus',
+      lemma: 'placeō',
+    });
+  });
+
+  it('uses the bare word as lemma when the headword has a parenthetical (aliquis)', () => {
+    expect(one('«aliquis (-quī), -qua, -quid (-quod)», indef. pron. _some one, some_\n    (§487)')[0]).toEqual({
+      headword: 'aliquis, -qua, -quid',
+      lemma: 'aliquis',
+      definition: 'some one, some',
+      pos: 'pronoun',
+    });
+  });
+
   it('parses the whole vendored file', () => {
     const rows = parseDooge(readFileSync('content/sources/dooge-latin-english.txt', 'utf8'));
     expect(rows.length).toBeGreaterThanOrEqual(1200);
@@ -70,6 +105,12 @@ describe('parseDooge', () => {
       expect(r.definition.length, r.headword).toBeGreaterThanOrEqual(1);
       expect(r.definition.length, r.headword).toBeLessThanOrEqual(200);
       expect(allowed.has(r.pos), r.headword).toBe(true);
+      expect(r.definition, r.headword).toMatch(/^\p{L}/u);
+      expect(r.definition, r.headword).not.toMatch(/[«»_\[\]]/);
+      expect(r.headword.length, r.headword).toBeGreaterThanOrEqual(1);
+      expect(r.headword.length, r.headword).toBeLessThanOrEqual(120);
+      expect(r.headword, r.headword).not.toMatch(/[«»\[\]]|\s{2}/);
+      if (!MULTI_WORD_LEMMAS.has(r.lemma)) expect(r.lemma, r.headword).toMatch(/^-?\p{L}+$/u);
     }
   });
 });

@@ -42,56 +42,91 @@ const POS_MARKERS: Array<[RegExp, string]> = [
   [/(?<![a-z])[mfn]\./, 'noun'],
 ];
 
-function parseEntry(entry: string): SourceRow | null {
+// One-off corrections for typos in the vendored source text (applied to the
+// joined entry string before parsing). Keep this list small.
+const SOURCE_FIXES: Array<[string, string]> = [
+  ['«anim-advertō, -ere, -tī, -sus [[animus»', '«anim-advertō, -ere, -tī, -sus» [[«animus»'],
+  ['[[«quam», _how]], how great, how much_, «tantus', '[[«quam», _how_]], _how great, how much_. «tantus'],
+  ['[[«pugna», _battle]], fight_', '[[«pugna», _battle_]], _fight_'],
+  ['f _-fight, battle._', 'f. _fight, battle_.'],
+  ['_m.food, victuals_', 'm. _food, victuals_'],
+  ['f. [«victor», _victor_],', 'f. [[«victor», _victor_]],'],
+  ['(§247.2.a]', '(§247.2.a)'],
+  ['_or_ «fidē», _trust', 'or «fidē», _trust'],
+];
+
+// Entries whose source has no part-of-speech marker at all.
+const POS_OVERRIDES: Record<string, string> = {
+  inde: 'adverb',
+  sīcut: 'adverb',
+  initium: 'noun',
+  vāgīna: 'noun',
+  fidēs: 'noun',
+  dēpendeō: 'verb',
+  inquit: 'verb',
+  'quā rē': 'adverb',
+  'quā dē causā': 'adverb',
+};
+
+const GENDER_RE = /[mfn]\.(?:\s*(?:and|or)\s*[mfn]\.)?(?:\s*plur\.)?/;
+
+const stripParens = (s: string) => s.replace(/\([^)]*\)/g, ' ');
+
+function parseEntry(rawEntry: string): SourceRow | null {
+  let entry = rawEntry;
+  for (const [from, to] of SOURCE_FIXES) entry = entry.replace(from, to);
   const m = /^«([^»]*)»/.exec(entry);
   if (!m) return null;
   let rest = entry.slice(m[0].length);
-    const alt = /^ or «([^»]*)»/.exec(rest);
-  let headword = clean(m[1]);
+  const alt = /^ or «([^»]*)»/.exec(rest);
+  const fixHead = (h: string) =>
+    clean(stripParens(h).replace(/(\p{L})\.(?= -)/gu, '$1,')).replace(/\s+,/g, ',');
+  let headword = fixHead(m[1]);
   const lemma = lemmaOf(headword);
   if (alt) {
-    headword = `${headword} or ${clean(alt[1])}`;
+    headword = `${headword} or ${fixHead(alt[1])}`;
     rest = rest.slice(alt[0].length);
   }
   if (/^\p{Lu}/u.test(headword)) return null;
 
-  // Text between the headword and the first [[, ( or _ carries pos / gender.
+  // Text between the headword and the first span carries pos / gender.
   const stripped = rest.replace(/\[\[[\s\S]*?\]\]/g, ' ').replace(/\([^)]*\)/g, ' ');
   const preEnd = stripped.indexOf('_');
   const pre = preEnd === -1 ? stripped : stripped.slice(0, preEnd);
 
   let pos: string | null = null;
   let best = Infinity;
-  let genderMatch = false;
+  let bestIdx = -1;
   for (const [re, p] of POS_MARKERS) {
     const mm = re.exec(pre);
     if (mm && mm.index < best) {
       best = mm.index;
       pos = p;
-      genderMatch = p === 'noun';
+      bestIdx = p === 'noun' ? mm.index : -1;
     }
   }
   const parts = headword.split(',').length;
-  if (pos === null) pos = parts >= 3 || /sum$/.test(lemma) ? 'verb' : 'other';
-  if (genderMatch) {
-    const g = /^\s*,?\s*(.*?)[\s,]*$/.exec(pre)?.[1];
+  if (pos === null) pos = POS_OVERRIDES[lemma] ?? (parts >= 3 || /sum$/.test(lemma) ? 'verb' : 'other');
+  if (bestIdx >= 0) {
+    const g = GENDER_RE.exec(pre.slice(bestIdx))?.[0].replace(/\s+/g, ' ');
     if (g) headword = `${headword}, ${g}`;
   }
 
-  // Definition spans: outside [[...]] and (...).
-  const body = stripped;
+  // Definition spans: `_..._` outside (...); parentheses inside spans are dropped.
   const spans: string[] = [];
-  const re = /_([^_]+)_/g;
+  const re = /_([^_]*)_|\([^)]*\)/g;
   let sm: RegExpExecArray | null;
+  const body = rest.replace(/\[\[[\s\S]*?\]\]/g, ' ');
   while ((sm = re.exec(body))) {
-    spans.push(sm[1].replace(/[;,\s]+$/, ''));
+    if (sm[1] === undefined) continue; // parenthetical outside a span
+    const span = stripParens(sm[1])
+      .replace(/§\s*[\d.]*/g, '')
+      .replace(/\s+/g, ' ')
+      .replace(/^[\s,;-]+|[\s,;.]+$/g, '');
+    if (span) spans.push(span);
     if (/^\.(\s|$)/.test(body.slice(re.lastIndex))) break;
   }
-  const definition = spans
-    .join(', ')
-    .replace(/§\s*[\d.]*/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+  const definition = spans.join(', ');
   if (!definition) return null;
   return { headword, lemma, definition, pos };
 }
