@@ -6,7 +6,7 @@ import {
   addCustomWord, addListItem, deleteVocabList, getVocabList, removeListItem, renameVocabList, searchLexicon,
   updateListItem, type LexiconRow, type VocabListItemRow,
 } from './api';
-import { DCC_ATTRIBUTION } from './VocabLists';
+import { LEXICON_CREDIT } from './VocabLists';
 
 const POS = ['noun', 'verb', 'adjective', 'adverb', 'pronoun', 'preposition', 'conjunction', 'other'];
 
@@ -140,7 +140,7 @@ export function VocabListEditor() {
           Delete list
         </button>
       </div>
-      <p className="attribution">{DCC_ATTRIBUTION}</p>
+      <p className="attribution">{LEXICON_CREDIT}</p>
     </>
   );
 }

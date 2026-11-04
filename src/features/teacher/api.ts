@@ -82,7 +82,7 @@ export async function searchLexicon(q: string, limit = 20): Promise<LexiconRow[]
   if (!term) return [];
   return must<LexiconRow[]>(
     await sb().from('lexicon').select(LEX_COLS).ilike('search_text', `%${term}%`)
-      .order('frequency', { ascending: true, nullsFirst: false }).order('lemma').limit(limit),
+      .order('core', { ascending: false }).order('frequency', { ascending: true, nullsFirst: false }).order('lemma').limit(limit),
   );
 }
 
@@ -136,7 +136,7 @@ export async function loadVocabItems(listId: string): Promise<VocabItem[]> {
 
 /** Built-in words used as extra MC distractors for short lists. */
 export async function loadFallbackLexicon(): Promise<VocabItem[]> {
-  const rows = must<LexiconRow[]>(await sb().from('lexicon').select(LEX_COLS).is('owner_id', null).limit(400));
+  const rows = must<LexiconRow[]>(await sb().from('lexicon').select(LEX_COLS).is('owner_id', null).eq('core', true).limit(400));
   return rows.map(r => ({ itemId: `lex${r.id}`, headword: r.headword, lemma: r.lemma, definition: r.definition, pos: r.pos }));
 }
 
