@@ -68,6 +68,15 @@ const POS_OVERRIDES: Record<string, string> = {
   'quā dē causā': 'adverb',
 };
 
+// Inseparable prefixes (com-, dis-/dī-, in- "un-, in-", re-/red-) are listed as entries with no
+// part-of-speech marker; they are not words, so they are dropped. Matched only when no marker was
+// found, so the preposition «in» (marked prep.) stays.
+const PREFIX_HEADWORDS = new Set(['com', 'dis, dī', 'in', 're or red']);
+
+// "-a, -um" / "-gra, -grum" / "-ra, -rum": the 2nd and 3rd parts of a 1st/2nd-declension adjective.
+const isAdjectiveEndings = (parts: string[]) =>
+  parts.length === 3 && /a$/.test(parts[1].trim()) && /um$/.test(parts[2].trim());
+
 const GENDER_RE = /[mfn]\.(?:\s*(?:and|or)\s*[mfn]\.)?(?:\s*plur\.)?/;
 
 const stripParens = (s: string) => s.replace(/\([^)]*\)/g, ' ');
@@ -105,8 +114,12 @@ function parseEntry(rawEntry: string): SourceRow | null {
       bestIdx = p === 'noun' ? mm.index : -1;
     }
   }
-  const parts = headword.split(',').length;
-  if (pos === null) pos = POS_OVERRIDES[lemma] ?? (parts >= 3 || /sum$/.test(lemma) ? 'verb' : 'other');
+  if (pos === null && PREFIX_HEADWORDS.has(headword)) return null;
+  const parts = headword.split(',');
+  if (pos === null) {
+    pos = POS_OVERRIDES[lemma]
+      ?? (isAdjectiveEndings(parts) ? 'adjective' : parts.length >= 3 || /sum$/.test(lemma) ? 'verb' : 'other');
+  }
   if (bestIdx >= 0) {
     const g = GENDER_RE.exec(pre.slice(bestIdx))?.[0].replace(/\s+/g, ' ');
     if (g) headword = `${headword}, ${g}`;

@@ -96,6 +96,20 @@ describe('parseDooge', () => {
     });
   });
 
+  it('labels 3-part adjective headwords (-a, -um) as adjectives, not verbs', () => {
+    expect(one('«vērus, -a, -um», _true, actual_')[0]).toMatchObject({ lemma: 'vērus', pos: 'adjective' });
+    expect(one('«integer, -gra, -grum», _untouched, whole; fresh, new_')[0]).toMatchObject({ lemma: 'integer', pos: 'adjective' });
+    expect(one('«re-cūsō, -āre, -āvī, -ātus», _refuse_')[0].pos).toBe('verb');
+    expect(one('«re-vertō, -ere, -ī», _turn back_')[0].pos).toBe('verb');
+  });
+
+  it('drops inseparable prefixes but keeps the preposition in', () => {
+    expect(one('«com- (col-, con-, cor-, co-)», a prefix, _together, with_')).toEqual([]);
+    expect(one('«re-» or «red-», an inseparable prefix, _again, back, anew, in return_')).toEqual([]);
+    expect(one('«in-», inseparable prefix. With nouns _un-, in-_')).toEqual([]);
+    expect(one('«in», prep, with acc. _into, to_')[0]).toMatchObject({ lemma: 'in', pos: 'preposition' });
+  });
+
   it('parses the whole vendored file', () => {
     const rows = parseDooge(readFileSync('content/sources/dooge-latin-english.txt', 'utf8'));
     expect(rows.length).toBeGreaterThanOrEqual(1200);
@@ -112,5 +126,14 @@ describe('parseDooge', () => {
       expect(r.headword, r.headword).not.toMatch(/[«»\[\]]|\s{2}/);
       if (!MULTI_WORD_LEMMAS.has(r.lemma)) expect(r.lemma, r.headword).toMatch(/^-?\p{L}+$/u);
     }
+    const adjectives = ['dēmissus', 'integer', 'iussus', 'missus', 'modicus', 'molestus', 'plēnus', 'praeruptus',
+      'reclīnātus', 'recreātus', 'redāctus', 'vērus'];
+    for (const lemma of adjectives) {
+      const found = rows.filter(r => r.lemma === lemma);
+      expect(found.length, lemma).toBeGreaterThan(0);
+      for (const r of found) expect(r.pos, lemma).not.toBe('verb');
+    }
+    for (const lemma of ['com', 'dis', 're']) expect(rows.filter(r => r.lemma === lemma), lemma).toEqual([]);
+    expect(rows.filter(r => r.lemma === 'in').map(r => r.pos)).toEqual(['preposition']);
   });
 });
