@@ -14,6 +14,8 @@ const cases: Array<[string[], string, string, string]> = [
   [['miles', 'milit'], 'N 3 1 M P', 'miles, militis, m.', 'noun'],
   [['puer', 'puer'], 'N 2 3 M P', 'puer, pueri, m.', 'noun'],
   [['bell', 'bell'], 'N 2 2 N T', 'bellum, belli, n.', 'noun'],
+  [['consili', 'consili'], 'N 2 4 N T', 'consilium, consilii, n.', 'noun'],
+  [['fili', 'fili'], 'N 2 5 M P', 'filius, filii, m.', 'noun'],
   [['corn', 'corn'], 'N 4 2 N T', 'cornu, cornus, n.', 'noun'],
   [['di', 'di'], 'N 5 1 C T', 'dies, diei, c.', 'noun'],
   [['bon', 'bon', 'meli', 'opti'], 'ADJ 1 1 X', 'bonus, bona, bonum', 'adjective'],

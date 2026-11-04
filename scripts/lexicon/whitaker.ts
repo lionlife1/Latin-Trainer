@@ -18,7 +18,8 @@ const GENDER: Record<string, string> = { M: 'm.', F: 'f.', N: 'n.', C: 'c.' };
 const NOUN: Record<string, [string, string]> = {
   '1 1': ['a', 'ae'],
   '2 1': ['us', 'i'],
-  '2 4': ['us', 'i'],
+  '2 4': ['us', 'i'], // -ius/-ium class; neuter is handled below
+  '2 5': ['us', 'i'],
   '2 2': ['um', 'i'],
   '2 3': ['', 'i'],
   '3 1': ['', 'is'],
@@ -47,7 +48,7 @@ function headwordFor(pos: string, f: string[], s: string[]): { headword: string;
   if (pos in SIMPLE_POS) return have(s1) ? { headword: s1, pos: SIMPLE_POS[pos] } : null;
   if (pos === 'N') {
     if (f[1] === '9') return have(s1) ? { headword: s1, pos: 'noun' } : null;
-    const t = NOUN[key];
+    const t = key === '2 4' && f[3] === 'N' ? ['um', 'i'] : NOUN[key];
     if (!t || !have(s1) || !have(s2raw)) return null;
     const g = GENDER[f[3]];
     const hw = `${s1}${t[0]}, ${s2raw}${t[1]}` + (g ? `, ${g}` : '');
