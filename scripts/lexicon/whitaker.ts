@@ -10,8 +10,6 @@ const SIMPLE_POS: Record<string, string> = {
   PREP: 'preposition',
   CONJ: 'conjunction',
   INTERJ: 'other',
-  PRON: 'pronoun',
-  NUM: 'other',
 };
 
 const GENDER: Record<string, string> = { M: 'm.', F: 'f.', N: 'n.', C: 'c.' };
@@ -45,16 +43,18 @@ const have = (s: string) => s !== '' && s !== 'zzz';
 function headwordFor(pos: string, f: string[], s: string[]): { headword: string; pos: string } | null {
   const key = `${f[1]} ${f[2]}`;
   const [s1, s2raw, s3, s4] = s;
-  if (pos in SIMPLE_POS) return { headword: s1, pos: SIMPLE_POS[pos] };
+  if (pos === 'PRON' || pos === 'NUM') return null; // stems only, not dictionary forms
+  if (pos in SIMPLE_POS) return have(s1) ? { headword: s1, pos: SIMPLE_POS[pos] } : null;
   if (pos === 'N') {
-    if (f[1] === '9') return { headword: s1, pos: 'noun' };
+    if (f[1] === '9') return have(s1) ? { headword: s1, pos: 'noun' } : null;
     const t = NOUN[key];
-    if (!t) return null;
+    if (!t || !have(s1) || !have(s2raw)) return null;
     const g = GENDER[f[3]];
     const hw = `${s1}${t[0]}, ${s2raw}${t[1]}` + (g ? `, ${g}` : '');
     return { headword: hw, pos: 'noun' };
   }
   if (pos === 'ADJ') {
+    if (!have(s1)) return null;
     const s2 = have(s2raw) ? s2raw : s1;
     switch (key) {
       case '1 1':

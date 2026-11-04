@@ -39,6 +39,18 @@ describe('parseDictlineLine', () => {
     expect(parseDictlineLine(line(['am', 'am', 'amav', 'amat'], 'V 1 1 X', 'F'))).toBeNull();
   });
 
+  it('drops PRON and NUM lines (stems only)', () => {
+    expect(parseDictlineLine(line(['aliqu', 'alicu'], 'PRON 1 0 INDEF'))).toBeNull();
+    expect(parseDictlineLine(line(['amb'], 'NUM 1 2 CARD'))).toBeNull();
+  });
+
+  it('drops rows whose required stem is zzz', () => {
+    expect(parseDictlineLine(line(['zzz', 'zzz'], 'N 3 1 N T'))).toBeNull();
+    expect(parseDictlineLine(line(['ep', 'zzz'], 'N 3 1 N T'))).toBeNull();
+    expect(parseDictlineLine(line(['zzz'], 'ADV POS'))).toBeNull();
+    expect(parseDictlineLine(line(['zzz', 'zzz'], 'ADJ 1 1 X'))).toBeNull();
+  });
+
   it('parses a real DICTLINE.GEN line', () => {
     const real =
       'am                 am                 amav               amat               V      1 1 X            X X X A O love, like; fall in love with; be fond of; have a tendency to;';
@@ -56,5 +68,8 @@ describe('parseDictline (whole file)', () => {
     expect(rows.length).toBeGreaterThanOrEqual(25000);
     expect(rows.length).toBeLessThanOrEqual(36000);
     expect(rows.every((r) => r.headword.length <= 120)).toBe(true);
+    expect(rows.some((r) => /zzz/.test(r.headword))).toBe(false);
+    expect(rows.some((r) => /(^|, ),|,\s*$|^\s*$/.test(r.headword))).toBe(false);
+    expect(rows.some((r) => r.pos === 'pronoun')).toBe(false);
   });
 });
