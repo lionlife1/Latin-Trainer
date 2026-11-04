@@ -62,8 +62,8 @@ site to the `gh-pages` branch. One-time setup after the first run:
 
 1. Create a Supabase project. Link it and push the schema: `supabase link`, `supabase db push`,
    then run `supabase/seed.sql` in the SQL editor (or `psql`). `supabase/seed-lexicon.sql` is several MB,
-   too large for the SQL editor, so apply it with `psql "$DATABASE_URL" -f supabase/seed-lexicon.sql`
-   after `seed.sql`.
+   too large for the SQL editor, so apply it with
+   `psql -v ON_ERROR_STOP=1 "$DATABASE_URL" -f supabase/seed-lexicon.sql` after `seed.sql`.
 2. Deploy the edge functions: `supabase functions deploy student-join student-login reset-pin`.
 3. In GitHub: Settings → Secrets and variables → Actions → **Variables**, add `VITE_SUPABASE_URL` and
    `VITE_SUPABASE_ANON_KEY` (the anon key is meant to be public), then re-run the workflow.
@@ -71,11 +71,24 @@ site to the `gh-pages` branch. One-time setup after the first run:
 
 Netlify works too (`netlify.toml` included); set the same two variables there.
 
+### Upgrading an existing deployment
+
+Update the database before the website:
+
+1. `supabase db push` (applies new migrations).
+2. `psql -v ON_ERROR_STOP=1 "$DATABASE_URL" -f supabase/seed-lexicon.sql` (reloads the dictionary).
+3. Then push or merge the frontend to `main`.
+
+The current frontend reads the `core` and `lemma_search` columns, so dictionary search fails until the
+migrations have run. Until the lexicon seed has run no word is marked core, so the trainers get no
+built-in extra answer choices.
+
 ## Dictionary data
 
-The built-in dictionary has about 35,000 words from William Whitaker's Words (free for any use). About
-2,500 core words come from Lodge (1909) and D'Ooge (1911), both public domain. Teacher search covers every
-word with core words listed first, and the trainers use core words only. The sources and their licenses
+The built-in dictionary has about 32,000 words from William Whitaker's Words (free for any use). About
+2,300 core words come from Lodge (1909) and D'Ooge (1911), both public domain. Teacher search covers every
+word: exact matches come first, then words starting with what you typed, then other matches (including
+definitions), with core words first in each group. The trainers use core words only. The sources and their licenses
 are in `content/sources/README.md`; no CC BY-SA sources are used. Run `npm run seed` to regenerate
 `supabase/seed.sql` (modules and questions) and `supabase/seed-lexicon.sql` (the lexicon), then apply both.
 Re-applying the lexicon seed keeps words that vocab lists use.

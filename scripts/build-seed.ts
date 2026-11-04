@@ -2,7 +2,7 @@
 // Lexicon sources, all under content/sources/:
 //   - dooge-latin-english.txt: D'Ooge, Latin-English vocabulary (public domain), with macrons
 //   - whitaker/DICTLINE.GEN: William Whitaker's Words dictionary data (open license), no macrons
-//   - lodge-core.tsv: Lodge's frequency-ranked core list (public domain), which marks the core words
+//   - lodge-core.tsv: Lodge's core list (public domain, numbered alphabetically), which marks the core words
 import { readFileSync, writeFileSync } from 'node:fs';
 import { MODULES } from '../src/content/modules';
 import { lemmaOf } from '../src/lib/lexicon';

@@ -49,7 +49,7 @@ describe('composeLexicon', () => {
       [w('amo, amare, amavi, amatus', 'verb', 'A')],
       new Map([['amo', 98]]),
     );
-    expect(rows).toEqual([{ headword: 'amō, amāre, amāvī, amātum', lemma: 'amō', definition: 'love', pos: 'verb', frequency: 98, core: true }]);
+    expect(rows).toEqual([{ headword: 'amō, amāre, amāvī, amātum', lemma: 'amō', definition: 'love', pos: 'verb', frequency: null, core: true }]);
   });
   it('marks only the best-frequency Whitaker entry of a Lodge lemma as core', () => {
     const { rows } = composeLexicon(
@@ -57,7 +57,7 @@ describe('composeLexicon', () => {
       [w('bonus, bona, bonum', 'adjective', 'A'), w('bonus, boni, m.', 'noun', 'C')],
       new Map([['bonus', 7]]),
     );
-    expect(rows.find(r => r.pos === 'adjective')).toMatchObject({ core: true, frequency: 7 });
+    expect(rows.find(r => r.pos === 'adjective')).toMatchObject({ core: true, frequency: null });
     expect(rows.find(r => r.pos === 'noun')).toMatchObject({ core: false, frequency: null });
   });
   it('keeps the best-frequency row for a duplicate (headword, pos)', () => {
@@ -78,6 +78,11 @@ describe('composeLexicon', () => {
     );
     const keys = rows.map(r => `${r.headword}|${r.pos}`);
     expect(new Set(keys).size).toBe(keys.length);
+  });
+  it('never stores Lodge numbers (alphabetical, not frequency) as frequency', () => {
+    const { rows } = composeLexicon([d('amō', 'verb')], [w('bonus, bona', 'adjective', 'A')], new Map([['amo', 1], ['bonus', 2]]));
+    expect(rows.map(r => r.frequency)).toEqual([null, null]);
+    expect(rows.every(r => r.core)).toBe(true);
   });
   it('reports Lodge lemmas found in neither source', () => {
     const { unmatchedLodge } = composeLexicon([d('amō', 'verb')], [w('bonus, bona', 'adjective', 'A')], new Map([['amo', 1], ['bonus', 2], ['zzz', 3]]));

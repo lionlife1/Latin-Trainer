@@ -3,6 +3,9 @@
 -- and deletes its temporary teacher (and so their list) at the end.
 \set ON_ERROR_STOP on
 
+-- A failed earlier run may have left its teacher behind; the fixed email would then clash.
+delete from auth.users where email = 'lexicon-test@example.test';
+
 create function pg_temp.ok(cond boolean, msg text) returns void language plpgsql as $$
 begin
   if cond is distinct from true then raise exception 'FAILED: %', msg; end if;
@@ -10,8 +13,9 @@ end $$;
 
 select pg_temp.ok((select count(*) from lexicon where owner_id is null) > 25000, 'full lexicon loaded');
 select pg_temp.ok((select count(*) from lexicon where owner_id is null and core) between 1500 and 3500, 'core list size');
-select pg_temp.ok((select core from lexicon where owner_id is null and search_text like '%amo%'
-                   order by core desc, frequency asc nulls last, lemma limit 1), 'core words rank first in search');
+-- lemma_search is the generated, normalized lemma that search matches exact and prefix lemmas against.
+select pg_temp.ok(exists (select 1 from lexicon where owner_id is null and core and lemma_search = 'sum'), 'core sum found by lemma_search');
+select pg_temp.ok(exists (select 1 from lexicon where owner_id is null and core and lemma_search = 'amo'), 'core amo found by lemma_search (macron removed)');
 
 -- A teacher (the on_auth_user_created trigger makes the profile) with a list that references the core amo row.
 select gen_random_uuid() as teacher_id \gset

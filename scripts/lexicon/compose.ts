@@ -8,7 +8,11 @@ export function lemmaKey(s: string): string {
   return normalize(s).replace(/[-´']/g, '').replace(/j/g, 'i');
 }
 
-/** Lodge TSV ("rank\tlemma") -> lemma key -> rank. The first rank wins for a repeated lemma. */
+/**
+ * Lodge TSV ("number\tlemma") -> lemma key -> entry number. The first number wins for a repeated lemma.
+ * Lodge numbers his list alphabetically, so the number only marks a word as core; it is not a
+ * frequency rank and composeLexicon never stores it.
+ */
 export function parseLodge(tsv: string): Map<string, number> {
   const out = new Map<string, number>();
   for (const line of tsv.split('\n')) {
@@ -53,7 +57,7 @@ export function composeLexicon(
     const key = lemmaKey(r.lemma);
     doogeKeys.add(key);
     doogeKeyPos.add(key + '\u0000' + r.pos);
-    rows.push({ ...r, frequency: lodge.get(key) ?? null, core: true });
+    rows.push({ ...r, frequency: null, core: true });
   }
 
   // Best Whitaker row per (headword, pos); file order wins ties.
@@ -81,7 +85,7 @@ export function composeLexicon(
     const core = bestFreq.get(key) === freqRank(r.freq) && bestFreq.has(key);
     rows.push({
       headword: r.headword, lemma: r.lemma, definition: r.definition, pos: r.pos,
-      frequency: core ? lodge.get(key)! : null, core,
+      frequency: null, core,
     });
   }
 

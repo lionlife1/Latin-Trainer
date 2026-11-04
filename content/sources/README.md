@@ -34,5 +34,5 @@ The file includes the Gutenberg transcriber's note about [[double brackets]] but
 
 - Source: Gonzalez Lodge, *Vocabulary of High School Latin* (1909), https://archive.org/details/vocabularyofhigh00lodguoft. Cross-checked against other scans of the same book: https://archive.org/details/cu31924021622125 (1907) and https://archive.org/details/vocabularyhighs01lodggoog (1909).
 - License: published 1909, public domain in the US.
-- Format: UTF-8, one `rank<TAB>lemma` per line, ranks 1-2000, no header. The lemma is Lodge's first word as printed: lowercase, hyphens kept, no macrons.
+- Format: UTF-8, one `number<TAB>lemma` per line, numbers 1-2000, no header. Lodge numbers his list alphabetically (1 a … 2000 vultus), so the number is not a frequency rank; it only marks a word as core and is not stored or used for search order. The lemma is Lodge's first word as printed: lowercase, hyphens kept, no macrons.
 - Produced from the archive.org OCR text of the vocabulary section. Entry numbers (including OCR-garbled ones such as `iioi.`) and first words were extracted, the three OCR copies were compared, and remaining gaps and OCR errors were fixed by hand against the printed context. Task 4 of the lexicon plan checks the lemmas against the other sources.
