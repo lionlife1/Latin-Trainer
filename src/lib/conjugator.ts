@@ -1,5 +1,6 @@
 // Algorithmic Latin subjunctive conjugation engine (ported from legacy trainer.js).
 import type { DrillQuestion, EndlessConfig } from './types';
+import { CORE_VERBS } from '../content/verbs.generated';
 
 export interface Verb {
     inf: string;
@@ -261,9 +262,15 @@ export function verbKey(v: Verb): string {
     return `${v.inf}|${v.irregular ? 'irr' : v.conj}`;
 }
 
-/** Every verb the Endless trainer can draw. */
+let pool: Verb[] | undefined;
+
+/** Every verb the Endless trainer can draw: the hand-written VERBS, then the generated core verbs they don't cover. */
 export function trainerPool(): Verb[] {
-    return VERBS;
+    if (!pool) {
+        const handWritten = new Set(VERBS.map(verbKey));
+        pool = [...VERBS, ...CORE_VERBS.filter(v => !handWritten.has(verbKey(v)))];
+    }
+    return pool;
 }
 
 export function generateRandomQuestion(config: EndlessConfig, rng: () => number = Math.random, verbs: Verb[] = trainerPool()): DrillQuestion | null {

@@ -1,4 +1,4 @@
-import { VERBS, generateSubjunctiveForm, generateRandomQuestion, type Verb } from './conjugator';
+import { VERBS, generateSubjunctiveForm, generateRandomQuestion, trainerPool, verbKey, type Verb } from './conjugator';
 
 const verb = (inf: string) => {
   const v = VERBS.find(v => v.inf === inf);
@@ -88,5 +88,31 @@ describe('generateRandomQuestion with a custom pool', () => {
       }
     }
     expect(seen).toBeGreaterThan(0);
+  });
+});
+
+describe('trainerPool', () => {
+  const pool = trainerPool();
+  it('adds the generated core verbs', () => expect(pool.length).toBeGreaterThan(600));
+  it('has each verb once', () => expect(new Set(pool.map(verbKey)).size).toBe(pool.length));
+  it('keeps the hand-written entry over a generated one', () => {
+    expect(pool.find(v => v.inf === 'amare')).toBe(VERBS.find(v => v.inf === 'amare'));
+    expect(pool.find(v => v.inf === 'ferre')).toBe(VERBS.find(v => v.inf === 'ferre'));
+    expect(pool.find(v => v.inf === 'ferre')?.base).toBeUndefined();
+  });
+  it('keeps both verbs that share an unmarked infinitive', () => {
+    expect(pool.filter(v => v.inf === 'iacere').map(v => v.conj).sort()).toEqual([2, 3.5]);
+  });
+  it('generates well-formed answers across the whole pool', () => {
+    const rng = seeded(2026);
+    const cfg = { stdAct: true, stdPass: true, dep: true, irr: true };
+    for (let i = 0; i < 2000; i++) {
+      const q = generateRandomQuestion(cfg, rng);
+      if (q?.type !== 'typein') throw new Error('expected typein');
+      for (const a of q.answers) {
+        expect(a).toMatch(/^[a-z]+( [a-z]+)?$/);
+        expect(a).not.toMatch(/undefined|NaN|j/);
+      }
+    }
   });
 });
