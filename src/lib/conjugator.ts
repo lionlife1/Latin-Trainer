@@ -12,6 +12,11 @@ export interface Verb {
     noPassive?: boolean;
     deponent?: boolean;
     impfBase?: string;
+    /** Compounds of esse / ferre / ire conjugate like their base with `prefix` in front. */
+    base?: 'esse' | 'ferre' | 'ire';
+    prefix?: string;
+    /** First principal part, for hints; set on generated verbs. */
+    pp1?: string;
 }
 export type Tense = 'present' | 'imperfect' | 'perfect' | 'pluperfect';
 export type Voice = 'active' | 'passive';
@@ -188,18 +193,20 @@ export function generateSubjunctiveForm(verb: Verb, tense: Tense, voice: Voice, 
     const passEnd = ENDINGS_PASS[pIndex];
 
     const calcVoice = verb.deponent ? "passive" : voice;
+    const irr = verb.base ?? verb.inf;
+    const pre = verb.prefix ?? "";
 
     // 1. PRESENT SUBJUNCTIVE
     if (tense === "present") {
-        if (verb.inf === "esse") return ["sim", "sis", "sit", "simus", "sitis", "sint"][pIndex];
+        if (irr === "esse") return pre + ["sim", "sis", "sit", "simus", "sitis", "sint"][pIndex];
         if (verb.inf === "posse") return ["possim", "possis", "possit", "possimus", "possitis", "possint"][pIndex];
         if (verb.inf === "velle") return "vel" + (pIndex === 0 ? "im" : pIndex === 1 ? "is" : pIndex === 2 ? "it" : pIndex === 3 ? "imus" : pIndex === 4 ? "itis" : "int");
         if (verb.inf === "nolle") return "nol" + (pIndex === 0 ? "im" : pIndex === 1 ? "is" : pIndex === 2 ? "it" : pIndex === 3 ? "imus" : pIndex === 4 ? "itis" : "int");
         if (verb.inf === "malle") return "mal" + (pIndex === 0 ? "im" : pIndex === 1 ? "is" : pIndex === 2 ? "it" : pIndex === 3 ? "imus" : pIndex === 4 ? "itis" : "int");
 
         let stem = "";
-        if (verb.inf === "ferre") stem = "fera";
-        else if (verb.inf === "ire") stem = "ea";
+        if (irr === "ferre") stem = pre + "fera";
+        else if (irr === "ire") stem = pre + "ea";
         else if (verb.inf === "fieri") stem = "fia";
         else if (verb.conj === 1) stem = verb.pres + "e";
         else if (verb.conj === 2) stem = verb.pres + "ea";
@@ -246,10 +253,15 @@ export function generateSubjunctiveForm(verb: Verb, tense: Tense, voice: Voice, 
     throw new Error(`Unknown tense: ${tense}`);
 }
 
-export function generateRandomQuestion(config: EndlessConfig, rng: () => number = Math.random): DrillQuestion | null {
+/** Every verb the Endless trainer can draw. */
+export function trainerPool(): Verb[] {
+    return VERBS;
+}
+
+export function generateRandomQuestion(config: EndlessConfig, rng: () => number = Math.random, verbs: Verb[] = trainerPool()): DrillQuestion | null {
     const pick = <T,>(arr: T[]): T => arr[Math.floor(rng() * arr.length)];
     // 1. Filter the VERBS array based on the user's config
-    let pool = VERBS.filter(v => {
+    let pool = verbs.filter(v => {
         if (v.deponent) return config.dep;
         if (v.irregular) {
             if (v.noPassive && !config.stdAct && !config.dep) return false;
@@ -278,7 +290,8 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
     } else {
         // Standard verb
         if (config.stdAct) availableVoices.push("active");
-        if (config.stdPass) availableVoices.push("passive");
+        if (config.stdPass && !verb.noPassive) availableVoices.push("passive");
+        if (availableVoices.length === 0) availableVoices = ["active"];
     }
 
     const voice = pick(availableVoices);
@@ -288,7 +301,7 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
     const answer = generateSubjunctiveForm(verb, tense, voice, person, number);
     const answers = [answer];
 
-    if (verb.inf === "ire" && (tense === "perfect" || tense === "pluperfect")) {
+    if ((verb.base ?? verb.inf) === "ire" && (tense === "perfect" || tense === "pluperfect")) {
         answers.push(answer.replace("iv", "i")); // Handles ierim / iissem
         if (tense === "pluperfect") answers.push(answer.replace("ivi", "i")); // Handles issem
     }
@@ -301,7 +314,12 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
     else if (verb.noPassive) voiceDisplay = "";
 
     let hint = "";
-    if (verb.deponent) hint = `Principal parts: ${verb.pres}or, ${verb.inf}, ${verb.perf}us sum`;
+    if (verb.pp1) {
+        hint = verb.deponent
+            ? `Principal parts: ${verb.pp1}, ${verb.inf}, ${verb.perf}us sum`
+            : `Principal parts: ${verb.pp1}, ${verb.inf}, ${verb.perf}i` + (verb.ppp ? `, ${verb.ppp}us` : "");
+    }
+    else if (verb.deponent) hint = `Principal parts: ${verb.pres}or, ${verb.inf}, ${verb.perf}us sum`;
     else if (verb.irregular) {
         if (verb.inf === "esse") hint = `Principal parts: sum, esse, fui, futurus`;
         else if (verb.inf === "posse") hint = `Principal parts: possum, posse, potui`;

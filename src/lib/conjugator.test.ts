@@ -1,4 +1,4 @@
-import { VERBS, generateSubjunctiveForm, generateRandomQuestion } from './conjugator';
+import { VERBS, generateSubjunctiveForm, generateRandomQuestion, type Verb } from './conjugator';
 
 const verb = (inf: string) => {
   const v = VERBS.find(v => v.inf === inf);
@@ -49,5 +49,44 @@ describe('generateRandomQuestion', () => {
       const q = generateRandomQuestion({ stdAct: false, stdPass: false, dep: true, irr: false }, rng);
       expect(q?.prompt).toContain('(deponent)');
     }
+  });
+});
+
+const absum: Verb = { inf: 'abesse', irregular: true, noPassive: true, base: 'esse', prefix: 'ab', perf: 'afu', pp1: 'absum', trans: 'to be away' };
+const confero: Verb = { inf: 'conferre', irregular: true, base: 'ferre', prefix: 'con', perf: 'contul', ppp: 'collat', pp1: 'confero', trans: 'to bring together' };
+const redeo: Verb = { inf: 'redire', irregular: true, noPassive: true, base: 'ire', prefix: 'red', perf: 'rediv', pp1: 'redeo', trans: 'to return' };
+const cado: Verb = { inf: 'cadere', conj: 3, pres: 'cad', perf: 'cecid', noPassive: true, pp1: 'cado', trans: 'to fall' };
+
+describe('compound irregulars', () => {
+  it('esse compound present', () => expect(generateSubjunctiveForm(absum, 'present', 'active', 1, 'singular')).toBe('absim'));
+  it('esse compound imperfect', () => expect(generateSubjunctiveForm(absum, 'imperfect', 'active', 3, 'plural')).toBe('abessent'));
+  it('ferre compound present passive', () => expect(generateSubjunctiveForm(confero, 'present', 'passive', 3, 'singular')).toBe('conferatur'));
+  it('ferre compound perfect passive', () => expect(generateSubjunctiveForm(confero, 'perfect', 'passive', 1, 'plural')).toBe('collati simus'));
+  it('ire compound present', () => expect(generateSubjunctiveForm(redeo, 'present', 'active', 2, 'singular')).toBe('redeas'));
+});
+
+describe('generateRandomQuestion with a custom pool', () => {
+  it('never asks a noPassive standard verb in the passive', () => {
+    const rng = seeded(3);
+    for (let i = 0; i < 50; i++) {
+      const q = generateRandomQuestion({ stdAct: false, stdPass: true, dep: false, irr: false }, rng, [cado]);
+      if (q?.type !== 'typein') throw new Error('expected typein');
+      expect(q.prompt).not.toContain('passive');
+      expect(q.answers[0]).not.toMatch(/ |r$|ris$|tur$|mur$|mini$|ntur$/);
+    }
+  });
+  it('accepts contracted pluperfects of ire compounds and builds a generic hint', () => {
+    const rng = seeded(11);
+    let seen = 0;
+    for (let i = 0; i < 400; i++) {
+      const q = generateRandomQuestion({ stdAct: true, stdPass: false, dep: false, irr: true }, rng, [redeo]);
+      if (q?.type !== 'typein') throw new Error('expected typein');
+      expect(q.hint).toBe('Principal parts: redeo, redire, redivi');
+      if (q.prompt.includes('1st sg. · pluperfect')) {
+        seen++;
+        expect(q.answers).toEqual(expect.arrayContaining(['redivissem', 'rediissem', 'redissem']));
+      }
+    }
+    expect(seen).toBeGreaterThan(0);
   });
 });
