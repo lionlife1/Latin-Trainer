@@ -282,8 +282,8 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
             if (v.noPassive && !config.stdAct && !config.dep) return false;
             return config.irr;
         }
-        // Standard verbs
-        if (!config.stdAct && !config.stdPass) return false;
+        // Standard verbs; one with no passive only fits a run that asks for actives
+        if (v.noPassive) return config.stdAct;
         return config.stdAct || config.stdPass;
     });
 
@@ -328,6 +328,10 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
     if (verb.deponent) voiceDisplay = "(deponent)";
     else if (verb.noPassive) voiceDisplay = "";
 
+    // Without macrons iacēre and iacere look alike, so name the verb by its 1st principal part too.
+    const shared = verb.pp1 && verbs.some(v => v !== verb && v.inf === verb.inf);
+    const verbLabel = shared ? `${verb.inf} (${verb.pp1})` : verb.inf;
+
     let hint = "";
     if (verb.pp1) {
         hint = verb.deponent
@@ -351,7 +355,7 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
         id: "endless_" + Date.now() + "_" + Math.floor(rng() * 1e9),
         type: "typein",
         badge: "ENDLESS TRAINER",
-        prompt: `<span class='latin-word' style='font-size: 1.4em;'>${verb.inf}</span><br><span style='font-size: 0.8em; color: var(--text-secondary);'>${ord} ${numAbbr} · ${tense} ${voiceDisplay}</span>`,
+        prompt: `<span class='latin-word' style='font-size: 1.4em;'>${verbLabel}</span><br><span style='font-size: 0.8em; color: var(--text-secondary);'>${ord} ${numAbbr} · ${tense} ${voiceDisplay}</span>`,
         hint: hint,
         answers: answers,
         explanation: `The correct algorithmic form is ${answer}.`

@@ -100,6 +100,20 @@ export function shortGloss(definition: string): string {
   return cut > 3 ? g.slice(0, cut) : g.slice(0, GLOSS_MAX);
 }
 
+/**
+ * Core verbs with no personal passive that Whitaker doesn't mark INTRANS (by 1st principal part,
+ * without macrons). Verbs whose 4th principal part is a future participle (-ūrus) are caught separately.
+ */
+const INTRANSITIVE = new Set([
+  'accedo', 'ardeo', 'careo', 'cedo', 'consentio', 'consisto', 'consuesco', 'convenio', 'decedo', 'decerto',
+  'decido', 'decurro', 'desilio', 'desisto', 'discedo', 'dissentio', 'erro', 'erumpo', 'evado', 'evenio',
+  'excedo', 'exsulto', 'faveo', 'fluo', 'haereo', 'hiemo', 'incedo', 'incido', 'incumbo', 'indulgeo',
+  'intercedo', 'invideo', 'inruo', 'lacrimo', 'maneo', 'mano', 'misereo', 'noceo', 'occurro', 'parco',
+  'pergo', 'permaneo', 'pertineo', 'pervenio', 'placeo', 'procedo', 'procumbo', 'procurro', 'propero',
+  'quiesco', 'recedo', 'regno', 'remaneo', 'salio', 'sedeo', 'serpo', 'servio', 'sono', 'spiro', 'spumo',
+  'sto', 'succedo', 'succurro', 'surgo', 'triumpho', 'vaco', 'valeo', 'venio', 'vigilo', 'vivo', 'volito',
+]);
+
 /** Core lexicon verbs -> trainer verbs; rows with no matching Whitaker verb are returned as unmatched headwords. */
 export function coreTrainerVerbs(rows: LexiconRow[], whitaker: WhitakerVerb[]): { verbs: Verb[]; unmatched: string[] } {
   const byPp1 = new Map<string, WhitakerVerb[]>();
@@ -122,7 +136,16 @@ export function coreTrainerVerbs(rows: LexiconRow[], whitaker: WhitakerVerb[]): 
       unmatched.push(r.headword);
       continue;
     }
-    const verb = { ...match.verb, trans: shortGloss(r.definition) };
+    const verb: Verb = { ...match.verb, trans: shortGloss(r.definition) };
+    const [, , third, fourth] = r.headword.split(',').map(p => p.trim());
+    // A spelled-out perfect in the lexicon beats Whitaker's unassimilated stem (attulī, not adtulī).
+    if (!verb.deponent && third && !third.startsWith('-') && !third.includes(' ')) {
+      const perf = lemmaKey(third);
+      if (perf.length > 1 && perf.endsWith('i')) verb.perf = perf.slice(0, -1);
+    }
+    if (!verb.deponent && (INTRANSITIVE.has(lemmaKey(verb.pp1 ?? '')) || (fourth && lemmaKey(fourth).endsWith('urus')))) {
+      verb.noPassive = true;
+    }
     if (!verbs.has(verbKey(verb))) verbs.set(verbKey(verb), verb);
   }
   return { verbs: [...verbs.values()].sort((x, y) => x.inf.localeCompare(y.inf)), unmatched };

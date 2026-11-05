@@ -115,6 +115,15 @@ describe('coreTrainerVerbs on the vendored sources', () => {
     expect(get('subigere')).toMatchObject({ perf: 'subeg' });
     expect(get('conari')).toMatchObject({ deponent: true });
   });
+  it('gives intransitive verbs no passive', () => {
+    for (const inf of ['stare', 'sedere', 'manere', 'discedere', 'nocere', 'servire', 'ardere', 'surgere', 'fluere'])
+      expect(get(inf), inf).toMatchObject({ noPassive: true });
+    for (const inf of ['agere', 'amare', 'capere', 'concedere']) expect(get(inf)?.noPassive, inf).toBeUndefined();
+  });
+  it('uses the lexicon\'s own perfect when it spells it out', () => {
+    expect(get('adferre')).toMatchObject({ perf: 'attul' });
+    expect(get('tollere')).toMatchObject({ perf: 'sustul' });
+  });
   it('leaves out semi-deponents and defectives', () => {
     for (const inf of ['audere', 'gaudere', 'solere', 'odisse']) expect(get(inf)).toBeUndefined();
     expect(verbs.some(v => v.pp1 === 'inquio')).toBe(false);

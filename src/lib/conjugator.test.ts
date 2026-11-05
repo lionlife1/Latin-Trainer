@@ -66,10 +66,32 @@ describe('compound irregulars', () => {
 });
 
 describe('generateRandomQuestion with a custom pool', () => {
+  it('leaves noPassive standard verbs out of a passive-only run', () => {
+    const amo = verb('amare');
+    const rng = seeded(5);
+    for (let i = 0; i < 50; i++) {
+      const q = generateRandomQuestion({ stdAct: false, stdPass: true, dep: false, irr: false }, rng, [cado, amo]);
+      expect(q?.prompt).toContain('amare');
+    }
+    expect(generateRandomQuestion({ stdAct: false, stdPass: true, dep: false, irr: false }, rng, [cado])).toBeNull();
+  });
+  it('names the verb when two verbs share an infinitive', () => {
+    const iaceo: Verb = { inf: 'iacere', conj: 2, pres: 'iac', perf: 'iacu', noPassive: true, pp1: 'iaceo', trans: 'to lie' };
+    const iacio: Verb = { inf: 'iacere', conj: 3.5, pres: 'iac', perf: 'iec', ppp: 'iact', pp1: 'iacio', trans: 'to throw' };
+    const rng = seeded(9);
+    const seen = new Set<string>();
+    for (let i = 0; i < 40; i++) {
+      const q = generateRandomQuestion({ stdAct: true, stdPass: false, dep: false, irr: false }, rng, [iaceo, iacio]);
+      const shown = q?.prompt.match(/iaci?e?o/)?.[0];
+      expect(shown).toBeDefined();
+      seen.add(shown!);
+    }
+    expect(seen).toEqual(new Set(['iaceo', 'iacio']));
+  });
   it('never asks a noPassive standard verb in the passive', () => {
     const rng = seeded(3);
     for (let i = 0; i < 50; i++) {
-      const q = generateRandomQuestion({ stdAct: false, stdPass: true, dep: false, irr: false }, rng, [cado]);
+      const q = generateRandomQuestion({ stdAct: true, stdPass: true, dep: false, irr: false }, rng, [cado]);
       if (q?.type !== 'typein') throw new Error('expected typein');
       expect(q.prompt).not.toContain('passive');
       expect(q.answers[0]).not.toMatch(/ |r$|ris$|tur$|mur$|mini$|ntur$/);
