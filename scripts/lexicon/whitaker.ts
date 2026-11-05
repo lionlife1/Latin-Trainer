@@ -39,7 +39,7 @@ const VERB: Record<string, [string, string, string, string]> = {
   '3 4': ['o', 'ire', 'or', 'iri'],
 };
 
-const have = (s: string) => s !== '' && s !== 'zzz';
+export const have = (s: string) => s !== '' && s !== 'zzz';
 
 function headwordFor(pos: string, f: string[], s: string[]): { headword: string; pos: string } | null {
   const key = `${f[1]} ${f[2]}`;
@@ -99,7 +99,17 @@ function headwordFor(pos: string, f: string[], s: string[]): { headword: string;
   return null;
 }
 
-export function parseDictlineLine(line: string): WhitakerRow | null {
+export interface DictlineFields {
+  /** The four stem columns, trimmed. */
+  s: string[];
+  /** Part of speech and its codes, e.g. ['V', '3', '1', 'TRANS']. */
+  f: string[];
+  freq: string;
+  meaning: string;
+}
+
+/** The columns of a usable DICTLINE line; null for short, continuation, empty or medieval/modern lines. */
+export function dictlineFields(line: string): DictlineFields | null {
   const l = line.replace(/\r$/, '');
   if (l.length < 111) return null;
   const s = [0, 19, 38, 57].map((i) => l.slice(i, i + 19).trim());
@@ -109,6 +119,13 @@ export function parseDictlineLine(line: string): WhitakerRow | null {
   const meaning = l.slice(110).trim().replace(/;+$/, '').trim();
   if (meaning.startsWith('|') || meaning === '') return null;
   if (age === 'F' || age === 'G' || age === 'H') return null;
+  return { s, f, freq, meaning };
+}
+
+export function parseDictlineLine(line: string): WhitakerRow | null {
+  const d = dictlineFields(line);
+  if (!d) return null;
+  const { s, f, freq, meaning } = d;
   const r = headwordFor(f[0], f, s);
   if (!r || !r.headword) return null;
   return { headword: r.headword, lemma: lemmaOf(r.headword), definition: meaning, pos: r.pos, freq };
