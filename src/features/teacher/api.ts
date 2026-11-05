@@ -1,5 +1,6 @@
 import { normalize } from '../../lib/grading';
 import { lemmaOf } from '../../lib/lexicon';
+import { rankLexicon } from '../../lib/lexiconRank';
 import { requireSupabase } from '../../lib/supabase';
 import type { AssignmentMode, DrillQuestion } from '../../lib/types';
 import type { PoolItem, VocabDirection, VocabItem } from '../../lib/vocab';
@@ -14,7 +15,11 @@ export interface AssignmentRow {
   question_count: number; due_at: string | null; time_limit_sec: number | null; max_attempts: number | null;
   reveal_answers: boolean; created_at: string;
 }
-export interface LexiconRow { id: number; owner_id: string | null; headword: string; lemma: string; definition: string; pos: string }
+export interface LexiconRow {
+  id: number; owner_id: string | null; headword: string; lemma: string; definition: string; pos: string;
+  /** Only selected by searchLexicon. */
+  core?: boolean; lemma_search?: string;
+}
 export interface VocabListRow { id: string; name: string; created_at: string }
 export interface VocabListItemRow { id: string; lexicon_id: number; definition_override: string | null; position: number; lexicon: LexiconRow }
 
@@ -77,13 +82,25 @@ export async function publishAssignment(input: PublishInput, pool: PoolItem[]): 
 // ---- lexicon & vocab lists
 const LEX_COLS = 'id, owner_id, headword, lemma, definition, pos';
 
+const SEARCH_COLS = `${LEX_COLS}, core, lemma_search`;
+
+/**
+ * Teacher dictionary search. Two queries run in parallel: lemmas starting with the term (so short
+ * words like "sum" or "et" are always found) and the full headword+definition text. The merged rows
+ * are ranked by rankLexicon: exact lemma, then lemma prefix, then the rest; core words first in each.
+ */
 export async function searchLexicon(q: string, limit = 20): Promise<LexiconRow[]> {
   const term = normalize(q).replace(/[%_\\]/g, '');
   if (!term) return [];
-  return must<LexiconRow[]>(
-    await sb().from('lexicon').select(LEX_COLS).ilike('search_text', `%${term}%`)
-      .order('frequency', { ascending: true, nullsFirst: false }).order('lemma').limit(limit),
-  );
+  const [prefix, full] = await Promise.all([
+    sb().from('lexicon').select(SEARCH_COLS).like('lemma_search', `${term}%`)
+      .order('core', { ascending: false }).order('lemma_search').limit(limit),
+    sb().from('lexicon').select(SEARCH_COLS).ilike('search_text', `%${term}%`)
+      .order('core', { ascending: false }).order('lemma').limit(limit),
+  ]);
+  const byId = new Map<number, LexiconRow>();
+  for (const r of [...must<LexiconRow[]>(prefix), ...must<LexiconRow[]>(full)]) if (!byId.has(r.id)) byId.set(r.id, r);
+  return rankLexicon([...byId.values()], term).slice(0, limit);
 }
 
 export async function addCustomWord(w: { headword: string; definition: string; pos: string }, ownerId: string) {
@@ -136,7 +153,7 @@ export async function loadVocabItems(listId: string): Promise<VocabItem[]> {
 
 /** Built-in words used as extra MC distractors for short lists. */
 export async function loadFallbackLexicon(): Promise<VocabItem[]> {
-  const rows = must<LexiconRow[]>(await sb().from('lexicon').select(LEX_COLS).is('owner_id', null).limit(400));
+  const rows = must<LexiconRow[]>(await sb().from('lexicon').select(LEX_COLS).is('owner_id', null).eq('core', true).limit(400));
   return rows.map(r => ({ itemId: `lex${r.id}`, headword: r.headword, lemma: r.lemma, definition: r.definition, pos: r.pos }));
 }
 

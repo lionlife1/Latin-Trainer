@@ -1,0 +1,2116 @@
+LATIN-ENGLISH VOCABULARY
+
+Translations inclosed within parentheses are not to be used as such;
+they are inserted to show etymological meanings.
+
+  [Transcriber’s Note:
+  The “parentheses” were originally printed as [square brackets]. They
+  are rendered here as [[double brackets]].]
+
+
+A
+
+«ā» or «ab», prep. with abl. _from, by, off_.
+  Translated _on_ in «ā dextrō cornū», _on the right wing_;
+  «ā fronte», _on the front_ or _in front_;
+  «ā dextrā», _on the right_;
+  «ā latere», _on the side_; etc.
+«ab-dō, -ere, -didī, -ditus», _hide, conceal_
+«ab-dūcō, -ere, -dūxī, -ductus», _lead off, lead away_
+«abs-cīdō, -ere, -cīdī,-cīsus» [[«ab(s)», _off_, + «caedō», _cut_]],
+    _cut off_
+«ab-sum, -esse, āfuī, āfutūrus», _be away, be absent, be distant,
+    be off_; with «ā» or «ab» and abl., §501.32
+«ac», conj., see «atque»
+«ac-cipiō, -ere, -cēpī, -ceptus» [[«ad», _to_, + «capiō», _take_]],
+    _receive, accept_
+«ācer, ācris, ācre», adj. _sharp_; figuratively, _keen, active, eager_
+    (§471)
+«acerbus, -a, -um», adj. _bitter, sour_
+«aciēs, -ēī», f. [[«ācer», _sharp_]], _edge; line of battle_
+«ācriter», adv. [[«ācer», _sharp_]], compared «ācrius, ācerrimē»,
+    _sharply, fiercely_
+«ad», prep. with acc. _to, towards, near_.
+  With the gerund or gerundive, _to, for_
+«ad-aequō, -āre, -āvī, -ātus», _make equal, make level with_
+«ad-dūcō, -ere, -dūxī, -ductus», _lead to; move, induce_
+«ad-eō, -īre, -iī, -itus», _go to, approach, draw near, visit_, with
+    acc. (§413)
+«ad-ferō, ad-ferre, at-tulī, ad-lātus», _bring, convey; report,
+    announce; render, give_ (§426)
+«ad-ficiō, -ere, -fēcī, -fectus» [[«ad», _to_, + «faciō», _do_]],
+    _affect, visit_
+«adflīctātus, -a, -um», adj. [[part. of «adflīctō», _shatter_]],
+    _shattered_
+«ad-flīgō, -ere, -flīxī, -flīctus», _dash upon, strike upon; harass,
+    distress_
+«ad-hibeō, -ēre, -uī, -itus» [[«ad», _to_, + «habeō», _hold_]], _apply,
+    employ, use_
+«ad-hūc», adv. _hitherto, as yet, thus far_
+«aditus, -ūs», m. [[«adeō», _approach_]], _approach, access; entrance_.
+    Cf. «adventus»
+«ad-ligō, -āre, -āvī, -ātus», _bind to, fasten_
+«ad-loquor, -loquī, -locūtus sum», dep. verb [[«ad», _to_, + «loquor»,
+    _speak_]], _speak to, address_, with acc.
+«ad-ministrō, -āre, -āvī, -ātus», _manage, direct_
+«admīrātiō, -ōnis», f. [[«admīror», _wonder at_]], _admiration,
+    astonishment_
+«ad-moveō, -ēre, -mōvī, -mōtus», _move to; apply, employ_
+«ad-propinquō, -āre, -āvī, -ātus», _come near, approach_, with dat.
+«ad-sum, -esse, -fuī, -futūres», _be present; assist_; with dat., §426
+«adulēscēns, -entis», m. and f. [[part. of «adolēscō», _grow_]], _a
+    youth, young man, young person_
+«adventus, -ūs», m. [[«ad», _to_, + «veniō», _come_]], _approach,
+    arrival_ (§466)
+«adversus, -a, -um», adj. [[part. of «advertō», _turn to_]], _turned
+    towards, facing; contrary, adverse_.
+  «rēs adversae», _adversity_
+«aedificium, aedifi´cī», n. [[«aedificō», _build_]], _building, edifice_
+«aedificō, -āre, -āvi, -ātus» [[«aedēs», _house_, + «faciō», _make_]],
+    _build_
+«aeger, aegra, aegrum», adj. _sick, feeble_
+«aequālis, -e», adj. _equal, like_. As a noun, «aequālis, -is», m. or f.
+    _one of the same age_
+«aequus, -a, -um», adj. _even, level; equal_
+«Aesōpus, -ī», m. _Æsop_, a writer of fables
+«aestās, -ātis», f. _summer_,
+  «initā aestāte», _at the beginning of summer_
+«aetās, -ātis», f. _age_
+«Aethiopia, -ae», f. _Ethiopia_, a country in Africa
+«Āfrica, -ae», f. _Africa_
+«Āfricānus, -a, -um», adj. _of Africa_. A name given to Scipio for his
+    victories in Africa
+«ager, agrī», m. _field, farm, land_ (§462.c)
+«agger, -eris», m. _mound_
+«agmen, -inis», n. [[«agō», _drive_]], _an army_ on the march, _column_.
+    «prīmum agmen», _the van_
+«agō, -ere, ēgī, āctus», _drive, lead; do, perform_.
+  «vītam agere», _pass life_
+«agricola, -ae», m. [[«ager», _field_, + «colō», _cultivate_]], _farmer_
+«agrī cultūra, -ae», f. _agriculture_
+«āla, -ae», f. _wing_
+«alacer, -cris, -cre», adj. _active, eager_. Cf. «ācer»
+«alacritās, -ātis», f. [[«alacer», _active_]], _eagerness, alacrity_
+«alacriter», adv. [[«alacer», _active_]], comp «alacrius, alacerrimē»,
+    _actively, eagerly_
+«albus, -a, -um», adj., _white_
+«alcēs, -is», f. _elk_
+«Alcmēna, -ae», f. _Alcme´na_, the mother of Hercules
+«aliquis (-quī), -qua, -quid (-quod)», indef. pron. _some one, some_
+    (§487)
+«alius, -a, -ud» (gen. «-īus», dat. «-ī»), adj. _another, other_.
+  «alius ... alius», _one ... another_.
+  «aliī ... aliī», _some ... others_ (§110)
+«Alpēs, -ium», f. plur. _the Alps_
+«alter, -era, -erum» (gen. «-īus», dat. «-ī»), adj. _the one, the other_
+    (of two).
+  «alter ... alter», _the one ... the other_ (§110)
+«altitūdō, -inis», f. [[«altus», _high_]], _height_
+«altus, -a, -um», adj. _high, tall, deep_
+«Amāzonēs, -um», f. plur. _Amazons_, a fabled tribe of warlike women
+«ambō, -ae, -ō», adj. (decl. like «duo»), _both_
+«amīcē», adv. [[«amīcus», _friendly_]], superl. «amīcissimē», _in a
+    friendly manner_
+«amiciō, -īre, ----, -ictus» [[«am-», _about_, + «iaciō», _throw_]],
+    _throw around, wrap about, clothe_
+«amīcitia, -ae», f. [[«amīcus», _friend_]], _friendship_
+«amīcus, -a, -um», adj. [[«amō», _love_]], _friendly_. As a noun,
+    «amīcus, -ī», m. _friend_
+«ā-mittō, -ere, -mīsī, -missus», _send away; lose_
+«amō, -āre, -āvī, -ātus», _love, like, be fond of_ (§488)
+«amphitheātrum, -ī», n. _amphitheater_
+«amplus, -a, -um», adj. _large, ample; honorable, noble_
+«an», conj. _or_, introducing the second part of a double question
+«ancilla, -ae», f. _maidservant_
+«ancora, -ae», f. _anchor_
+«Andromeda, -ae», f. _Androm´eda_, daughter of Cepheus and wife of
+    Perseus
+«angulus, -ī», m. _angle, corner_
+«anim-advertō, -ere, -tī, -sus [[animus», _mind_, + «advertō», _turn
+    to_]], _turn the mind to, notice_
+«animal, -ālis», n. [[«anima», _breath_]], _animal_ (§465.b)
+«animōsus, -a, -um», adj. _spirited_
+«animus, -ī», m. [[«anima», _breath_]], _mind, heart; spirit, courage,
+    feeling;_ in this sense often plural
+«annus, -i», m. _year_
+«ante», prep, with acc. _before_
+«anteā», adv. [[«ante»]], _before, formerly_
+«antīquus, -a, -um», adj. [[«ante», _before_]], _former, ancient, old_
+«aper, aprī», m. _wild boar_
+«Apollō, -inis», m. _Apollo_, son of Jupiter and Latona, brother of
+    Diana
+«ap-pāreō, -ēre, -uī», ---- [[«ad + pāreō», _appear_]], _appear_
+«ap-pellō, -āre, -āvī, -ātus», _call by name, name_. Cf. «nōminō, vocō»
+«Appius, -a, -um», adj. _Appian_
+«ap-plicō, -āre, -āvī, -ātus», _apply, direct, turn_
+«apud», prep, with acc. _among; at, at the house of_
+«aqua, -ae», f. _water_
+«aquila, -ae», f. _eagle_
+«āra, -ae», f. _altar_
+«arbitror, -ārī, -ātus sum», _think, suppose_ (§420.c). Cf.
+    «exīstimō, putō»
+«arbor, -oris», f. _tree_ (§247.1.a)
+«Arcadia, -ae», f. _Arcadia_, a district in southern Greece
+«ārdeō, -ēre, ārsī, ārsūrus», _be on fire, blaze, burn_
+«arduus, -a, -um», adj. _steep_
+«Arīcia, -ae», f. _Aricia_, a town on the Appian Way, near Rome
+«ariēs, -etis», m. _battering-ram_ (p. 221)
+«arma, -ōrum», n. plur. _arms, weapons_. Cf. «tēlum»
+«armātus, -a, -um», adj. [[«armō», _arm_]], _armed, equipped_
+«arō, -āre, -āvī, -ātus», _plow, till_
+«ars, artis», f. _art, skill_
+«articulus, -ī», m. _joint_
+«ascrībō, -ere, -scrīpsī, -scrīptus» [[«ad», _in addition_, + «scrībō»,
+    _write_]], _enroll, enlist_
+«Āsia, -ae», f. _Asia_, i.e. Asia Minor
+«at», conj. _but_. Cf. «autem, sed»
+«Athēnae, -ārum», f. plur. _Athens_
+«Atlās, -antis», m. _Atlas_, a Titan who was said to hold up the sky
+«at-que, ac», conj. _and, and also, and what is more_. «atque» may be
+    used before either vowels or consonants, «ac» before consonants only
+«attentus, -a, -um», adj. [[part. of «attendō», _direct_ (the mind)
+    _toward_]], _attentive, intent on, careful_
+«at-tonitus, -a, -um», adj. _thunderstruck, astounded_
+«audācia, -ae», f. [[«audāx», _bold_]], _boldness, audacity_
+«audācter», adv. [[«audāx», _bold_]], compared «audācius, audācissimē»,
+    _boldly_
+«audāx, -ācis», adj. _bold, daring_
+«audeō, -ēre, ausus sum», _dare_
+«audiō, -īre, -īvī or -īī, -ītus», _hear, listen to_ (§§420.d, 491)
+«Augēās, -ae», m. _Auge´as_, a king whose stables Hercules cleaned
+«aura, -ae», f. _air, breeze_
+«aurātus, -a, -um», adj. [[«aurum», _gold_]], _adorned with gold_
+«aureus, -a, -um», adj.[[«aurum», _gold_]], _golden_
+«aurum, -ī», n. _gold_
+«aut», conj. _or_.
+  «aut...aut», _either...or_
+«autem», conj., usually second, never first, in the clause, _but,
+    moreover, however, now_. Cf. «at, sed»
+«auxilium, auxi´lī», n. _help, aid, assistance;_ plur. _auxiliaries_
+«ā-vertō, -ere, -tī, -sus», _turn away, turn aside_
+«avis, -is», f. _bird_ (§243.1)
+
+
+B
+
+«ballista, -ae», f. _ballista_, an engine for hurling missiles (p. 220)
+«balteus, -ī», m. _belt, sword belt_
+«barbarus, -ī», m. _barbarian, savage_
+«bellum, -ī», n. _war_.
+  «bellum īnferre», with dat. _make war upon_
+«bene», adv. [[for «bonē», from «bonus»]], compared «melius, optimē»,
+    _well_
+«benignē», adv. [[«benignus», _kind_]], compared «benignius,
+    benignissimē», _kindly_
+«benignus, -a, -um», adj. _good-natured, kind_, often used with dat.
+«bīnī, -ae, -a», distributive numeral adj. _two each, two at a time_
+    (§334)
+«bis», adv. _twice_
+«bonus, -a, -um», adj. compared «melior, optimus», _good, kind_
+    (§469.a)
+«bōs, bovis» (gen. plur. «boum» or «bovum», dat. and abl. plur. «bōbus»
+    or «būbus»), m. and f. _ox, cow_
+«bracchium, bracchī», n. _arm_
+«brevis, -e», adj. _short_
+«Brundisium, -ī», n. _Brundisium_, a seaport in southern Italy. See map
+«bulla, -ae», f. _bulla_, a locket made of small concave plates of gold
+    fastened by a spring (p. 212)
+
+
+C
+
+«C.» abbreviation for «Gāius», Eng. _Caius_
+«cadō, -ere, ce´cidī, cāsūrus», _fall_
+«caedēs, -is», f. [[«caedō», _cut_]], (_a cutting down_), _slaughter,
+    carnage_ (§465.a)
+«caelum, -ī», n. _sky, heavens_
+«Caesar, -aris», m. _Cæsar_, the famous general, statesman, and writer
+«calamitās, -ātis», f. _loss, calamity, defeat, disaster_
+«calcar, -āris», n. _spur_ (§465.b)
+«Campānia, -ae», f. _Campania_., a district of central Italy. See map
+«Campānus, -a, -um», adj. _of Campania_
+«campus, -ī», m. _plain, field_, esp. the _Campus Martius_, along the
+    Tiber just outside the walls of Rome
+«canis, -is», m. and f. _dog_
+«canō, -ere, ce´cinī», ----, _sing_
+«cantō, -āre, -āvi, -ātus» [[«canō», _sing_]], _sing_
+«Capēnus, -a, -um», adj. _of Capena_, esp. the _Porta Cape´na_, the gate
+    at Rome leading to the Appian Way
+«capiō, -ere, cēpī, captus», _take, seize, capture_ (§492)
+«Capitōlīnus, -a, -um», adj. _belonging to the Capitol, Capitoline_
+«Capitōlium, Capitō´lī», n. [[«caput», _head_]], _the Capitol_, the hill
+    at Rome on which stood the temple of Jupiter Capitolinus and the
+    citadel
+«capsa, -ae», f. _box_ for books
+«captīvus, -ī», m. [[«capiō», _take_]], _captive_
+«Capua, -ae», f. _Capua_, a large city of Campania. See map
+«caput, -itis», n. _head_ (§464.2.b)
+«carcer, -eris», m. _prison, jail_
+«carrus, -ī», m. _cart, wagon_
+«cārus, -a, -um», adj. _dear; precious_
+«casa, -ae», f. _hut, cottage_
+«castellum, -ī», n. [[dim. of «castrum», _fort_]], _redoubt, fort_
+«castrum, -ī», n. _fort_. Usually in the plural, «castra, -ōrum»,
+    a military _camp_.
+  «castra pōnere», _to pitch camp_
+«cāsus, -us», m. [[«cadō», _fall_]], _chance; misfortune, loss_
+«catapulta, -ae», f. _catapult_, an engine for hurling stones
+«catēna, -ae», f. _chain_
+«caupōna, -ae», f. _inn_
+«causa, -ae», f. _cause, reason_, «quā dē causā», _for this reason_
+«cēdō, -ere, cessī, cessūrus», _give way, retire_
+«celer, -eris, -ere», adj. _swift, fleet_
+«celeritās, -ātis», f. [[«celer», _swift_]], _swiftness, speed_
+«celeriter», adv. [[«celer», _swift_]], compared «celerius, celerrimē»,
+    _swiftly_
+«cēna, -ae», f. _dinner_
+«centum», indecl. numeral adj. _hundred_
+«centuriō, -ōnis», m. _centurion, captain_
+«Cēpheus» (dissyl.), «-eī» (acc. «Cēphea»), m. _Cepheus_, a king of
+    Ethiopia and father of Andromeda
+«Cerberus, -ī», m. _Cerberus_, the fabled three-headed dog that guarded
+    the entrance to Hades
+«certāmen, -inis», n. [[«certō», _struggle_]], _struggle, contest,
+    rivalry_
+«certē», adv. [[«certus», _sure_]], compared «certius, certissimē»,
+    _surely, certainly_
+«certus, -a, -um», adj. _fixed, certain, sure_.
+  «aliquem certiōrem facere» (_to make some one more certain_),
+    _to inform some one_
+«cervus, -ī», m. _stag, deer_
+«cessō, -āre, -āvī, -ātus», _delay, cease_
+«cibāria, -ōrum», n. plur. _food, provisions_
+«cibus, -ī», _m.food, victuals_
+«Cimbrī, -ōrum», m. plur. _the Cimbri_
+«Cimbricus, -a, -um», adj. _Cimbrian_
+«cīnctus, -a, -um», adj. [[part. of «cingō», _surround_]], _girt,
+    surrounded_
+«cingō, -ere, cīnxī, cīnctus», _gird, surround_
+«circiter», adv. _about_
+«circum», prep, with acc. _around_
+«circum´-dō, -dare, -dedī, -datus», _place around, surround, inclose_
+«circum´-eō, -īre, -iī, -itus», _go around_
+«circum-sistō, -ere, circum´stetī», ----, _stand around, surround_
+«circum-veniō, -īre, -vēnī, -ventus» (_come around_), _surround_
+«citerior, -ius», adj. in comp., superl. «citimus», _hither, nearer_
+    (§475)
+«cīvīlis, -e», adj. [[«cīvis»]], _civil_
+«cīvis, -is», m. and f. _citizen_ (§243.1)
+«cīvitās, -ātis», f. [[«cīvis», _citizen_]], (_body of citizens_),
+    _state; citizenship_
+«clāmor, -ōris», m. _shout, cry_
+«clārus, -a, -um», adj. _clear; famous, renowned; bright, shining_
+«classis, -is», f. _fleet_
+«claudō, -ere, -sī, -sus», _shut, close_
+«clavus, -ī», m. _stripe_
+«cliēns, -entis», m. _dependent, retainer, client_ (§465.a)
+«Cocles, -itis», m. (_blind in one eye_), _Cocles_, the surname of
+    Horatius
+«co-gnōscō, -ere, -gnōvī, -gnītus», _learn, know, understand_. Cf.
+    «sciō» (§420.b)
+«cōgō, -ere, coēgī, coāctus» [[«co(m)-», _together_, + «agō», _drive_]],
+    (_drive together_), _collect; compel, drive_
+«cohors, cohortis», f. _cohort_, the tenth part of a legion, about 360
+    men
+«collis, -is», m. _hill_, «in summō colle», _on top of the hill_
+    (§247.2.a)
+«collum, -ī», n. _neck_
+«colō, -ere, coluī, cultus», _cultivate, till; honor, worship; devote
+    one’s self to_
+«columna, -ae», f. _column, pillar_
+«com- (col-, con-, cor-, co-)», a prefix, _together, with_, or
+    intensifying the meaning of the root word
+«coma, -ae», f. _hair_
+«comes, -itis», m. and f. [[«com-», _together_, + «eō», _go_]],
+    _companion, comrade_
+«comitātus, -ūs», m. [[«comitor», _accompany_]], _escort, company_
+«comitor, -ārī, -ātus sum», dep. verb [[«comes», _companion_]],
+    _accompany_
+«com-meātus, -ūs», m. _supplies_
+«com-minus», adv. [[«com-», _together_, + «manus», _hand_]], _hand to
+    hand_
+«com-mittō, -ere, -mīsī, -missus», _join together; commit, intrust_.
+  «proelium committere», _join battle_.
+  «sē committere» with dat, _trust one’s self to_
+«commodē», adv. [[«commodus», _fit_]], compared «commodius,
+    commodissimē», _conveniently, fitly_
+«commodus, -a, -um», adj. _suitable, fit_
+«com-mōtus, -a, -um», adj. [[part. of «commoveō», _move_]], _aroused,
+    moved_
+«com-parō, -āre, -āvī, -ātus» [[«com-», intensive, + «parō»,
+    _prepare_]], _prepare; provide, get_
+«com-pleō, -ēre, -plēvī, -plētus» [[«com-», intensive, + «pleō»,
+    _fill_]], _fill up_
+«complexus, -ūs», m. _embrace_
+«com-primō, -ere, -pressī, -pressus» [[«com-», _together_, + «premō»,
+    _press_]], _press together, grasp, seize_
+«con-cidō, -ere, -cidī», ---- [[«com-», intensive, + «cadō», _fall_]],
+    _fall down_
+«concilium, conci´lī», n. _meeting, council_
+«con-clūdō, -ere, -clūsī, -clūsus» [[«com-», intensive, + «claudō»,
+    _close_]], _shut up, close; end, finish_
+«con-currō, -ere, -currī, -cursus» [[«com-», _together_, + «currō»,
+    _run_]], _run together; rally, gather_
+«condiciō, -ōnis», f. [[«com-», _together_, + «dicō», _talk_]],
+    _agreement, condition, terms_
+«con-dōnō, -āre, -āvī, -ātus», _pardon_
+«con-dūcō, -ere, -dūxī, -ductus», _hire_
+«cōn-ferō, -ferre, -tulī, -lātus», _bring together_.
+  «sē cōnferre», _betake one’s self_
+«cōn-fertus, -a, -um», adj. _crowded, thick_
+«cōnfestim», adv. _immediately_
+«cōn-ficiō, -ere, -fēcī, -fectus» [[«com-», _completely_, + «faciō»,
+    _do_]], _make, complete, accomplish, finish_
+«cōn-fīrmō, -āre, -āvī, -ātus», _make firm, establish, strengthen,
+    affirm, assert_
+«cōn-fluō, -ere, -flūxī», ----, _flow together_
+«cōn-fugiō, -ere, -fūgī, -fugitūrus», _flee for refuge, flee_
+«con-iciō, -ere, -iēcī, -iectus» [[«com-», intensive, + «iaciō»,
+    _throw_]], _hurl_
+«con-iungō, -ere, -iūnxī, -iūnctus» [[«com-», _together_, + «iungō»,
+    _join_]], _join together, unite_
+«con-iūrō, -āre, -āvī, -ātus» [[«com-», _together_, + «iūrō», _swear_]],
+    _unite by oath, conspire_
+«con-locō, -āre, -āvī, -ātus» [[«com-», _together_, + «locō», _place_]],
+    _arrange, place, station_
+«conloquium, conlo´quī», n. [[«com-», _together_, + «loquor», _speak_]],
+    _conversation, conference_
+«cōnor, -ārī, -ātus sum», dep. verb, _endeavor, attempt, try_
+«cōn-scendō, -ere, -scendī, -scēnsus» [[«com-», intensive, + «scandō»,
+    _climb_]], _climb up, ascend_.
+  «nāvem cōnscendere», _embark, go on board_
+«cōn-scrībō, -ere, -scrīpsī, -scrīptus» [[«com-», _together_, +
+    «scrībō», _write_]], (_write together_), _enroll, enlist_
+«cōn-secrō, -āre, -āvī, -ātus» [[«com-», intensive, + «sacrō»,
+    _consecrate_]], _consecrate, devote_
+«cōn-sequor, -sequī, -secūtus sum», dep. verb [[«com-», intensive, +
+    «sequor», _follow_]], _pursue; overtake; win_
+«cōn-servō, -āre, -āvī, -ātus» [[«com-», intensive, + «servō», _save_]],
+    _preserve, save_
+«cōnsilium, cōnsi´lī», n. _plan, purpose, design; wisdom_
+«cōn-sistō, -ere, -stitī, -stitus» [[«com-», intensive, + «sistō»,
+    _cause to stand_]], _stand firmly, halt, take one’s stand_
+«cōn-spiciō, -ere, -spēxī, -spectus» [[«com-», intensive, + «spiciō»,
+    _spy_]], _look at attentively, perceive, see_
+«cōnstantia, -ae», f. _firmness, steadiness, perseverance_
+«cōn-stituō, -ere, -uī, -ūtus» [[«com-», intensive, + «statuō»,
+    _set_]], _establish, determine, resolve_
+«cōn-stō, -āre, -stitī, -stātūrus» [[«com-», _together_, + «stō»,
+    _stand_]], _agree; be certain ; consist of_
+«cōnsul, -ulis», m. _consul_ (§464.2.a)
+«cōn-sūmō, -ere, -sūmpsī, -sūmptus» [[«com-», intensive, + «sumō»,
+    _take_]], _consume, use up_
+«con-tendō, -ere, -dī, -tus», _strain; hasten; fight, contend,
+    struggle_
+«con-tineō, -ēre, -uī, -tentus» [[«com-», _together_, + «teneō»,
+    _hold_]], _hold together, hem in, contain; restrain_
+«contrā», prep, with acc. _against, contrary to_
+«con-trahō, -ere, -trāxī, -trāctus» [[«com-», _together_, + «trahō»,
+    _draw_]], _draw together;_ of sails, _shorten, furl_
+«contrōversia, -ae», f. _dispute, quarrel_
+«con-veniō, -īre, -vēnī, -ventus» [[«com-», _together_, + «veniō»,
+    _come_]], _come together, meet, assemble_
+«con-vertō, -ere, -vertī, -versus» [[«com-», intensive, + «vertō»,
+    _turn_]], _turn_
+«con-vocō, -āre, -āvī, -ātus» [[«com-», _together_, + «vocō», _call_]],
+    _call together_
+«co-orior, -īrī, -ortus sum», dep. verb [[«com-», intensive, + «orior»,
+    _rise_]], _rise, break forth_
+«cōpia, -ae», f. [[«com-», intensive, + «ops», _wealth_]], _abundance,
+    wealth, plenty_. Plur. «cōpiae, -ārum», _troops_
+«coquō, -ere, coxī, coctus», _cook_
+«Corinthus, -ī», f. _Corinth_, the famous city on the Isthmus of Corinth
+«Cornēlia, -ae», f. _Cornelia_, daughter of Scipio and mother of the
+    Gracchi
+«Cornēlius, Cornē´lī», m. _Cornelius_, a Roman name
+«cornū, -ūs», n. _horn; wing_ of an army, «ā dextrō cornū», _on the
+    right wing_ (§466)
+«corōna, -ae», f. _garland, wreath; crown_
+«corōnātus, -a, -um», adj. _crowned_
+«corpus, -oris», n. _body_
+«cor-ripiō, -ere, -uī, -reptus» [[«com-», intensive, + «rapiō»,
+    _seize_]], _seize, grasp_
+«cotīdiānus, -a, -um», adj. _daily_
+«cotīdiē», adv. _daily_
+«crēber, -bra, -brum», adj. _thick, crowded, numerous, frequent_
+«crēdō, -ere, -dīdī, -ditus», _trust, believe_, with dat. (§501.14)
+«cremō, -āre, -āvī, -ātus», _burn_
+«creō, -āre, -āvī, -ātus», _make; elect, appoint_
+«Creōn, -ontis», m. _Creon_, a king of Corinth
+«crēscō, -ere, crēvī, crētus», _rise, grow, increase_
+«Crēta, -ae», f. _Crete_, a large island in the Mediterranean
+«Crētaeus, -a, -um», adj. _Cretan_
+«crūs, crūris», n. _leg_
+«crūstulum, -ī», n. _pastry, cake_
+«cubīle, -is», n. _bed_
+«cultūra, -ae», f. _culture, cultivation_
+«cum», conj. with the indic. or subjv. _when; since; although_
+    (§501.46)
+«cum», prep, with abl. _with_ (§209)
+«cupidē», adv. [[«cupidus», _desirous_]], compared «cupidius,
+    cupidissimē», _eagerly_
+«cupiditās, -ātis», f. [[«cupidus», _desirous_]], _desire, longing_
+«cupiō, -ere, -īvī» or «-iī, -ītus», _desire, wish_. Cf. «volō»
+«cūr», adv. _why, wherefore_
+«cūra, -ae», f. _care, pains; anxiety_
+«cūria, -ae», f. _senate house_
+«cūrō, -āre, -āvī, -ātus» [[«cūra», _care_]], _care for, attend to, look
+    after_
+«currō, -ere, cucurrī, cursus», _run_
+«currus, -ūs», m. _chariot_
+«cursus, -ūs», m. _course_
+«custōdiō, -īre, -īvī, -ītus» [[«custōs», _guard_]], _guard, watch_
+
+
+D
+
+«Daedalus, -ī», m. _Dæd´alus_, the supposed inventor of the first flying
+    machine
+«Dāvus, -ī», m. _Davus_, name of a slave
+«dē», prep, with abl. _down from, from; concerning, about, for_
+    (§209).
+  «quā dē causā», _for this reason, wherefore_
+«dea, -ae», f. _goddess_ (§461.a)
+«dēbeō, -ēre, -uī, -itus» [[«dē», _from_, + «habeō», _hold_]], _owe,
+    ought, should_
+«decem», indecl. numeral adj. _ten_
+«dē-cernō, -ere, -crēvī, -crētus» [[«dē», _from_, + «cernō»,
+    _separate_]], _decide, decree_
+«dē-cidō, -ere, -cidī», ---- [[«dē», _down_, + «cadō», _fall_]], _fall
+    down_
+«decimus, -a, -um», numeral adj. _tenth_
+«dēclīvis, -e», adj. _sloping downward_
+«dē-dō, -ere, -didī, -ditus», _give up, surrender_, «sē dēdere»,
+    _surrender one’s self_
+«dē-dūcō, -ere, -dūxī, -ductus» [[«dē», _down_, + «dūcō», _lead_]],
+    _lead down, escort_
+«dē-fendō, -ere, -dī, -fēnsus», _ward off, repel, defend_
+«dē-ferō, -ferre, -tulī, -lātus» [[«dē», _down_, + «ferō», _bring_]],
+    _bring down; report, announce_ (§426)
+«dē-fessus, -a, -um», adj. _tired out, weary_
+«dē-ficiō, -ere, -fēcī, -fectus» [[«dē», _from_, + «faciō», _make_]],
+    _fail, be wanting; revolt from_
+«dē-fīgō, -ere, -fīxī, -fīxus» [[«dē», _down_, + «fīgō», _fasten_]],
+    _fasten, fix_
+«dē-iciō, -ere, -iēcī, -iectus» [[«dē», _down_, + «iaciō», _hurl_]],
+    _hurl down; bring down, kill_
+«de-inde», adv. _(from thence), then, in the next place_
+«dēlectō, -āre, -āvī, -ātus», _delight_
+«dēleō, -ēre, -ēvī, -ētus», _blot out, destroy_
+«dēlīberō, -āre, -āvī, -ātus», _weigh, deliberate, ponder_
+«dē-ligō, -ere, -lēgī, -lēctus» [[«dē», _from_, + «legō», _gather_]],
+    _choose, select_
+«Delphicus, -a, -um», adj. _Delphic_
+«dēmissus, -a, -um» [[part. of «dēmittō», _send down_]], _downcast,
+    humble_
+«dē-mōnstrō, -āre, -āvī, -ātus» [[«dē», _out_, + «mōnstrō», _point_]],
+    _point out, show_
+«dēmum», adv. _at last, not till then_.
+  «tum dēmum», _then at last_
+«dēnique», adv. _at last, finally_. Cf. «postrēmō»
+«dēns, dentis», m. _tooth_ (§247.2.a)
+«dēnsus, -a, -um», adj. _dense, thick_
+«dē-pendeō, -ēre», ----, ---- [[«dē», _down_, + «pendeō», _hang_]],
+    _hang from, hang down_
+«dē-plōrō, -āre, -āvī, -ātus» [[«dē», intensive, + «plōrō», _wail_]],
+    _bewail, deplore_
+«dē-pōnō, -ere, -posuī, -positus» [[«dē», _down_, + «pōnō», _put_]],
+    _put down_
+«dē-scendō, -ere, -dī, -scēnsus» [[«dē», _down_, + «scandō», _climb_]],
+    _climb down, descend_
+«dē-scrībō, -ere, -scrīpsī, -scrīptus» [[«dē», _down_, + «scrībō»,
+    _write_]], _write down_
+«dēsīderō, -āre, -āvī, -ātus», _long for_
+«dē-siliō, -īre, -uī, -sultus» [[«dē», _down_, + «saliō», _leap_]],
+    _leap down_
+«dē-spērō, -āre, -āvī, -ātus» [[«dē», _away from_, + «spērō»,
+    _hope_]], _despair_
+«dē-spiciō, -ere, -spēxi, -spectus» [[«dē», _down_]], _look down upon,
+    despise_
+«dē-sum, -esse, -fuī, -futūrus» [[«dē», _away from_, + «sum», _be_]],
+    _be wanting, lack_, with dat. (§426)
+«deus, -ī», m. _god_ (§468)
+«dē-volvō, -ere, -volvī, -volūtus» [[«dē», _down_, + «volvō», _roll_]],
+    _roll down_
+«dē-vorō, -āre, -āvī, -ātus» [[«dē», _down_, + «vorō», _swallow_]],
+    _devour_
+«dexter, -tra, -trum» («-tera, -terum»), adj. _to the right, right_.
+  «ā dextrō cornū», _on the right wing_
+«Diāna, -ae», f. _Diana_, goddess of the moon and twin sister of Apollo
+«dīcō, -ere, dīxī, dictus» (imv. «dīc»), _say, speak, tell_. Usually
+    introduces indirect discourse (§420.a)
+«dictātor, -ōris», m. [[«dictō», _dictate_]], _dictator_, a chief
+    magistrate with unlimited power
+«diēs, -ēi» or «diē», m., sometimes f. in sing., _day_ (§467)
+«dif-ferō, -ferre, distulī, dīlātus» [[«dis-», _apart_, + «ferō»,
+    _carry_]], _carry apart; differ_.
+  «differre inter sē», _differ from each other_
+«dif-ficilis, -e», adj. [[«dis-», _not_, + «facilis», _easy_]], _hard,
+    difficult_ (§307)
+«difficultās, -ātis», f. [[«difficilis», _hard_]], _difficulty_
+«dīligenter», adv. [[«dīligēns», _careful_]], compared «dīligentius,
+    dīligentissimē», _industriously, diligently_
+«dīligentia, -ae», f. [[«dīligēns», _careful_]], _industry, diligence_
+«dī-micō, -āre, -āvī, -ātus», _fight, struggle_
+«dī-mittō, -ere, -mīsī, -missus» [[«dī-», _off_, + «mittō», _send_]],
+    _send away, dismiss, disband_.
+  «dīmittere animum in», _direct one’s mind to, apply one’s self to_
+«Diomēdēs, -is», m. _Dī-o-mē´dēs_, a name
+«dis-, dī-», a prefix expressing separation, _off, apart, in different
+    directions_. Often negatives the meaning
+«dis-cēdō, -ere, -cessī, -cessus» [[«dis-», _apart_, + «cēdō», _go_]],
+    _depart from, leave, withdraw, go away_
+«dis-cernō, -ere, -crēvī, -crētus» [[«dis-», _apart_, + «cernō»,
+    _sift_]], _separate; distinguish_
+«disciplīna, -ae», f. _instruction, training, discipline_
+«discipulus, -ī», m. [[«discō», _learn_]], _pupil, disciple_
+«discō, -ere, didicī», ----, _learn_
+«dis-cutiō, -ere, -cussī, -cussus» [[«dis-», _apart_, + «quatiō»,
+    _shake_]], _shatter, dash to pieces_
+«dis-pōnō, -ere, -posuī, -positus» [[«dis-», _apart_, + «pōnō», _put_]],
+    _put here and there, arrange, station_
+«dis-similis, -e», adj. [[«dis-», _apart_, + «similis», _like_]],
+    _unlike, dissimilar_ (§307)
+«dis-tribuō, -ere, -uī, -ūtus», _divide, distribute_
+«diū», adv., compared «diūtius, diūtissimē», _for a long time, long_
+    (§477)
+«dō, dare, dedī, datus», _give_.
+  «in fugam dare», _put to flight_.
+  «alicui negōtium dare», _employ some one_
+«doceō, -ēre, -uī, -tus», _teach, show_
+«doctrīna, -ae», f. [[«doctor», _teacher_]], _teaching, learning,
+    wisdom_
+«dolor, -ōris», m. _pain, sorrow_
+«domesticus, -a, -um», adj. [[«domus», _house_]], _of the house,
+    domestic_
+«domicilium, domici´lī», n. _dwelling; house, abode_. Cf. «domus»
+«domina, -ae», f. _mistress_ (of the house), _lady_ (§461)
+«dominus, -ī», m. _master_ (of the house), _owner, ruler_ (§462)
+«domus, -ūs», f. _house, home_.
+  «domī», locative, _at home_ (§468)
+«dormiō, -īre, -īvī, -ītus», _sleep_
+«dracō, -ōnis», m. _serpent, dragon_
+«dubitō, -āre, -āvī, -ātus», _hesitate_
+«dubius, -a, -um», adj. [[«duo», _two_]], (_moving two ways_),
+    _doubtful, dubious_
+«du-centī, -ae, -a», numeral adj. _two hundred_
+«dūcō, -ere, dūxī, ductus» (imv. «dūc»), _lead, conduct_
+«dum», conj. _while, as long as_
+«duo, duae, duo», numeral adj. _two_ (§479)
+«duo-decim», indecl. numeral adj. _twelve_
+«dūrus, -a, -um», adj. _hard, tough; harsh, pitiless, bitter_
+«dux, ducis», m. and f. [[cf. «dūcō», _lead_]], _leader, commander_
+
+
+E
+
+«ē» or «ex», prep, with abl. _out of, from, off, of_ (§209)
+«eburneus, -a, -um», adj. _of ivory_
+«ecce», adv. _see! behold! there! here!_
+«ē-dūcō, -ere, -dūxī, -ductus» [[«ē», _out_, + «dūcō», _lead_]], _lead
+    out, draw out_
+«ef-ficiō, -ere, -fēcī, -fectus» [[«ex», _thoroughly_, + «faciō»,
+    _do_]], _work out; make, cause_
+«ef-fugiō, -ere, -fūgī, -fugitūrus» [[«ex», _from_, + «fugiō», _flee_]],
+    _escape_
+«egeō, -ēre, -uī», ----, _be in need of, lack_, with abl. (§501.32)
+«ego», pers. pron. _I_; plur. «nōs», _we_ (§480)
+«ē-gredior, -ī, ēgressus sum», dep. verb [[«ē», _out of_, + «gradior»,
+    _go_]], _go out, go forth_.
+  «ē nāvī ēgredī», _disembark_
+«ē-iciō, -ere, -iēcī, -iectus» [[«ē», _forth_, + «iaciō», _hurl_]],
+    _hurl forth, expel_
+«elementum, -ī», n., in plur. _first principles, rudiments_
+«elephantus, -ī», m. _elephant_
+«Ēlis, Ēlidis», f. _E´lis_, a district of southern Greece
+«emō, -ere, ēmī, ēmptus», _buy, purchase_
+«enim», conj., never standing first, _for, in fact, indeed._ Cf. «nam»
+«Ennius, Ennī», m. _Ennius_, the father of Roman poetry, born 239 B.C.
+«eō, īre, iī» («īvī»), «itūrus», _go_ (§499)
+«eō», adv. _to that place, thither_
+«Ēpīrus, -ī», f. _Epi´rus_, a district in the north of Greece
+«eques, -itis», m. [[«equus», _horse_]], _horseman, cavalryman_
+«equitātus, -ūs», m. [[«equitō», _ride_]], _cavalry_
+«equus, -ī», m. _horse_
+«ē-rigō, -ere, -rēxī, -rēctus» [[«ē», _out_, + «regō», _make
+    straight_]], _raise up_
+«ē-ripiō, -ere, -uī, -reptus» [[«ē», _out of_, + «rapiō», _seize_]],
+    _seize, rescue_
+«ē-rumpō, -ere, -rūpī, -ruptus» [[«ē», _forth_, + «rumpō», _break_]],
+    _burst forth_
+«ēruptiō, -ōnis», f. _sally_
+«Erymanthius, -a, -um», adj. _Erymanthian, of Erymanthus_, a district in
+    southern Greece
+«et», conj. _and, also_. «et ... et», _both ... and_. Cf. «atque, ac,
+    -que»
+«etiam», adv. (rarely conj.) [[«et», _also_, + «iam», _now_]], _yet,
+    still; also, besides_. Cf. «quoque».
+  «nōn sōlum ... sed etiam», _not only ... but also_
+«Etrūscī, -ōrum», m. _the Etruscans_, the people of Etruria. See map of
+    Italy
+«Eurōpa, -ae», f. _Europe_
+«Eurystheus, -ī», m. _Eurys´theus_, a king of Tiryns, a city in southern
+    Greece
+«ē-vādō, -ere, -vāsī, -vāsus» [[«ē», _out_, + «vādō», _go_]], _go forth,
+    escape_
+«ex», see «ē»
+«exanimātus, -a, -um» [[part. of «exanimō», _put out of breath_
+    («anima»)]], adj. _out of breath, tired; lifeless_
+«ex-cipiō, -ere, -cēpī, -ceptus» [[«ex», _out_, + «capiō», _take_]],
+    _welcome, receive_
+«exemplum, -ī», n. _example, model_
+«ex-eō,-īre,-iī,-itūrus» [[«ex», _out_, + «eō», _go_]], _go out, go
+    forth_ (§413)
+«ex-erceō, -ēre, -uī, -itus» [[«ex», _out_, + «arceō», _shut_]], _(shut
+    out), employ, train, exercise, use_
+«exercitus, -us», m. [[«exerceō», _train_]], _army_
+«ex-īstimō, -āre, -āvī, -ātus» [[«ex», _out_, + «aestimō», _reckon_]],
+    _estimate; think, judge_ (§420.c). Cf. «arbitror, putō»
+«ex-orior, -īrī, -ortus sum», dep. verb [[«ex», _forth_, + «orior»,
+    _rise_]], _come forth, rise_
+«expedītus, -a, -um», adj. _without baggage_
+«ex-pellō, -ere, -pulī, -pulsus» [[«ex», _out_, + «pellō», _drive_]],
+    _drive out_
+«ex-piō, -āre, -āvī, -ātus» [[«ex», intensive, + «pīo», _atone for_]],
+    _make amends for, atone for_
+«explōrātor, -ōris», m. [[«explōrō», _investigate_]], _spy, scout_
+«explōrō, -āre, -āvī, -ātus», _examine, explore_
+«ex-pugnō, -āre, -āvī, -ātus» [[«ex», _out_, + «pugnō», _fight_]], _take
+    by storm, capture_
+«exsilium, exsi´lī», n. [[«exsul», _exile_]], _banishment, exile_
+«ex-spectō, -āre, -āvī, -ātus» [[«ex», _out_, + «spectō», _look_]],
+    _expect, wait_
+«ex-struō, -ere, -strūxī, -strūctus» [[«ex», _out_, + «struō»,
+    _build_]], _build up, erect_
+«exterus, -a, -um», adj., compared «exterior, extrēmus» or «extimus»,
+    _outside, outer_ (§312)
+«extrā», prep, with acc. _beyond, outside of_
+«ex-trahō, -ere, -trāxī, -trāctus» [[«ex», _out_, + «trahō», _drag_]],
+    _drag out, pull forth_
+«extrēmus, -a, -um», adj., superl. of «exterus», _utmost, farthest_
+    (§312)
+
+
+F
+
+«fābula, -ae», f. _story, tale, fable_
+«facile», adv. [[«facilis», _easy_]], compared «facilius, facillimē»,
+    _easily_ (§322)
+«facilis, -e», adj. [[cf. «faciō», _make_]], _easy, without difficulty_
+    (§307)
+«faciō, -ere, fēcī, factus» (imv. «fac»), _make, do; cause, bring
+    about_.
+  «impetum facere in», _make an attack upon_.
+  «proelium facere», _fight a battle_.
+  «iter facere», _make a march_ or _journey_.
+  «aliquem certiōrem facere», _inform some one_.
+  «facere verba prō», _speak in behalf of_.
+    Passive «fīō, fierī, factus sum», _be done, happen_.
+      «certior fierī», _be informed_
+«fallō, -ere, fefellī, falsus», _trip, betray, deceive_
+«fāma, -ae», f. _report, rumor; renown, fame, reputation_
+«famēs, -is» (abl. «famē»), f. _hunger_
+«familia, -ae», f. _servants, slaves; household, family_
+«fascēs, -ium» (plur. of «fascis»), f. _fasces_ (p. 225)
+«fastīgium, fastī´gī», n. _top; slope, descent_
+«fātum, -ī», n. _fate, destiny_
+«faucēs, -ium», f. plur. _jaws, throat_
+«faveō, -ēre, fāvī, fautūrus», _be favorable to, favor_, with dat.
+    (§501.14)
+«fēlīx, -īcis», adj. _happy, lucky_
+«fēmina, -ae», f. woman. Cf. «mulier»
+«fera, -ae», f. [[«ferus», _wild_]], _wild beast_
+«ferāx, -ācis», adj. _fertile_
+«ferē», adv. _about, nearly, almost_
+«ferō, ferre, tulī, lātus», _bear_.
+  «graviter» or «molestē ferre», _be annoyed_ (§498)
+«ferreus, -a, -um», adj. [[«ferrum», _iron_]], _made of iron_
+«fidēlis, -e», adj. [[«fidēs», _trust_]], _faithful, true_
+«fidēs, fideī» _or_ «fidē», _trust, faith; promise, word; protection_.
+  «in fidem venīre», _come under the protection_.
+  «in fidē manēre», _remain loyal_
+«fīlia, -ae» (dat. and abl. plur. «fīliābus»), f. _daughter_ (§461.a)
+«fīlius, fīlī» (voc. sing, «fīlī»), m. _son_
+«fīnis, -is», m. _boundary, limit, end;_ in plur. _territory, country_
+    (§243.1)
+«fīnitimus, -a, -um», adj. [[«fīnis», _boundary_]], _adjoining,
+    neighboring_.
+  Plur. «fīnitimī, -ōrum», m. _neighbors_
+«fīō, fierī, factus sum», used as passive of «faciō». See «faciō» (§500)
+«flamma, -ae», f. _fire, flame_
+«flōs, flōris», m. _flower_
+«fluctus, -ūs», m. [[of. «fluō», _flow_]], _flood, wave, billow_
+«flūmen, -inis», n. [[cf. «fluō», _flow_]], _river_ (§464.2.b)
+«fluō, -ere, flūxī, fluxus», _flow_
+«fluvius, fluvī», m. [[cf. «fluō», _flow_]], _river_
+«fodiō, -ere, fōdī, fossus», _dig_
+«fōns, fontis», m. _fountain_ (§247.2.a)
+«fōrma, -ae», f. _form, shape, appearance; beauty_
+«Formiae, -ārum», f. _Formiae_, a town of Latium on the Appian Way.
+    See map
+«forte», adv. [[abl. of «fors», _chance_]], _by chance_
+«fortis, -e», adj. _strong; fearless, brave_
+«fortiter», adv. [[«fortis», _strong_]], compared «fortius, fortissimē»,
+    _strongly; bravely_
+«fortūna, -ae», f. [[«fors», _chance_]], _chance, fate, fortune_
+«forum, -ī», n. _market place_, esp. the «Forum Rōmānum», where the life
+    of Rome centered
+«Forum Appī», _Forum of Appius_, a town in Latium on the Appian Way
+«fossa, -ae», f. [[cf. «fodiō», _dig_]], _ditch_
+«fragor, -ōris», m. [[cf. «frangō», _break_]], _crash, noise_
+«frangō, -ere, frēgī, frāctus», _break_
+«frāter, -tris», m. _brother_
+«fremitus, -ūs», m. _loud noise_
+«frequentō, -āre, -āvī, -ātus», _attend_
+«frētus, -a, -um», adj. _supported, trusting_. Usually with abl. of
+    means
+«frōns, frontis», f. _front_, «ā fronte», _in front_
+«frūctus, -ūs», m. _fruit_
+«frūmentārius, -a, -um», adj. _pertaining to grain_.
+  «rēs frūmentāria», _grain supplies_
+«frūmentum, -ī», n. _grain_
+«frūstrā», adv. _in vain, vainly_
+«fuga, -ae», f. [[cf. «fugiō», _flee_]], _flight_.
+  «in fugam dare», _put to flight_
+«fugiō, -ere, fūgī, fugitūrus», _flee, run; avoid, shun_
+«fūmō, -are, ------, ------», _smoke_
+«fūnis, -is», m. _rope_
+«furor, -ōris», m. [[«furō», _rage_]], _madness_.
+  «in furōrem incīdere», _go mad_
+
+
+G
+
+«Gāius, Gāī», m. _Gaius_, a Roman name, abbreviated «C.», English form
+    _Caius_
+«Galba, -ae», m. _Galba_, a Roman name
+«galea, -ae», f. _helmet_
+«Gallia, -ae», f. _Gaul_, the country comprising what is now Holland,
+    Belgium, Switzerland, and France
+«Gallicus, -a, -um», adj. _Gallic_
+«gallīna, -ae», f. _hen, chicken_
+«Gallus, -ī», m. _a Gaul_
+«gaudium, gaudī», n. _joy_
+«Genāva, -ae», f. _Geneva_, a city in Switzerland
+«gēns, gentis», f. [[cf. «gignō», _beget_]], _race, family; people,
+    nation, tribe_
+«genus, -eris», n. _kind, variety_
+«Germānia, -ae», f. _Germany_
+«Germānus, -ī», m. _a German_
+«gerō, -ere, gessī, gestus», _carry, wear; wage_.
+  «bellum gerere», _wage war_.
+  «rēs gestae», _exploits_.
+  «bene gerere», _carry on successfully_
+«gladiātōrius, -a, -um», adj. _gladiatorial_
+«gladius, gladī», m. _sword_
+«glōria, -ae», f. _glory, fame_
+«Gracchus, -ī», m. _Gracchus_, name of a famous Roman family
+«gracilis, -e», adj. _slender_ (§307)
+«Graeca, -ōrum», n. plur. _Greek writings, Greek literature_
+«Graecē», adv. _in Greek_
+«Graecia, -ae», f. _Greece_
+«grammaticus, -ī», m. _grammarian_
+«grātia, -ae», f. _thanks, gratitude_
+«grātus, -a, -um», adj. _acceptable, pleasing_. Often with dat.
+    (§501.16)
+«gravis, -ē», adj. _heavy; disagreeable; serious, dangerous; earnest,
+    weighty_
+«graviter», adv. [[«gravis», _heavy_]], compared «gravius, gravissimē»,
+    _heavily; greatly, seriously_.
+  «graviter ferre», _bear ill, take to heart_
+«gubernātor, -ōris», m. [[«gubernō», _pilot_]], _pilot_
+
+
+H
+
+«habēna, -ae», f. _halter, rein_.
+«habeō, -ēre, -uī, -itus», _have, hold; regard, consider, deem_
+«habitō, -āre, -āvī, -ātus» [[cf. «habeō», _have_]], _dwell, abide,
+    inhabit_. Cf. «incolō, vīvō»
+«hāc-tenus», adv. _thus far_
+«Helvētiī, -ōrum», m. _the Helvetii_, a Gallic tribe
+«Herculēs, -is», m. _Hercules_, son of Jupiter and Alcmena, and god of
+    strength
+«Hesperidēs, -um», f. _the Hesperides_, daughters of Hesperus, who kept
+    the garden of the golden apples
+«hic, haec, hoc», demonstrative adj. and pron. _this_ (of mine); as
+    pers. pron. _he, she, it_ (§481)
+«hīc», adv. _here_
+«hiems, -emis», f. _winter_
+«hīnc», adv. [[«hīc», _here_]], _from here, hence_
+«Hippolytē, -ēs», f. _Hippolyte_, queen of the Amazons
+«ho-diē», adv. [[modified form of «hōc diē», _on this day_]], _to-day_
+«homō, -inis», m. and f. _(human being), man, person_
+«honestus, -a, -um», adv. [[«honor», _honor_]], _respected, honorable_
+«honor, -ōris», m. _honor_
+«hōra, -ae», f. _hour_
+«Horātius, Horā´tī», m. _Horatius_, a Roman name
+«horribilis, -e», adj. _terrible, horrible_
+«hortor, -āri, -ātus sum», dep. verb, _urge, incite, exhort, encourage_
+    (§493)
+«hortus, -ī», m. _garden_
+«hospitium, hospi´tī», n. [[«hospes», _host_]], _hospitality_
+«hostis, -is», m. and f. _enemy, foe_ (§465.a)
+«humilis, -e», adj. _low, humble_ (§307)
+«Hydra, -ae», f. _the Hydra_, a mythical water snake slain by
+    Hercules
+
+
+I
+
+«iaciō, -ere, iēcī, iactus», _throw, hurl_
+«iam», adv. _now, already_.
+  «nec iam», _and no longer_
+«Iāniculum, -ī», n. _the Janiculum_, one of the hills of Rome
+«iānua, -ae», f. _door_
+«ibi», adv. _there, in that place_
+«Īcarus, -ī», m. _Ic´arus_, the son of Dædalus
+«ictus, -ūs», m. [[cf. «īcō», _strike_]], _blow_
+«īdem, e´adem, idem», demonstrative pron. [[«is» + «dem»]], _same_
+    (§481)
+«idōneus, -a, -um», adj. _suitable, fit_
+«igitur», conj., seldom the first word, _therefore, then_. Cf. «itaque»
+«ignis, -is», m. _fire_ (§§243.1; 247. 2.a; 465, 1)
+«ignōtus, -a, -um», adj. [[«in-», _not_, + «(g)notus», _known_]],
+    _unknown, strange_
+«ille, illa, illud», demonstrative adj. and pron. _that_ (yonder); as
+    pers. pron. _he, she, it_ (§481)
+«illīc», adv. [[cf. «ille»]], _yonder, there_
+«im-mittō, -ere, -mīsī, -missus» [[«in», _against_, + «mittō», _send_]],
+    _send against; let in_
+«immolō, -āre, -āvī, -ātus» [[«in», _upon_, + «mola», _meal_]],
+    _sprinkle with sacrificial meal; offer, sacrifice_
+«im-mortālis, -e», adj. [[«in-», _not_, + «mortalis», _mortal_]],
+    _immortal_
+«im-mortālitās, -ātis», f. [[«immortālis», _immortal_]], _immortality_
+«im-parātus, -a, -um», adj. [[«in-», _not_, + «parātus», _prepared_]],
+    _unprepared_
+«impedīmentum», -ī, n. [[«impediō», _hinder_]], _hindrance;_ in plur.
+    _baggage_
+«impedītus, -a, -um», adj. [[part. of «impediō», _hinder_]], _hindered,
+    burdened_
+«im-pellō, -ere, -pulī, -pulsus» [[«in», _against_, + «pellō»,
+    _strike_]], _strike against; impel, drive, propel_
+«imperātor, -ōris», m. [[«imperō», _command_]], _general_
+«imperium, impe´rī», n. [[«imperō», _command_]], _command, order; realm,
+    empire; power, authority_
+«imperō, -āre, -āvī, -ātus», _command, order_. Usually with dat. and an
+    object clause of purpose (§501.41).
+  With acc. object, _levy, impose_
+«impetus, -ūs», m. _attack_, «impetum facere in», _make an attack upon_
+«im-pōnō, -ere, -posui, -positus» [[«in», _upon_, + «pōnō», _place_]],
+    _place upon; impose, assign_
+«in», prep, with acc. _into, to, against, at, upon, towards;_ with abl.
+    _in, on_.
+  «in reliquum tempus», _for the future_
+«in-», inseparable prefix. With nouns and adjectives often with a
+    negative force, like English _un-, in-_
+«in-cautus, -a, -um», adj. [[«in-», _not_, + «cautus», _careful_]], _off
+    one’s guard_
+«incendium, incendī», n. _flame, fire_. Cf. «ignis, flamma»
+«in-cendō, -ere, -dī, -cēnsus», _set fire to, burn_
+«in-cidō, -ere, -cidī, ----», [[«in», _in, on_, + «cadō», _fall_]],
+    _fall in, fall on; happen_.
+  «in furōrem incidere», _go mad_
+«in-cipiō, -ere, -cēpi, -ceptus» [[«in», _on_, + «capiō», _take_]],
+    _begin_
+«in-cognitus, -a, -um», adj. [[«in-», _not_, + «cognitus», _known_]],
+    _unknown_
+«in-colō, -ere, -uī, ----», [[«in», _in_, + «colō», _dwell_]], _inhabit;
+    live_
+«incolumis, -e», adj. _sound, safe, uninjured, imharmed_
+«in-crēdibilis, -e», adj. [[«in-», _not_, + «crēdibilis», _to be
+    believed_]], _incredible_
+«inde», _from that place, thence_
+«induō, -ere, -uī, -ūtus», _put on_
+«indūtus, -a, -um», adj. [[part. of «induō», _put on_]], _clothed_
+«in-eō, -īre, -iī, -itus» [[«in», _into_, + «eō», _go_]], _go into;
+    enter upon, begin_, with acc. (§413)
+«īn-fāns, -fantis», adj. [[«in-», _not_, + *«fāns», _speaking_]], _not
+    speaking_. As a noun, m. and f. _infant_
+«īn-fēlīx, -īcis», adj. [[«in-», _not_, + «fēlīx», _happy_]], _unhappy,
+    unlucky_
+«īnfēnsus, -a, -um», adj. _hostile_
+«īn´-ferō, īnfer´re, in´tulī, inlā´tus» [[«in», _against_, + «ferō»,
+    _bear_]], _bring against or upon, inflict_, with acc. and dat.
+    (§501.15).
+  «bellum īnferre», with dat., _make war upon_
+«īnferus, -a, -um», adj. _low, below_ (§312).
+«īn-fīnītus, -a, -um», adj. [[«in-», _not_, + «fīnītus», _bounded_]],
+    _boundless, endless_
+«īn-fīrmus, -a, -um», adj. [[«in-», _not_, + «fīrmus», _strong_]],
+    _weak, infirm_
+«ingenium, inge´ni», n. _talent, ability_
+«ingēns, -entis», adj. _vast, huge, enormous, large_. Cf. «magnus»
+«in-gredior, -gredī, -gressus sum» [[«in», _in_, + «gradior», _walk_]],
+    _advance, enter_
+«inimīcus, -a, -um», adj. [[«in-», _not_, + «amīcus», _friendly_]],
+    _hostile_.
+  As a noun, «inimīcus, -ī», m. _enemy, foe_. Cf. «hostis»
+«initium, ini´tī», _entrance, beginning_
+«initus, -a, -um», part. of «ineō».
+  «initā aestāte», _at the beginning of summer_
+«iniūria, -ae», f. [[«in», _against_, + «iūs», _law_]], _injustice,
+    wrong, injury_.
+  «alicui iniūriās īnferre», _inflict wrongs upon some one_
+«inopia, -ae», f. [[«inops», _needy_]], _want, need, lack_
+«in-opīnāns, -antis», adj. [[«in-», _not_, + «opīnāns», _thinking_]],
+    _not expecting, taken by surprise_
+«inquit», _said he, said she_. Regularly inserted in a direct quotation
+«in-rigō, -āre, -āvī, -ātus», _irrigate, water_
+«in-rumpō, -ere, -rūpī, -ruptus» [[«in», _into_, + «rumpō», _break_]],
+    _burst in, break in_
+«in-ruō, -ere, -ruī,----» [[«in», _in_, + «ruō», _rush_]], _rush in_
+«īn-sequor, -sequī, -secūtus sum», dep. verb [[«in», _on_, + «sequor»,
+    _follow_]], _follow on, pursue_
+«īn-signe, -is», n. _badge, decoration_ (§465.b)
+«īnsignis, -e», adj. _remarkable, noted_
+«īnstāns, -antis», adj. [[part, of «īnsto», _be at hand_]], _present,
+    immediate_
+«īn-stō, -āre, -stitī, -statūrus» [[«in», _upon_, + «stō», _stand_]],
+    _stand upon; be at hand; pursue, press on_
+«īnstrūmentum, -ī», n. _instrument_
+«īn-struō, -ere, -strūxī, -strūctus» [[«in», _on_, + «struō», _build_]],
+    _draw up_
+«īnsula, -ae», f. _island_
+«integer, -gra, -grum», _untouched, whole; fresh, new_
+«intellegō, -ere, -lēxī, -lēctus» [[«inter», _between_, +«legō»,
+    _choose_]], _perceive, understand_ (§420.d)
+«intentō, -āre, -āvī, -ātus», _aim; threaten_
+«inter», prep. with acc. _between, among; during, while_ (§340)
+«interfectus, -a, -um», adj. [[part. of «inter-ficiō», _kill_]], _slain,
+    dead_
+«inter-ficiō, -ere, -fēcī, -fectus» [[«inter», _between_, + «faciō»,
+    _make_]], _put out of the way, kill_. Cf. «necō, occīdō, trucīdō»
+«interim», adv. _meanwhile_
+«interior, -ius», adj. _interior, inner_ (§315)
+«inter-mittō, -ere, -mīsī, -missus», _leave off, suspend_
+«interpres, -etis», m. and f. _interpreter_
+«inter-rogō, -āre, -āvī, -ātus», _question_
+«inter-sum, -esse, -fuī, -futūrus» [[«inter», _between_, +«sum», _be_]],
+    _be present, take part in_, with dat. (§501.15)
+«inter-vāllum, -ī», n. _interval, distance_
+«intrā», adv. and prep. with acc. _within, in_
+«intrō, -āre, -āvi, -ātus», _go into, enter_
+«in-veniō, -īre, -vēnī, -ventus» [[«in», _upon_, +«veniō», _come_]],
+    _find_
+«invīsus, -a, -um», adj. [[part. of «invideō», _envy_]], _hated,
+    detested_
+«Iolāus, -ī», m. _I-o-lā´us_, a friend of Hercules
+«ipse, -a, -um», intensive pron. _that very, this very; self, himself,
+    herself, itself_, (§481)
+«īra, -ae», f. _wrath, anger_
+«īrātus, -a, -um», adj. [[part. of «īrāscor», _be angry_]], _angered,
+    enraged_
+«is, ea, id», demonstrative adj. and pron. _this, that; he, she, it_
+    (§481)
+«iste, -a, -ud», demonstrative adj. and pron. _that_ (of yours), _he,
+    she, it_ (§481)
+«ita», adv. _so, thus_. Cf. «sīc» and «tam»
+«Italia, -ae», f. _Italy_
+«ita-que», conj. _and so, therefore_
+«item», adv. _also_
+«iter, itineris», n. _journey, march, route; way, passage_
+    (§§247.1.a; 468).
+  «iter dare», _give a right of way, allow to pass_.
+  «iter facere», _march_ (see p. 159)
+«iubeō, -ēre, iussī, iussus», _order, command_. Usually with the infin.
+    and subj. acc. (§213)
+«iūdex, -icis», m. and f. _judge_ (§464.1)
+«iūdicō, -āre, -āvī, -ātus» [[«iūdex», _judge_]], _judge, decide_
+    (§420.c)
+«Iūlia, -ae», _Julia_, a Roman name
+«Iūlius, Iūlī», m. _Julius_, a Roman name
+«iungō, -ēre, iūnxī, iūnctus», _join; yoke, harness_
+«Iūnō, -ōnis», f. _Juno_, the queen of the gods and wife of Jupiter
+«Iuppiter, Iovis», m. _Jupiter_, the supreme god
+«iūrō, -āre, -āvī, -ātus», _swear, take an oath_
+«iussus, -a, -um», part. of «iubeō», _ordered_
+
+
+L
+
+«L.», abbreviation for «Lūcius»
+«labefactus, -a, -um», adj. [[part. of «labefaciō», _cause to shake_]],
+    _shaken, weakened, ready to fall_
+«Labiēnus, -ī», m. _La-bi-e´nus_, one of Cæsar’s lieutenants
+«labor, -ōris», m. _labor, toil_
+«labōrō, -āre, -āvī, -ātus» [[«labor», _labor_]], _labor; suffer, be
+    hard pressed_
+«lacrima, -ae», f. _tear_
+«lacus, -ūs» (dat. and abl. plur. «lacubus»), m. _lake_
+«laetē», adv. [[«laetus», _glad_]], compared «laetius, laetissimē»,
+    _gladly_
+«laetitia, -ae», f. [[«laetus», _glad_]], _joy_
+«laetus, -a, -um», adj. _glad, joyful_
+«lapis, -idis», m. _stone_ (§§247.2.a; 464.1)
+«Lār, Laris», m.; plur. «Larēs, -um» (rarely «-ium»), _the Lares_ or
+    _household, gods_
+«lātē, »adv. [[«lātus», _wide_]], compared «lātius, lātissimē», _widely_
+«Latinē», adv. _in Latin_.
+  «Latīnē loquī», _to speak Latin_
+«lātitūdō, -inis», f. [[«lātus», _wide_]], _width_
+«Lātōna, -ae», f. _Latona_, mother of Apollo and Diana
+«latus, -a, -um», adj. _wide_
+«lātus, -eris», n. _side, flank_.
+  «ab utrōque latere», _on each side_
+«laudō, -āre, -āvī, -ātus» [[«laus», _praise_]], _praise_
+«laurea, -ae», f. _laurel_
+«laureātus, -a, -um», adj. _crowned with laurel_
+«laus, laudis», f. _praise_
+«lectulus, -ī», m. _couch, bed_
+«lēgātus, -ī», m. _ambassador; lieutenant_
+«legiō, -ōnis», f. [[cf. «legō», _gather_]], (_body of soldiers_),
+    _legion_, about 3600 men (§464.2.a)
+«legiōnārius, -a, -um», adj. _legionary_. Plur. «legiōnariī, -ōrum», m.
+    _the soldiers of the legion_
+«legō, -ere, lēgī, lēctus», _read_
+«lēnis, -e», adj. _gentle, smooth, mild_
+«lēniter», adv. [[«lēnis», _gentle_]], compared «lēnius, lēnissimē»,
+    _gently_
+«Lentulus, -i», m. _Lentulus_, a Roman family name
+«leō, -ōnis», m. _lion_
+«Lernaeus, -a, -um», adj. _Lernæean_, of Lerna, in southern Greece
+«Lesbia, -ae», f. _Lesbia_, a girl’s name
+«levis, -e», adj. _light_
+«lēx, lēgis», f. _measure, law_
+«libenter», adv. [[«libēns», _willing_]], compared «libentius,
+    libentissimē», _willingly, gladly_
+«līber, -era, -erum», adj. _free_ (§469.b)
+«līberī, -ōrum», m. [[«līber», _free_]], _children_
+«līberō, -āre, -āvī, -ātus» [[«līber», _free_]], _set free, release,
+    liberate_
+«lībertās, -ātis», f. [[«līber», _free_]], _freedom, liberty_
+«līctor, -ōris», m. _lictor_ (p. 225)
+«līmus, -ī», m. _mud_
+«littera, -ae», f. _a letter_ of the alphabet; in plur. _a letter,
+    epistle_
+«lītus, -oris», n. _seashore, beach_
+«locus, -ī», m. (plur. «locī» and «loca», m. and n.), _place, spot_
+«longē», adv. [[«longus», _long_]], comp. «longius, longissimē», _a long
+    way off; by far_
+«longinquus, -a, -um», adj. [[«longus», _long_]], _distant, remote_
+«longitūdō, -inis», f. [[«longus», _long_]], _length_
+«longus, -a, -um», adj. _long_
+«loquor, loqui, locūtus sum», dep. verb, _talk, speak_
+«lōrīca, -ae», f. [[«lōrum», _thong_]], _coat of mail, corselet_
+«lūdō, -ere, lūsī, lūsus», _play_
+«lūdus, -ī», m. _play; school_, the elementary grades. Cf. «schola»
+«lūna, -ae», f. _moon_
+«lūx, lūcis», f. (no gen. plur.), _light_.
+  «prīma lūx», _daybreak_
+«Lȳdia, -ae», f. _Lydia_, a girl’s name
+
+
+M
+
+«M.», abbreviation for «Mārcus»
+«magicus, -a, -um», adj. _magic_
+«magis», adv. in comp. degree [[«magnus», _great_]], _more, in a higher
+    degree_ (§323)
+«magister, -trī», m. _master, commander; teacher_
+«magistrātus, -ūs», m. [[«magister», _master_]], _magistracy;
+    magistrate_
+«magnitūdō, -inis», f. [[«magnus», _great_]], _greatness, size_
+«magnopere», adv. [[abl. of «magnum opus»]], compared «magis, maximē»,
+    _greatly, exceedingly_ (§323)
+«magnus, -a, -um», adj., compared «maior, maximus», _great, large;
+    strong, loud_ (§311)
+«maior, maius, -ōris», adj., comp. of «magnus», _greater, larger_ (§311)
+«maiōrēs, -um», m. plur. of «maior», _ancestors_
+«mālō, mālle, māluī, ----» [[«magis», _more_, + «volō», _wish_]], _wish
+    more, prefer_ (§497)
+«malus, -a, -um», adj., compared «peior, pessimus», _bad, evil_ (§311)
+«mandō, -āre, -āvī, -ātus» [[«manus», _hand_, + «dō», _put_]], _(put in
+    hand), intrust; order, command_
+«maneō, -ēre, mānsī, mānsūrus», _stay, remain, abide_
+«Mānlius, Mānlī», m. _Manlius_, a Roman name
+«mānsuētus, -a, -um», adj. [[part. of «mānsuēscō», _tame_]], _tamed_
+«manus, -ūs», f. _hand; force, band_
+«Mārcus, -ī», m. _Marcus, Mark_, a Roman first name
+«mare, -is», n. (no gen. plur.), _sea_.
+  «mare tenēre», _be out to sea_
+«margō, -inis», m. _edge, border_
+«marītus, -ī», m. _husband_
+«Marius, Marī», m. _Marius_, a Roman name, esp. _C. Marius_, the general
+«Mārtius, -a, -um», adj. _of Mars_, esp. the _Campus Martius_
+«māter, -tris», f. _mother_
+«mātrimōnium, mātrimō´nī», n. _marriage_.
+  «in mātrimōnium dūcere», _marry_
+«mātūrō, -āre, -āvī, -ātus», _hasten_. Cf. «contendō», «properō»
+«mātūrus, -a, -um», adj. _ripe, mature_
+«maximē», adv. in superl. degree [[«maximus», _greatest_]], compared
+    «magnopere, magis, maximē», _especially, very much_ (§323)
+«maximus, -a, -um», adj., superl. of «magnus», _greatest, extreme_
+    (§311)
+«medius, -a, -um», adj. _middle part; middle, intervening_
+«melior, -ius, -ōris», adj., comp. of «bonus», _better_ (§311)
+«melius», adv. in comp. degree, compared «bene, melius, optimē»,
+    _better_ (§323)
+«memoria, -ae», f. [[«memor», _mindful_]], _memory_.
+  «memoriā tenēre», _remember_
+«mēns, mentis», f. _mind_. Cf. «animus»
+«mēnsis, -is», m. _month_ (§247.2. a)
+«mercātor, -ōris», m. [[«mercor», _trade_]], _trader, merchant_
+«merīdiānus, -a, -um», adj. [[«merīdiēs», _noon_]], _of midday_
+«merīdiēs, ----» (acc. «-em», abl. «-ē»), m. [[«medius», _mid_, +
+    «diēs», _day_]], _noon_
+«metus, -ūs», m. _fear, dread_
+«meus, -a, -um», possessive adj. and pron. _my, mine_ (§98)
+«mīles, -itis», m. _soldier_ (§464.1)
+«mīlitāris, -e», adj. [[«mīles», _soldier_]], _military_.
+  «rēs mīlitāris», _science of war_
+«mīlitō, -āre, -āvī, -ātus» [[«mīles», _soldier_]], _serve as a soldier_
+«mīlle», plur. «mīlia, -ium», numeral adj. and subst. _thousand_ (§479)
+«minimē», adv. in superl. degree, compared «parum, minus, minimē»,
+    _least, very little; by no means_ (§323)
+«minimus, -a, -um», adj. in superl. degree, compared «parvus, minor,
+    minimus», _least, smallest_ (§311)
+«minor, minus, -ōris», adj. in comp. degree, compared «parvus, minor,
+    minimus», _smaller, less_ (§311)
+«Mīnōs, -ōis», m. _Minos_, a king of Crete
+«minus», adv. in comp. degree, compared «parum, minus, minimē», _less_
+    (§323)
+«Minyae, -ārum», m. _the Minyae_, a people of Greece
+«mīrābilis, -e», adj. [[«mīror», _wonder at_]], _wonderful, marvelous_
+«mīror, -ārī, -ātus sum», dep. verb [[«mīrus», _wonderful_]], _wonder,
+    marvel, admire_
+«mīrus, -a, -um», adj. _wonderful_
+«Mīsēnum, -ī», _Mise´num_, a promontory and harbor on the coast of
+    Campania. See map
+«miser, -era, -erum», adj. _wretched, unhappy, miserable_
+«missus, -a, -um», part. of «mittō», _sent_
+«mittō, -ere, mīsī, missus», _send_
+«modicus, -a, -um» [[«modus», _measure_]], _modest, ordinary_
+«modo», adv. [[abl. of «modus», _measure_, with shortened «o»]], _only,
+    merely, just now_.
+  «modo ... modo», _now ... now, sometimes ... sometimes_
+«modus, -ī», m. _measure; manner, way; kind_
+«moenia, -ium», n. plur. [[cf. «mūniō», _fortify_]], _walls, ramparts_
+«molestē», adv. [[«molestus», _troublesome_]], compared «molestius,
+    molestissimē», _annoyingly_.
+  «molestē ferre», _to be annoyed_
+«molestus, -a, -um», _troublesome, annoying, unpleasant_ (§501.16)
+«moneō, -ēre, -uī, -itus», _remind, advise, warn_ (§489)
+«mōns, montis», m. _mountain_ (§247.2. a)
+«mōnstrum, -ī», n. _monster_
+«mora, -ae», f. _delay_
+«moror, -ārī, -ātus sum», dep. verb [[«mora», _delay_]], _delay, linger;
+    impede_
+«mors, mortis», f. [[cf. «morior», _die_]], _death_
+«mōs, mōris», m. _custom, habit_
+«mōtus, -ūs», m. [[cf. «moveō», _move_]], _motion, movement_.
+  «terrae mōtus», _earthquake_
+«moveō, -ēre, mōvī, mōtus», _move_
+«mox», adv. _soon, presently_
+«mulier, -eris», f. _woman_
+«multitūdō, -inis», f. [[«multus», _much_]], _multitude_
+«multum (multō)», adv. [[«multus», _much_]], compared «plūs, plūrimum»,
+    _much_ (§477)
+«multus, -a, -um», adj., compared «plūs, plūrimus», _much_; plur. _many_
+    (§311)
+«mūniō, -īre, -īvī or -iī, -ītus», _fortify, defend_
+«mūnītiō, -ōnis», f. [[«mūniō», _fortify_]], _defense, fortification_
+«mūrus, -ī», m. _wall_. Cf. «moenia»
+«mūsica, -ae», f. _music_
+
+
+N
+
+«nam», conj. _for_. Cf. «enim»
+«nam-que», conj., a strengthened «nam», introducing a reason or
+    explanation, _for, and in fact; seeing that_
+«nārrō, -āre, -āvī, -ātus», _tell, relate_
+«nāscor, nāscī, nātus sum», dep. verb, _be born, spring from_
+«nātūra, -ae», f. _nature_
+«nātus», part. of «nāscor»
+«nauta, -ae», m. [[for «nāvita», from «nāvis», _ship_]], _sailor_
+«nāvālis, -e», adj. [[«nāvis», _ship_]], _naval_
+«nāvigium, nāvi´gī», n. _ship, boat_
+«nāvigō, -āre, -āvī, -ātus» [[«nāvis», _ship_, + «agō», _drive_]],
+    _sail, cruise_
+«nāvis, -is» (abl. -ī or -e), f. _ship_ (§243.1).
+    «nāvem cōnscendere», _embark, go on board_.
+    «nāvem solvere», _set sail_.
+    «nāvis longa», _man-of-war_
+«nē», conj. and adv. _in order that not, that_ (with verbs of fearing),
+    _lest; not_.
+  «nē ... quidem», _not even_
+«-ne», interrog. adv., enclitic (see §§16, 210). Cf. «nōnne» and «num»
+«nec» or «neque», conj. [[«nē», _not_, + «que», _and_]], _and not, nor_.
+  «nec ... nec» or «neque ... neque», _neither ... nor_
+«necessārius, -a, -um», adj. _needful, necessary_
+«necō, -āre, -āvī, -ātus» [[cf. nex, _death_]], _kill_. Cf. «interficiō,
+    occīdō, trucīdō»
+«negō, -āre, -āvī, -ātus», _deny, say not_ (§420.a)
+«negōtium, negō´tī», n. [[«nec», _not_, + «ōtium», _ease_]], _business,
+    affair, matter_.
+  «alicui negōtium dare», _to employ some one_
+«Nemaeus, -a, -um», adj. _Neme´an, of Neme´a_, in southern Greece
+«nēmō», dat. «nēminī» (gen. «nūllīus», abl. «nūllō», supplied from
+    «nūllus»), m. and f. [[«nē», _not_, + «homō», _man_]], _(not a man),
+    no one, nobody_
+«Neptūnus, -ī», m. _Neptune_, god of the sea, brother of Jupiter
+«neque», see «nec»
+«neuter, -tra, -trum» (gen. «-trīus», dat. «-trī»), adj. _neither_ (of
+    two) (§108)
+«nē-ve», conj. adv. _and not, and that not, and lest_
+«nihil», n. indecl. [[«nē», _not_, + «hīlum», _a whit_]], _nothing_.
+  «nihil posse», _to have no power_
+«nihilum, -ī», n., see «nihil»
+«Niobē, -ēs», f. _Ni´obe_, the queen of Thebes whose children were
+    destroyed by Apollo and Diana
+«nisi», conj. [[«nē», _not_, + «sī», _if_]], _if not, unless, except_
+«nōbilis, -e», adj. _well known; noble_
+«noceō, -ēre, -uī, -itūrus» [[cf. «necō», _kill_]], _hurt, injure_, with
+    dat. (§501.14)
+«noctū», abl. used as adv. [[cf. «nox», _night_]], _at night, by night_
+«Nōla, -ae», f. _Nola_, a town in central Campania. See map
+«nōlō, nōlle, nōluī», ---- [[«ne», _not_, + «volō», _wish_]], _not to
+    wish, be unwilling_ (§497)
+«nōmen, -inis», n. [[cf. «nōscō», _know_]], _(means of knowing), name_
+«nōminō, -āre, -āvī, -ātus» [[«nōmen», _name_]], _name, call_. Cf.
+    «appellō, vocō»
+«nōn», adv. [[«nē», _not_, + «ūnum», _one_]], _not_.
+  «nōn sōlum ... sed etiam», _not only ... but also_
+«nōn-dum», adv. _not yet_
+«nōn-ne», interrog. adv. suggesting an affirmative answer, _not?_
+    (§210). Cf. «-ne» and «num»
+«nōs», pers. pron. _we_ (see «ego») (§480)
+«noster, -tra, -trum», possessive adj. and pron. _our, ours_. Plur.
+    «nostrī, -ōrum», m. _our men_ (§98)
+«novem», indecl. numeral adj. _nine_
+«novus, -a, -um», adj. _new_.
+  «novae rēs», _a revolution_
+«nox, noctis», f. _night_, «multā nocte», _late at night_
+«nūllus, -a, -um» (gen. «-īus», dat. «-ī») adj. [[«nē», _not_, +
+    «ūllus», _any_]], _not any, none, no_ (§108)
+«num», interrog. adv. suggesting a negative answer (§210). Cf. «-ne» and
+    «nōnne». In indir. questions, _whether_
+«numerus, -ī», m. _number_
+«numquam», adv. [[«nē», _not_, + «umquam», _ever_]], _never_
+«nunc», adv. _now_. Cf. «iam»
+«nūntiō, -āre, -āvī, -ātus» [[«nūntius», _messenger_]], _report,
+    announce_ (§420.a)
+«nūntius, nūntī», m. _messenger_
+«nūper», adv. _recently, lately, just now_
+«nympha, -ae», f. _nymph_
+
+
+O
+
+«ob», prep. with acc. _on account of_. In compounds it often means _in
+    front of, against_, or it is intensive.
+  «quam ob rem», _for this reason_ (§340)
+«obses, -idis», m. and f. _hostage_
+«ob-sideō,-ēre,-sēdī, -sessus» [[«ob», _against_, + «sedeō», _sit_]],
+    _besiege_
+«obtineō, -ēre, -uī, -tentus» [[«ob», _against_, + «teneō», _hold_]],
+    _possess, occupy, hold_
+«occāsiō, -ōnis», f. _favorable opportunity, favorable moment_
+«occāsus, -ūs», m. _going down, setting_
+«occīdō, -ere, -cīdī, -cīsus» [[«ob», _down_, + «caedō», _strike_]],
+    _strike down; cut down, kill_. Cf. «interficiō, necō»
+«occupō, -āre, -āvī, -ātus» [[«ob», _completely_, + «capiō», _take_]],
+    _seize, take possession of, occupy_. Cf. «rapio»
+«oc-currō, -ere, -currī, -cursus» [[«ob», _against_ + «currō», _run_]],
+    _run towards; meet_, with dat. (§426)
+«ōceanus, -ī», m. _the ocean_
+«octō», indecl. numeral adj. _eight_
+«oculus, -ī», m. _eye_
+«officium, offi´cī», n. _duty_
+«ōlim», adv. _formerly, once upon a time_
+«ōmen, -inis», n. _sign, token, omen_
+«ō-mittō, -ere, -mīsī, -missus» [[«ob», _over, past_, + «mittō»,
+    _send_]], _let go, omit_.
+  «consilium omittere», _give up a plan_
+«omnīnō», adv. [[«omnis», _all_]], _altogether, wholly, entirely_
+«omnis, -e», adj. _all, every._ Cf. «tōtus»
+«onerāria, -ae», f. [[«onus», _load_]], with «nāvis» expressed or
+    understood, _merchant vessel, transport_
+«onus, -eris», n. _load, burden_
+«opīniō, -ōnis», f. [[«opīnor», _suppose_]], _opinion, supposition,
+    expectation_
+«oppidānus, -ī», m. [[«oppidum», _town_]], _townsman_
+«oppidum, -ī», n. _town, stronghold_
+«opportūnus, -a, -um», adj. _suitable, opportune, favorable_
+«op-primō, -ere, -pressī, -pressus» [[«ob», _against_, + «premō»,
+    _press_]], (_press against_), _crush; surprise_
+«oppugnātiō, -ōnis», f. _storming, assault_
+«oppugnō, -āre, -āvī, -ātus» [[«ob», _against_, + «pugnō» _fight_]],
+    _fight against, assault, storm, assail_
+«optimē», adv. in superl. degree, compared «bene, melius, optimē», _very
+    well, best of all_ (§323)
+«optimus, -a, -um», adj. in superl. degree, compared «bonus, melior,
+    optimus», _best, most excellent_ (§311)
+«opus, -eris», n. _work, labor, task_ (§464.2.b)
+«ōrāculum, -ī», n. [[«ōrō», _speak_]], _oracle_
+«ōrātor, -ōris», m. [[«ōrō», _speak_]], _orator_
+«orbis, -is», m. _ring, circle_.
+  «orbis terrārum», _the earth, world_
+«orbita, -ae», f. [[«orbis», _wheel_]], _rut_
+«Orcus, -ī», m. _Orcus, the lower world_
+«ōrdō, -inis», m. _row, order, rank_ (§247.2.a)
+«orīgo, -inis», f. [[«orior», _rise_]], _source, origin_
+«orior, -īrī, ortus sum», dep. verb, _arise, rise, begin; spring, be
+    born_
+«ōrnāmentum, -ī», n. [[«ōrnō», _fit out_]], _ornament, jewel_
+«ōrnātus, -a, -um», adj. [[part. of «ōrnō», _fit out_]] _fitted out;
+    adorned_
+«ōrnō, -āre, -āvī, -ātus», _fit out, adorn_
+
+
+P
+
+«P.», abbreviation for «Pūblius»
+«paene», adv. _nearly, almost_
+«palūdāmentum, -ī», n. _military cloak_
+«palūs, -ūdis», f. _swamp, marsh_
+«pānis, -is», m. _bread_
+«pār, paris», adj. _equal_ (§471. III)
+«parātus, -a, -um», adj. [[part. of «parō», _prepare_]], _prepared,
+    ready_
+«parcō, -ere, peper´cī» («parsī»), «parsūrus», _spare_, with dat.
+    (§501.14)
+«pāreō, -ēre, -uī, ----», _obey_, with dat. (§501.14)
+«parō, -āre, -āvī, -ātus», _prepare for, prepare; provide, procure_
+«pars, partis», f. _part, share; side, direction_
+«parum», adv., compared «minus, minimē», _too little, not enough_ (§323)
+«parvus, -a, -um», adj., compared «minor, minimus», _small, little_
+    (§311)
+«passus, -ūs», m. _step, pace_.
+  «mīlle passuum», _thousand paces, mile_ (§331.b)
+«pateō, -ēre, patuī, ----», _lie open, be open; stretch, extend_
+«pater, -tris», m. _father_ (§464.2.a)
+«patior, -ī, passus sum», dep. verb, _bear, suffer, allow, permit_
+«patria, -ae», f. [[cf. «pater», _father_]], _fatherland_, (_one’s_)
+    _country_
+«paucus, -a, -um», adj. (generally plur.), _few, only a few_
+«paulisper», adv. _for a little while_
+«paulō», adv. _by a little, little_
+«paulum» adv. _a little, somewhat_
+«pāx, pācis», f. (no gen. plur.), _peace_
+«pecūnia, -ae», f. [[«pecus», _cattle_]], _money_
+«pedes, -itis», m. [[«pēs», _foot_]], _foot soldier_
+«pedester, -tris, -tre», adj. [[«pēs», _foot_]], _on foot; by land_
+«peior, peius, -ōris», adj. in comp. degree, compared «malus, peior,
+    pessimus», _worse_ (§311)
+«pellis, -is», f. _skin, hide_
+«penna, -ae», f. _feather_
+«per», prep. with acc. _through, by means of, on account of_. In
+    composition it often has the force of _thoroughly, completely, very_
+    (§340)
+«percussus, -a, -um», adj. [[part. of «percutiō», _strike through_]],
+    _pierced_
+«per-dūcō, -ere, -dūxī, -ductus» [[«per», _through_, + «dūcō», _lead_]],
+    _lead through_.
+  «fossam perdūcere», _to construct a ditch_
+«per-exiguus, -a, -um», adj. [[«per», _very_, + «exiguus», _small_]],
+    _very small, very short_
+«perfidus, -a, -um», adj. _faithless, treacherous, false_
+«per-fringō, -ere, -frēgī, -frāctus» [[«per», _through_, «frangō»,
+    _break_]], _shatter_
+«pergō, -ere, perrēxī, perrēctus» [[«per», _through_, + «regō»,
+    _conduct_]], _go on, proceed, hasten_
+«perīculum, -ī», n. _trial, test; danger_
+«peristȳlum, -ī», n. _peristyle_, an open court with columns around it
+«perītus, -a, -um», adj. _skillful_
+«perpetuus, -a, -um», adj. _perpetual_
+«Perseus, -eī», _Perseus_, a Greek hero, son of Jupiter and Danaë
+«persōna, -ae», f. _part, character, person_
+«per-suādeō, -ēre, -suāsī, -suāsus» [[«per», _thoroughly_, + «suādeō»,
+    _persuade_]], _persuade, advise_, with dat. (§501.14), often with an
+    object clause of purpose (§501.41)
+«per-terreō, -ēre, -uī, -itus» [[«per», _thoroughly_, + «terreō»,
+    _frighten_]], _thoroughly terrify, alarm_
+«per-veniō, -īre, -vēnī, -ventus» [[«per», _through_, + «veniō»,
+    _come_]], _arrive, reach, come to_
+«pēs, pedis», m. _foot_.
+  «pedem referre», _retreat_ (§247.2.a)
+«pessimus, -a, -um», adj. in superl. degree, compared «malus, peior,
+    pessimus», _worst_ (§311)
+«petō, -ere, -īvī or -iī, -ītus», _strive for, seek, beg, ask; make
+    for, travel to_. Cf. «postulō, quaerō, rogō»
+«Pharsālus, -ī», f. _Pharsa´lus_ or _Pharsa´lia_, a town in Thessaly,
+    near which Cassar defeated Pompey, 48 B.C.
+«philosophia, -ae», f. _philosophy_
+«philosophus, -ī», m. _philosopher_
+«pictus, -a, -um», adj. [[part. of «pingō», _paint_]], _colored,
+    variegated_
+«pīlum, -ī», n. _spear, javelin_ (§462.b)
+«piscīna, -ae», f. [[«piscis», _fish_]], _fish pond_
+«piscis, -is», m. _fish_
+«pīstor, -ōris», m. _baker_
+«placeō. -ēre, -uī, -itus», _please, be pleasing_, with dat. (§501.14)
+«plānitiēs, -ēī», f. [[«plānus», _level_]], _plain_
+«plānus, -a, -um», adj. _level, flat_
+«plēnus, -a, -um», _full_
+«plūrimum», adv. in superl. degree, compared «multum, plūs, plūrimum»,
+    _very much_.
+  «plūrimum valēre», _be most influential_ (§322)
+«plūrimus, -a, -um», adj. in superl. degree, compared «multus, plūs,
+    plūrimus», _most, very many_ (§311)
+«plūs, plūris», adj. in comp. degree, compared «multus, plūs, plūrimus»;
+    sing. n. as substantive, _more_; plur. _more, several_ (§311)
+«pluteus, -ī», m. _shield, parapet_
+«poena, -ae», f. _punishment, penalty_
+«poēta, -ae», m. _poet_
+«pompa, -ae», f. _procession_
+«Pompēiī, -ōrum», m. _Pompeii_, a city of Campania. See map
+«Pompēius, Pompē´ī», m. _Pompey_, a Roman name
+«pōmum, -ī», n. _apple_
+«pōnō, -ere, posuī, positus», _put, place_.
+  «castra pōnere», _pitch camp_
+«pōns, pontis», m. _bridge_ (§247.2.a)
+«popīna, -ae», f. _restaurant_
+«populus, -ī», m. _people_
+«Porsena, -ae», m. _Porsena_, king of Etruria, a district of Italy.
+    See map
+«porta, -ae», f. _gate, door_
+«portō, -āre, -āvī, -ātus», _bear, carry_
+«portus, -ūs», m. [[cf. «porta», _gate_]], _harbor_
+«possideō, -ēre, -sēdī, -sessus», _have, own, possess_
+«possum, posse, potuī, ----», irreg. verb [[«potis», _able_, + «sum»,
+    _I am_]], _be able, can_ (§495).
+  «nihil posse», _have no power_
+«post», prep, with acc. _after, behind_ (§340)
+«posteā», adv. [[«post», _after_, + «eā», _this_]], _afterwards_
+(«posterus»), «-a, -um», adj., compared «posterior, postrēmus» or
+    «postumus», _following, next_ (§312)
+«postquam», conj. _after, as soon as_
+«postrēmō», adv. [[abl. of «postrēmus», _last_]], _at last, finally_.
+    Cf. «dēmum, dēnique» (§322)
+«postrīdiē», adv. [[«posterō», _next_, + «diē», _day_]], _on the next
+    day_
+«postulō, -āre, -āvī, -ātus», _ask, demand, require_. Cf. «petō,
+    quaerō, rogō»
+«potentia, -ae», f. [[«potēns», _able_]], _might, power, force_
+«prae-beō, -ēre, -uī, -itus» [[«prae», _forth_, + «habeō», _hold_]],
+    _offer, give_
+«praeda, -ae», f. _booty, spoil, plunder_
+«prae-dīcō, -ere, -dīxī, -dictus» [[«prae», _before_, + «dīcō»,
+    _tell_]], _foretell, predict_
+«prae-ficiō, -ere, -fēcī, -fectus» [[«prae», _before_, + «faciō»,
+    _make_]], _place in command_, with acc. and dat. (§501.15)
+«prae-mittō, -ere, -mīsī, -missus» [[«prae», _forward_, + «mittō»,
+    _send_]], _send forward_
+«praemium, praemī», n. _reward, prize_
+«praeruptus, -a, -um» [[part. of «prae-rumpō», _break off_]], _broken
+    off, steep_
+«praesēns, -entis», adj. _present, immediate_
+«praesertim», adv. _especially, chiefly_
+«praesidium, praesi´di», n. _guard, garrison, protection_
+«prae-stō, -āre, -stitī, -stitus» [[«prae», _before_, + «sto»,
+    _stand_]], (_stand before_), _excel, surpass_, with dat. (§501.15);
+    _show, exhibit_
+«prae-sum, -esse, -fuī, -futūrus» [[«prae», _before_, + «sum», _be_]],
+    _be over, be in command of_, with dat. (§501.15)
+«praeter», prep, with acc. _beyond, contrary to_ (§340)
+«praetereā», adv. [[«praeter», _besides_, + «eā», _this_]], _in
+    addition, besides, moreover_
+«praetextus, -a, -um», adj. _bordered, edged_
+«praetōrium, praetō´rī», n. _prætorium_
+«prandium, prandī», n. _luncheon_
+«premō, -ere, pressī, pressus», _press hard, compress; crowd, drive,
+    harass_
+(«prex, precis»), f. _prayer_
+«prīmō», adv. [[«prīmus», _first_]], _at first, in the beginning_ (§322)
+«prīmum», adv. [[«prīmus», _first_]], _first_.
+  «quam primum», _as soon as possible_
+«prīmus, -a, -um», adj. in superl. degree, compared «prior, prīmus»,
+    _first_ (§315)
+«prīnceps, -cipis», m. [[«prīmus», _first_, + «capiō», _take_]],
+    (_taking the first place_), _chief, leader_ (§464.1)
+«prior, prius, -ōris», adj. in comp. degree, superl., «prīmus», _former_
+    (§315)
+«prīstinus, -a, -um», adj. _former, previous_
+«prō», prep, with abl. _before; for, for the sake of, in behalf of;
+    instead of, as_ (§209). In composition, _forth, forward_
+«prō-cēdō, -ere, -cussī, -cessūrus» [[«prō», _forward_, + «cēdō»,
+    _go_]], _go forward, proceed_
+«procul», adv. _far, afar off_
+«prō-currō, -ere, -currī» («-cucurrī»), «-cur-sus» [[«prō», _forward_, +
+    «currō», _run_]], _run forward_
+«proelium, proeli», n. _battle, combat_.
+  «proelium committere», _join battle_.
+  «proelium facere», _fight a battle_
+«profectiō, -ōnis», f. _departure_
+«proficīscor, -ī, -fectus sum», dep. verb, _set out, march_. Cf.
+    «ēgredior, exeō»
+«prō-gredior, -ī, -gressus sum», dep. verb [[«prō», _forth_, +
+    «gradior», _go_]], _go forth, proceed, advance_. Cf. «pergō,
+    prōcēdō»
+«prōgressus», see «prōgredior»
+«prohibeō, -ēre, -uī, -itus» [[«prō», _forth, away from_, + «habeō»,
+    _hold_]], _keep away from, hinder, prevent_
+«prō-moveō, -ēre, -mōvī, -mōtus» [[«prō», _forward_, + «moveō»,
+    _move_]], _move forward, advance_
+«prō-nūntiō, -āre, -āvī, -ātus» [[«prō», _forth_, + «nūntiō»,
+    _announce_]], _proclaim, declare_
+«prope», adv., compared «propius, proxi-mē», _nearly_. Prep, with acc.
+    _near_
+«prō-pellō, -ere, -pulī, -pulsus» [[«prō», _forth_, + «pellō»,
+    _drive_]], _drive forth; move, impel_
+«properō, -āre, -āvī, -ātus» [[«properus», _quick]], go quickly,
+    hasten_. Cf. «contendō, maturō»
+«propinquus, -a, -um», adj. [[«prope», _near]], near, neighboring_
+«propior, -ius, -ōris», adj. in comp. degree, superl., «proximus»,
+    _nearer_ (§315)
+«propius», adv. in comp. degree, compared «prope, propius, proximē»,
+    _nearer_ (§323)
+«propter», prep. with acc. _on account of, because of_ (§340)
+«prō-scrībō, -ere, -scrīpsī, -scriptus» [[«prō», _forth_, + «scribō»,
+    _write_]], _proclaim, publish_. Cf. «prōnūntiō»
+«prō-sequor, -sequī, -secūtus sum», dep. verb [[«prō», _forth_, +
+    «sequor», _follow]], escort, attend_
+«prō-sum, prōdesse, prōfuī, prōfutūrus» [[«prō», _for_, + «sum», _be_]],
+    _be useful, benefit_, with dat. (§§496; 501.15)
+«prō-tegō, -ere, -tēx=i], -tēctus» [[«prō», _in front_, + «tegō»,
+    _cover]], cover in front, protect_
+«prōvincia, -ae», f. _territory, province_
+«proximē», adv. in superl. degree, compared «prope, propius, proximē»,
+    _nearest, next; last, most recently_ (§323)
+«proximus, -a, -um», adj. in superl. degree, compared «propior,
+    proximus», _nearest, next_ (§315)
+«pūblicus, -a, -um», adj. [[«populus»,_people_]], _of the people,
+    public_, «res pūblica», _the commonwealth_
+«puella, -ae», f. [[diminutive of «puer», _boy_]], _girl, maiden_
+«puer, -eri», m. _boy; slave_ (§462.c)
+«pugna, -ae», f _-fight, battle._ Cf. «proelium»
+«pugnō, -āre, -āvī, -ātus» [[«pugna», _battle]], fight_. Cf. «contendō,
+    dīmicō»
+«pulcher, -chra, -chrum», adj. _beautiful, pretty_ (§§469.b; 304)
+«Pullō, -ōnis», m. _Pullo_, a centurion
+«pulsō, -āre, -āvī, -ātus», _strike, beat_
+«puppis, -is» (acc. «-im», abl. «-ī»), f. _stern_ of a ship, _deck_
+«pūrē», adv. [[«pūrus», _pure_]], comp. «pūrius», _purely_
+«pūrgō, -āre, -āvī, -ātus», _cleanse, clean_
+«purpureus, -a, -um», adj. _purple, dark red_
+«putō, -āre, -āvī, -ātus», _reckon, think_ (§420,_c_). Cf. «arbitror,
+    exīstimō»
+«Pȳthia, -ae», f. _Pythia_, the inspired priestess of Apollo at Delphi
+
+
+Q
+
+«quā dē causā», _for this reason, wherefore_
+«quā rē», _therefore, for this reason_
+«quaerō, -ere, -sīvī, -sītus», _seek, ask, inquire_. Cf. «petō, postulō,
+    rogō»
+«quālis, -e», interrog. pronom. adj. _of what sort, what kind of_.
+    «talis ... qualis», _such ... as_
+«quam», adv. _how_; after a comparative, _than_; with a superlative,
+    translated _as...as possible_, «quam prīmum», _as soon as possible_
+«quantus, -a, -um», adj. [[«quam», _how]], how great, how much_,
+    «tantus ... quantus», _as great as_
+«quārtus, -a, -um», numeral adj. [[«quattuor», _four_]], _fourth_
+«quattuor», indecl. numeral adj. _four_
+«quattuor-decim», indecl. numeral adj. _fourteen_
+«-que», conj., enclitic, _and_ (§16). Cf. «ac, atque, et»
+«quī, quae, quod», rel. pron. and adj. _who, which, what, that_ (§482)
+«quia», conj. _because_. Cf. «quod»
+«quīdam, quaedam, quiddam (quoddam)», indef. pron. and adj. _a certain
+    one, a certain, a_ (§485).
+«quidem», adv. _to be sure, certainly, indeed_, «nē ... quidem», _not
+    even_
+«quiēs, -ētis», f. _rest, repose_
+«quiētus, -a, -um», adj. _quiet, restful_
+«quīndecim», indecl. numeral adj. _fifteen_
+«quīngentī, -ae, -a», numeral adj. _five hundred_
+«quīnque», indecl. numeral adj. _five_
+«quīntus, -a, -um», numeral adj. _fifth_
+«quis (quī), quae, quid (quod)», interrog. pron. and adj. _who? what?
+    which?_ (§483).
+«quis (quī), qua (quae), quid (quod)», indef. pron. and adj., used after
+    «sī, nisi, nē, num», _any one, anything, some one, something, any,
+    some_ (§484).
+«quisquam, quicquam» or «quidquam» (no fem. or plur.), indef. pron. _any
+    one_ (at all), _anything_ (at all) (§486).
+«quisque, quaeque, quidque (quodque)», indef. pron. and adj. _each, each
+    one, every_ (§484).
+«quō», interrog. and rel. adv. _whither, where_
+«quō», conj. _in order to, that_, with comp. degree (§350).
+«quod», conj. _because, in that_. Cf. «quia»
+«quoque», conj., following an emphatic word, _also, too_. Cf. «etiam»
+«quot-annīs», adv. [[«quot», _how many_ + «annus», _year_]], _every
+    year, yearly_
+«quotiēns», interrog. and rel. adv. _how often? as often as_
+
+
+R
+
+«rādīx, -īcis», f. _root; foot_
+«rapiō, -ere, -uī, -tus», _seize, snatch_
+«rārō», adv. [[«rārus», _rare_]], _rarely_
+«rārus, -a, -um», adj. _rare_
+«re-» or «red-», an inseparable prefix, _again, back, anew, in return_
+«rebelliō, -ōnis», f. _renewal of war, rebellion_
+«recēns, -entis», adj. _recent_
+«re-cipiō, -ere, -cēpī, -ceptus» [[«re-», _back_, + «capiō», _take_]],
+    _take back, receive_.
+  «sē recipere», _withdraw, retreat_
+«re-clīnātus, -a, -um», part. of «reclīnō», _leaning back_
+«re-creātus, -a, -um», part. of «recreō», _refreshed_
+«rēctus, -a, -um», adj. [[part. of «regō», _keep straight_]], _straight,
+    direct_
+«re-cūsō, -āre, -āvī, -ātus», _refuse_
+«red-āctus, -a, -um», part. of «redigō», _reduced, subdued_
+«red-eō, -īre, -iī, -itus» [[«red-», _back_, + «eō», _go_]], _go back,
+    return_ (§413). Cf. «revertō»
+«reditus, -ūs», m. [[cf. «redeō», _return_]], _return, going back_
+«re-dūcō, -ere, -dūxī, -ductus» [[«re-», _back_, + «dūcō», _lead_]],
+    _lead back_
+«re-ferō, -ferre, rettulī, -lātus» [[«re-», _back_, + «ferō», _bear_]],
+    _bear back; report_.
+  «pedem referre», _withdraw, retreat_
+«re-ficiō, -ere, -fēcī, -fectus» [[«re-», _again_, + «faciō», _make_]],
+    _make again, repair_.
+  «sē reficere», _refresh one’s self_
+«rēgīna, -ae», f. [[«rēx», _king_]], _queen_
+«regiō, -ōnis», f. _region, district_
+«rēgnum, -ī», n. _sovereignty; kingdom_
+«regō, -ere, rēxī, rēctus» [[cf. «rēx», _king_]], _govern, rule_ (§490)
+«re-iciō, -ere, -iēcī, -iectus» [[«re-», _back_, + «iaciō», _hurl_]],
+    _hurl back; throw away_
+«re-linquō, -ere, -līquī, -lictus» [[«re-», _behind_, + «linquō»,
+    _leave_]], _leave behind, leave, abandon_
+«reliquus, -a, -um», adj. [[cf. «relinquō», _leave_]], _left over,
+    remaining_. As a noun, plur. _the rest_
+«remōtus, -a, -um», adj. [[part. of «re-moveō», _remove_]], _remote,
+    distant_
+«re-moveō, -ēre, -mōvī, -motus» [[«re-», _back_, + «moveō», _move_]],
+    _remove_
+«rēmus, -ī», m. _oar_
+«re-periō, -īre, repperī, repertus», _find_
+«re-portō, -āre, -āvī, -ātus» [[«re-», _back_, + «portō», _carry_]],
+    _carry back, bring back, win, gain_
+«rēs, reī», f. _thing, business, matter, deed, event, circumstance_
+    (§467).
+  «quam ob rem», _for this reason_.
+  «rēs adversae», _adversity_.
+  «rēs frūmentāria», _grain supplies_.
+  «rēs gestae», _exploits_.
+  «rēs militāris», _science of war_.
+  «rēs pūblica», _the commonwealth_.
+  «rēs secundae», _prosperity_
+«re-scindō, -ere, -scidī, -scissus» [[«re-», _back_, + «scindō»,
+    _cut_]], _cut off, cut down_
+«re-sistō, -ere, -stitī», ---- [[«re-», _back_, + «sistō», _cause to
+    stand_]], _oppose, resist_, with dat. (§501.14)
+«re-spondeō, -ēre, -spondī, -spōnsus» [[«re-», _in return_, + «spondeō»,
+    _promise_]], answer, reply (§420.a)
+«re-vertō, -ere, -ī», ----, or dep. verb «re-vertor, -ī, -sus sum»
+    [[«re-», _back_, + «vertō», _turn_]], _turn back, return_. Usually
+    active in the perf. system
+«re-vinciō, -īre, -vīnxī, -vīnctus» [[«re-», _back_, + «vinciō»,
+    _bind_]], _fasten_
+«rēx, rēgis», m. [[cf. «regō», _rule_]], _king_
+«Rhēnus, -ī», m. _the Rhine_, a river of Germany
+«rīpa, -ae», f. _bank_
+«rogō, -āre, -āvī, -ātus», _ask_. Cf. «petō, postulō, quaerō»
+«Rōma, -ae», f. _Rome_. See map
+«Rōmānus, -a, -um», adj. [[«Rōma», _Rome_]], _Roman_, follows its noun.
+    As a noun, m. and f. _a Roman_
+«rosa, -ae», f. _rose_
+«rōstrum, -ī», n. _beak_ of a ship. In plur., _the rostra_, the
+    speaker’s stand in the Roman Forum
+«rota, -ae», f. _wheel_
+«Rubicō, -ōnis», m. _the Rubicon_, a river in northern Italy. See map
+«rūmor, -ōris», m. _report, rumor_
+«rūrsus», adv. [[for «reversus», _turned back_]], _again, in turn_
+«rūs, rūris» (locative abl. «rūrī», no gen., dat., or abl. plur.), n.
+    _the country_ (§501.36.1). Cf. «ager, patria, terra»
+
+
+S
+
+«Sabīnus, -a, -um», adj. _Sabine_. As a noun, m. and f. _a Sabine_. The
+    Sabines were an ancient people of central Italy. See map
+«sacrum, -ī», n. [[«sacer», _consecrated_]], _something consecrated,
+    sacrifice;_ usually in plur., _religious rites_
+«saepe», adv., compared «saepius, saepissimē», _often, frequently_
+«saevus, -a, -um», adj. _cruel, savage_
+«sagitta, -ae», f. _arrow_
+«saliō, -īre, -uī, saltus», _jump_
+«salūs, -ūtis», f. _safety; health_.
+  «salūtem dīcere», _send greetings_
+«salūtō, -āre, -āvī, -ātus» [[«salūs», _health_]], _greet, salute_
+«salvē», imv. of «salveō», _hail, greetings_
+«sanguis, -inis», m. _blood_ (§247.2.a]
+«sānitās, -ātis», f. [[«sānus», _sound_]], _health, sanity_
+«sapiēns, -entis», adj. [[part. of «sapiō», _be wise_]], _wise,
+    sensible_
+«satis», adv. and indecl. noun, _enough, sufficient, sufficiently_
+«saxum, -ī», n. _rock, stone_
+«scelus, -eris», n. _crime, sin_
+«scēptrum, -ī», n. _scepter_
+«schola, -ae», f. _school_, the higher grades. Cf. «lūdus»
+«scientia, -ae», f. [[«sciēns», _knowing_]], _skill, knowledge, science_
+«scindō, -ere, scidī, scissus», _cut, tear_
+«sciō, -īre, -īvī, -ītus», _know_ (§420.b). Cf. «cognōscō»
+«scrībō, -ere, scrīpsī, scrīptus», _write_
+«scūtum, -ī», n. _shield, buckler_
+«sē», see «suī»
+«sēcum» = «sē» + «cum»
+«secundus, -a, -um», adj. [[«sequor», _follow_]], _following, next,
+    second; favorable, successful_.
+  «rēs secundae», _prosperity_
+«sed», conj. _but, on the contrary_.
+  «nōn sōlum ... sed etiam», _not only ... but also_
+«sēdecim», indecl. numeral adj. _sixteen_
+«sedeō, -ēre, sēdī, sessus», _sit_
+«semper», adv. _always, forever_
+«senātus, -ūs», m. [[cf. «senex», _old_]], _council of elders, senate_
+«sentiō, -īre, sēnsī, sēnsus», _feel, know, perceive_ (§420.d). Cf.
+    «intellegō», «videō»
+«septem», indecl. numeral adj. _seven_
+«septimus, -a, -um», numeral adj. _seventh_
+«sequor, -ī, secūtus sum», dep. verb, _follow_ (§493)
+«serpēns, -entis», f. [[«serpō», _crawl_]], _serpent, snake_
+«sertae, -ārum», f. plur. _wreaths, garlands_
+«servitūs, -ūtis», f. [[«servus», _slave_]], _slavery, servitude_
+«servō, -āre, -āvī, -ātus», _save, rescue, keep_
+«servus, -ī», m. _slave_
+«sēsē», emphatic for «sē»
+«sex», indecl. numeral adj. _six_
+«Sextus, -ī», m. _Sextus_, a Roman first name
+«sī», conj. _if_
+«sīc», adv. _thus, in this way_. Cf. «ita», «tam»
+«Sicilia, -ae», f. _Sicily_. See map
+«sīc-ut», _just as, as if_
+«signifer, -erī», m. [[«signum», _standard_, + «ferō», _bear_]],
+    _standard bearer_ (p. 224)
+«signum, -ī», n. _ensign, standard; signal_
+«silva, -ae», f. _wood, forest_
+«similis, -e», adj., compared «similior, simillimus», _like, similar_
+    (§307)
+«simul», adv. _at the same time_
+«simul ac» or «simul atque», conj. _as soon as_
+«sine», prep. with abl. _without_ (§209)
+«singulī, -ae, -a», distributive numeral adj. _one at a time, single_
+    (§334)
+«sinister, -tra, -trum», adj. _left_
+«Sinuessa, -ae», f. _Sinues´sa_, a town in Campania. See map
+«sitis, -is» (acc. «-im», abl. «-ī», no plur.), f. _thirst_
+«situs, -a, -um», adj. [[part. of «sinō», _set_]], _situated, placed,
+    lying_
+«socius, socī», m. _comrade, ally_
+«sōl, sōlis» (no gen. plur.), m. _sun_
+«soleō, -ēre, solitus sum», semi-dep. verb, _be wont, be accustomed_
+«sollicitus, -a, -um», adj. _disturbed, anxious_
+«sōlum», adv. [[«sōlus», _alone_]], _alone, only_.
+  «nōn sōlum ... sed etiam», _not only ... but also_
+«sōlus, -a, -um» (gen. «-īus», dat. «-ī»), adj. _alone, only_ (§108)
+«solvō, -ere, solvī, solūtus», _loosen, unbind_.
+  «nāvem solvere», _set sail_
+«somnus, -ī», m. _sleep_
+«soror, -ōris», f. _sister_
+«spatium, spatī», n. _space, distance; time; opportunity_
+«spectāculum, -ī», n. [[«spectō», _look at_]], _show, spectacle_
+«spectō, -āre, -āvī, -ātus», _look at, witness_
+«spērō, -āre, -āvī, -ātus» [[spēs, _hope_]], _hope, expect_ (§420.c)
+«spēs, speī», f. _hope_ (§273.2)
+«splendidē», adv. [[«splendidus»]], compared «splendidius,
+    splendidissimē», _splendidly, handsomely_
+«splendidus, -a, -um», adj. _brilliant, gorgeous, splendid_
+«Stabiānus, -a, -um», _Stabian_
+«stabulum, -ī», n. [[cf. «stō», _stand_]], _standing place, stable,
+    stall_
+«statim», adv. [[cf. «stō», _stand_]], _on the spot, at once, instantly_
+«statua, -ae», f. [[«sistō», _place, set_]], _statue_
+«statuō, -ere, -uī, -ūtus» [[«status», _station_]], _decide, determine_
+«stilus, -ī», m. _iron pencil, style_ (p. 210)
+«stō, -āre, stetī, status», _stand_
+«strātus, -a, -um», adj. [[part. of «sternō», _spread_]], _paved_ (of
+    streets)
+«strepitus, -ūs», m. [[«strepō», _make a noise_]], _noise, din_
+«stringō, -ere, strīnxī, strictus», _bind tight; draw, unsheathe_
+«studeō, -ēre, -uī, ----», _give attention to, be eager_, with dat.
+    (§501.14)
+«studium, studī», n. [[cf. «studeō», _be eager for_]], _eagerness,
+    desire, zeal, devotion_
+«stultus, -a, -um», adj. _foolish, stupid_
+«Stymphālis, -idis», adj. f. _Stymphalian, of Stympha´lus_, a lake in
+    southern Greece
+«Stymphālus, -ī», m. _Stympha´lus_, a district of southern Greece with a
+    town, mountain, and lake, all of the same name
+«suādeō, -ēre, -sī, -sus», _advise, recommend_, with subjv. of purpose
+    (§501.41)
+«sub», prep, with acc. and abl. _under, below, up to; at_ or _to the
+    foot of_
+«sub-igō, -ere, -ēgī, -āctus» [[«sub», _under_, + «agō», _drive_]],
+    _subdue, reduce_
+«subitō», adv. [[«subitus», _sudden_]], _suddenly_
+«sub-sequor, -ī, -secūtus sum», dep. verb [[«sub», _below_, + «sequor»,
+    _follow_]], _follow close after, follow up_
+«suc-cēdō, -ere, -cessī, -cessus» [[«sub», _below_, + «cēdō», _go_]],
+    _follow, succeed_
+«suī», reflexive pron. _of himself (herself, itself, themselves)_
+    (§480).
+  «sēcum» = «sē» + «cum».
+  «sēsē», emphatic form of «sē»
+«sum, esse, fuī, futūrus», irreg. verb, _be; exist_ (§494)
+«summus, -a, -um», adj. in superl. degree, compared «superus, superior,
+    suprēmus» or «summus» (§312), _supreme, highest; best, greatest_.
+  «in summō colle», _on the top of the hill_
+«sūmō, -ere, sūmpsī, sūmptus», _take up; assume, put on_.
+  «sūmere supplicium dē», _inflict punishment on_
+«super», prep. with acc. and abl. _over, above_
+«superbia, -ae», f. [[«superbus», _proud_]], _pride, arrogance_
+«superbus, -a, -um», adj. _proud, haughty_
+«superior», comp. of «superus»
+«superō, -āre, -āvī, -ātus» [[«superus», _above_]], _go over; subdue,
+    overcome; surpass, excel_
+«super-sum, -esse, -fuī, ----», _be over, survive_, with dat. (§501.15)
+«superus, -a, -um», adj., compared «superior, suprēmus» or «summus»,
+    _above, upper_ (§312)
+«supplicium, suppli´cī», n. [[«supplex», _kneeling in entreaty_]],
+    _punishment, torture_.
+  «supplicium sūmere dē», _inflict punishment on_.
+  «supplicium dare», _suffer punishment_
+«surgō, -ere, surrēxī», ---- [[«sub», _from below_, + «regō»,
+_straighten_]], _rise_
+«sus-cipiō, -ere, -cēpī, -ceptus» [[«sub», _under_, + «capiō», _take_]],
+    _undertake, assume, begin_
+«suspicor, -ārī, -ātus sum», dep. verb, _suspect, surmise, suppose_
+«sus-tineō, -ēre, -tinuī, -tentus» [[«sub», _under_, + «teneō»,
+    _hold_]], _hold up, bear, sustain, withstand_
+«suus, -a, -um», reflexive possessive adj. and pron., _his, her, hers,
+    its, their, theirs_ (§98)
+
+
+T
+
+«T.», abbreviation of «Titus»
+«taberna, -ae», f. _shop, stall_
+«tabula, -ae», f. _tablet_ for writing
+«tālis, -e», adj. _such_.
+  «tālis ... quālis», _such ... as_
+«tam», adv. _so, such_. Cf. «ita, sīc»
+«tamen», adv. _yet, however, nevertheless_
+«tandem», adv. _at length, finally_
+«tangō, -ere, tetigī, tāctus», _touch_
+«tantum», adv. [[«tantus»]], _only_
+«tantus, -a, -um», adj. _so great, such_.
+  «tantus ... quantus», _as large as_
+«tardus, -a, -um», adj. _slow, late; lazy_
+«Tarpēia, -ae», f. _Tarpeia_ (pronounced _Tar-pē´ya_), the maiden who
+    opened the citadel to the Sabines
+«Tarquinius, Tarqui´nī», _Tarquin_, a Roman king. With the surname
+    «Superbus», _Tarquin the Proud_
+«Tarracīna, -ae», f. _Tarraci´na_, a town in Latium. See map
+«taurus, -ī», m. _bull_
+«tēctus, -a, -um», adj. [[part. of «tegō», _cover_]], _covered,
+    protected_
+«tēlum, -ī», n. _weapon_
+«temerē», adv. _rashly, heedlessly_
+«tempestās, -ātis», f. [[«tempus», _time_]] _storm, tempest_
+«templum, -ī», n. _temple, shrine_
+«tempto, -āre, -āvī, -ātus», _try, test; make trial of, attempt_
+«tempus, -oris», n. _time_ (§464.2.b).
+  «in reliquum tempus», _for the future_
+«teneō, -ēre, tenuī», ----, _hold, keep_
+«tergum, -ī», n. _back_, «ā tergō», _on the rear_, «tergum vertere»,
+_retreat, flee_
+«ternī, -ae, -a», distributive numeral adj. _three each, by threes_
+    (§334)
+«terra, -ae», f. _earth, ground, land_.
+  «orbis terrārum», _the whole world_
+«terror, -ōris», m. [[cf. «terreō», _frighten_]], _dread, alarm, terror_
+«tertius, -a, -um», numeral adj. _third_
+«Teutonēs, -um», m. _the Teutons_
+«theātrum, -ī», n. _theater_
+«Thēbae, -ārum», f. _Thebes_, a city of Greece
+«Thēbānī, -ōrum», m. _Thebans_, the people of Thebes
+«thermae, -ārum», f. plur. _baths_
+«Thessalia, -ae», f. _Thessaly_, a district of northern Greece
+«Thrācia, -ae», f. _Thrace_, a district north of Greece
+«Tiberius, Tibe´rī», m. _Tiberius_, a Roman first name
+«tībīcen, -īnis», m. [[cf. «tībia», _pipe_]], _piper, flute player_
+«timeō, -ēre, -uī», ----, _fear, be afraid of_. Cf. «vereor»
+«timor, -ōris», m. [[cf. «timeō», _fear_]], _fear, dread, alarm_.
+    Cf. «metus»
+«Tīryns, Tīrynthis», f. _Ti´ryns_, an ancient town in southern Greece,
+    where Hercules served Eurystheus
+«toga, -ae», f. [[cf. «tegō», _cover_]], _toga_
+«tormentum, -ī», n. _engine of war_
+«totiēns», adv. _so often, so many times_
+«tōtus, -a, -um», (gen. «-īus», dat. «-ī»), adj. _all, the whole,
+    entire_ (§108)
+«trā-dō, -ere, -didī, -ditus» [[«trāns», _across_, + «dō», _deliver_]],
+    _give up, hand over, surrender, betray_
+«trā-dūcō, -ere, -dūxī, -ductus» [[«trāns», _across_, + «dūcō»,
+    _lead_]], _lead across_
+«trahō, -ere, trāxī, trāctus», _draw, pull, drag_.
+  «multum trahere», _protract, prolong much_
+«trā-iciō, -ere, -iēcī, -iectus» [[«trāns», _across_, + «iaciō»,
+    _hurl_]], _throw across; transfix_
+«trā-nō, -āre, -āvī, -ātus» [[«trāns», _across_, + «nō», _swim_]], _swim
+    across_
+«trāns», prep. with acc. _across, over_ (§340)
+«trāns-eō, -īre, -iī, -itus» [[«trāns», _across_, + «eō», _go_]], _go
+    across, cross_ (§413)
+«trāns-fīgō, -ere, -fīxī, -fīxus» [[«trāns», _through_, + «fīgō»,
+    _drive_]], _transfix_
+«trānsitus», ---- (acc. «-um», abl. «-ū»), m. [[cf. «trānseō», _cross
+    over_]], _passage across_
+«trēs, tria», numeral adj. _three_ (§479)
+«trīduum, trīduī», n. [[«trēs», _three_, + «diēs», _days_]], _three
+    days’ time, three days_
+«trīgintā», indecl. numeral adj. _thirty_
+«triplex, -icis», adj. _threefold, triple_
+«trīstis, -e», adj. _sad; severe, terrible_
+«trīstitia, -ae», f. [[«trīstis», _sad_]], _sadness, sorrow_
+«triumphō, -āre, -āvī, -ātus» [[«triumphus», _triumph_]], _celebrate a
+    triumph_
+«triumphus, -ī», m. _triumphal procession, triumph_.
+  «triumphum agere», _celebrate a triumph_
+«trucīdō, -āre, -āvī, -ātus», _cut to pieces, slaughter._ Cf.
+    «interficiō», «necō», «occīdō»
+«tū, tuī» (plur. «vōs»), pers. pron. _thou, you_ (§480)
+«tuba, -ae», f. _trumpet_
+«Tullia, -ae», f. _Tullia_, a Roman name
+«tum», adv. _then, at that time_
+«turris, -is», f. _tower_ (§465.2)
+«tūtus, -a, -um», adj. _safe_
+«tuus, -a, -um», possessive adj. and pron. _your, yours_ (§98)
+
+
+U
+
+«ubi», rel. and interrog. adv. _where, when_
+«ūllus, -a, -um» (gen. «-īus», dat. «-ī»), adj. _any_ (§108)
+«ulterior, -ius, -ōris», adj. in comp. degree, superl. «ultimus»,
+    _farther, more remote_ (§315)
+«ultimus, -a, -um», adj. in superl. degree (see «ulterior»), _farthest_
+    (§315)
+«umbra, -ae», f. _shade_
+«umerus, -ī», m. _shoulder_
+«umquam», adv. _ever, at any time_
+«ūnā», adv. [[«ūnus», _one_]], _in the same place, at the same time_
+«ūndecimus, -a, -um», numeral adj. [[«ūnus», _one_, + «decimus»,
+    _tenth_]], _eleventh_
+«undique», adv. _from every quarter, on all sides, everywhere_
+«ūnus, -a, -um» (gen. «-īus», dat. «-ī»), numeral adj. _one; alone_
+    (§108)
+«urbs, -is», f. _city_ (§465.a)
+«urgeō, -ēre, ursī», ----, _press upon, crowd, hem in_
+«ūrus, -ī», m. _wild ox, urus_
+«ūsque», adv. _all the way, even_
+«ūsus, -ūs», m. _use, advantage_
+«ut», conj. with the subjv. _that, in order that, that not_ (with verbs
+    of fearing), _so that, to_ (§350.1)
+«uter, -tra, -trum» (gen. «-īus», dat. «-ī»), interrog. pron. _which of
+    two? which?_ (§108)
+«uterque, utraque, utrumque», indef. pron. _each of two, each, both_.
+    «ab utrāque parte», _on both sides_
+«ūtilis, -e», adj. [[«ūtor», _use_]], _useful_
+«utrimque», adv. [[«uterque», _each of two_]], _on each side, on either
+    hand_
+«ūva, -ae», f. _grape, bunch of grapes_
+«uxor, -ōris», f. _wife_
+
+
+V
+
+«vāgīna, -ae», _sheath, scabbard_
+«vagor, -ārī, -ātus sum», dep. verb, _wander_
+«valeō, -ēre, -uī, -itūrus», _be powerful, be well_; in the imperative
+    as a greeting, _farewell_.
+  «plūrimum valēre», _have the most power_
+«valētūdō, -inis», f. [[«valeō», _be well_]], _health_
+«validus, -a, -um», adj. [[cf. «valeō», _be strong_]], _strong, able,
+    well_
+«vallēs, -is», f. _valley_
+«vāllum, -ī», n. _rampart, earthworks_
+«varius, -a, -um», adj. _bright-colored_
+«vāstō, -āre, -āvī, -ātus» [[«vāstus», _empty_]], _(make empty),
+    devastate, lay waste_
+«vectīgal, -ālis», n. _tax, tribute_
+«vehementer», adv. [[«vehemēns», _eager_]], compared «vehementius,
+    vehementissimē», _eagerly, vehemently_
+«vehō, -ere, vexī, vectus», _convey, carry_. In the passive often in the
+    sense of _ride, sail_
+«vel», conj. _or_.
+  «vel ... vel», _either ... or_. Cf. «aut»
+«vēlōcitās, -ātis», f. [[«vēlōx», _swift_]], _swiftness_
+«vēlōx, -ōcis», adj. _swift, fleet_
+«vēlum, -ī», n. _sail_
+«vēndō, -ere, vēndidī, vēnditus», _sell_
+«veniō, -īre, vēnī, ventus», _come, go_
+«ventus, -ī», m. _wind_
+«verbum, -ī», n. _word_.
+  «verba facere prō», _speak in behalf of_
+«vereor, -ērī, -itus sum», dep. verb, _fear; reverence, respect_
+    (§493). Cf. «timeō»
+«Vergilius, Vergi´lī», m. _Vergil_, the poet
+«vergō, -ere, ----, ----», _turn, lie_
+«vērō», adv. [[«vērus», _true_]], _in truth, surely;_ conj. _but,
+    however_.
+  «tum vērō», _then you may be sure_, introducing the climax of a story
+«vertō, -ere, -tī, -sus», _turn, change_.
+  «tergum vertere», _retreat, flee_
+«vērus, -a, -um», _true, actual_
+«vesper, -erī», m. _evening_
+«vester, -tra, -trum», possessive adj. and pron. _your, yours_ (§98)
+«vestīgium, vestī´gī», n. [[cf. «vestīgō», _track_]], _footstep, track,
+    trace_
+«vestīmentum, -ī», n. [[«vestis», _clothing_]], _garment_
+«vestiō, -īre, -īvī, -ītus» [[«vestis», _clothing_]], _clothe, dress_
+«vestis, -is», f. _clothing, attire, garment, robe_
+«vestītus, -a, -um», adj. [[part. of «vestiō», _clothe_]], _clothed_
+«Vesuvius, Vesu´vi», m. _Vesuvius_, the volcano near Pompeii. See map
+«veterānus, -a, -um», adj. _old, veteran_
+«vetō, -āre, -uī, -itus», _forbid, prohibit_
+«vexō, -āre, -āvī, -ātus», _trouble, annoy_
+«via, -ae», f. _way, road, street; way, manner_. Cf. «iter»
+«viātor, -ōris», m. [[«via»]], _traveler_
+«victor, -ōris», m. [[«vincō», _conquer_]], _conqueror, victor_. In
+    apposition, with adj. force _ victorious_
+«victōria, -ae», f. [«victor», _victor_], _victory_
+«vīcus, -ī», m. _village_
+«videō, -ēre, vīdī, vīsus», _see, perceive_. Pass. _be seen; seem_
+    (§420.d)
+«vigilia,-ae», f. [[«vigil» _awake_]], watch.
+  «dē tertia vigilia», _about the third watch_
+«vīgintī», indecl. numeral adj. _twenty_
+«vīlicus, -ī», m. [[«vīlla», _farm_]], _steward, overseer of a farm_
+«vīlla, -ae», f. _farm, villa_
+«vinciō, -īre, vīnxī, vīnctus», _bind, tie,fetter_
+«vincō, -ere, vīcī, victus», _conquer, defeat, overcome_. Cf. «subigō,
+    superō»
+«vīnea, -ae», f. _shed_ (p. 219)
+«vīnum, -ī», n. _wine_
+«violenter», adv. [[«violentus», _violent_]], compared «violentius,
+    violentissimē», _violently, furiously_
+«vir, virī», m. _man, husband; hero_ (§462.c)
+«virīlis, -e», adj. [[vir, _man_]], _manly_
+«virtūs, -ūtis», f. [[«vir», _man_]], _manliness; courage, valor;
+    virtue_ (§464.1)
+«vīs», («vīs»), f. _strength, power, might, violence_ (§468)
+«vīta, -ae», f. [[cf. «vīvō», _live_]], _life_, «vītam agere», _spend or
+    pass life_
+«vīto, -āre, -āvī, -ātus», _shun, avoid_
+«vīvō, -ere, vīxī, ----», _live_. Cf. «habitō, incolō»
+«vīvus, -a, -um», adj. [[cf. «vīvō», _live_]], _alive, living_
+«vix», adv. _scarcely, hardly_
+«vocō, -āre, -āvī, -ātus», _call, summon, invite_. Cf. «appellō,
+    nōminō»
+«volō, -āre, -āvī, -ātūrus», _fly_
+«volō, velle, voluī, ----», irreg. verb, _will, be willing; wish_
+    (§497). Cf. «cupio»
+«volūmen, -inis», n. _roll, book_
+«Vorēnus, -ī», m. _Vore´nus_, a centurion
+«vōs», pers. pron.; _you_ (see «tū») (§480)
+«vōtum, -ī», n. [[neut. part. of «voveō», _vow_]], _vow, pledge, prayer_
+«vōx, vōcis», f. [[cf. «vocō», _call_]], _voice, cry; word_
+«vulnerō, -āre, -āvī, -ātus» [[«vulnus», _wound_]], _wound, hurt_
+«vulnus, -eris», n. _wound, injury_
+«vulpēs, -īs», f. _fox_
+
+
+  [Illustration: EQUES ROMANUS]
+
+
+
+

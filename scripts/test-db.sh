@@ -23,6 +23,7 @@ else
   run_sql "${CONN[@]}" -f supabase/tests/shim.sql
   for f in supabase/migrations/*.sql; do run_sql "${CONN[@]}" -f "$f"; done
   [ -f supabase/seed.sql ] && run_sql "${CONN[@]}" -f supabase/seed.sql
+  [ -f supabase/seed-lexicon.sql ] && run_sql "${CONN[@]}" -f supabase/seed-lexicon.sql
 fi
 
 status=0

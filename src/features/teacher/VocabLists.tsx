@@ -3,9 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAsync } from '../../lib/useAsync';
 import { createVocabList, listVocabLists } from './api';
 
-/** Set VITE_LEXICON_ATTRIBUTION when the DCC core list is imported (see README). */
-export const DCC_ATTRIBUTION =
-  (import.meta.env.VITE_LEXICON_ATTRIBUTION as string | undefined) || 'Built-in dictionary: LatinIQ starter vocabulary';
+export const LEXICON_CREDIT =
+  "Dictionary: William Whitaker's Words. Core list from G. Lodge, The Vocabulary of High School Latin (1909) and B. L. D'Ooge, Latin for Beginners (1911).";
 
 export function VocabLists() {
   const { data, error } = useAsync(listVocabLists, []);
