@@ -1,5 +1,9 @@
 import { readFileSync } from 'node:fs';
-import { parseWhitakerVerbs } from './verbs';
+import { composeLexicon, parseLodge } from './compose';
+import { parseDooge } from './dooge';
+import { verbKey } from '../../src/lib/conjugator';
+import { coreTrainerVerbs, parseWhitakerVerbs, shortGloss, verbsModule } from './verbs';
+import { parseDictline } from './whitaker';
 
 const dictline = readFileSync('content/sources/whitaker/DICTLINE.GEN', 'utf8').split('\n');
 // 1-based line numbers in the pinned DICTLINE.GEN.
@@ -60,4 +64,73 @@ describe('parseWhitakerVerbs', () => {
   it('spells j as i', () => expect(v.get('subicere')).toMatchObject({ conj: 3.5, perf: 'subiec', ppp: 'subiect', pp1: 'subicio' }));
   it('intransitive verbs have no passive', () => expect(v.get('cadere')).toMatchObject({ conj: 3, noPassive: true }));
   it('ignores continuation lines on their own', () => expect(parseWhitakerVerbs(fixture(34875))).toEqual([]));
+});
+
+describe('shortGloss', () => {
+  it.each([
+    ['hide, conceal', 'to hide'],
+    ['say, declare, state; allege', 'to say'],
+    ['be away/absent/distant', 'to be away/absent/distant'],
+    ['to try (to)', 'to try'],
+    ['bring [news] together', 'to bring together'],
+  ])('%s', (def, gloss) => expect(shortGloss(def)).toBe(gloss));
+  it('cuts long glosses at a space', () => {
+    const g = shortGloss('overwhelm/overthrow/demolish/destroy/annihilate utterly and completely');
+    expect(g.length).toBeLessThanOrEqual(40);
+    expect(g).toMatch(/^to \S/);
+    expect(g.endsWith(' ')).toBe(false);
+  });
+});
+
+describe('coreTrainerVerbs on the vendored sources', () => {
+  const { rows } = composeLexicon(
+    parseDooge(readFileSync('content/sources/dooge-latin-english.txt', 'utf8')),
+    parseDictline(readFileSync('content/sources/whitaker/DICTLINE.GEN', 'utf8')),
+    parseLodge(readFileSync('content/sources/lodge-core.tsv', 'utf8')),
+  );
+  const { verbs, unmatched } = coreTrainerVerbs(rows, parseWhitakerVerbs(dictline.join('\n')));
+  const get = (inf: string) => verbs.find(v => v.inf === inf);
+
+  it('generates most core verbs, each once', () => {
+    expect(verbs.length).toBeGreaterThanOrEqual(600);
+    expect(verbs.length).toBeLessThanOrEqual(800);
+    expect(new Set(verbs.map(verbKey)).size).toBe(verbs.length);
+    console.log(`unmatched core verbs (${unmatched.length}): ${unmatched.join(', ')}`);
+    expect(unmatched.length).toBeLessThan(40);
+  });
+  it('keeps 2nd and 3rd conjugation verbs that share an unmarked infinitive', () => {
+    expect(verbs.find(v => v.pp1 === 'iacio')).toMatchObject({ inf: 'iacere', conj: 3.5, perf: 'iec' });
+    expect(verbs.find(v => v.pp1 === 'pario')).toMatchObject({ inf: 'parere', conj: 3.5, perf: 'peper' });
+    expect(verbs.find(v => v.pp1 === 'pendeo')).toMatchObject({ inf: 'pendere', conj: 2 });
+  });
+  it('keeps homographs apart', () => {
+    expect(get('volare')).toMatchObject({ conj: 1, perf: 'volav' });
+    expect(get('dicere')).toMatchObject({ conj: 3, perf: 'dix' });
+    expect(get('dicare')).toBeUndefined();
+  });
+  it('includes compounds, deponents and ablaut perfects', () => {
+    expect(get('abesse')).toMatchObject({ base: 'esse' });
+    expect(get('conferre')).toMatchObject({ base: 'ferre' });
+    expect(get('redire')).toMatchObject({ base: 'ire' });
+    expect(get('subigere')).toMatchObject({ perf: 'subeg' });
+    expect(get('conari')).toMatchObject({ deponent: true });
+  });
+  it('leaves out semi-deponents and defectives', () => {
+    for (const inf of ['audere', 'gaudere', 'solere', 'odisse']) expect(get(inf)).toBeUndefined();
+    expect(verbs.some(v => v.pp1 === 'inquio')).toBe(false);
+  });
+  it('glosses every verb', () => {
+    for (const v of verbs) expect(v.trans).toMatch(/^to \S/);
+  });
+});
+
+describe('verbsModule', () => {
+  it('emits the verbs as a typed JSON literal', () => {
+    const verbs = [{ inf: 'amare', conj: 1, pres: 'am', perf: 'amav', ppp: 'amat', pp1: 'amo', trans: "to love's \"x\"" }];
+    const src = verbsModule(verbs);
+    expect(src).toContain("import type { Verb } from '../lib/conjugator';");
+    const body = src.split('export const CORE_VERBS: Verb[] = ')[1];
+    expect(body.trimEnd().endsWith(';')).toBe(true);
+    expect(JSON.parse(body.trimEnd().slice(0, -1))).toEqual(verbs);
+  });
 });

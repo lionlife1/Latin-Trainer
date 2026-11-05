@@ -253,6 +253,14 @@ export function generateSubjunctiveForm(verb: Verb, tense: Tense, voice: Voice, 
     throw new Error(`Unknown tense: ${tense}`);
 }
 
+/**
+ * Identifies a verb in the trainer pool. Without macrons a 2nd and a 3rd conjugation verb can share
+ * an infinitive (iacēre / iacere), so the conjugation is part of the key.
+ */
+export function verbKey(v: Verb): string {
+    return `${v.inf}|${v.irregular ? 'irr' : v.conj}`;
+}
+
 /** Every verb the Endless trainer can draw. */
 export function trainerPool(): Verb[] {
     return VERBS;
