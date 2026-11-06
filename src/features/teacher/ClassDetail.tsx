@@ -65,6 +65,7 @@ export function ClassDetail() {
               <td>{a.question_count}</td>
               <td className="row">
                 <Link className="link small" to={`/t/a/${a.id}/analysis`}>Item analysis</Link>
+                <Link className="link small" to={`/t/a/${a.id}/print`}>Print</Link>
                 <button
                   className="btn-ghost small"
                   onClick={async () => {

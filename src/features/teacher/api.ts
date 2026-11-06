@@ -47,6 +47,9 @@ export const listAssignments = async (classId: string) =>
   must<AssignmentRow[]>(await sb().from('assignments').select('*').eq('class_id', classId).order('created_at', { ascending: false }));
 export const getAssignment = async (id: string) =>
   must<AssignmentRow>(await sb().from('assignments').select('*').eq('id', id).single());
+/** The published question snapshot. RLS (pool_teacher) limits it to the class's teacher. */
+export const getAssignmentPool = async (assignmentId: string) =>
+  must<PoolItem[]>(await sb().from('assignment_pool').select('item_key, question').eq('assignment_id', assignmentId).order('item_key'));
 export async function deleteAssignment(id: string) {
   must(await sb().from('assignments').delete().eq('id', id));
 }
