@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { downloadCsv, downloadText } from '../../lib/csv';
 import { useAsync } from '../../lib/useAsync';
+import type { VocabItem } from '../../lib/vocab';
+import { blooketCsv, gimkitCsv, quizletText } from '../../lib/vocabExport';
 import { PARTS_OF_SPEECH } from '../../lib/vocabImport';
 import { useAuth } from '../auth/AuthProvider';
 import {
-  addCustomWord, addListItem, deleteVocabList, getVocabList, removeListItem, renameVocabList, searchLexicon,
-  updateListItem, type LexiconRow, type VocabListItemRow,
+  addCustomWord, addListItem, deleteVocabList, getVocabList, loadFallbackLexicon, removeListItem, renameVocabList,
+  searchLexicon, toVocabItem, updateListItem, type LexiconRow, type VocabListItemRow,
 } from './api';
 import { LatinField } from './LatinField';
 import { VocabImport } from './VocabImport';
@@ -29,6 +32,35 @@ function OverrideCell({ item, onSaved }: { item: VocabListItemRow; onSaved: () =
         }
       }}
     />
+  );
+}
+
+const fileName = (name: string, ext: string) => `${name.trim().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '') || 'vocab'}.${ext}`;
+
+/** Downloads for review games. Gimkit/Blooket layouts must be checked against their templates (vocabExport.ts). */
+function ExportButtons({ name, items }: { name: string; items: VocabItem[] }) {
+  const [note, setNote] = useState<string | null>(null);
+  const withFallback = async (make: (fallback: VocabItem[]) => string, file: string) => {
+    try {
+      downloadCsv(file, make(await loadFallbackLexicon()));
+    } catch (e) {
+      setNote(String(e));
+    }
+  };
+  return (
+    <div className="row">
+      <span className="muted small">Export:</span>
+      <button className="btn-secondary small" onClick={() => downloadText(fileName(name, 'txt'), quizletText(items))}>Quizlet (.txt)</button>
+      <button
+        className="btn-ghost small"
+        onClick={() => navigator.clipboard.writeText(quizletText(items)).then(() => setNote('Copied. In Quizlet: Create → Import, then paste.'), e => setNote(String(e)))}
+      >
+        Copy for Quizlet
+      </button>
+      <button className="btn-secondary small" onClick={() => withFallback(f => gimkitCsv(items, f), fileName(name, 'gimkit.csv'))}>Gimkit (.csv)</button>
+      <button className="btn-secondary small" onClick={() => withFallback(f => blooketCsv(items, f), fileName(name, 'blooket.csv'))}>Blooket (.csv)</button>
+      {note && <span className="small">{note}</span>}
+    </div>
   );
 }
 
@@ -75,6 +107,7 @@ export function VocabListEditor() {
         onBlur={e => e.target.value.trim() && e.target.value !== meta.name && renameVocabList(listId, e.target.value.trim())}
       />
       <p className="muted small">{items.length} words. Leave a definition blank to use the dictionary meaning.</p>
+      {items.length > 0 && <ExportButtons name={meta.name} items={items.map(toVocabItem)} />}
 
       <table className="table">
         <thead><tr><th>Word</th><th>Definition used in quizzes</th><th /></tr></thead>

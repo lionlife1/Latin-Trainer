@@ -19,7 +19,8 @@ export interface PoolItem {
 
 const DISTRACTORS = 3;
 
-function pickDistractors(target: VocabItem, list: VocabItem[], fallback: VocabItem[], rng: () => number): string[] {
+/** Up to 3 wrong meanings: same part of speech first, list words before fallback words, no repeats. */
+export function pickDistractors(target: VocabItem, list: VocabItem[], fallback: VocabItem[], rng: () => number): string[] {
   const others = list.filter(i => i.itemId !== target.itemId);
   const samePos = (xs: VocabItem[]) => shuffle(xs.filter(i => i.pos === target.pos), rng);
   const otherPos = (xs: VocabItem[]) => shuffle(xs.filter(i => i.pos !== target.pos), rng);
