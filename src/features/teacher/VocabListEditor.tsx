@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAsync } from '../../lib/useAsync';
+import { PARTS_OF_SPEECH } from '../../lib/vocabImport';
 import { useAuth } from '../auth/AuthProvider';
 import {
   addCustomWord, addListItem, deleteVocabList, getVocabList, removeListItem, renameVocabList, searchLexicon,
   updateListItem, type LexiconRow, type VocabListItemRow,
 } from './api';
 import { LatinField } from './LatinField';
+import { VocabImport } from './VocabImport';
 import { LEXICON_CREDIT } from './VocabLists';
-
-const POS = ['noun', 'verb', 'adjective', 'adverb', 'pronoun', 'preposition', 'conjunction', 'other'];
 
 function OverrideCell({ item, onSaved }: { item: VocabListItemRow; onSaved: () => void }) {
   const [value, setValue] = useState(item.definition_override ?? '');
@@ -122,11 +122,14 @@ export function VocabListEditor() {
         <LatinField aria-label="Dictionary form" placeholder="Dictionary form, e.g. gladius, gladiī, m." value={custom.headword} onValueChange={headword => setCustom({ ...custom, headword })} maxLength={120} />
         <input className="input" placeholder="Meaning" value={custom.definition} onChange={e => setCustom({ ...custom, definition: e.target.value })} maxLength={200} />
         <select className="select" value={custom.pos} onChange={e => setCustom({ ...custom, pos: e.target.value })}>
-          {POS.map(p => <option key={p}>{p}</option>)}
+          {PARTS_OF_SPEECH.map(p => <option key={p}>{p}</option>)}
         </select>
         <button className="btn-primary" type="submit">Add word</button>
       </form>
       {err && <p className="form-error">{err}</p>}
+
+      <h2>Import a list</h2>
+      {profile && <VocabImport listId={listId} ownerId={profile.id} inList={inList} nextPos={nextPos} onDone={list.reload} />}
 
       <div className="row-end">
         <button

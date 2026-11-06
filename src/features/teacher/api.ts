@@ -132,8 +132,8 @@ export async function getVocabList(id: string) {
   );
   return { list, items };
 }
-export async function addListItem(listId: string, lexiconId: number, position: number) {
-  must(await sb().from('vocab_list_items').insert({ list_id: listId, lexicon_id: lexiconId, position }));
+export async function addListItem(listId: string, lexiconId: number, position: number, definitionOverride: string | null = null) {
+  must(await sb().from('vocab_list_items').insert({ list_id: listId, lexicon_id: lexiconId, position, definition_override: definitionOverride }));
 }
 export async function updateListItem(itemId: string, definitionOverride: string | null) {
   must(await sb().from('vocab_list_items').update({ definition_override: definitionOverride }).eq('id', itemId));
