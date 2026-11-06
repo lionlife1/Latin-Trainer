@@ -290,3 +290,25 @@ paper score entry. A derivatives library.
 ## Progress log
 
 - 2026-11-05: Research done (research.md §1–§9). First version of this plan.
+- 2026-11-05: **Phase 1 shipped (no schema change).**
+  - *Print*: `/t/a/:assignmentId/print` (linked as "Print" from the class's assignment table) renders the
+    published `assignment_pool` (mc and typein, module and vocab) as student copies and answer keys. It
+    draws the assignment's question count once, then versions A/B/C each get their own seeded order of
+    questions and MC choices (`src/lib/print.ts`); the seed comes from the assignment id, so reprints match,
+    and "Reshuffle" changes it. Options: name/date/class lines, versions, copies, keys. `@media print` in
+    `classroom.css`. Teachers already read the pool through RLS (`pool_teacher`). Hints are not printed.
+  - *Import*: paste in the vocab list editor; tab (Quizlet), spaced `-`/`–`/`—`/`=`, or CSV with quoted
+    fields (`parseCsvRow` in `csv.ts`). Exact-lemma match through `searchLexicon` (macrons optional;
+    typed macrons break ties like *malum*/*mālum*), review table (matched / choose / new / already in
+    list), then add. Pasted English becomes `definition_override` when it differs; unmatched lines become
+    custom words with a guessed part of speech. Logic in `src/lib/vocabImport.ts`. Up to 200 lines at a time.
+    In unquoted CSV the first field is the Latin, so a dictionary form with commas needs quotes or a dash.
+  - *Export*: Quizlet (`term<TAB>definition`, download or copy), Gimkit CSV and Blooket CSV
+    (`src/lib/vocabExport.ts`, wrong answers from `pickDistractors`). **The Gimkit and Blooket column
+    layouts (title row, header text, column order) are from memory of their import templates and must be
+    checked against a fresh template download before teachers rely on them.**
+  - *Macron helper*: `LatinField` with ā ē ī ō ū ȳ buttons that insert at the caret, plus an `a=` → ā
+    shortcut, on dictionary search and the custom headword. The import box has the buttons but no shortcut,
+    because `=` is a separator there.
+  - Deferred: Kahoot export (needs .xlsx, so a dependency); white space / large print options; tags and
+    "combine lists"; re-drawing generated items per version (Phase 2, needs generators).

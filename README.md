@@ -16,7 +16,10 @@ teachers create classes, assign practice or tests, and see a gradebook and per-q
   No student email or real name is required, and the teacher can reset a forgotten PIN.
 - Assignments from grammar modules (filter by question kind) or **vocab lists**. Teachers build lists by
   searching a built-in Latin dictionary (macrons optional), can override a definition to match their
-  textbook, and can add their own words.
+  textbook, and can add their own words. Lists can be **imported** by pasting lines (Quizlet export, CSV,
+  "latin - english") and **exported** to Quizlet, Gimkit and Blooket. Latin fields have a macron helper.
+- **Print** any assignment as a student copy plus answer key, in versions A/B/C with shuffled questions
+  and choices.
 - Two modes:
   - **Practice**: instant feedback after each answer.
   - **Test**: no feedback until submit, optional time limit and attempt limit, graded on the server.
