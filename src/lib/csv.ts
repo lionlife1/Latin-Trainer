@@ -3,8 +3,9 @@ type Cell = string | number | null;
 function cell(v: Cell): string {
   if (v === null) return '';
   if (typeof v === 'number') return String(v);
-  // Stop spreadsheets from evaluating student-entered text as formulas.
-  const s = /^[=+\-@\t\r]/.test(v) ? `'${v}` : v;
+  // Stop spreadsheets from evaluating student-entered text as formulas. A dash followed only by
+  // letters is a Latin enclitic or ending (-que, -ne, -ārum), which can't run as a formula.
+  const s = /^[=+\-@\t\r]/.test(v) && !/^-\p{L}+$/u.test(v) ? `'${v}` : v;
   return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 

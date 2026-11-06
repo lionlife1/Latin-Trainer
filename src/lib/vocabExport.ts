@@ -11,8 +11,8 @@ import { pickDistractors, type VocabItem } from './vocab';
  * the header text and whether the title row is expected against a fresh template download from
  * each site, and update the constants and tests if they differ. Quizlet's paste import (term TAB
  * definition, one per line) is stable and documented. Kahoot needs .xlsx and is not done.
- * toCsv prefixes text starting with = + - @ with an apostrophe (formula safety), so "-que" shows as
- * "'-que" in the game.
+ * toCsv prefixes text starting with = + - @ with an apostrophe (formula safety), except a dash
+ * followed only by letters, so "-que" exports as is.
  */
 
 /** Tabs and line breaks would split a Quizlet card. */

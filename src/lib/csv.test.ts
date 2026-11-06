@@ -10,6 +10,9 @@ describe('toCsv', () => {
   it('neutralizes spreadsheet formulas in text cells', () => {
     expect(toCsv([['=HYPERLINK("x")', '+1', '-2', '@a']])).toBe(`"'=HYPERLINK(""x"")",'+1,'-2,'@a\r\n`);
   });
+  it('leaves Latin enclitics and endings alone but still guards dash formulas', () => {
+    expect(toCsv([['-que', '-ārum', '-HYPERLINK("x")', '-1+1']])).toBe(`-que,-ārum,"'-HYPERLINK(""x"")",'-1+1\r\n`);
+  });
   it('leaves numbers alone', () => {
     expect(toCsv([[-5, 0]])).toBe('-5,0\r\n');
   });
