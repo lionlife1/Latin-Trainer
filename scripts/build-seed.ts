@@ -8,6 +8,7 @@ import { MODULES } from '../src/content/modules';
 import { lemmaOf } from '../src/lib/lexicon';
 import { composeLexicon, parseLodge } from './lexicon/compose';
 import { parseDooge } from './lexicon/dooge';
+import { coreTrainerVerbs, parseWhitakerVerbs, verbsModule } from './lexicon/verbs';
 import { parseDictline } from './lexicon/whitaker';
 
 export { lemmaOf };
@@ -65,14 +66,20 @@ function main() {
   writeFileSync('supabase/seed.sql', out.join('\n'));
   console.log(`seed.sql: ${MODULES.length} modules, ${MODULES.reduce((n, m) => n + m.questions.length, 0)} questions`);
 
+  const dictline = readFileSync('content/sources/whitaker/DICTLINE.GEN', 'utf8');
   const { rows, unmatchedLodge } = composeLexicon(
     parseDooge(readFileSync('content/sources/dooge-latin-english.txt', 'utf8')),
-    parseDictline(readFileSync('content/sources/whitaker/DICTLINE.GEN', 'utf8')),
+    parseDictline(dictline),
     parseLodge(readFileSync('content/sources/lodge-core.tsv', 'utf8')),
   );
   writeFileSync('supabase/seed-lexicon.sql', lexiconSql(rows));
   console.log(`seed-lexicon.sql: ${rows.length} rows (${rows.filter(r => r.core).length} core), ${unmatchedLodge.length} unmatched Lodge lemmas`);
   if (unmatchedLodge.length) console.log(unmatchedLodge.join('\n'));
+
+  const { verbs, unmatched } = coreTrainerVerbs(rows, parseWhitakerVerbs(dictline));
+  writeFileSync('src/content/verbs.generated.ts', verbsModule(verbs));
+  console.log(`verbs.generated.ts: ${verbs.length} verbs, ${unmatched.length} unmatched core verbs`);
+  if (unmatched.length) console.log(unmatched.join('\n'));
 }
 
 if (process.argv[1]?.endsWith('build-seed.ts')) main();
