@@ -85,3 +85,13 @@
   .print-sheet { border: 0; border-radius: 0; margin: 0; padding: 0; break-after: page; }
   .print-sheet:last-of-type { break-after: auto; }
 }
+
+/* Macron helper for fields where teachers type Latin. */
+.latin-field { display: inline-flex; flex-direction: column; gap: 4px; }
+.latin-field.block { display: flex; width: 100%; }
+.macron-bar { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+.macron-bar button {
+  min-width: 30px; padding: 2px 6px; font-size: 0.95rem; border: 1px solid var(--border); border-radius: 6px;
+  background: var(--bg-surface); color: var(--text-primary); cursor: pointer;
+}
+.macron-bar button:hover, .macron-bar button:focus-visible { border-color: var(--primary); }

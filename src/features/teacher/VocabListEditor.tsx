@@ -6,6 +6,7 @@ import {
   addCustomWord, addListItem, deleteVocabList, getVocabList, removeListItem, renameVocabList, searchLexicon,
   updateListItem, type LexiconRow, type VocabListItemRow,
 } from './api';
+import { LatinField } from './LatinField';
 import { LEXICON_CREDIT } from './VocabLists';
 
 const POS = ['noun', 'verb', 'adjective', 'adverb', 'pronoun', 'preposition', 'conjunction', 'other'];
@@ -91,7 +92,7 @@ export function VocabListEditor() {
       </table>
 
       <h2>Add from dictionary</h2>
-      <input className="input" style={{ width: '100%' }} placeholder="Search Latin or English (macrons optional)…" value={q} onChange={e => setQ(e.target.value)} />
+      <LatinField block style={{ width: '100%' }} aria-label="Search the dictionary" placeholder="Search Latin or English (macrons optional)…" value={q} onValueChange={setQ} />
       <ul className="list-plain">
         {results.map(r => (
           <li key={r.id} className="row" style={{ justifyContent: 'space-between' }}>
@@ -118,7 +119,7 @@ export function VocabListEditor() {
           }
         }}
       >
-        <input className="input" placeholder="Dictionary form, e.g. gladius, gladiī, m." value={custom.headword} onChange={e => setCustom({ ...custom, headword: e.target.value })} maxLength={120} />
+        <LatinField aria-label="Dictionary form" placeholder="Dictionary form, e.g. gladius, gladiī, m." value={custom.headword} onValueChange={headword => setCustom({ ...custom, headword })} maxLength={120} />
         <input className="input" placeholder="Meaning" value={custom.definition} onChange={e => setCustom({ ...custom, definition: e.target.value })} maxLength={200} />
         <select className="select" value={custom.pos} onChange={e => setCustom({ ...custom, pos: e.target.value })}>
           {POS.map(p => <option key={p}>{p}</option>)}
