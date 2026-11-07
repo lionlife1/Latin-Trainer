@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MODULES } from '../../content/modules';
 import type { AssignmentMode } from '../../lib/types';
+import { errorMessage } from '../../lib/useAsync';
 import { buildVocabQuestions, type PoolItem, type VocabDirection, type VocabItem } from '../../lib/vocab';
 import {
   listVocabLists, loadFallbackLexicon, loadVocabItems, publishAssignment,
@@ -66,34 +67,39 @@ export function AssignmentBuilder({ classId, onPublished }: Props) {
   const publish = async () => {
     setBusy(true);
     setError(null);
-    let pool: PoolItem[];
-    let source: AssignmentSource;
-    if (kind === 'modules') {
-      pool = modulePool(moduleIds, activeBadges, types);
-      source = { kind: 'modules', moduleIds };
-      if (activeBadges.length) source.badges = activeBadges;
-      if (types.length) source.types = types;
-    } else {
-      pool = buildVocabQuestions(vocabItems, directions, await loadFallbackLexicon());
-      source = { kind: 'vocab', listId, directions };
+    try {
+      let pool: PoolItem[];
+      let source: AssignmentSource;
+      if (kind === 'modules') {
+        pool = modulePool(moduleIds, activeBadges, types);
+        source = { kind: 'modules', moduleIds };
+        if (activeBadges.length) source.badges = activeBadges;
+        if (types.length) source.types = types;
+      } else {
+        pool = buildVocabQuestions(vocabItems, directions, await loadFallbackLexicon());
+        source = { kind: 'vocab', listId, directions };
+      }
+      const res = await publishAssignment(
+        {
+          classId,
+          title: title.trim(),
+          mode,
+          source,
+          questionCount,
+          dueAt: dueAt ? new Date(dueAt).toISOString() : null,
+          timeLimitSec: mode === 'test' && timeLimitMin ? Math.round(Number(timeLimitMin) * 60) : null,
+          maxAttempts: maxAttempts ? Number(maxAttempts) : null,
+          revealAnswers: mode === 'practice' || reveal,
+        },
+        pool,
+      );
+      if (res.ok) onPublished(res.id);
+      else setError(res.error);
+    } catch (e) {
+      setError(errorMessage(e));
+    } finally {
+      setBusy(false);
     }
-    const res = await publishAssignment(
-      {
-        classId,
-        title: title.trim(),
-        mode,
-        source,
-        questionCount,
-        dueAt: dueAt ? new Date(dueAt).toISOString() : null,
-        timeLimitSec: mode === 'test' && timeLimitMin ? Math.round(Number(timeLimitMin) * 60) : null,
-        maxAttempts: maxAttempts ? Number(maxAttempts) : null,
-        revealAnswers: mode === 'practice' || reveal,
-      },
-      pool,
-    );
-    setBusy(false);
-    if (res.ok) onPublished(res.id);
-    else setError(res.error);
   };
 
   return (

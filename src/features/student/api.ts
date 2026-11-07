@@ -32,8 +32,9 @@ export async function listMyAssignments() {
   return as.map(a => {
     const mine = ts.filter(t => t.assignment_id === a.id);
     const done = mine.filter(t => t.submitted_at);
+    // Newest first, so a tie keeps the latest attempt.
     const best = done.reduce<AttemptRow | null>((b, t) => (!b || (t.score ?? 0) > (b.score ?? 0) ? t : b), null);
-    return { assignment: a, attempts: mine, best, open: mine.find(t => !t.submitted_at) ?? null, latest: done[0] ?? null };
+    return { assignment: a, attempts: mine, best, open: mine.find(t => !t.submitted_at) ?? null };
   });
 }
 

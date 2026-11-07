@@ -1,4 +1,10 @@
-import { groupAssignments } from './MyAssignments';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+
+const listMyAssignments = vi.fn();
+vi.mock('./api', () => ({ listMyAssignments: () => listMyAssignments() }));
+
+import { groupAssignments, MyAssignments } from './MyAssignments';
 
 type Rows = Parameters<typeof groupAssignments>[0];
 const row = (id: string, due_at: string | null, best = false): Rows[number] => ({
@@ -9,7 +15,6 @@ const row = (id: string, due_at: string | null, best = false): Rows[number] => (
   attempts: [],
   best: best ? { id: 't', assignment_id: id, started_at: '', submitted_at: 'x', score: 1, total: 1, is_late: false, over_time: false } : null,
   open: null,
-  latest: null as unknown as Rows[number]['latest'], // api types this non-null; it can be null at runtime
 });
 
 describe('groupAssignments', () => {
@@ -26,4 +31,15 @@ describe('groupAssignments', () => {
     expect(g.todo.map(r => r.assignment.id)).toEqual(['soon', 'later', 'nodue']);
     expect(g.done.map(r => r.assignment.id)).toEqual(['done-late']);
   });
+});
+
+it('links the best score to the best attempt, not the latest', async () => {
+  const attempt = (id: string, score: number) =>
+    ({ id, assignment_id: 'a', started_at: '', submitted_at: 'x', score, total: 10, is_late: false, over_time: false });
+  const best = attempt('t-best', 9);
+  const latest = attempt('t-latest', 4);
+  listMyAssignments.mockResolvedValue([{ ...row('a', null), attempts: [latest, best], best }]);
+  render(<MemoryRouter><MyAssignments /></MemoryRouter>);
+  expect(await screen.findByText(/9\/10/)).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /results/i })).toHaveAttribute('href', '/s/attempt/t-best');
 });

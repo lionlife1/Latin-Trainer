@@ -19,6 +19,8 @@ interface Props {
   timeLimitSec: number | null;
   items: TestItem[];
   onSubmit: (responses: TestResponse[]) => Promise<void> | void;
+  /** Shown above the submit button, e.g. when the last submit failed. */
+  error?: string | null;
 }
 
 const storageKey = (attemptId: string) => `latiniq_test_${attemptId}`;
@@ -42,7 +44,7 @@ function remainingSec(startedAt: string, limit: number | null): number | null {
 
 const fmtClock = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 
-export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit }: Props) {
+export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit, error }: Props) {
   const [answers, setAnswers] = useState<Record<string, string>>(() => loadAnswers(attemptId));
   const [index, setIndex] = useState(0);
   const [left, setLeft] = useState(() => remainingSec(startedAt, timeLimitSec));
@@ -142,6 +144,7 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
           ))}
         </div>
 
+        {error && <p className="form-error" role="alert">{error}</p>}
         <button
           className="btn-primary"
           disabled={submitting}

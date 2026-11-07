@@ -164,6 +164,8 @@ export async function loadFallbackLexicon(): Promise<VocabItem[]> {
 export interface GradebookRow {
   student_id: string; display_name: string; assignment_id: string; best_score: number | null; total: number | null;
   attempts: number; last_submitted_at: string | null; any_late: boolean; latest_attempt_id: string | null;
+  /** The attempt with best_score. Missing until migration 20261106000001 has run. */
+  best_attempt_id?: string | null;
 }
 export const gradebook = async (classId: string) =>
   must<GradebookRow[]>(await sb().rpc('gradebook', { p_class_id: classId }));

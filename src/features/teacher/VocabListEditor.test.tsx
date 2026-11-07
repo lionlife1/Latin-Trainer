@@ -15,6 +15,8 @@ vi.mock('./api', async () => {
     getVocabList: () => Promise.resolve({ list: { id: 'L1', name: 'Ch. 1 words', created_at: '' }, items }),
     searchLexicon: () => Promise.resolve([]),
     loadFallbackLexicon: () => Promise.resolve([{ itemId: 'f', headword: 'via', lemma: 'via', definition: 'road', pos: 'noun' }]),
+    removeListItem: () => Promise.reject(new Error('permission denied')),
+    updateListItem: () => Promise.reject(new Error('timeout')),
   };
 });
 vi.mock('../auth/AuthProvider', () => ({ useAuth: () => ({ profile: { id: 'T1' } }) }));
@@ -63,5 +65,21 @@ describe('VocabListEditor export', () => {
     expect(screen.getAllByRole('group', { name: /long vowel/i })).toHaveLength(3);
     await userEvent.type(screen.getByLabelText('Dictionary form'), 'ga=dius');
     expect(screen.getByLabelText('Dictionary form')).toHaveValue('gādius');
+  });
+});
+
+describe('VocabListEditor errors', () => {
+  it('shows an error when removing a word fails', async () => {
+    renderEditor();
+    await userEvent.click((await screen.findAllByRole('button', { name: 'Remove' }))[0]);
+    expect(await screen.findByText('permission denied')).toBeInTheDocument();
+  });
+
+  it('shows an error when saving a definition fails', async () => {
+    renderEditor();
+    const field = await screen.findByLabelText('Definition for rēx');
+    await userEvent.type(field, 'ruler');
+    await userEvent.tab();
+    expect(await screen.findByText('timeout')).toBeInTheDocument();
   });
 });

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAsync } from '../../lib/useAsync';
+import { errorMessage, useAsync } from '../../lib/useAsync';
 import { createClass, listClasses } from './api';
 
 export function Classes() {
@@ -34,7 +34,7 @@ export function Classes() {
             setErr(null);
             reload();
           } catch (e) {
-            setErr(String(e));
+            setErr(errorMessage(e));
           }
         }}
       >

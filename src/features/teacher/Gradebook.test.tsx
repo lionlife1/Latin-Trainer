@@ -13,7 +13,7 @@ const row = (student: string, name: string, a: string, over: Partial<GradebookRo
 const rows: GradebookRow[] = [
   row('s1', 'Marcus', 'a1', { best_score: 7, total: 10, attempts: 1, any_late: true, latest_attempt_id: 't1' }),
   row('s1', 'Marcus', 'a2'),
-  row('s2', 'Iulia', 'a1', { best_score: 10, total: 10, attempts: 2, latest_attempt_id: 't2' }),
+  row('s2', 'Iulia', 'a1', { best_score: 10, total: 10, attempts: 2, latest_attempt_id: 't3', best_attempt_id: 't2' }),
   row('s2', 'Iulia', 'a2'),
 ];
 
@@ -38,6 +38,7 @@ describe('Gradebook', () => {
     const names = screen.getAllByRole('rowheader').map(h => h.textContent);
     expect(names).toEqual(['Iulia', 'Marcus']);
     expect(screen.getByRole('link', { name: '7/10 ⏰' })).toHaveAttribute('href', '/t/attempt/t1');
+    expect(screen.getByRole('link', { name: '10/10' })).toHaveAttribute('href', '/t/attempt/t2');
     expect(screen.getByRole('button', { name: /export csv/i })).toBeInTheDocument();
   });
 

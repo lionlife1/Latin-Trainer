@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { downloadCsv, downloadText } from '../../lib/csv';
-import { useAsync } from '../../lib/useAsync';
+import { errorMessage, useAsync } from '../../lib/useAsync';
 import type { VocabItem } from '../../lib/vocab';
 import { blooketCsv, gimkitCsv, quizletText } from '../../lib/vocabExport';
 import { PARTS_OF_SPEECH } from '../../lib/vocabImport';
@@ -14,7 +14,7 @@ import { LatinField } from './LatinField';
 import { VocabImport } from './VocabImport';
 import { LEXICON_CREDIT } from './VocabLists';
 
-function OverrideCell({ item, onSaved }: { item: VocabListItemRow; onSaved: () => void }) {
+function OverrideCell({ item, onSaved, onError }: { item: VocabListItemRow; onSaved: () => void; onError: (e: unknown) => void }) {
   const [value, setValue] = useState(item.definition_override ?? '');
   return (
     <input
@@ -27,8 +27,12 @@ function OverrideCell({ item, onSaved }: { item: VocabListItemRow; onSaved: () =
       onBlur={async () => {
         const next = value.trim() || null;
         if (next !== item.definition_override) {
-          await updateListItem(item.id, next);
-          onSaved();
+          try {
+            await updateListItem(item.id, next);
+            onSaved();
+          } catch (e) {
+            onError(e);
+          }
         }
       }}
     />
@@ -44,7 +48,7 @@ function ExportButtons({ name, items }: { name: string; items: VocabItem[] }) {
     try {
       downloadCsv(file, make(await loadFallbackLexicon()));
     } catch (e) {
-      setNote(String(e));
+      setNote(errorMessage(e));
     }
   };
   return (
@@ -53,7 +57,7 @@ function ExportButtons({ name, items }: { name: string; items: VocabItem[] }) {
       <button className="btn-secondary small" onClick={() => downloadText(fileName(name, 'txt'), quizletText(items))}>Quizlet (.txt)</button>
       <button
         className="btn-ghost small"
-        onClick={() => navigator.clipboard.writeText(quizletText(items)).then(() => setNote('Copied. In Quizlet: Create → Import, then paste.'), e => setNote(String(e)))}
+        onClick={() => navigator.clipboard.writeText(quizletText(items)).then(() => setNote('Copied. In Quizlet: Create → Import, then paste.'), e => setNote(errorMessage(e)))}
       >
         Copy for Quizlet
       </button>
@@ -87,14 +91,17 @@ export function VocabListEditor() {
   const inList = new Set(items.map(i => i.lexicon_id));
   const nextPos = items.length ? Math.max(...items.map(i => i.position)) + 1 : 0;
 
-  const add = async (lexiconId: number) => {
+  /** Runs a list change, reloads, and shows any failure below the custom-word form. */
+  const change = async (fn: () => Promise<unknown>) => {
+    setErr(null);
     try {
-      await addListItem(listId, lexiconId, nextPos);
+      await fn();
       list.reload();
     } catch (e) {
-      setErr(String(e));
+      setErr(errorMessage(e));
     }
   };
+  const add = (lexiconId: number) => change(() => addListItem(listId, lexiconId, nextPos));
 
   return (
     <>
@@ -104,7 +111,10 @@ export function VocabListEditor() {
         style={{ fontSize: '1.4rem', fontFamily: 'var(--font-display)', width: '100%' }}
         defaultValue={meta.name}
         aria-label="List name"
-        onBlur={e => e.target.value.trim() && e.target.value !== meta.name && renameVocabList(listId, e.target.value.trim())}
+        onBlur={e => {
+          const name = e.target.value.trim();
+          if (name && name !== meta.name) void change(() => renameVocabList(listId, name));
+        }}
       />
       <p className="muted small">{items.length} words. Leave a definition blank to use the dictionary meaning.</p>
       {items.length > 0 && <ExportButtons name={meta.name} items={items.map(toVocabItem)} />}
@@ -115,9 +125,9 @@ export function VocabListEditor() {
           {items.map(i => (
             <tr key={i.id}>
               <td>{i.lexicon.headword}<div className="muted small">{i.lexicon.pos}</div></td>
-              <td><OverrideCell item={i} onSaved={list.reload} /></td>
+              <td><OverrideCell item={i} onSaved={list.reload} onError={e => setErr(errorMessage(e))} /></td>
               <td>
-                <button className="btn-ghost small" onClick={async () => { await removeListItem(i.id); list.reload(); }}>Remove</button>
+                <button className="btn-ghost small" onClick={() => change(() => removeListItem(i.id))}>Remove</button>
               </td>
             </tr>
           ))}
@@ -143,13 +153,11 @@ export function VocabListEditor() {
         onSubmit={async e => {
           e.preventDefault();
           if (!profile || !custom.headword.trim() || !custom.definition.trim()) return;
-          try {
+          await change(async () => {
             const w = await addCustomWord(custom, profile.id);
-            await add(w.id);
+            await addListItem(listId, w.id, nextPos);
             setCustom({ headword: '', definition: '', pos: custom.pos });
-          } catch (e) {
-            setErr(String(e));
-          }
+          });
         }}
       >
         <LatinField aria-label="Dictionary form" placeholder="Dictionary form, e.g. gladius, gladiī, m." value={custom.headword} onValueChange={headword => setCustom({ ...custom, headword })} maxLength={120} />
@@ -169,8 +177,12 @@ export function VocabListEditor() {
           className="btn-ghost"
           onClick={async () => {
             if (window.confirm('Delete this list? Assignments already published keep their questions.')) {
-              await deleteVocabList(listId);
-              navigate('/t/vocab');
+              try {
+                await deleteVocabList(listId);
+                navigate('/t/vocab');
+              } catch (e) {
+                setErr(errorMessage(e));
+              }
             }
           }}
         >

@@ -16,10 +16,14 @@ interface Props {
   onFinish: (results: DrillResult[]) => void;
   /** Gets the answers so far, so endless sessions can be logged on exit. */
   onExit: (results: DrillResult[]) => void;
+  /** Confirm text for the exit button. Endless sessions exit without asking. */
+  exitWarning?: string;
 }
 
+const LOSE_ANSWERS = 'Exit this session? Your answers so far won\'t be saved.';
+
 /** Practice-mode drill with instant feedback. Test mode uses TestRunner instead. */
-export function DrillSession({ questions, mode, onAnswer, generate, onFinish, onExit }: Props) {
+export function DrillSession({ questions, mode, onAnswer, generate, onFinish, onExit, exitWarning = LOSE_ANSWERS }: Props) {
   const drill = useDrill(questions, { mode, onAnswer, generate });
   const { current, index, total, finished, results, score, lastResult } = drill;
 
@@ -37,7 +41,7 @@ export function DrillSession({ questions, mode, onAnswer, generate, onFinish, on
           className="btn-back-small"
           aria-label="Exit session"
           onClick={() => {
-            if (endless || window.confirm('Exit this session? Your answers so far won\'t be saved.')) onExit(results);
+            if (endless || window.confirm(exitWarning)) onExit(results);
           }}
         >
           <Close />

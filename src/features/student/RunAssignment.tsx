@@ -6,8 +6,8 @@ import { useAsync } from '../../lib/useAsync';
 import { useAuth } from '../auth/AuthProvider';
 import { DrillSession } from '../drill/DrillSession';
 import {
-  finishPractice, flushPracticeQueue, getAssignment, getAttempt, getAttemptItems, recordPractice, startAttempt,
-  submitTest, type AttemptItem, type AttemptRow,
+  finishPractice, flushPracticeQueue, getAssignment, getAttempt, getAttemptItems, getResponses, recordPractice,
+  startAttempt, submitTest, type AttemptItem, type AttemptRow,
 } from './api';
 import { clearSavedAnswers, TestRunner, type TestItem } from './TestRunner';
 
@@ -60,8 +60,16 @@ export function RunAssignment() {
     setError(null);
     try {
       const attemptId = await startAttempt(assignmentId);
-      const [attempt, items] = await Promise.all([getAttempt(attemptId), getAttemptItems(attemptId)]);
-      setRun({ attempt, items });
+      const [attempt, items, responses] = await Promise.all([
+        getAttempt(attemptId),
+        getAttemptItems(attemptId),
+        // A resumed practice attempt skips what is already answered: the server keeps the first answer only.
+        assignment.data?.mode === 'practice' ? getResponses(attemptId) : Promise.resolve([]),
+      ]);
+      const answered = new Set(responses.map(r => r.pool_id));
+      const left = items.filter(i => !answered.has(i.pool_id));
+      setRun({ attempt, items: left });
+      if (left.length === 0) void finishRun(attemptId);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     }
@@ -97,6 +105,7 @@ export function RunAssignment() {
           savePractice({ userId, attemptId: run.attempt.id, poolId: poolIdOf.get(q)!, given, ms })
         }
         onExit={() => navigate('/s')}
+        exitWarning="Exit for now? Your answers are saved, and you can pick up where you left off."
         onFinish={() => void finishRun(run.attempt.id)}
       />
     );
@@ -109,7 +118,9 @@ export function RunAssignment() {
         startedAt={run.attempt.started_at}
         timeLimitSec={a.time_limit_sec}
         items={run.items as TestItem[]}
+        error={error}
         onSubmit={async responses => {
+          setError(null);
           try {
             await submitTest(run.attempt.id, responses);
           } catch (e) {
