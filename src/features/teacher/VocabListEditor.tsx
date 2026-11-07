@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useAsync } from '../../lib/useAsync';
+import { downloadCsv, downloadText } from '../../lib/csv';
+import { errorMessage, useAsync } from '../../lib/useAsync';
+import type { VocabItem } from '../../lib/vocab';
+import { blooketCsv, gimkitCsv, quizletText } from '../../lib/vocabExport';
+import { PARTS_OF_SPEECH } from '../../lib/vocabImport';
 import { useAuth } from '../auth/AuthProvider';
 import {
-  addCustomWord, addListItem, deleteVocabList, getVocabList, removeListItem, renameVocabList, searchLexicon,
-  updateListItem, type LexiconRow, type VocabListItemRow,
+  addCustomWord, addListItem, deleteVocabList, getVocabList, loadFallbackLexicon, removeListItem, renameVocabList,
+  searchLexicon, toVocabItem, updateListItem, type LexiconRow, type VocabListItemRow,
 } from './api';
+import { LatinField } from './LatinField';
+import { VocabImport } from './VocabImport';
 import { LEXICON_CREDIT } from './VocabLists';
 
-const POS = ['noun', 'verb', 'adjective', 'adverb', 'pronoun', 'preposition', 'conjunction', 'other'];
-
-function OverrideCell({ item, onSaved }: { item: VocabListItemRow; onSaved: () => void }) {
+function OverrideCell({ item, onSaved, onError }: { item: VocabListItemRow; onSaved: () => void; onError: (e: unknown) => void }) {
   const [value, setValue] = useState(item.definition_override ?? '');
   return (
     <input
@@ -23,11 +27,44 @@ function OverrideCell({ item, onSaved }: { item: VocabListItemRow; onSaved: () =
       onBlur={async () => {
         const next = value.trim() || null;
         if (next !== item.definition_override) {
-          await updateListItem(item.id, next);
-          onSaved();
+          try {
+            await updateListItem(item.id, next);
+            onSaved();
+          } catch (e) {
+            onError(e);
+          }
         }
       }}
     />
+  );
+}
+
+const fileName = (name: string, ext: string) => `${name.trim().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '') || 'vocab'}.${ext}`;
+
+/** Downloads for review games. Gimkit/Blooket layouts must be checked against their templates (vocabExport.ts). */
+function ExportButtons({ name, items }: { name: string; items: VocabItem[] }) {
+  const [note, setNote] = useState<string | null>(null);
+  const withFallback = async (make: (fallback: VocabItem[]) => string, file: string) => {
+    try {
+      downloadCsv(file, make(await loadFallbackLexicon()));
+    } catch (e) {
+      setNote(errorMessage(e));
+    }
+  };
+  return (
+    <div className="row">
+      <span className="muted small">Export:</span>
+      <button className="btn-secondary small" onClick={() => downloadText(fileName(name, 'txt'), quizletText(items))}>Quizlet (.txt)</button>
+      <button
+        className="btn-ghost small"
+        onClick={() => navigator.clipboard.writeText(quizletText(items)).then(() => setNote('Copied. In Quizlet: Create → Import, then paste.'), e => setNote(errorMessage(e)))}
+      >
+        Copy for Quizlet
+      </button>
+      <button className="btn-secondary small" onClick={() => withFallback(f => gimkitCsv(items, f), fileName(name, 'gimkit.csv'))}>Gimkit (.csv)</button>
+      <button className="btn-secondary small" onClick={() => withFallback(f => blooketCsv(items, f), fileName(name, 'blooket.csv'))}>Blooket (.csv)</button>
+      {note && <span className="small">{note}</span>}
+    </div>
   );
 }
 
@@ -54,14 +91,17 @@ export function VocabListEditor() {
   const inList = new Set(items.map(i => i.lexicon_id));
   const nextPos = items.length ? Math.max(...items.map(i => i.position)) + 1 : 0;
 
-  const add = async (lexiconId: number) => {
+  /** Runs a list change, reloads, and shows any failure below the custom-word form. */
+  const change = async (fn: () => Promise<unknown>) => {
+    setErr(null);
     try {
-      await addListItem(listId, lexiconId, nextPos);
+      await fn();
       list.reload();
     } catch (e) {
-      setErr(String(e));
+      setErr(errorMessage(e));
     }
   };
+  const add = (lexiconId: number) => change(() => addListItem(listId, lexiconId, nextPos));
 
   return (
     <>
@@ -71,9 +111,13 @@ export function VocabListEditor() {
         style={{ fontSize: '1.4rem', fontFamily: 'var(--font-display)', width: '100%' }}
         defaultValue={meta.name}
         aria-label="List name"
-        onBlur={e => e.target.value.trim() && e.target.value !== meta.name && renameVocabList(listId, e.target.value.trim())}
+        onBlur={e => {
+          const name = e.target.value.trim();
+          if (name && name !== meta.name) void change(() => renameVocabList(listId, name));
+        }}
       />
       <p className="muted small">{items.length} words. Leave a definition blank to use the dictionary meaning.</p>
+      {items.length > 0 && <ExportButtons name={meta.name} items={items.map(toVocabItem)} />}
 
       <table className="table">
         <thead><tr><th>Word</th><th>Definition used in quizzes</th><th /></tr></thead>
@@ -81,9 +125,9 @@ export function VocabListEditor() {
           {items.map(i => (
             <tr key={i.id}>
               <td>{i.lexicon.headword}<div className="muted small">{i.lexicon.pos}</div></td>
-              <td><OverrideCell item={i} onSaved={list.reload} /></td>
+              <td><OverrideCell item={i} onSaved={list.reload} onError={e => setErr(errorMessage(e))} /></td>
               <td>
-                <button className="btn-ghost small" onClick={async () => { await removeListItem(i.id); list.reload(); }}>Remove</button>
+                <button className="btn-ghost small" onClick={() => change(() => removeListItem(i.id))}>Remove</button>
               </td>
             </tr>
           ))}
@@ -91,7 +135,7 @@ export function VocabListEditor() {
       </table>
 
       <h2>Add from dictionary</h2>
-      <input className="input" style={{ width: '100%' }} placeholder="Search Latin or English (macrons optional)…" value={q} onChange={e => setQ(e.target.value)} />
+      <LatinField block style={{ width: '100%' }} aria-label="Search the dictionary" placeholder="Search Latin or English (macrons optional)…" value={q} onValueChange={setQ} />
       <ul className="list-plain">
         {results.map(r => (
           <li key={r.id} className="row" style={{ justifyContent: 'space-between' }}>
@@ -109,31 +153,36 @@ export function VocabListEditor() {
         onSubmit={async e => {
           e.preventDefault();
           if (!profile || !custom.headword.trim() || !custom.definition.trim()) return;
-          try {
+          await change(async () => {
             const w = await addCustomWord(custom, profile.id);
-            await add(w.id);
+            await addListItem(listId, w.id, nextPos);
             setCustom({ headword: '', definition: '', pos: custom.pos });
-          } catch (e) {
-            setErr(String(e));
-          }
+          });
         }}
       >
-        <input className="input" placeholder="Dictionary form, e.g. gladius, gladiī, m." value={custom.headword} onChange={e => setCustom({ ...custom, headword: e.target.value })} maxLength={120} />
+        <LatinField aria-label="Dictionary form" placeholder="Dictionary form, e.g. gladius, gladiī, m." value={custom.headword} onValueChange={headword => setCustom({ ...custom, headword })} maxLength={120} />
         <input className="input" placeholder="Meaning" value={custom.definition} onChange={e => setCustom({ ...custom, definition: e.target.value })} maxLength={200} />
         <select className="select" value={custom.pos} onChange={e => setCustom({ ...custom, pos: e.target.value })}>
-          {POS.map(p => <option key={p}>{p}</option>)}
+          {PARTS_OF_SPEECH.map(p => <option key={p}>{p}</option>)}
         </select>
         <button className="btn-primary" type="submit">Add word</button>
       </form>
       {err && <p className="form-error">{err}</p>}
+
+      <h2>Import a list</h2>
+      {profile && <VocabImport listId={listId} ownerId={profile.id} inList={inList} nextPos={nextPos} onDone={list.reload} />}
 
       <div className="row-end">
         <button
           className="btn-ghost"
           onClick={async () => {
             if (window.confirm('Delete this list? Assignments already published keep their questions.')) {
-              await deleteVocabList(listId);
-              navigate('/t/vocab');
+              try {
+                await deleteVocabList(listId);
+                navigate('/t/vocab');
+              } catch (e) {
+                setErr(errorMessage(e));
+              }
             }
           }}
         >

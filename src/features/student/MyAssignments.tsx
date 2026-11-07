@@ -23,7 +23,7 @@ export function groupAssignments(rows: Row[], now = new Date()) {
 }
 
 function AssignmentRow({ row }: { row: Row }) {
-  const { assignment: a, best, open, latest, attempts } = row;
+  const { assignment: a, best, open, attempts } = row;
   const outOfAttempts = a.max_attempts !== null && attempts.length >= a.max_attempts && !open;
   const p = best && best.total ? Math.round(((best.score ?? 0) / best.total) * 100) : null;
   return (
@@ -44,7 +44,7 @@ function AssignmentRow({ row }: { row: Row }) {
               {best.is_late && <> <span className="tag warn">Late</span></>}
             </span>
           )}
-          {latest && <Link className="link small" to={`/s/attempt/${latest.id}`}>Results</Link>}
+          {best && <Link className="link small" to={`/s/attempt/${best.id}`}>Results</Link>}
           {!outOfAttempts && (
             <Link className={best ? 'btn-secondary btn-small' : 'btn-primary btn-small'} to={`/s/a/${a.id}`}>
               {open ? 'Resume' : best ? 'Try again' : 'Start'}

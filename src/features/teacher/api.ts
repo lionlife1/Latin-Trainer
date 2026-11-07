@@ -47,6 +47,9 @@ export const listAssignments = async (classId: string) =>
   must<AssignmentRow[]>(await sb().from('assignments').select('*').eq('class_id', classId).order('created_at', { ascending: false }));
 export const getAssignment = async (id: string) =>
   must<AssignmentRow>(await sb().from('assignments').select('*').eq('id', id).single());
+/** The published question snapshot. RLS (pool_teacher) limits it to the class's teacher. */
+export const getAssignmentPool = async (assignmentId: string) =>
+  must<PoolItem[]>(await sb().from('assignment_pool').select('item_key, question').eq('assignment_id', assignmentId).order('item_key'));
 export async function deleteAssignment(id: string) {
   must(await sb().from('assignments').delete().eq('id', id));
 }
@@ -129,8 +132,8 @@ export async function getVocabList(id: string) {
   );
   return { list, items };
 }
-export async function addListItem(listId: string, lexiconId: number, position: number) {
-  must(await sb().from('vocab_list_items').insert({ list_id: listId, lexicon_id: lexiconId, position }));
+export async function addListItem(listId: string, lexiconId: number, position: number, definitionOverride: string | null = null) {
+  must(await sb().from('vocab_list_items').insert({ list_id: listId, lexicon_id: lexiconId, position, definition_override: definitionOverride }));
 }
 export async function updateListItem(itemId: string, definitionOverride: string | null) {
   must(await sb().from('vocab_list_items').update({ definition_override: definitionOverride }).eq('id', itemId));
@@ -161,6 +164,8 @@ export async function loadFallbackLexicon(): Promise<VocabItem[]> {
 export interface GradebookRow {
   student_id: string; display_name: string; assignment_id: string; best_score: number | null; total: number | null;
   attempts: number; last_submitted_at: string | null; any_late: boolean; latest_attempt_id: string | null;
+  /** The attempt with best_score. Missing until migration 20261106000001 has run. */
+  best_attempt_id?: string | null;
 }
 export const gradebook = async (classId: string) =>
   must<GradebookRow[]>(await sb().rpc('gradebook', { p_class_id: classId }));

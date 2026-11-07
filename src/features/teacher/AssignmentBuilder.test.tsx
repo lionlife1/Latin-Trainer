@@ -67,4 +67,14 @@ describe('AssignmentBuilder', () => {
     expect(pool).toHaveLength(MODULES[0].questions.length);
     expect(pool[0]).toEqual({ item_key: MODULES[0].questions[0].id, question: MODULES[0].questions[0] });
   });
+
+  it('shows the error and lets the teacher retry when publishing throws', async () => {
+    publishAssignment.mockRejectedValueOnce(new Error('Failed to fetch'));
+    renderBuilder();
+    await userEvent.type(screen.getByLabelText(/title/i), 'Forms quiz');
+    await userEvent.click(screen.getByLabelText(new RegExp(MODULES[0].title)));
+    await userEvent.click(screen.getByRole('button', { name: /publish/i }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('Failed to fetch');
+    expect(screen.getByRole('button', { name: /publish assignment/i })).toBeEnabled();
+  });
 });

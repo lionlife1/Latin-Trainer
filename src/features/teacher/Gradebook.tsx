@@ -48,7 +48,7 @@ export function Gradebook() {
           Export CSV
         </button>
       </div>
-      <p className="muted small">Best submitted score per student. ⏰ = late or over the time limit. Click a score to see answers.</p>
+      <p className="muted small">Best submitted score per student. ⏰ = late or over the time limit. Click a score to see that attempt's answers.</p>
       <div className="scroll-x">
         <table className="table">
           <thead>
@@ -69,9 +69,10 @@ export function Gradebook() {
                   const c = cellOf(rows, s.id, a.id);
                   if (!c || c.attempts === 0) return <td key={a.id} className="muted">—</td>;
                   const label = `${c.best_score}/${c.total}${c.any_late ? ' ⏰' : ''}`;
+                  const attemptId = c.best_attempt_id ?? c.latest_attempt_id;
                   return (
                     <td key={a.id}>
-                      {c.latest_attempt_id ? <Link className="link" to={`/t/attempt/${c.latest_attempt_id}`}>{label}</Link> : label}
+                      {attemptId ? <Link className="link" to={`/t/attempt/${attemptId}`}>{label}</Link> : label}
                     </td>
                   );
                 })}

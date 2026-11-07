@@ -99,6 +99,12 @@ select tests.ok((select best_score from gradebook(tests.uid('c1')) where student
   'gradebook best score');
 select tests.ok((select attempts from gradebook(tests.uid('c1')) where student_id = tests.uid('s2') and assignment_id = tests.uid('a3')) = 0,
   'gradebook counts zero attempts for untouched assignment');
+select tests.ok((select g.best_attempt_id = (select t.id from attempts t where t.student_id = tests.uid('s1') and t.assignment_id = tests.uid('a1')
+                   and t.submitted_at is not null order by t.score desc, t.submitted_at desc limit 1)
+                 from gradebook(tests.uid('c1')) g where g.student_id = tests.uid('s1') and g.assignment_id = tests.uid('a1')),
+  'gradebook links the best attempt');
+select tests.ok((select best_attempt_id is null from gradebook(tests.uid('c1')) where student_id = tests.uid('s2') and assignment_id = tests.uid('a3')),
+  'gradebook has no best attempt for an untouched assignment');
 select tests.ok(teacher_owns_student(tests.uid('s1')), 'teacher owns enrolled student');
 select tests.ok(not teacher_owns_student(tests.uid('s3')), 'teacher does not own other class student');
 

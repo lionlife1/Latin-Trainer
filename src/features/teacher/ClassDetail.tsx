@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useAsync } from '../../lib/useAsync';
+import { errorMessage, useAsync } from '../../lib/useAsync';
 import { resetPin } from '../auth/api';
 import { validatePin } from '../../../supabase/functions/_shared/validate.ts';
 import { deleteAssignment, getClass, getRoster, listAssignments, removeStudent, type RosterRow } from './api';
@@ -34,6 +34,17 @@ export function ClassDetail() {
   const roster = useAsync(() => getRoster(classId), [classId]);
   const assignments = useAsync(() => listAssignments(classId), [classId]);
   const [resetting, setResetting] = useState<string | null>(null);
+  const [actionError, setActionError] = useState<string | null>(null);
+
+  /** Runs a delete/remove and reports failure instead of leaving an unhandled rejection. */
+  const act = async (fn: () => Promise<void>, failure: string) => {
+    setActionError(null);
+    try {
+      await fn();
+    } catch (e) {
+      setActionError(`${failure}: ${errorMessage(e)}`);
+    }
+  };
 
   if (cls.error) return <p className="form-error">{cls.error}</p>;
   if (!cls.data) return <p className="muted">Loading…</p>;
@@ -42,6 +53,7 @@ export function ClassDetail() {
     <>
       <div className="crumbs"><Link className="link" to="/t">← Classes</Link></div>
       <h1>{cls.data.name}</h1>
+      {actionError && <p className="form-error" role="alert">{actionError}</p>}
       <div className="card">
         <div className="muted small">Students join at this site → “Join with a class code”</div>
         <div className="join-code" data-testid="join-code">{cls.data.join_code}</div>
@@ -65,12 +77,15 @@ export function ClassDetail() {
               <td>{a.question_count}</td>
               <td className="row">
                 <Link className="link small" to={`/t/a/${a.id}/analysis`}>Item analysis</Link>
+                <Link className="link small" to={`/t/a/${a.id}/print`}>Print</Link>
                 <button
                   className="btn-ghost small"
                   onClick={async () => {
                     if (window.confirm(`Delete "${a.title}" and all student attempts?`)) {
-                      await deleteAssignment(a.id);
-                      assignments.reload();
+                      await act(async () => {
+                        await deleteAssignment(a.id);
+                        assignments.reload();
+                      }, `Could not delete "${a.title}"`);
                     }
                   }}
                 >
@@ -101,8 +116,10 @@ export function ClassDetail() {
                       className="btn-ghost small"
                       onClick={async () => {
                         if (window.confirm(`Remove ${s.display_name} from this class?`)) {
-                          await removeStudent(classId, s.student_id);
-                          roster.reload();
+                          await act(async () => {
+                            await removeStudent(classId, s.student_id);
+                            roster.reload();
+                          }, `Could not remove ${s.display_name}`);
                         }
                       }}
                     >

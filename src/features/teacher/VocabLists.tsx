@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAsync } from '../../lib/useAsync';
+import { errorMessage, useAsync } from '../../lib/useAsync';
 import { createVocabList, listVocabLists } from './api';
 
 export const LEXICON_CREDIT =
@@ -9,6 +9,7 @@ export const LEXICON_CREDIT =
 export function VocabLists() {
   const { data, error } = useAsync(listVocabLists, []);
   const [name, setName] = useState('');
+  const [err, setErr] = useState<string | null>(null);
   const navigate = useNavigate();
   return (
     <>
@@ -24,13 +25,18 @@ export function VocabLists() {
         onSubmit={async e => {
           e.preventDefault();
           if (!name.trim()) return;
-          const l = await createVocabList(name.trim());
-          navigate(`/t/vocab/${l.id}`);
+          try {
+            const l = await createVocabList(name.trim());
+            navigate(`/t/vocab/${l.id}`);
+          } catch (e) {
+            setErr(errorMessage(e));
+          }
         }}
       >
         <input className="input" placeholder="e.g. Chapter 12 vocab" value={name} onChange={e => setName(e.target.value)} maxLength={80} />
         <button className="btn-primary" type="submit">Create</button>
       </form>
+      {err && <p className="form-error">{err}</p>}
     </>
   );
 }
