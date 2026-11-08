@@ -15,6 +15,8 @@ const puer = mk('puer', 'puer', 2, 'm');
 const ager = mk('ager', 'agr', 2, 'm');
 const filius = mk('filius', 'fili', 2, 'm');
 const consilium = mk('consilium', 'consili', 2, 'n');
+const vir = mk('vir', 'vir', 2, 'm');
+const genius = mk('genius', 'geni', 2, 'm');
 const rex = mk('rex', 'reg', 3, 'm');
 const nomen = mk('nomen', 'nomin', 3, 'n');
 const civis = mk('civis', 'civ', 3, 'c', { iStem: true });
@@ -63,6 +65,18 @@ describe('variants and irregulars', () => {
         expect(nounForms(domus, { case: 'dative', number: 'singular' })).toEqual(['domui', 'domo']);
         expect(nounForms(domus, { case: 'ablative', number: 'singular' })).toEqual(['domo', 'domu']);
     });
+    it('consilium genitive singular has the contracted form', () => { expect(nounForms(consilium, { case: 'genitive', number: 'singular' })).toEqual(['consilii', 'consili']); });
+    it('genius vocative singular', () => { expect(nounForms(genius, { case: 'vocative', number: 'singular' })).toEqual(['geni']); });
+    it('vir declines like puer', () => {
+        expect(col(vir, 'singular')).toEqual(t('vir, viri, viro, virum, viro, vir'));
+        expect(col(vir, 'plural')).toEqual(t('viri, virorum, viris, viros, viris, viri'));
+    });
+    it('vis accusative plural has two forms', () => { expect(nounForms(vis, { case: 'accusative', number: 'plural' })).toEqual(['vires', 'viris']); });
+    it('deus genitive plural has two forms', () => { expect(nounForms(deus, { case: 'genitive', number: 'plural' })).toEqual(['deorum', 'deum']); });
+    it('deus dative and ablative plural variants', () => {
+        for (const c of ['dative', 'ablative'] as const) expect(nounForms(deus, { case: c, number: 'plural' })).toEqual(['dis', 'deis', 'diis']);
+    });
+    it('domus genitive plural has two forms', () => { expect(nounForms(domus, { case: 'genitive', number: 'plural' })).toEqual(['domuum', 'domorum']); });
     it('vis plural', () => { expect(col(vis, 'plural')).toEqual(t('vires, virium, viribus, vires, viribus, vires')); });
     it('vis singular has vim and vi', () => {
         expect(nounForms(vis, { case: 'nominative', number: 'singular' })).toEqual(['vis']);

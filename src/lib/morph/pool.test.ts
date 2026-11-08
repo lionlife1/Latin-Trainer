@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { trainerPool } from '../conjugator';
+import { CORE_NOUNS } from '../../content/nouns.generated';
+import { nounCells, nounForms } from './nouns';
 import { verbCells, verbForms } from './verbs';
 import { legacySubjunctiveForm } from './__fixtures__/legacySubjunctive';
 
@@ -31,6 +33,16 @@ describe('the engine against the whole trainer pool', () => {
                 const forms = verbForms(v, c);
                 expect(forms.length, `${v.inf} ${JSON.stringify(c)}`).toBeGreaterThan(0);
                 for (const f of forms) expect(f, `${v.inf} ${JSON.stringify(c)}`).toMatch(/^[a-z]+( [a-z]+)?$/);
+            }
+        }
+    });
+
+    it('builds clean, non-empty noun forms for every claimed cell of every core noun', () => {
+        for (const n of CORE_NOUNS) {
+            for (const c of nounCells(n)) {
+                const forms = nounForms(n, c);
+                expect(forms.length, `${n.nom} ${c.case} ${c.number}`).toBeGreaterThan(0);
+                for (const f of forms) expect(f, `${n.nom} ${c.case} ${c.number}`).toMatch(/^[a-z]+$/);
             }
         }
     });
