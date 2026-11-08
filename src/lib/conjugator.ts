@@ -1,28 +1,10 @@
 // Algorithmic Latin subjunctive conjugation engine (ported from legacy trainer.js).
 import type { DrillQuestion, EndlessConfig } from './types';
+import type { Verb, Voice, GrammaticalNumber, Person } from './morph/types';
 import { CORE_VERBS } from '../content/verbs.generated';
 
-export interface Verb {
-    inf: string;
-    conj?: number;
-    pres?: string;
-    perf: string;
-    ppp?: string;
-    trans: string;
-    irregular?: boolean;
-    noPassive?: boolean;
-    deponent?: boolean;
-    impfBase?: string;
-    /** Compounds of esse / ferre / ire conjugate like their base with `prefix` in front. */
-    base?: 'esse' | 'ferre' | 'ire';
-    prefix?: string;
-    /** First principal part, for hints; set on generated verbs. */
-    pp1?: string;
-}
+export type { Verb, Voice, GrammaticalNumber, Person } from './morph/types';
 export type Tense = 'present' | 'imperfect' | 'perfect' | 'pluperfect';
-export type Voice = 'active' | 'passive';
-export type GrammaticalNumber = 'singular' | 'plural';
-export type Person = 1 | 2 | 3;
 
 
 export const VERBS: Verb[] = [
