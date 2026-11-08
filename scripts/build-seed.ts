@@ -8,6 +8,7 @@ import { MODULES } from '../src/content/modules';
 import { lemmaOf } from '../src/lib/lexicon';
 import { composeLexicon, parseLodge } from './lexicon/compose';
 import { parseDooge } from './lexicon/dooge';
+import { adjectivesModule, coreAdjectives, parseWhitakerAdjectives } from './lexicon/adjectives';
 import { coreNouns, nounsModule, parseWhitakerNouns } from './lexicon/nouns';
 import { coreTrainerVerbs, parseWhitakerVerbs, verbsModule } from './lexicon/verbs';
 import { parseDictline } from './lexicon/whitaker';
@@ -86,6 +87,11 @@ function main() {
   writeFileSync('src/content/nouns.generated.ts', nounsModule(nouns));
   console.log(`nouns.generated.ts: ${nouns.length} nouns, ${unmatchedNouns.length} unmatched core nouns`);
   if (unmatchedNouns.length) console.log(unmatchedNouns.join('\n'));
+
+  const { adjectives, unmatched: unmatchedAdjectives } = coreAdjectives(rows, parseWhitakerAdjectives(dictline));
+  writeFileSync('src/content/adjectives.generated.ts', adjectivesModule(adjectives));
+  console.log(`adjectives.generated.ts: ${adjectives.length} adjectives, ${unmatchedAdjectives.length} unmatched core adjectives`);
+  if (unmatchedAdjectives.length) console.log(unmatchedAdjectives.join('\n'));
 }
 
 if (process.argv[1]?.endsWith('build-seed.ts')) main();

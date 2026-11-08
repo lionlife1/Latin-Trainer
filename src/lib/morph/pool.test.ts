@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { trainerPool } from '../conjugator';
+import { CORE_ADJECTIVES } from '../../content/adjectives.generated';
 import { CORE_NOUNS } from '../../content/nouns.generated';
+import { adjectiveCells, adjectiveForms, adverbForms } from './adjectives';
 import { nounCells, nounForms } from './nouns';
 import { verbCells, verbForms } from './verbs';
 import { legacySubjunctiveForm } from './__fixtures__/legacySubjunctive';
@@ -43,6 +45,23 @@ describe('the engine against the whole trainer pool', () => {
                 const forms = nounForms(n, c);
                 expect(forms.length, `${n.nom} ${c.case} ${c.number}`).toBeGreaterThan(0);
                 for (const f of forms) expect(f, `${n.nom} ${c.case} ${c.number}`).toMatch(/^[a-z]+$/);
+            }
+        }
+    });
+
+    it('builds clean, non-empty adjective forms and adverbs for every core adjective', () => {
+        for (const a of CORE_ADJECTIVES) {
+            for (const c of adjectiveCells(a)) {
+                const forms = adjectiveForms(a, c);
+                expect(forms.length, `${a.nom} ${JSON.stringify(c)}`).toBeGreaterThan(0);
+                for (const f of forms) expect(f, `${a.nom} ${JSON.stringify(c)}`).toMatch(/^[a-z]+$/);
+            }
+            if (a.comp) {
+                for (const d of ['positive', 'comparative', 'superlative'] as const) {
+                    const forms = adverbForms(a, d);
+                    expect(forms.length, `${a.nom} adverb ${d}`).toBeGreaterThan(0);
+                    for (const f of forms) expect(f, `${a.nom} adverb ${d}`).toMatch(/^[a-z]+$/);
+                }
             }
         }
     });
