@@ -112,11 +112,15 @@ function futurePartStem(verb: Verb): string | undefined {
 }
 
 export function hasVerbCell(verb: Verb, cell: VerbCell): boolean {
+    if (verb.irregular) return irregularForms(verb, cell).length > 0;
     if (conjOf(verb) === undefined) return false;
     const passive = !verb.deponent && !verb.noPassive;
     switch (cell.mood) {
         case 'indicative':
+            return cell.voice === 'active' || passive;
         case 'subjunctive':
+            // A deponent's imperfect subjunctive is built on `impfBase`; without it there is no form.
+            if (cell.tense === 'imperfect' && verb.deponent && !verb.impfBase) return false;
             return cell.voice === 'active' || passive;
         case 'imperative':
             if (cell.tense === 'future') return cell.voice === 'active' && !verb.deponent;
@@ -138,6 +142,7 @@ export function verbCells(verb: Verb): VerbCell[] {
 }
 
 export function verbForms(verb: Verb, cell: VerbCell): string[] {
+    if (verb.irregular) return irregularForms(verb, cell);
     if (!hasVerbCell(verb, cell)) return [];
     return [build(verb, conjOf(verb)!, cell)];
 }
@@ -189,7 +194,7 @@ function finite(verb: Verb, conj: Conj, cell: Extract<VerbCell, { mood: 'indicat
     if (cell.mood === 'subjunctive') {
         switch (cell.tense) {
             case 'present': return stem + SUBJ_PRES[conj] + ends[i];
-            case 'imperfect': return (verb.deponent ? verb.impfBase ?? verb.inf : verb.inf) + ends[i];
+            case 'imperfect': return (verb.deponent ? verb.impfBase! : verb.inf) + ends[i];
             case 'perfect': return passive ? `${participle} ${ESSE_SUBJ_PRES[i]}` : verb.perf + SUBJ_PERF_ACT[i];
             case 'pluperfect': return passive ? `${participle} ${ESSE_SUBJ_IMPF[i]}` : verb.perf + SUBJ_PLUP_ACT[i];
         }
@@ -202,4 +207,226 @@ function finite(verb: Verb, conj: Conj, cell: Extract<VerbCell, { mood: 'indicat
         case 'pluperfect': return passive ? `${participle} ${ESSE_IMPF[i]}` : verb.perf + PLUP_ACT[i];
         case 'futurePerfect': return passive ? `${participle} ${ESSE_FUT[i]}` : verb.perf + FUTPERF_ACT[i];
     }
+}
+
+
+// ---------------------------------------------------------------------------------------------
+// Irregular verbs: esse, posse, ferre, velle, nolle, malle, ire, fieri and the compounds of
+// esse / ferre / ire (A&G 170, 199-204).
+
+/** The forms one irregular verb has outside the perfect system. Arrays are in person order 1sg ... 3pl. */
+interface Irregular {
+    pres: string[]; impf: string[]; fut: string[]; subjPres: string[]; subjImpf: string[];
+    /** Passive counterparts of the five lists above; only for verbs with a passive. */
+    passive?: { pres: string[]; impf: string[]; fut: string[]; subjPres: string[]; subjImpf: string[] };
+    /** Present imperative singular and plural, passive singular and plural. */
+    impPres?: [string, string]; impPresPass?: [string, string];
+    /** Future imperative: 2sg, 3sg, 2pl, 3pl. */
+    impFut?: [string, string, string, string];
+    infPres: string; infPresPass?: string;
+    infFut?: string[]; infFutPass?: string;
+    partPres?: string; partFut?: string; gerundive?: string;
+    /** Genitive, dative, accusative and ablative of the gerund. */
+    gerund?: [string, string, string, string];
+    /** Stem of the perfect participle, when the verb has perfect forms made with `sum`. */
+    perfPart?: string;
+    /** `fieri` has no perfect active of its own: its perfect system is the participle plus `sum`. */
+    perfectIsPassive?: boolean;
+}
+
+const ends = (stem: string, list: string[]) => list.map(e => stem + e);
+const prefixed = (pre: string, list: string[]) => list.map(f => pre + f);
+const IMPF_BA = (stem: string) => ends(stem + 'ba', ACT);
+
+function irregularSpec(verb: Verb): Irregular | undefined {
+    const irr = verb.base ?? verb.inf;
+    const pre = verb.prefix ?? '';
+    const passive = !verb.noPassive;
+    switch (irr) {
+        case 'esse': {
+            // pro- puts a d between itself and a form starting with e: prodes, proderam, prodesse.
+            const e = (f: string) => (pre.endsWith('pro') && f.startsWith('e') ? pre + 'd' + f : pre + f);
+            return {
+                pres: ESSE_PRES.map(e), impf: ESSE_IMPF.map(e), fut: ESSE_FUT.map(e),
+                subjPres: ESSE_SUBJ_PRES.map(e), subjImpf: ESSE_SUBJ_IMPF.map(e),
+                impPres: [e('es'), e('este')], impFut: [e('esto'), e('esto'), e('estote'), e('sunto')],
+                infPres: e('esse'),
+                infFut: [verb.perf + 'turus esse', pre + 'fore'],
+                partFut: verb.perf + 'turus',
+            };
+        }
+        case 'posse':
+            return {
+                pres: ['possum', 'potes', 'potest', 'possumus', 'potestis', 'possunt'],
+                impf: ends('pote', ['ram', 'ras', 'rat', 'ramus', 'ratis', 'rant']),
+                fut: ends('pote', ['ro', 'ris', 'rit', 'rimus', 'ritis', 'runt']),
+                subjPres: ends('poss', ['im', 'is', 'it', 'imus', 'itis', 'int']),
+                subjImpf: ends('posse', ACT),
+                infPres: 'posse',
+            };
+        case 'ferre': {
+            const f = (list: string[]) => prefixed(pre, list);
+            const part = verb.ppp ?? pre + 'lat';
+            return {
+                pres: f(['fero', 'fers', 'fert', 'ferimus', 'fertis', 'ferunt']),
+                impf: f(IMPF_BA('fere')),
+                fut: f(['feram', 'feres', 'feret', 'feremus', 'feretis', 'ferent']),
+                subjPres: f(ends('fera', ACT)),
+                subjImpf: f(ends('ferre', ACT)),
+                passive: passive ? {
+                    pres: f(['feror', 'ferris', 'fertur', 'ferimur', 'ferimini', 'feruntur']),
+                    impf: f(ends('fereba', PASS)),
+                    fut: f(['ferar', 'fereris', 'feretur', 'feremur', 'feremini', 'ferentur']),
+                    subjPres: f(ends('fera', PASS)),
+                    subjImpf: f(ends('ferre', PASS)),
+                } : undefined,
+                impPres: [pre + 'fer', pre + 'ferte'],
+                impPresPass: passive ? [pre + 'ferre', pre + 'ferimini'] : undefined,
+                impFut: [pre + 'ferto', pre + 'ferto', pre + 'fertote', pre + 'ferunto'],
+                infPres: pre + 'ferre', infPresPass: passive ? pre + 'ferri' : undefined,
+                infFut: [part + 'urus esse'], infFutPass: passive ? part + 'um iri' : undefined,
+                partPres: pre + 'ferens', partFut: part + 'urus', gerundive: passive ? pre + 'ferendus' : undefined,
+                gerund: [pre + 'ferendi', pre + 'ferendo', pre + 'ferendum', pre + 'ferendo'],
+                perfPart: passive ? part : undefined,
+            };
+        }
+        case 'velle':
+        case 'nolle':
+        case 'malle': {
+            const root = irr === 'velle' ? 'vol' : irr === 'nolle' ? 'nol' : 'mal';
+            const subj = irr === 'velle' ? 'vel' : root;
+            const pres = irr === 'velle' ? ['volo', 'vis', 'vult', 'volumus', 'vultis', 'volunt']
+                : irr === 'nolle' ? ['nolo', 'non vis', 'non vult', 'nolumus', 'non vultis', 'nolunt']
+                : ['malo', 'mavis', 'mavult', 'malumus', 'mavultis', 'malunt'];
+            return {
+                pres,
+                impf: IMPF_BA(root + 'e'),
+                fut: ends(root, ['am', 'es', 'et', 'emus', 'etis', 'ent']),
+                subjPres: ends(subj, ['im', 'is', 'it', 'imus', 'itis', 'int']),
+                subjImpf: ends(irr, ACT),
+                infPres: irr,
+                impPres: irr === 'nolle' ? ['noli', 'nolite'] : undefined,
+                impFut: irr === 'nolle' ? ['nolito', 'nolito', 'nolitote', 'nolunto'] : undefined,
+                partPres: irr === 'malle' ? undefined : root + 'ens',
+            };
+        }
+        case 'ire': {
+            const i = (list: string[]) => prefixed(pre, list);
+            return {
+                pres: i(['eo', 'is', 'it', 'imus', 'itis', 'eunt']),
+                impf: i(IMPF_BA('i')),
+                fut: i(['ibo', 'ibis', 'ibit', 'ibimus', 'ibitis', 'ibunt']),
+                subjPres: i(ends('ea', ACT)),
+                subjImpf: i(ends('ire', ACT)),
+                passive: passive ? {
+                    pres: i(['eor', 'iris', 'itur', 'imur', 'imini', 'euntur']),
+                    impf: i(ends('iba', PASS)),
+                    fut: i(['ibor', 'iberis', 'ibitur', 'ibimur', 'ibimini', 'ibuntur']),
+                    subjPres: i(ends('ea', PASS)),
+                    subjImpf: i(ends('ire', PASS)),
+                } : undefined,
+                impPres: [pre + 'i', pre + 'ite'],
+                impFut: [pre + 'ito', pre + 'ito', pre + 'itote', pre + 'eunto'],
+                infPres: pre + 'ire',
+                infFut: [pre + 'iturus esse'],
+                partPres: pre + 'iens', partFut: pre + 'iturus', gerundive: passive ? pre + 'eundus' : undefined,
+                gerund: [pre + 'eundi', pre + 'eundo', pre + 'eundum', pre + 'eundo'],
+                perfPart: passive ? verb.ppp : undefined,
+            };
+        }
+        case 'fieri':
+            return {
+                pres: ['fio', 'fis', 'fit', 'fimus', 'fitis', 'fiunt'],
+                impf: IMPF_BA('fie'),
+                fut: ends('fi', ['am', 'es', 'et', 'emus', 'etis', 'ent']),
+                subjPres: ends('fia', ACT),
+                subjImpf: ends('fiere', ACT),
+                impPres: ['fi', 'fite'],
+                infPres: 'fieri',
+                perfPart: verb.perf, perfectIsPassive: true,
+            };
+        default:
+            return undefined;
+    }
+}
+
+function irregularForms(verb: Verb, cell: VerbCell): string[] {
+    const spec = irregularSpec(verb);
+    if (!spec) return [];
+    const forms = irregularBuild(verb, spec, cell);
+    return (verb.base ?? verb.inf) === 'ire' ? ireVariants(verb.prefix ?? '', cell, forms) : forms;
+}
+
+/** The perfect-system forms of `ire` also come without the v: ivisti, iisti, isti; iverunt, ierunt. */
+function ireVariants(pre: string, cell: VerbCell, forms: string[]): string[] {
+    const perfectSystem = (cell.mood === 'indicative' && ['perfect', 'pluperfect', 'futurePerfect'].includes(cell.tense) && cell.voice === 'active')
+        || (cell.mood === 'subjunctive' && (cell.tense === 'perfect' || cell.tense === 'pluperfect') && cell.voice === 'active')
+        || (cell.mood === 'infinitive' && cell.tense === 'perfect' && cell.voice === 'active');
+    if (!perfectSystem || forms.length !== 1 || !forms[0].startsWith(pre + 'iv')) return forms;
+    const end = forms[0].slice(pre.length + 2);
+    const out = [forms[0], pre + 'i' + end];
+    if (end.startsWith('is')) out.push(pre + 'i' + end.slice(1));
+    return out;
+}
+
+function irregularBuild(verb: Verb, spec: Irregular, cell: VerbCell): string[] {
+    const hasPassive = !!spec.passive;
+    switch (cell.mood) {
+        case 'indicative':
+        case 'subjunctive': {
+            const i = (cell.person - 1) + (cell.number === 'plural' ? 3 : 0);
+            const subj = cell.mood === 'subjunctive';
+            const tense = cell.tense;
+            const isPassive = cell.voice === 'passive';
+            if (!perfectTense(tense)) {
+                const src = isPassive ? spec.passive : spec;
+                if (!src) return [];
+                if (tense === 'present') return [(subj ? src.subjPres : src.pres)[i]];
+                if (tense === 'imperfect') return [(subj ? src.subjImpf : src.impf)[i]];
+                return subj ? [] : [src.fut[i]];
+            }
+            // Perfect system: perfect stem plus endings, or a perfect participle plus `sum`.
+            if (!isPassive && !spec.perfectIsPassive) return [verb.perf + perfectEnding(cell.mood, tense, i)];
+            if (isPassive && (spec.perfectIsPassive || !spec.passive)) return [];
+            if (!spec.perfPart) return [];
+            const participle = spec.perfPart + (cell.number === 'plural' ? 'i' : 'us');
+            return [`${participle} ${perfectAuxiliary(cell.mood, tense, i)}`];
+        }
+        case 'imperative': {
+            if (cell.tense === 'future') {
+                if (cell.voice !== 'active' || !spec.impFut) return [];
+                return [spec.impFut[(cell.person === 3 ? 1 : 0) + (cell.number === 'plural' ? 2 : 0)]];
+            }
+            const pair = cell.voice === 'active' ? spec.impPres : spec.impPresPass;
+            return cell.person === 2 && pair ? [pair[cell.number === 'plural' ? 1 : 0]] : [];
+        }
+        case 'infinitive': {
+            if (cell.tense === 'present') return cell.voice === 'active' ? [spec.infPres] : spec.infPresPass ? [spec.infPresPass] : [];
+            if (cell.tense === 'perfect') {
+                if (cell.voice === 'active') return spec.perfectIsPassive ? [spec.perfPart + 'us esse'] : [verb.perf + 'isse'];
+                return hasPassive && spec.perfPart ? [spec.perfPart + 'us esse'] : [];
+            }
+            return cell.voice === 'active' ? spec.infFut ?? [] : spec.infFutPass ? [spec.infFutPass] : [];
+        }
+        case 'participle': {
+            if (cell.tense === 'present') return cell.voice === 'active' && spec.partPres ? [spec.partPres] : [];
+            if (cell.tense === 'perfect') return cell.voice === 'passive' && hasPassive && spec.perfPart ? [spec.perfPart + 'us'] : [];
+            if (cell.voice === 'active') return spec.partFut ? [spec.partFut] : [];
+            return spec.gerundive ? [spec.gerundive] : [];
+        }
+        case 'gerund':
+            return spec.gerund ? [spec.gerund[CASES.indexOf(cell.case)]] : [];
+    }
+}
+
+const perfectTense = (t: VerbTense) => t === 'perfect' || t === 'pluperfect' || t === 'futurePerfect';
+
+function perfectEnding(mood: 'indicative' | 'subjunctive', tense: VerbTense, i: number): string {
+    if (mood === 'subjunctive') return tense === 'perfect' ? SUBJ_PERF_ACT[i] : SUBJ_PLUP_ACT[i];
+    return tense === 'perfect' ? PERF_ACT[i] : tense === 'pluperfect' ? PLUP_ACT[i] : FUTPERF_ACT[i];
+}
+
+function perfectAuxiliary(mood: 'indicative' | 'subjunctive', tense: VerbTense, i: number): string {
+    if (mood === 'subjunctive') return tense === 'perfect' ? ESSE_SUBJ_PRES[i] : ESSE_SUBJ_IMPF[i];
+    return tense === 'perfect' ? ESSE_PRES[i] : tense === 'pluperfect' ? ESSE_IMPF[i] : ESSE_FUT[i];
 }

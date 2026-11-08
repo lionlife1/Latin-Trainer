@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import type { Verb, VerbCell, VerbTense, Voice, Person } from './types';
+import { VERBS } from '../conjugator';
 import { ALL_VERB_CELLS, hasVerbCell, verbCells, verbForms } from './verbs';
 
 const amo: Verb = { inf: 'amare', conj: 1, pres: 'am', perf: 'amav', ppp: 'amat', trans: 'to love' };
@@ -151,9 +152,11 @@ describe('cell sets', () => {
         expect(hasVerbCell(amo, part('perfect', 'active'))).toBe(false);
     });
     it('every claimed cell yields a form, every other cell none', () => {
-        for (const v of [amo, moneo, rego, capio, audio, hortor, cado, mori]) {
+        for (const v of [amo, moneo, rego, capio, audio, hortor, cado, mori, ...IRR, absum, prosum, confero, redeo]) {
             for (const c of ALL_VERB_CELLS) {
-                expect(verbForms(v, c).length > 0).toBe(hasVerbCell(v, c));
+                const forms = verbForms(v, c);
+                expect(forms.length > 0).toBe(hasVerbCell(v, c));
+                for (const form of forms) expect(form).not.toMatch(/undefined|NaN/);
             }
         }
     });
@@ -170,8 +173,105 @@ describe('cell sets', () => {
         expect(hasVerbCell(cado, part('future', 'passive'))).toBe(false);
         expect(one(cado, part('future', 'active'))).toBe('casurus');
     });
-    it('irregular verbs have no forms yet', () => {
-        const esse: Verb = { inf: 'esse', irregular: true, noPassive: true, perf: 'fu', trans: 'to be' };
-        expect(verbCells(esse)).toEqual([]);
+    it('an unknown irregular verb claims nothing', () => {
+        const odd: Verb = { inf: 'odd', irregular: true, noPassive: true, perf: 'o', trans: 'odd' };
+        expect(verbCells(odd)).toEqual([]);
+    });
+    it('a deponent without impfBase has no imperfect subjunctive', () => {
+        const bad: Verb = { ...hortor, impfBase: undefined };
+        expect(verbForms(bad, { mood: 'subjunctive', tense: 'imperfect', voice: 'active', person: 1, number: 'singular' })).toEqual([]);
+    });
+});
+
+const V = (inf: string) => VERBS.find(v => v.inf === inf)!;
+const esse = V('esse'), posse = V('posse'), ferre = V('ferre'), velle = V('velle'), nolle = V('nolle'), malle = V('malle'), ire = V('ire'), fieri = V('fieri');
+const IRR = [esse, posse, ferre, velle, nolle, malle, ire, fieri];
+const absum: Verb = { inf: 'abesse', irregular: true, noPassive: true, base: 'esse', prefix: 'ab', perf: 'afu', pp1: 'absum', trans: 'to be away' };
+const confero: Verb = { inf: 'conferre', irregular: true, base: 'ferre', prefix: 'con', perf: 'contul', ppp: 'collat', pp1: 'confero', trans: 'to bring together' };
+const redeo: Verb = { inf: 'redire', irregular: true, noPassive: true, base: 'ire', prefix: 'red', perf: 'rediv', pp1: 'redeo', trans: 'to return' };
+const prosum: Verb = { inf: 'prodesse', irregular: true, noPassive: true, base: 'esse', prefix: 'pro', perf: 'profu', pp1: 'prosum', trans: 'to be useful' };
+const pp = (v: Verb, tense: VerbTense, voice: Voice, p: Person, n: 'singular' | 'plural') =>
+    verbForms(v, { mood: 'indicative', tense, voice, person: p, number: n });
+
+describe('irregular finite forms', () => {
+    const rows: [Verb, 'indicative' | 'subjunctive', VerbTense, Voice, string][] = [
+        [esse, 'indicative', 'present', 'active', 'sum, es, est, sumus, estis, sunt'],
+        [esse, 'indicative', 'imperfect', 'active', 'eram, eras, erat, eramus, eratis, erant'],
+        [esse, 'indicative', 'future', 'active', 'ero, eris, erit, erimus, eritis, erunt'],
+        [esse, 'indicative', 'perfect', 'active', 'fui, fuisti, fuit, fuimus, fuistis, fuerunt'],
+        [esse, 'subjunctive', 'imperfect', 'active', 'essem, esses, esset, essemus, essetis, essent'],
+        [posse, 'indicative', 'present', 'active', 'possum, potes, potest, possumus, potestis, possunt'],
+        [posse, 'indicative', 'future', 'active', 'potero, poteris, poterit, poterimus, poteritis, poterunt'],
+        [ire, 'indicative', 'present', 'active', 'eo, is, it, imus, itis, eunt'],
+        [ire, 'indicative', 'future', 'active', 'ibo, ibis, ibit, ibimus, ibitis, ibunt'],
+        [ire, 'indicative', 'perfect', 'active', 'ivi, ivisti, ivit, ivimus, ivistis, iverunt'],
+        [ire, 'subjunctive', 'present', 'active', 'eam, eas, eat, eamus, eatis, eant'],
+        [ferre, 'indicative', 'present', 'active', 'fero, fers, fert, ferimus, fertis, ferunt'],
+        [ferre, 'indicative', 'present', 'passive', 'feror, ferris, fertur, ferimur, ferimini, feruntur'],
+        [ferre, 'indicative', 'future', 'active', 'feram, feres, feret, feremus, feretis, ferent'],
+        [ferre, 'indicative', 'perfect', 'passive', 'latus sum, latus es, latus est, lati sumus, lati estis, lati sunt'],
+        [ferre, 'subjunctive', 'imperfect', 'passive', 'ferrer, ferreris, ferretur, ferremur, ferremini, ferrentur'],
+        [velle, 'indicative', 'present', 'active', 'volo, vis, vult, volumus, vultis, volunt'],
+        [velle, 'indicative', 'future', 'active', 'volam, voles, volet, volemus, voletis, volent'],
+        [nolle, 'indicative', 'present', 'active', 'nolo, non vis, non vult, nolumus, non vultis, nolunt'],
+        [malle, 'indicative', 'present', 'active', 'malo, mavis, mavult, malumus, mavultis, malunt'],
+        [fieri, 'indicative', 'present', 'active', 'fio, fis, fit, fimus, fitis, fiunt'],
+        [fieri, 'indicative', 'imperfect', 'active', 'fiebam, fiebas, fiebat, fiebamus, fiebatis, fiebant'],
+        [fieri, 'indicative', 'perfect', 'active', 'factus sum, factus es, factus est, facti sumus, facti estis, facti sunt'],
+        [fieri, 'subjunctive', 'perfect', 'active', 'factus sim, factus sis, factus sit, facti simus, facti sitis, facti sint'],
+        [fieri, 'subjunctive', 'pluperfect', 'active', 'factus essem, factus esses, factus esset, facti essemus, facti essetis, facti essent'],
+    ];
+    for (const [v, mood, tense, voice, want] of rows)
+        it(`${v.inf} ${mood} ${tense} ${voice}`, () => { expect(six(v, mood, tense, voice)).toEqual(t(want)); });
+
+    it('compounds', () => {
+        expect(six(absum, 'indicative', 'present', 'active')).toEqual(t('absum, abes, abest, absumus, abestis, absunt'));
+        expect(six(prosum, 'indicative', 'present', 'active')).toEqual(t('prosum, prodes, prodest, prosumus, prodestis, prosunt'));
+        expect(pp(prosum, 'imperfect', 'active', 1, 'singular')).toEqual(['proderam']);
+        expect(pp(confero, 'present', 'passive', 3, 'singular')).toEqual(['confertur']);
+        expect(pp(redeo, 'pluperfect', 'active', 1, 'singular')).toEqual(['rediveram', 'redieram']);
+        expect(pp(redeo, 'perfect', 'active', 2, 'singular')).toEqual(['redivisti', 'rediisti', 'redisti']);
+        expect(verbCells(redeo).some(c => 'voice' in c && c.voice === 'passive')).toBe(false);
+    });
+    it('ire perfect-system variants', () => {
+        expect(pp(ire, 'perfect', 'active', 2, 'singular')).toEqual(['ivisti', 'iisti', 'isti']);
+        expect(pp(ire, 'perfect', 'active', 3, 'singular')).toEqual(['ivit', 'iit']);
+        expect(pp(ire, 'perfect', 'active', 3, 'plural')).toEqual(['iverunt', 'ierunt']);
+        expect(verbForms(ire, { mood: 'subjunctive', tense: 'pluperfect', voice: 'active', person: 1, number: 'singular' })).toEqual(['ivissem', 'iissem', 'issem']);
+    });
+});
+
+describe('irregular imperatives, infinitives, participles', () => {
+    it('imperatives', () => {
+        expect([one(esse, imp('present', 'active', 2, 'singular')), one(esse, imp('present', 'active', 2, 'plural'))]).toEqual(['es', 'este']);
+        expect([2, 3].map(p => one(esse, imp('future', 'active', p as 2 | 3, 'singular')))).toEqual(['esto', 'esto']);
+        expect([one(esse, imp('future', 'active', 2, 'plural')), one(esse, imp('future', 'active', 3, 'plural'))]).toEqual(['estote', 'sunto']);
+        expect([one(ire, imp('present', 'active', 2, 'singular')), one(ire, imp('present', 'active', 2, 'plural')), one(ire, imp('future', 'active', 3, 'plural'))]).toEqual(['i', 'ite', 'eunto']);
+        expect([one(ferre, imp('present', 'active', 2, 'singular')), one(ferre, imp('present', 'active', 2, 'plural')), one(ferre, imp('present', 'passive', 2, 'singular')), one(ferre, imp('present', 'passive', 2, 'plural'))]).toEqual(['fer', 'ferte', 'ferre', 'ferimini']);
+        expect([one(nolle, imp('present', 'active', 2, 'singular')), one(nolle, imp('present', 'active', 2, 'plural'))]).toEqual(['noli', 'nolite']);
+        expect([one(nolle, imp('future', 'active', 2, 'singular')), one(nolle, imp('future', 'active', 3, 'singular')), one(nolle, imp('future', 'active', 2, 'plural')), one(nolle, imp('future', 'active', 3, 'plural'))]).toEqual(['nolito', 'nolito', 'nolitote', 'nolunto']);
+        expect([one(fieri, imp('present', 'active', 2, 'singular')), one(fieri, imp('present', 'active', 2, 'plural'))]).toEqual(['fi', 'fite']);
+        for (const v of [posse, velle, malle]) expect(verbCells(v).some(c => c.mood === 'imperative')).toBe(false);
+    });
+    it('infinitives', () => {
+        expect(verbForms(esse, inf('future', 'active'))).toEqual(['futurus esse', 'fore']);
+        const cells: [('present' | 'perfect' | 'future'), Voice][] = [['present', 'active'], ['present', 'passive'], ['perfect', 'active'], ['perfect', 'passive'], ['future', 'active'], ['future', 'passive']];
+        expect(cells.map(([tn, v]) => one(ferre, inf(tn, v)))).toEqual(t('ferre, ferri, tulisse, latus esse, laturus esse, latum iri'));
+        expect(verbForms(ire, inf('perfect', 'active'))).toEqual(['ivisse', 'iisse', 'isse']);
+        expect([one(fieri, inf('present', 'active')), one(fieri, inf('perfect', 'active'))]).toEqual(['fieri', 'factus esse']);
+        expect([one(posse, inf('present', 'active')), one(posse, inf('perfect', 'active'))]).toEqual(['posse', 'potuisse']);
+    });
+    it('participles and gerunds', () => {
+        expect([one(ire, part('present', 'active')), one(ire, part('future', 'active'))]).toEqual(['iens', 'iturus']);
+        expect([part('present', 'active'), part('perfect', 'passive'), part('future', 'active'), part('future', 'passive')].map(c => one(ferre, c))).toEqual(t('ferens, latus, laturus, ferendus'));
+        expect(one(velle, part('present', 'active'))).toBe('volens');
+        expect(one(esse, part('future', 'active'))).toBe('futurus');
+        expect(one(absum, part('future', 'active'))).toBe('afuturus');
+        expect(one(ire, ger('genitive'))).toBe('eundi');
+        expect(one(ferre, ger('genitive'))).toBe('ferendi');
+        const cs = verbCells(esse);
+        expect(cs.some(c => c.mood === 'gerund')).toBe(false);
+        expect(cs.some(c => c.mood === 'participle' && c.tense === 'present')).toBe(false);
+        for (const v of [velle, nolle, malle, fieri, posse]) expect(verbCells(v).some(c => c.mood === 'gerund')).toBe(false);
     });
 });
