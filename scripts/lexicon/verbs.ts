@@ -1,6 +1,7 @@
 import { verbKey, type Verb } from '../../src/lib/conjugator';
 import type { LexiconRow } from '../build-seed';
 import { lemmaKey } from './compose';
+import { clipGloss, firstSense } from './gloss';
 import { dictlineFields, have } from './whitaker';
 
 export interface WhitakerVerb {
@@ -31,8 +32,14 @@ function verbFromLine(line: string): { verb: Omit<Verb, 'trans'>; freq: string }
   const d = dictlineFields(line);
   if (!d || d.f[0] !== 'V') return null;
   const [, a, b, kind] = d.f;
-  if (kind === 'SEMIDEP' || kind === 'IMPERS') return null;
+  if (kind === 'IMPERS') return null;
   const [s1, s2, s3, s4] = d.s.map(x => x.replace(/j/g, 'i'));
+  if (kind === 'SEMIDEP') {
+    const code = `${a} ${b}`;
+    if ((code !== '2 1' && code !== '3 1') || !have(s1) || !have(s2) || !have(s4)) return null;
+    const conj = code === '2 1' ? 2 : 3;
+    return { freq: d.freq, verb: { inf: s2 + 'ere', conj, pres: s1, perf: s4, semiDeponent: true, noPassive: true, pp1: s1 + (conj === 2 ? 'eo' : 'o') } };
+  }
   const passive = kind !== 'INTRANS' && have(s4);
   const code = `${a} ${b}`;
 
@@ -84,21 +91,23 @@ export function parseWhitakerVerbs(dictline: string): WhitakerVerb[] {
   return [...best.values()];
 }
 
-const GLOSS_MAX = 40;
-
 /** A lexicon definition -> the short "to ..." meaning shown in the trainer. */
 export function shortGloss(definition: string): string {
-  let g = definition.split(';')[0].split(',')[0]
-    .replace(/\([^)]*\)|\[[^\]]*\]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .replace(/[\s.:]+$/, '')
-    .trim();
-  if (!g.startsWith('to ')) g = 'to ' + g;
-  if (g.length <= GLOSS_MAX) return g;
-  const head = g.slice(0, GLOSS_MAX + 1);
-  const cut = Math.max(head.lastIndexOf(' '), head.lastIndexOf('/'));
-  return cut > 3 ? g.slice(0, cut) : g.slice(0, GLOSS_MAX);
+  const g = firstSense(definition);
+  return clipGloss(g.startsWith('to ') ? g : 'to ' + g);
 }
+
+/** Glosses the first-sense rule gets wrong, by 1st principal part. */
+const GLOSS_OVERRIDES: Record<string, string> = {
+  surgo: 'to rise', muto: 'to change', perago: 'to complete', libo: 'to pour as an offering',
+  tueor: 'to watch over', cerno: 'to discern', fallo: 'to deceive', differo: 'to put off', ruo: 'to rush',
+};
+
+/** Compounds of ire that take a direct object, so they have a passive (by 1st principal part). */
+const TRANSITIVE_IRE = new Set(['transeo', 'adeo', 'circumeo', 'ineo']);
+
+/** Defective or duplicate verbs left out, keyed `${pp1}|${conj}`: fari, and the archaic 3rd-conjugation sonere. */
+const EXCLUDED_VERBS = new Set(['for|1', 'sono|3']);
 
 /**
  * Core verbs with no personal passive that Whitaker doesn't mark INTRANS (by 1st principal part,
@@ -125,11 +134,14 @@ export function coreTrainerVerbs(rows: LexiconRow[], whitaker: WhitakerVerb[]): 
   const unmatched: string[] = [];
   for (const r of rows) {
     if (!r.core || r.pos !== 'verb') continue;
-    const second = r.headword.split(',')[1]?.trim();
+    // The core row for fruor is built from Whitaker's 1st-conjugation line ("fruari"); the verb is 3rd conjugation (frui).
+    const second = r.lemma === 'fruor' ? 'i' : r.headword.split(',')[1]?.trim();
     const infKey = second ? lemmaKey(second) : '';
     const match = infKey
       ? (byPp1.get(lemmaKey(r.lemma)) ?? [])
           .filter(w => lemmaKey(w.verb.inf).endsWith(infKey))
+          // fruor, -i is 3rd conjugation; don't let it match the 1st-conjugation line that gives "fruari".
+          .filter(w => infKey !== 'i' || w.verb.conj === 3 || w.verb.conj === 3.5)
           .sort((x, y) => freqRank(x.freq) - freqRank(y.freq) || x.line - y.line)[0]
       : undefined;
     if (!match) {
@@ -137,6 +149,13 @@ export function coreTrainerVerbs(rows: LexiconRow[], whitaker: WhitakerVerb[]): 
       continue;
     }
     const verb: Verb = { ...match.verb, trans: shortGloss(r.definition) };
+    if (EXCLUDED_VERBS.has(`${verb.pp1}|${verb.conj}`)) continue;
+    const override = GLOSS_OVERRIDES[verb.pp1 ?? ''];
+    if (override) verb.trans = override;
+    if (verb.base === 'ire' && TRANSITIVE_IRE.has(verb.pp1 ?? '')) {
+      delete verb.noPassive;
+      verb.ppp = (verb.prefix ?? '') + 'it';
+    }
     const [, , third, fourth] = r.headword.split(',').map(p => p.trim());
     // A spelled-out perfect in the lexicon beats Whitaker's unassimilated stem (attulī, not adtulī).
     if (!verb.deponent && third && !third.startsWith('-') && !third.includes(' ')) {

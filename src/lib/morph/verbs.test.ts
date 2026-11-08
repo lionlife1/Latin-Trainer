@@ -276,6 +276,27 @@ describe('irregular imperatives, infinitives, participles', () => {
     });
 });
 
+describe('transitive ire compounds have a passive', () => {
+    const adeo: Verb = { inf: 'adire', irregular: true, base: 'ire', prefix: 'ad', perf: 'adiv', ppp: 'adit', pp1: 'adeo', trans: 'to go to' };
+    const cell = (mood: 'indicative' | 'subjunctive', tense: VerbTense, person: Person, number: 'singular' | 'plural'): VerbCell =>
+        ({ mood, tense, voice: 'passive', person, number } as VerbCell);
+
+    it('conjugates adeor in the passive', () => {
+        expect(adeo.noPassive).toBeUndefined();
+        expect(one(adeo, cell('indicative', 'present', 3, 'singular'))).toBe('aditur');
+        expect(one(adeo, cell('indicative', 'future', 1, 'plural'))).toBe('adibimur');
+        expect(one(adeo, cell('indicative', 'perfect', 1, 'singular'))).toBe('aditus sum');
+        expect(one(adeo, cell('indicative', 'pluperfect', 3, 'plural'))).toBe('aditi erant');
+        expect(one(adeo, cell('subjunctive', 'imperfect', 2, 'singular'))).toBe('adireris');
+        expect(one(adeo, part('perfect', 'passive'))).toBe('aditus');
+        expect(one(adeo, part('future', 'passive'))).toBe('adeundus');
+    });
+    it('keeps intransitive compounds active only', () => {
+        expect(verbCells(adeo).some(c => 'voice' in c && c.voice === 'passive')).toBe(true);
+        expect(verbCells(redeo).some(c => 'voice' in c && c.voice === 'passive')).toBe(false);
+    });
+});
+
 describe('semi-deponents, principal parts and the fugere family', () => {
     const audeo: Verb = { inf: 'audere', conj: 2, pres: 'aud', perf: 'aus', semiDeponent: true, noPassive: true, pp1: 'audeo', trans: 'to dare' };
     const vb = (inf: string) => VERBS.find(v => v.inf === inf)!;

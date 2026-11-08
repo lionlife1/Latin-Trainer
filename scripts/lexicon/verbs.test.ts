@@ -57,8 +57,8 @@ describe('parseWhitakerVerbs', () => {
     expect(parseWhitakerVerbs(fixture(12399, 12400, 12401, 12402))).toHaveLength(1);
     expect(v.get('conferre')).toMatchObject({ irregular: true, base: 'ferre', prefix: 'con', perf: 'contul', ppp: 'collat', pp1: 'confero' });
   });
-  it('skips semi-deponents and impersonals', () => {
-    expect(v.get('audere')).toBeUndefined();
+  it('parses semi-deponents and skips impersonals', () => {
+    expect(v.get('audere')).toEqual({ inf: 'audere', conj: 2, pres: 'aud', perf: 'aus', semiDeponent: true, noPassive: true, pp1: 'audeo' });
     expect(v.get('accidere')).toBeUndefined();
   });
   it('spells j as i', () => expect(v.get('subicere')).toMatchObject({ conj: 3.5, perf: 'subiec', ppp: 'subiect', pp1: 'subicio' }));
@@ -124,9 +124,33 @@ describe('coreTrainerVerbs on the vendored sources', () => {
     expect(get('adferre')).toMatchObject({ perf: 'attul' });
     expect(get('tollere')).toMatchObject({ perf: 'sustul' });
   });
-  it('leaves out semi-deponents and defectives', () => {
-    for (const inf of ['audere', 'gaudere', 'solere', 'odisse']) expect(get(inf)).toBeUndefined();
+  it('includes the semi-deponents', () => {
+    expect(get('audere')).toMatchObject({ conj: 2, perf: 'aus', semiDeponent: true });
+    expect(get('gaudere')).toMatchObject({ conj: 2, perf: 'gavis', semiDeponent: true });
+    expect(get('solere')).toMatchObject({ conj: 2, perf: 'solit', semiDeponent: true });
+    expect(get('fidere')).toMatchObject({ conj: 3, perf: 'fis', semiDeponent: true });
+    expect(get('confidere')).toMatchObject({ conj: 3, perf: 'confis', semiDeponent: true });
+  });
+  it('leaves out defectives and duplicates', () => {
+    for (const inf of ['odisse', 'fari', 'fruari', 'sonere']) expect(get(inf), inf).toBeUndefined();
     expect(verbs.some(v => v.pp1 === 'inquio')).toBe(false);
+    expect(get('sonare')).toBeDefined();
+  });
+  it('matches 3rd-conjugation deponents in -i', () => {
+    expect(get('frui')).toMatchObject({ conj: 3, deponent: true, perf: 'fruct', pp1: 'fruor' });
+  });
+  it('gives transitive ire compounds a passive', () => {
+    for (const [inf, ppp] of [['transire', 'transit'], ['adire', 'adit'], ['circumire', 'circumit'], ['inire', 'init']]) {
+      expect(get(inf), inf).toMatchObject({ base: 'ire', ppp });
+      expect(get(inf)?.noPassive, inf).toBeUndefined();
+    }
+    for (const inf of ['exire', 'redire']) expect(get(inf), inf).toMatchObject({ noPassive: true });
+  });
+  it('overrides bad glosses', () => {
+    expect(get('surgere')?.trans).toBe('to rise');
+    expect(get('mutare')?.trans).toBe('to change');
+    expect(get('peragere')?.trans).toBe('to complete');
+    expect(get('fallere')?.trans).toBe('to deceive');
   });
   it('glosses every verb', () => {
     for (const v of verbs) expect(v.trans).toMatch(/^to \S/);
