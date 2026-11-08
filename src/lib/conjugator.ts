@@ -1,7 +1,7 @@
 // Algorithmic Latin subjunctive conjugation engine (ported from legacy trainer.js).
 import type { DrillQuestion, EndlessConfig } from './types';
 import type { Verb, Voice, GrammaticalNumber, Person } from './morph/types';
-import { verbForms } from './morph/verbs';
+import { principalParts, verbForms } from './morph/verbs';
 import { CORE_VERBS } from '../content/verbs.generated';
 
 export type { Verb, Voice, GrammaticalNumber, Person } from './morph/types';
@@ -133,9 +133,9 @@ export const VERBS: Verb[] = [
     { inf: "conficere", conj: 3.5, pres: "confic", perf: "confec", ppp: "confect", trans: "to finish" },
     { inf: "conspicere", conj: 3.5, pres: "conspic", perf: "conspex", ppp: "conspect", trans: "to catch sight of" },
     { inf: "cupere", conj: 3.5, pres: "cup", perf: "cupiv", ppp: "cupit", trans: "to desire" },
-    { inf: "effugere", conj: 3.5, pres: "effug", perf: "effug", ppp: "effugit", trans: "to escape" },
+    { inf: "effugere", conj: 3.5, pres: "effug", perf: "effug", noPassive: true, trans: "to escape" },
     { inf: "excipere", conj: 3.5, pres: "excip", perf: "excep", ppp: "except", trans: "to welcome" },
-    { inf: "fugere", conj: 3.5, pres: "fug", perf: "fug", ppp: "fugit", trans: "to flee" },
+    { inf: "fugere", conj: 3.5, pres: "fug", perf: "fug", noPassive: true, ppp: "fugit", trans: "to flee" },
     { inf: "iacere", conj: 3.5, pres: "iac", perf: "iec", ppp: "iact", trans: "to throw" },
     { inf: "incipere", conj: 3.5, pres: "incip", perf: "incep", ppp: "incept", trans: "to begin" },
     { inf: "interficere", conj: 3.5, pres: "interfic", perf: "interfec", ppp: "interfect", trans: "to kill" },
@@ -191,7 +191,7 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
     const pick = <T,>(arr: T[]): T => arr[Math.floor(rng() * arr.length)];
     // 1. Filter the VERBS array based on the user's config
     let pool = verbs.filter(v => {
-        if (v.deponent) return config.dep;
+        if (v.deponent || v.semiDeponent) return config.dep;
         if (v.irregular) {
             if (v.noPassive && !config.stdAct && !config.dep) return false;
             return config.irr;
@@ -210,7 +210,7 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
     // 3. Determine available voices based on verb type AND config
     let availableVoices: Voice[] = [];
 
-    if (verb.deponent) {
+    if (verb.deponent || verb.semiDeponent) {
         availableVoices = ["active"]; // Internal logic uses active string
     } else if (verb.irregular) {
         if (config.stdAct) availableVoices.push("active");
@@ -227,43 +227,22 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
     const person = pick(PERSONS);
     const number = pick(NUMBERS);
 
-    const answer = generateSubjunctiveForm(verb, tense, voice, person, number);
-    const answers = [answer];
-
-    if ((verb.base ?? verb.inf) === "ire" && (tense === "perfect" || tense === "pluperfect")) {
-        answers.push(answer.replace("iv", "i")); // Handles ierim / iissem
-        if (tense === "pluperfect") answers.push(answer.replace("ivi", "i")); // Handles issem
-    }
+    const answers = verbForms(verb, { mood: 'subjunctive', tense, voice, person, number });
+    const answer = answers[0] ?? '';
 
     let ord = person === 1 ? "1st" : person === 2 ? "2nd" : "3rd";
     let numAbbr = number === "singular" ? "sg." : "pl.";
 
     let voiceDisplay: string = voice;
-    if (verb.deponent) voiceDisplay = "(deponent)";
+    if (verb.semiDeponent) voiceDisplay = "(semi-deponent)";
+    else if (verb.deponent) voiceDisplay = "(deponent)";
     else if (verb.noPassive) voiceDisplay = "";
 
     // Without macrons iacēre and iacere look alike, so name the verb by its 1st principal part too.
     const shared = verb.pp1 && verbs.some(v => v !== verb && v.inf === verb.inf);
     const verbLabel = shared ? `${verb.inf} (${verb.pp1})` : verb.inf;
 
-    let hint = "";
-    if (verb.pp1) {
-        hint = verb.deponent
-            ? `Principal parts: ${verb.pp1}, ${verb.inf}, ${verb.perf}us sum`
-            : `Principal parts: ${verb.pp1}, ${verb.inf}, ${verb.perf}i` + (verb.ppp ? `, ${verb.ppp}us` : "");
-    }
-    else if (verb.deponent) hint = `Principal parts: ${verb.pres}or, ${verb.inf}, ${verb.perf}us sum`;
-    else if (verb.irregular) {
-        if (verb.inf === "esse") hint = `Principal parts: sum, esse, fui, futurus`;
-        else if (verb.inf === "posse") hint = `Principal parts: possum, posse, potui`;
-        else if (verb.inf === "velle") hint = `Principal parts: volo, velle, volui`;
-        else if (verb.inf === "nolle") hint = `Principal parts: nolo, nolle, nolui`;
-        else if (verb.inf === "malle") hint = `Principal parts: malo, malle, malui`;
-        else if (verb.inf === "ferre") hint = `Principal parts: fero, ferre, tuli, latus`;
-        else if (verb.inf === "ire") hint = `Principal parts: eo, ire, ivi, itus`;
-        else if (verb.inf === "fieri") hint = `Principal parts: fio, fieri, factus sum`;
-    }
-    else hint = `Principal parts: ${getPP1(verb)}, ${verb.inf}, ${verb.perf}i, ${verb.ppp || '--'}us`;
+    const hint = `Principal parts: ${principalParts(verb)}`;
 
     return {
         id: "endless_" + Date.now() + "_" + Math.floor(rng() * 1e9),
@@ -274,10 +253,4 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
         answers: answers,
         explanation: `The correct algorithmic form is ${answer}.`
     };
-}
-
-function getPP1(verb: Verb): string {
-    if (verb.conj === 2) return verb.pres + 'eo';
-    if (verb.conj === 3.5 || verb.conj === 4) return verb.pres + 'io';
-    return verb.pres + 'o'; // 1st and 3rd
 }

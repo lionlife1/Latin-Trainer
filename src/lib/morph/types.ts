@@ -16,6 +16,8 @@ export interface Verb {
     irregular?: boolean;
     noPassive?: boolean;
     deponent?: boolean;
+    /** Active present system, deponent perfect system (audere, ausus sum). Always with `noPassive`; `perf` is the participle stem. */
+    semiDeponent?: boolean;
     impfBase?: string;
     /** Compounds of esse / ferre / ire conjugate like their base with `prefix` in front. */
     base?: 'esse' | 'ferre' | 'ire';

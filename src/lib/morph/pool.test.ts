@@ -8,6 +8,7 @@ describe('the engine against the whole trainer pool', () => {
 
     it('matches the frozen subjunctive conjugator on every claimed subjunctive cell', () => {
         for (const v of pool) {
+            if (v.semiDeponent) continue; // the frozen legacy conjugator never knew semi-deponents
             const cells = verbCells(v).filter(c => c.mood === 'subjunctive');
             for (const c of cells) {
                 if (c.mood !== 'subjunctive') continue;

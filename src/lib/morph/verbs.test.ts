@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import type { Verb, VerbCell, VerbTense, Voice, Person } from './types';
 import { VERBS } from '../conjugator';
-import { ALL_VERB_CELLS, hasVerbCell, verbCells, verbForms } from './verbs';
+import { ALL_VERB_CELLS, hasVerbCell, principalParts, verbCells, verbForms } from './verbs';
 
 const amo: Verb = { inf: 'amare', conj: 1, pres: 'am', perf: 'amav', ppp: 'amat', trans: 'to love' };
 const moneo: Verb = { inf: 'monere', conj: 2, pres: 'mon', perf: 'monu', ppp: 'monit', trans: 'to warn' };
@@ -273,5 +273,55 @@ describe('irregular imperatives, infinitives, participles', () => {
         expect(cs.some(c => c.mood === 'gerund')).toBe(false);
         expect(cs.some(c => c.mood === 'participle' && c.tense === 'present')).toBe(false);
         for (const v of [velle, nolle, malle, fieri, posse]) expect(verbCells(v).some(c => c.mood === 'gerund')).toBe(false);
+    });
+});
+
+describe('semi-deponents, principal parts and the fugere family', () => {
+    const audeo: Verb = { inf: 'audere', conj: 2, pres: 'aud', perf: 'aus', semiDeponent: true, noPassive: true, pp1: 'audeo', trans: 'to dare' };
+    const vb = (inf: string) => VERBS.find(v => v.inf === inf)!;
+
+    it('conjugates semi-deponents: present system active, perfect system with sum', () => {
+        expect(six(audeo, 'indicative', 'present', 'active')).toEqual(t('audeo, audes, audet, audemus, audetis, audent'));
+        expect(six(audeo, 'indicative', 'perfect', 'active')).toEqual(t('ausus sum, ausus es, ausus est, ausi sumus, ausi estis, ausi sunt'));
+        expect(one(audeo, { mood: 'subjunctive', tense: 'perfect', voice: 'active', person: 1, number: 'singular' })).toBe('ausus sim');
+        expect(one(audeo, { mood: 'subjunctive', tense: 'pluperfect', voice: 'active', person: 3, number: 'plural' })).toBe('ausi essent');
+        expect(one(audeo, { mood: 'subjunctive', tense: 'imperfect', voice: 'active', person: 1, number: 'singular' })).toBe('auderem');
+    });
+    it('gives semi-deponents their infinitives and participles', () => {
+        expect([inf('present', 'active'), inf('perfect', 'active'), inf('future', 'active')].map(c => one(audeo, c))).toEqual(['audere', 'ausus esse', 'ausurus esse']);
+        expect([part('present', 'active'), part('perfect', 'active'), part('future', 'active')].map(c => one(audeo, c))).toEqual(['audens', 'ausus', 'ausurus']);
+        expect(one(audeo, ger('genitive'))).toBe('audendi');
+        expect(one(audeo, imp('present', 'active', 2, 'singular'))).toBe('aude');
+        expect(one(audeo, imp('future', 'active', 2, 'singular'))).toBe('audeto');
+    });
+    it('gives semi-deponents no passive and no gerundive', () => {
+        const cells = verbCells(audeo);
+        expect(cells.some(c => 'voice' in c && c.voice === 'passive')).toBe(false);
+        expect(cells.some(c => c.mood === 'participle' && c.tense === 'future' && c.voice === 'passive')).toBe(false);
+    });
+
+    it('writes principal parts', () => {
+        expect(principalParts(audeo)).toBe('audeo, audere, ausus sum');
+        expect(principalParts(vb('amare'))).toBe('amo, amare, amavi, amatus');
+        expect(principalParts(vb('esse'))).toBe('sum, esse, fui, futurus');
+        expect(principalParts(vb('hortari'))).toBe('hortor, hortari, hortatus sum');
+        const cadoPP: Verb = { inf: 'cadere', conj: 3, pres: 'cad', perf: 'cecid', noPassive: true, pp1: 'cado', trans: 'to fall' };
+        expect(principalParts(cadoPP)).toBe('cado, cadere, cecidi');
+        expect(principalParts({ ...cadoPP, ppp: 'cas' })).toBe('cado, cadere, cecidi');
+    });
+
+    it('gives effugere and fugere no passive', () => {
+        const eff = vb('effugere'), fug = vb('fugere');
+        for (const v of [eff, fug]) {
+            const cells = verbCells(v);
+            expect(cells.some(c => 'voice' in c && c.voice === 'passive'), v.inf).toBe(false);
+            expect(cells.some(c => c.mood === 'participle' && c.tense === 'perfect' && c.voice === 'passive'), v.inf).toBe(false);
+        }
+        expect(one(fug, part('future', 'active'))).toBe('fugiturus');
+    });
+
+    it('derives the future infinitive of esse compounds from the perfect stem', () => {
+        expect(verbForms(absum, inf('future', 'active'))).toEqual(['afuturus esse', 'afore']);
+        expect(verbForms(prosum, inf('future', 'active'))).toEqual(['profuturus esse', 'profore']);
     });
 });

@@ -107,7 +107,7 @@ function conjOf(verb: Verb): Conj | undefined {
 /** Stem of the future active participle (`amatur`), when the verb has one. */
 function futurePartStem(verb: Verb): string | undefined {
     if (FUT_PART_STEM[verb.inf]) return FUT_PART_STEM[verb.inf];
-    if (verb.deponent) return verb.perf + 'ur';
+    if (verb.deponent || verb.semiDeponent) return verb.perf + 'ur';
     return verb.ppp ? verb.ppp + 'ur' : undefined;
 }
 
@@ -130,7 +130,7 @@ export function hasVerbCell(verb: Verb, cell: VerbCell): boolean {
             return passive && (cell.tense === 'present' || !!verb.ppp);
         case 'participle':
             if (cell.tense === 'present') return cell.voice === 'active';
-            if (cell.tense === 'perfect') return cell.voice === 'active' ? !!verb.deponent : passive && !!verb.ppp;
+            if (cell.tense === 'perfect') return cell.voice === 'active' ? !!verb.deponent || !!verb.semiDeponent : passive && !!verb.ppp;
             return cell.voice === 'active' ? futurePartStem(verb) !== undefined : !!verb.deponent || !verb.noPassive;
         case 'gerund':
             return true;
@@ -167,14 +167,15 @@ function build(verb: Verb, conj: Conj, cell: VerbCell): string {
             return dropsE ? stem : stem + IMP_SG[conj];
         }
         case 'infinitive': {
-            const part = verb.deponent ? verb.perf : verb.ppp!;
+            const perfDep = verb.deponent || verb.semiDeponent;
+            const part = perfDep ? verb.perf : verb.ppp!;
             if (cell.tense === 'present') return cell.voice === 'active' ? verb.inf : stem + INF_PASS[conj];
-            if (cell.tense === 'perfect') return cell.voice === 'active' && !verb.deponent ? verb.perf + 'isse' : part + 'us esse';
+            if (cell.tense === 'perfect') return cell.voice === 'active' && !perfDep ? verb.perf + 'isse' : part + 'us esse';
             return cell.voice === 'active' ? futurePartStem(verb)! + 'us esse' : verb.ppp + 'um iri';
         }
         case 'participle':
             if (cell.tense === 'present') return stem + PRES_PART[conj];
-            if (cell.tense === 'perfect') return (verb.deponent ? verb.perf : verb.ppp) + 'us';
+            if (cell.tense === 'perfect') return (verb.deponent || verb.semiDeponent ? verb.perf : verb.ppp) + 'us';
             if (cell.voice === 'active') return futurePartStem(verb)! + 'us';
             return stem + GERUND[conj] + 'ndus';
         case 'gerund':
@@ -187,25 +188,27 @@ function finite(verb: Verb, conj: Conj, cell: Extract<VerbCell, { mood: 'indicat
     const stem = verb.pres!;
     // Deponents are active in meaning and passive in form.
     const passive = cell.voice === 'passive' || !!verb.deponent;
+    // Semi-deponents are active in the present system and passive in form (participle plus sum) in the perfect system.
+    const perfPassive = passive || !!verb.semiDeponent;
     const ends = passive ? PASS : ACT;
-    const partStem = verb.deponent ? verb.perf : (verb.ppp ?? verb.perf);
+    const partStem = verb.deponent || verb.semiDeponent ? verb.perf : (verb.ppp ?? verb.perf);
     const participle = partStem + (cell.number === 'plural' ? 'i' : 'us');
 
     if (cell.mood === 'subjunctive') {
         switch (cell.tense) {
             case 'present': return stem + SUBJ_PRES[conj] + ends[i];
             case 'imperfect': return (verb.deponent ? verb.impfBase! : verb.inf) + ends[i];
-            case 'perfect': return passive ? `${participle} ${ESSE_SUBJ_PRES[i]}` : verb.perf + SUBJ_PERF_ACT[i];
-            case 'pluperfect': return passive ? `${participle} ${ESSE_SUBJ_IMPF[i]}` : verb.perf + SUBJ_PLUP_ACT[i];
+            case 'perfect': return perfPassive ? `${participle} ${ESSE_SUBJ_PRES[i]}` : verb.perf + SUBJ_PERF_ACT[i];
+            case 'pluperfect': return perfPassive ? `${participle} ${ESSE_SUBJ_IMPF[i]}` : verb.perf + SUBJ_PLUP_ACT[i];
         }
     }
     switch (cell.tense) {
         case 'present': return stem + (passive ? PRES_PASS : PRES_ACT)[conj][i];
         case 'imperfect': return stem + IMPF[conj] + ends[i];
         case 'future': return stem + (passive ? FUT_PASS : FUT_ACT)[conj][i];
-        case 'perfect': return passive ? `${participle} ${ESSE_PRES[i]}` : verb.perf + PERF_ACT[i];
-        case 'pluperfect': return passive ? `${participle} ${ESSE_IMPF[i]}` : verb.perf + PLUP_ACT[i];
-        case 'futurePerfect': return passive ? `${participle} ${ESSE_FUT[i]}` : verb.perf + FUTPERF_ACT[i];
+        case 'perfect': return perfPassive ? `${participle} ${ESSE_PRES[i]}` : verb.perf + PERF_ACT[i];
+        case 'pluperfect': return perfPassive ? `${participle} ${ESSE_IMPF[i]}` : verb.perf + PLUP_ACT[i];
+        case 'futurePerfect': return perfPassive ? `${participle} ${ESSE_FUT[i]}` : verb.perf + FUTPERF_ACT[i];
     }
 }
 
@@ -251,7 +254,8 @@ function irregularSpec(verb: Verb): Irregular | undefined {
                 subjPres: ESSE_SUBJ_PRES.map(e), subjImpf: ESSE_SUBJ_IMPF.map(e),
                 impPres: [e('es'), e('este')], impFut: [e('esto'), e('esto'), e('estote'), e('sunto')],
                 infPres: e('esse'),
-                infFut: [verb.perf + 'turus esse', pre + 'fore'],
+                // fore is built on the perfect stem (afu- gives afore), not the prefix (abfore).
+                infFut: [verb.perf + 'turus esse', verb.perf.replace(/u$/, '') + 'ore'],
                 partFut: verb.perf + 'turus',
             };
         }
@@ -429,4 +433,28 @@ function perfectEnding(mood: 'indicative' | 'subjunctive', tense: VerbTense, i: 
 function perfectAuxiliary(mood: 'indicative' | 'subjunctive', tense: VerbTense, i: number): string {
     if (mood === 'subjunctive') return tense === 'perfect' ? ESSE_SUBJ_PRES[i] : ESSE_SUBJ_IMPF[i];
     return tense === 'perfect' ? ESSE_PRES[i] : tense === 'pluperfect' ? ESSE_IMPF[i] : ESSE_FUT[i];
+}
+
+// ---------------------------------------------------------------------------------------------
+// Principal parts, for hints.
+
+const IRREGULAR_PARTS: Record<string, string> = {
+    esse: 'sum, esse, fui, futurus', posse: 'possum, posse, potui', velle: 'volo, velle, volui',
+    nolle: 'nolo, nolle, nolui', malle: 'malo, malle, malui', ferre: 'fero, ferre, tuli, latus',
+    ire: 'eo, ire, ivi, itus', fieri: 'fio, fieri, factus sum',
+};
+
+/** First principal part of a regular verb, derived from the present stem. */
+function firstPart(verb: Verb): string {
+    if (verb.conj === 2) return verb.pres + 'eo';
+    if (verb.conj === 3.5 || verb.conj === 4) return verb.pres + 'io';
+    return verb.pres + 'o'; // 1st and 3rd
+}
+
+/** The principal parts as a student writes them (`amo, amare, amavi, amatus`), with no label. */
+export function principalParts(verb: Verb): string {
+    if (verb.semiDeponent) return `${verb.pp1 ?? firstPart(verb)}, ${verb.inf}, ${verb.perf}us sum`;
+    if (verb.deponent) return `${verb.pp1 ?? verb.pres + 'or'}, ${verb.inf}, ${verb.perf}us sum`;
+    if (verb.irregular && !verb.pp1 && IRREGULAR_PARTS[verb.inf]) return IRREGULAR_PARTS[verb.inf];
+    return `${verb.pp1 ?? firstPart(verb)}, ${verb.inf}, ${verb.perf}i` + (verb.ppp && !verb.noPassive ? `, ${verb.ppp}us` : '');
 }
