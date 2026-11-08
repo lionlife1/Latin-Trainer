@@ -139,6 +139,11 @@ describe('coreTrainerVerbs on the vendored sources', () => {
   it('matches 3rd-conjugation deponents in -i', () => {
     expect(get('frui')).toMatchObject({ conj: 3, deponent: true, perf: 'fruct', pp1: 'fruor' });
   });
+  it('restricts a deponent whose 2nd part is -i to the 3rd conjugation', () => {
+    const row = { headword: 'fruor, i, fructus sum', lemma: 'fruor', definition: 'enjoy', pos: 'verb', frequency: null, core: true };
+    const r = coreTrainerVerbs([row, { ...row, lemma: 'sequor', headword: 'sequor, i, secutus sum' }], parseWhitakerVerbs(fixture(21089, 21090, 34874, 34875)));
+    expect(r.verbs.map(v => v.inf)).toEqual(['frui', 'sequi']);
+  });
   it('gives transitive ire compounds a passive', () => {
     for (const [inf, ppp] of [['transire', 'transit'], ['adire', 'adit'], ['circumire', 'circumit'], ['inire', 'init']]) {
       expect(get(inf), inf).toMatchObject({ base: 'ire', ppp });

@@ -106,6 +106,9 @@ const GLOSS_OVERRIDES: Record<string, string> = {
 /** Compounds of ire that take a direct object, so they have a passive (by 1st principal part). */
 const TRANSITIVE_IRE = new Set(['transeo', 'adeo', 'circumeo', 'ineo']);
 
+/** Lexicon headwords whose 2nd principal part is wrong. fruor's core row says "fruari" (Whitaker's 1st-conjugation line); it is 3rd conjugation, frui. */
+const SECOND_PART_OVERRIDES: Record<string, string> = { fruor: 'i' };
+
 /** Defective or duplicate verbs left out, keyed `${pp1}|${conj}`: fari, and the archaic 3rd-conjugation sonere. */
 const EXCLUDED_VERBS = new Set(['for|1', 'sono|3']);
 
@@ -134,8 +137,7 @@ export function coreTrainerVerbs(rows: LexiconRow[], whitaker: WhitakerVerb[]): 
   const unmatched: string[] = [];
   for (const r of rows) {
     if (!r.core || r.pos !== 'verb') continue;
-    // The core row for fruor is built from Whitaker's 1st-conjugation line ("fruari"); the verb is 3rd conjugation (frui).
-    const second = r.lemma === 'fruor' ? 'i' : r.headword.split(',')[1]?.trim();
+    const second = SECOND_PART_OVERRIDES[r.lemma] ?? r.headword.split(',')[1]?.trim();
     const infKey = second ? lemmaKey(second) : '';
     const match = infKey
       ? (byPp1.get(lemmaKey(r.lemma)) ?? [])

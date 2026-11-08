@@ -232,6 +232,8 @@ describe('irregular finite forms', () => {
         expect(pp(redeo, 'pluperfect', 'active', 1, 'singular')).toEqual(['rediveram', 'redieram']);
         expect(pp(redeo, 'perfect', 'active', 2, 'singular')).toEqual(['redivisti', 'rediisti', 'redisti']);
         expect(verbCells(redeo).some(c => 'voice' in c && c.voice === 'passive')).toBe(false);
+        expect(verbForms(redeo, inf('present', 'passive'))).toEqual([]);
+        expect(verbForms(redeo, inf('future', 'passive'))).toEqual([]);
     });
     it('ire perfect-system variants', () => {
         expect(pp(ire, 'perfect', 'active', 2, 'singular')).toEqual(['ivisti', 'iisti', 'isti']);
@@ -290,10 +292,14 @@ describe('transitive ire compounds have a passive', () => {
         expect(one(adeo, cell('subjunctive', 'imperfect', 2, 'singular'))).toBe('adireris');
         expect(one(adeo, part('perfect', 'passive'))).toBe('aditus');
         expect(one(adeo, part('future', 'passive'))).toBe('adeundus');
+        expect(one(adeo, inf('present', 'passive'))).toBe('adiri');
+        expect(one(adeo, inf('future', 'passive'))).toBe('aditum iri');
     });
     it('keeps intransitive compounds active only', () => {
         expect(verbCells(adeo).some(c => 'voice' in c && c.voice === 'passive')).toBe(true);
         expect(verbCells(redeo).some(c => 'voice' in c && c.voice === 'passive')).toBe(false);
+        expect(verbForms(redeo, inf('present', 'passive'))).toEqual([]);
+        expect(verbForms(redeo, inf('future', 'passive'))).toEqual([]);
     });
 });
 
