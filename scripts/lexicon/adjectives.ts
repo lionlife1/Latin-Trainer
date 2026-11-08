@@ -1,5 +1,6 @@
 import type { Adjective } from '../../src/lib/morph/adjectives';
 import type { LexiconRow } from '../build-seed';
+import { lemmaKey } from './compose';
 import { clipGloss, firstSense } from './gloss';
 import { freqRank, matchHeadword } from './match';
 import { dictlineFields, have } from './whitaker';
@@ -19,8 +20,16 @@ const COMPARISON_FIXES: Record<string, { comp: string; sup: string }> = {
   multus: { comp: 'plur', sup: 'pluri' },
 };
 
+/** Other per-word corrections Whitaker's codes get wrong, by nominative. */
+const ADJECTIVE_FIXES: Record<string, Partial<Adjective>> = {
+  iuvenis: { terminations: 1 },
+};
+
+/** Separate headwords that duplicate another adjective's comparative (plus, pluris is multus). */
+const EXCLUDED = new Set(['plus']);
+
 /** Whitaker lists these as i-stems, but they decline with consonant-stem endings. */
-const CONSONANT_ADJ = new Set(['vetus', 'pauper', 'dives', 'princeps', 'particeps', 'compos', 'superstes', 'senex']);
+const CONSONANT_ADJ = new Set(['vetus', 'pauper', 'dives', 'princeps', 'particeps', 'compos', 'superstes', 'senex', 'memor', 'uber', 'pubes', 'iuvenis']);
 
 function adjectiveFromLine(line: string): Omit<WhitakerAdjective, 'line'> | null {
   const d = dictlineFields(line);
@@ -32,6 +41,7 @@ function adjectiveFromLine(line: string): Omit<WhitakerAdjective, 'line'> | null
   const mk = (nom: string, decl: Adjective['decl'], keys: string[], extra: Partial<Adjective> = {}) => {
     const adjective: Omit<Adjective, 'trans'> = { nom, stem: s2, decl, ...extra };
     const fix = COMPARISON_FIXES[nom];
+    Object.assign(adjective, ADJECTIVE_FIXES[nom]);
     if (fix) Object.assign(adjective, fix);
     else if (d.f[3] === 'X' && have(s3) && have(s4)) Object.assign(adjective, { comp: s3, sup: s4 });
     if (CONSONANT_ADJ.has(nom)) adjective.consonantStem = true;
@@ -74,6 +84,7 @@ export function coreAdjectives(rows: LexiconRow[], whitaker: WhitakerAdjective[]
       unmatched.push(r.headword);
       continue;
     }
+    if (EXCLUDED.has(lemmaKey(match.adjective.nom))) continue;
     const adjective: Adjective = { ...match.adjective, trans: clipGloss(firstSense(r.definition)) };
     const id = `${adjective.nom}|${adjective.stem}|${adjective.decl}`;
     if (!adjectives.has(id)) adjectives.set(id, adjective);

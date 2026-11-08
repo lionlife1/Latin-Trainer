@@ -155,9 +155,9 @@ const ADVERB_OVERRIDES: Record<string, [string, string, string]> = {
     audax: ['audacter', 'audacius', 'audacissime'],
 };
 
-/** The adverb in one degree; none unless the adjective is compared. */
+/** The adverb in one degree; none unless the adjective is compared, and none for consonant stems (no regular adverb). */
 export function adverbForms(a: Adjective, degree: Degree): string[] {
-    if (!a.comp || !a.sup) return [];
+    if (!a.comp || !a.sup || a.consonantStem) return [];
     const i = DEGREES.indexOf(degree);
     const over = ADVERB_OVERRIDES[a.nom];
     if (over) return [over[i]];

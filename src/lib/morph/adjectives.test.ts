@@ -15,6 +15,7 @@ const vetus: Adjective = { nom: 'vetus', stem: 'veter', decl: '3', terminations:
 const multus: Adjective = { nom: 'multus', stem: 'mult', decl: '12', comp: 'plur', sup: 'pluri', trans: 'much' };
 const solus: Adjective = { nom: 'solus', stem: 'sol', decl: '12', pronominal: true, trans: 'alone' };
 const alius: Adjective = { nom: 'alius', stem: 'ali', decl: '12', pronominal: true, trans: 'another' };
+const memor: Adjective = { nom: 'memor', stem: 'memor', decl: '3', terminations: 1, consonantStem: true, trans: 'mindful' };
 const magnus: Adjective = { nom: 'magnus', stem: 'magn', decl: '12', comp: 'mai', sup: 'maxi', trans: 'big' };
 
 const CASES: Case[] = ['nominative', 'genitive', 'dative', 'accusative', 'ablative', 'vocative'];
@@ -46,6 +47,7 @@ describe('adjective declension', () => {
         ['bonus comp n pl', bonus, 'n', 'plural', 'comparative', 'meliora, meliorum, melioribus, meliora, melioribus, meliora'],
         ['bonus sup f sg', bonus, 'f', 'singular', 'superlative', 'optima, optimae, optimae, optimam, optima, optima'],
         ['pulcher sup m sg', pulcher, 'm', 'singular', 'superlative', 'pulcherrimus, pulcherrimi, pulcherrimo, pulcherrimum, pulcherrimo, pulcherrime'],
+        ['memor n pl', memor, 'n', 'plural', 'positive', 'memora, memorum, memoribus, memora, memoribus, memora'],
         ['solus m sg', solus, 'm', 'singular', 'positive', 'solus, solius, soli, solum, solo, sole'],
     ];
     for (const [name, a, g, n, d, expected] of golden) {
@@ -107,5 +109,7 @@ describe('adverbs', () => {
         expect(['positive', 'comparative', 'superlative'].map(d => adverbForms(bonus, d as Degree)[0])).toEqual(['bene', 'melius', 'optime']);
         expect(['positive', 'comparative', 'superlative'].map(d => adverbForms(magnus, d as Degree)[0])).toEqual(['magnopere', 'magis', 'maxime']);
         expect(adverbForms(solus, 'positive')).toEqual([]);
+        expect(adverbForms(vetus, 'positive')).toEqual([]);
+        expect(adverbForms(vetus, 'superlative')).toEqual([]);
     });
 });

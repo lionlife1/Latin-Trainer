@@ -54,6 +54,9 @@ describe('coreAdjectives on the vendored sources', () => {
     expect(get('multus')).toMatchObject({ comp: 'plur', sup: 'pluri' });
     expect(get('malus')).toMatchObject({ comp: 'pei', sup: 'pessi' });
     expect(get('vetus')).toMatchObject({ consonantStem: true });
+    for (const nom of ['memor', 'uber', 'iuvenis']) expect(get(nom), nom).toMatchObject({ consonantStem: true });
+    expect(get('iuvenis')).toMatchObject({ terminations: 1 });
+    expect(get('plus')).toBeUndefined();
     expect(get('meus')).toBeDefined();
     expect(get('meus')).not.toHaveProperty('comp');
     expect(get('solus')).toMatchObject({ pronominal: true });

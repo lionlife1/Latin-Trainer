@@ -56,7 +56,7 @@ describe('the engine against the whole trainer pool', () => {
                 expect(forms.length, `${a.nom} ${JSON.stringify(c)}`).toBeGreaterThan(0);
                 for (const f of forms) expect(f, `${a.nom} ${JSON.stringify(c)}`).toMatch(/^[a-z]+$/);
             }
-            if (a.comp) {
+            if (a.comp && !a.consonantStem) {
                 for (const d of ['positive', 'comparative', 'superlative'] as const) {
                     const forms = adverbForms(a, d);
                     expect(forms.length, `${a.nom} adverb ${d}`).toBeGreaterThan(0);
