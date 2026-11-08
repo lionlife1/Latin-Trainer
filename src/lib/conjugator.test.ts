@@ -47,7 +47,7 @@ describe('generateRandomQuestion', () => {
     const rng = seeded(7);
     for (let i = 0; i < 20; i++) {
       const q = generateRandomQuestion({ stdAct: false, stdPass: false, dep: true, irr: false }, rng);
-      expect(q?.prompt).toContain('(deponent)');
+      expect(q?.prompt).toMatch(/\((semi-)?deponent\)/);
     }
   });
 });
@@ -136,5 +136,20 @@ describe('trainerPool', () => {
         expect(a).not.toMatch(/undefined|NaN|j/);
       }
     }
+  });
+});
+
+describe('semi-deponents in Endless', () => {
+  const audeo: Verb = { inf: 'audere', conj: 2, pres: 'aud', perf: 'aus', semiDeponent: true, noPassive: true, pp1: 'audeo', trans: 'to dare' };
+  it('is drawn by the deponent option and labelled', () => {
+    const rng = seeded(3);
+    for (let i = 0; i < 10; i++) {
+      const q = generateRandomQuestion({ stdAct: false, stdPass: false, dep: true, irr: false }, rng, [audeo]);
+      expect(q?.prompt).toContain('(semi-deponent)');
+      expect(q?.type === 'typein' && q.hint).toBe('Principal parts: audeo, audere, ausus sum');
+    }
+  });
+  it('is not drawn without the deponent option', () => {
+    expect(generateRandomQuestion({ stdAct: true, stdPass: true, dep: false, irr: true }, seeded(3), [audeo])).toBeNull();
   });
 });

@@ -1,28 +1,11 @@
 // Algorithmic Latin subjunctive conjugation engine (ported from legacy trainer.js).
 import type { DrillQuestion, EndlessConfig } from './types';
+import type { Verb, Voice, GrammaticalNumber, Person } from './morph/types';
+import { principalParts, verbForms } from './morph/verbs';
 import { CORE_VERBS } from '../content/verbs.generated';
 
-export interface Verb {
-    inf: string;
-    conj?: number;
-    pres?: string;
-    perf: string;
-    ppp?: string;
-    trans: string;
-    irregular?: boolean;
-    noPassive?: boolean;
-    deponent?: boolean;
-    impfBase?: string;
-    /** Compounds of esse / ferre / ire conjugate like their base with `prefix` in front. */
-    base?: 'esse' | 'ferre' | 'ire';
-    prefix?: string;
-    /** First principal part, for hints; set on generated verbs. */
-    pp1?: string;
-}
+export type { Verb, Voice, GrammaticalNumber, Person } from './morph/types';
 export type Tense = 'present' | 'imperfect' | 'perfect' | 'pluperfect';
-export type Voice = 'active' | 'passive';
-export type GrammaticalNumber = 'singular' | 'plural';
-export type Person = 1 | 2 | 3;
 
 
 export const VERBS: Verb[] = [
@@ -150,9 +133,9 @@ export const VERBS: Verb[] = [
     { inf: "conficere", conj: 3.5, pres: "confic", perf: "confec", ppp: "confect", trans: "to finish" },
     { inf: "conspicere", conj: 3.5, pres: "conspic", perf: "conspex", ppp: "conspect", trans: "to catch sight of" },
     { inf: "cupere", conj: 3.5, pres: "cup", perf: "cupiv", ppp: "cupit", trans: "to desire" },
-    { inf: "effugere", conj: 3.5, pres: "effug", perf: "effug", ppp: "effugit", trans: "to escape" },
+    { inf: "effugere", conj: 3.5, pres: "effug", perf: "effug", noPassive: true, trans: "to escape" },
     { inf: "excipere", conj: 3.5, pres: "excip", perf: "excep", ppp: "except", trans: "to welcome" },
-    { inf: "fugere", conj: 3.5, pres: "fug", perf: "fug", ppp: "fugit", trans: "to flee" },
+    { inf: "fugere", conj: 3.5, pres: "fug", perf: "fug", noPassive: true, ppp: "fugit", trans: "to flee" },
     { inf: "iacere", conj: 3.5, pres: "iac", perf: "iec", ppp: "iact", trans: "to throw" },
     { inf: "incipere", conj: 3.5, pres: "incip", perf: "incep", ppp: "incept", trans: "to begin" },
     { inf: "interficere", conj: 3.5, pres: "interfic", perf: "interfec", ppp: "interfect", trans: "to kill" },
@@ -181,77 +164,8 @@ const TENSES: Tense[] = ["present", "imperfect", "perfect", "pluperfect"];
 const PERSONS: Person[] = [1, 2, 3];
 const NUMBERS: GrammaticalNumber[] = ["singular", "plural"];
 
-const ENDINGS_ACT = ["m", "s", "t", "mus", "tis", "nt"];
-const ENDINGS_PASS = ["r", "ris", "tur", "mur", "mini", "ntur"];
-
-function getPersonNumberIndex(person: Person, number: GrammaticalNumber): number {
-    return (person - 1) + (number === "plural" ? 3 : 0);
-}
-
 export function generateSubjunctiveForm(verb: Verb, tense: Tense, voice: Voice, person: Person, number: GrammaticalNumber): string {
-    const pIndex = getPersonNumberIndex(person, number);
-    const actEnd = ENDINGS_ACT[pIndex];
-    const passEnd = ENDINGS_PASS[pIndex];
-
-    const calcVoice = verb.deponent ? "passive" : voice;
-    const irr = verb.base ?? verb.inf;
-    const pre = verb.prefix ?? "";
-
-    // 1. PRESENT SUBJUNCTIVE
-    if (tense === "present") {
-        if (irr === "esse") return pre + ["sim", "sis", "sit", "simus", "sitis", "sint"][pIndex];
-        if (verb.inf === "posse") return ["possim", "possis", "possit", "possimus", "possitis", "possint"][pIndex];
-        if (verb.inf === "velle") return "vel" + (pIndex === 0 ? "im" : pIndex === 1 ? "is" : pIndex === 2 ? "it" : pIndex === 3 ? "imus" : pIndex === 4 ? "itis" : "int");
-        if (verb.inf === "nolle") return "nol" + (pIndex === 0 ? "im" : pIndex === 1 ? "is" : pIndex === 2 ? "it" : pIndex === 3 ? "imus" : pIndex === 4 ? "itis" : "int");
-        if (verb.inf === "malle") return "mal" + (pIndex === 0 ? "im" : pIndex === 1 ? "is" : pIndex === 2 ? "it" : pIndex === 3 ? "imus" : pIndex === 4 ? "itis" : "int");
-
-        let stem = "";
-        if (irr === "ferre") stem = pre + "fera";
-        else if (irr === "ire") stem = pre + "ea";
-        else if (verb.inf === "fieri") stem = "fia";
-        else if (verb.conj === 1) stem = verb.pres + "e";
-        else if (verb.conj === 2) stem = verb.pres + "ea";
-        else if (verb.conj === 3) stem = verb.pres + "a";
-        else if (verb.conj === 3.5) stem = verb.pres + "ia";
-        else if (verb.conj === 4) stem = verb.pres + "ia";
-
-        if (verb.inf === "fieri") return stem + actEnd;
-        return calcVoice === "active" ? stem + actEnd : stem + passEnd;
-    }
-
-    // 2. IMPERFECT SUBJUNCTIVE
-    if (tense === "imperfect") {
-        let base = verb.impfBase || verb.inf;
-        if (verb.inf === "fieri") return "fiere" + actEnd;
-        return calcVoice === "active" ? base + actEnd : base + passEnd;
-    }
-
-    // 3. PERFECT SUBJUNCTIVE
-    if (tense === "perfect") {
-        if (verb.inf === "fieri" || calcVoice === "passive") {
-            const essePres = ["sim", "sis", "sit", "simus", "sitis", "sint"];
-            const ppp = verb.ppp || verb.perf;
-            const pppEnd = number === "singular" ? "us" : "i";
-            return ppp + pppEnd + " " + essePres[pIndex];
-        } else {
-            const perfEnds = ["erim", "eris", "erit", "erimus", "eritis", "erint"];
-            return verb.perf + perfEnds[pIndex];
-        }
-    }
-
-    // 4. PLUPERFECT SUBJUNCTIVE
-    if (tense === "pluperfect") {
-        if (verb.inf === "fieri" || calcVoice === "passive") {
-            const esseImp = ["essem", "esses", "esset", "essemus", "essetis", "essent"];
-            const ppp = verb.ppp || verb.perf;
-            const pppEnd = number === "singular" ? "us" : "i";
-            return ppp + pppEnd + " " + esseImp[pIndex];
-        } else {
-            const plupEnds = ["issem", "isses", "isset", "issemus", "issetis", "issent"];
-            return verb.perf + plupEnds[pIndex];
-        }
-    }
-    throw new Error(`Unknown tense: ${tense}`);
+    return verbForms(verb, { mood: 'subjunctive', tense, voice: verb.deponent ? 'active' : voice, person, number })[0] ?? '';
 }
 
 /**
@@ -277,7 +191,7 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
     const pick = <T,>(arr: T[]): T => arr[Math.floor(rng() * arr.length)];
     // 1. Filter the VERBS array based on the user's config
     let pool = verbs.filter(v => {
-        if (v.deponent) return config.dep;
+        if (v.deponent || v.semiDeponent) return config.dep;
         if (v.irregular) {
             if (v.noPassive && !config.stdAct && !config.dep) return false;
             return config.irr;
@@ -296,7 +210,7 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
     // 3. Determine available voices based on verb type AND config
     let availableVoices: Voice[] = [];
 
-    if (verb.deponent) {
+    if (verb.deponent || verb.semiDeponent) {
         availableVoices = ["active"]; // Internal logic uses active string
     } else if (verb.irregular) {
         if (config.stdAct) availableVoices.push("active");
@@ -313,43 +227,22 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
     const person = pick(PERSONS);
     const number = pick(NUMBERS);
 
-    const answer = generateSubjunctiveForm(verb, tense, voice, person, number);
-    const answers = [answer];
-
-    if ((verb.base ?? verb.inf) === "ire" && (tense === "perfect" || tense === "pluperfect")) {
-        answers.push(answer.replace("iv", "i")); // Handles ierim / iissem
-        if (tense === "pluperfect") answers.push(answer.replace("ivi", "i")); // Handles issem
-    }
+    const answers = verbForms(verb, { mood: 'subjunctive', tense, voice, person, number });
+    const answer = answers[0] ?? '';
 
     let ord = person === 1 ? "1st" : person === 2 ? "2nd" : "3rd";
     let numAbbr = number === "singular" ? "sg." : "pl.";
 
     let voiceDisplay: string = voice;
-    if (verb.deponent) voiceDisplay = "(deponent)";
+    if (verb.semiDeponent) voiceDisplay = "(semi-deponent)";
+    else if (verb.deponent) voiceDisplay = "(deponent)";
     else if (verb.noPassive) voiceDisplay = "";
 
     // Without macrons iacēre and iacere look alike, so name the verb by its 1st principal part too.
     const shared = verb.pp1 && verbs.some(v => v !== verb && v.inf === verb.inf);
     const verbLabel = shared ? `${verb.inf} (${verb.pp1})` : verb.inf;
 
-    let hint = "";
-    if (verb.pp1) {
-        hint = verb.deponent
-            ? `Principal parts: ${verb.pp1}, ${verb.inf}, ${verb.perf}us sum`
-            : `Principal parts: ${verb.pp1}, ${verb.inf}, ${verb.perf}i` + (verb.ppp ? `, ${verb.ppp}us` : "");
-    }
-    else if (verb.deponent) hint = `Principal parts: ${verb.pres}or, ${verb.inf}, ${verb.perf}us sum`;
-    else if (verb.irregular) {
-        if (verb.inf === "esse") hint = `Principal parts: sum, esse, fui, futurus`;
-        else if (verb.inf === "posse") hint = `Principal parts: possum, posse, potui`;
-        else if (verb.inf === "velle") hint = `Principal parts: volo, velle, volui`;
-        else if (verb.inf === "nolle") hint = `Principal parts: nolo, nolle, nolui`;
-        else if (verb.inf === "malle") hint = `Principal parts: malo, malle, malui`;
-        else if (verb.inf === "ferre") hint = `Principal parts: fero, ferre, tuli, latus`;
-        else if (verb.inf === "ire") hint = `Principal parts: eo, ire, ivi, itus`;
-        else if (verb.inf === "fieri") hint = `Principal parts: fio, fieri, factus sum`;
-    }
-    else hint = `Principal parts: ${getPP1(verb)}, ${verb.inf}, ${verb.perf}i, ${verb.ppp || '--'}us`;
+    const hint = `Principal parts: ${principalParts(verb)}`;
 
     return {
         id: "endless_" + Date.now() + "_" + Math.floor(rng() * 1e9),
@@ -360,10 +253,4 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
         answers: answers,
         explanation: `The correct algorithmic form is ${answer}.`
     };
-}
-
-function getPP1(verb: Verb): string {
-    if (verb.conj === 2) return verb.pres + 'eo';
-    if (verb.conj === 3.5 || verb.conj === 4) return verb.pres + 'io';
-    return verb.pres + 'o'; // 1st and 3rd
 }
