@@ -26,7 +26,7 @@ export function GrammarPath() {
       <div className="page-head">
         <div>
           <h1>Grammar</h1>
-          <p>The subjunctive, from forms to clauses. {done} of {MODULES.length} complete.</p>
+          <p>From subjunctive forms to case uses. {done} of {MODULES.length} complete.</p>
         </div>
         <Link className="btn-secondary" to="/practice/endless"><Repeat size={18} />Endless Train</Link>
       </div>

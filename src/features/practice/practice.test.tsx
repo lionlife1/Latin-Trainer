@@ -38,6 +38,7 @@ describe('GrammarPath', () => {
     expect(steps[1]).toHaveAttribute('data-state', 'practiced');
     expect(within(steps[1]).getByText('Best 60%')).toBeInTheDocument();
     expect(within(steps[1]).getByText('Up next')).toBeInTheDocument();
+    expect(screen.getByText(`From subjunctive forms to case uses. 1 of ${MODULES.length} complete.`)).toBeInTheDocument();
     expect(steps[2]).toHaveAttribute('data-state', 'new');
     expect(within(steps[2]).getByRole('link')).toHaveAttribute('href', `/practice/grammar/${MODULES[2].id}`);
   });
