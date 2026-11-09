@@ -167,3 +167,14 @@ a.subject:hover { border-color: var(--primary); }
 /* ---- Vocab set editor ---- */
 .vocab-add { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: start; }
 @media (max-width: 480px) { .vocab-add { grid-template-columns: 1fr; } }
+
+/* ---- Vocab flashcards ---- */
+.flashcard {
+  width: 100%; min-height: 220px; display: flex; align-items: center; justify-content: center; padding: 24px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); box-shadow: var(--shadow);
+  font-size: 1.35rem; text-align: center; cursor: pointer; overflow-wrap: anywhere;
+}
+.flashcard[aria-pressed="true"] { border-color: var(--primary); }
+.rate-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
+.feedback-actions { display: flex; gap: 10px; margin-top: 16px; }
+.feedback-actions > button { flex: 1; margin-top: 0; }
