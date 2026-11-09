@@ -30,3 +30,26 @@ describe('DrillSession', () => {
     expect(onFinish).toHaveBeenCalledWith([expect.objectContaining({ correct: true, given: 'y' })]);
   });
 });
+
+describe('DrillSession onEasy', () => {
+  it('offers That was easy only after a right answer', async () => {
+    const onEasy = vi.fn();
+    const { unmount } = render(<DrillSession questions={[typein]} mode="practice" onEasy={onEasy} onFinish={() => {}} onExit={() => {}} />);
+    await userEvent.type(screen.getByPlaceholderText(/type your answer/i), 'nope{Enter}');
+    expect(screen.queryByRole('button', { name: 'That was easy' })).not.toBeInTheDocument();
+    unmount();
+
+    const onFinish = vi.fn();
+    render(<DrillSession questions={[typein]} mode="practice" onEasy={onEasy} onFinish={onFinish} onExit={() => {}} />);
+    await userEvent.type(screen.getByPlaceholderText(/type your answer/i), 'amem{Enter}');
+    await userEvent.click(screen.getByRole('button', { name: 'That was easy' }));
+    expect(onEasy).toHaveBeenCalledWith(typein);
+    expect(onFinish).toHaveBeenCalledTimes(1);
+  });
+
+  it('never shows That was easy without the prop', async () => {
+    render(<DrillSession questions={[typein]} mode="practice" onFinish={() => {}} onExit={() => {}} />);
+    await userEvent.type(screen.getByPlaceholderText(/type your answer/i), 'amem{Enter}');
+    expect(screen.queryByRole('button', { name: 'That was easy' })).not.toBeInTheDocument();
+  });
+});

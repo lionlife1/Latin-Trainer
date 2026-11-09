@@ -13,6 +13,8 @@ interface Props {
   mode: 'practice';
   onAnswer?: DrillOptions['onAnswer'];
   generate?: DrillOptions['generate'];
+  /** Vocab review: offered after a right answer; re-rates that question as easy. */
+  onEasy?: (q: DrillQuestion) => void;
   onFinish: (results: DrillResult[]) => void;
   /** Gets the answers so far, so endless sessions can be logged on exit. */
   onExit: (results: DrillResult[]) => void;
@@ -23,7 +25,7 @@ interface Props {
 const LOSE_ANSWERS = 'Exit this session? Your answers so far won\'t be saved.';
 
 /** Practice-mode drill with instant feedback. Test mode uses TestRunner instead. */
-export function DrillSession({ questions, mode, onAnswer, generate, onFinish, onExit, exitWarning = LOSE_ANSWERS }: Props) {
+export function DrillSession({ questions, mode, onAnswer, generate, onEasy, onFinish, onExit, exitWarning = LOSE_ANSWERS }: Props) {
   const drill = useDrill(questions, { mode, onAnswer, generate });
   const { current, index, total, finished, results, score, lastResult } = drill;
 
@@ -74,6 +76,7 @@ export function DrillSession({ questions, mode, onAnswer, generate, onFinish, on
           answerIsHtml={current.type === 'mc'}
           explanation={current.explanation}
           onNext={drill.next}
+          onEasy={onEasy && lastResult.correct ? () => { onEasy(current); drill.next(); } : undefined}
         />
       )}
     </div>

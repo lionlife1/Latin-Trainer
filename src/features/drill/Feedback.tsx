@@ -7,9 +7,11 @@ interface Props {
   answerIsHtml?: boolean;
   explanation?: string;
   onNext: () => void;
+  /** Vocab review only: re-rate the answer as easy and move on. */
+  onEasy?: () => void;
 }
 
-export function Feedback({ correct, answer, answerIsHtml, explanation, onNext }: Props) {
+export function Feedback({ correct, answer, answerIsHtml, explanation, onNext, onEasy }: Props) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Enter') onNext();
@@ -31,7 +33,14 @@ export function Feedback({ correct, answer, answerIsHtml, explanation, onNext }:
           {answerIsHtml ? <strong dangerouslySetInnerHTML={{ __html: answer }} /> : <strong>{answer}</strong>}
         </div>
         {explanation && <div className="feedback-explanation">{explanation}</div>}
-        <button className="btn-next" onClick={onNext}>Continue</button>
+        {onEasy ? (
+          <div className="feedback-actions">
+            <button className="btn-secondary" onClick={onEasy}>That was easy</button>
+            <button className="btn-next" onClick={onNext}>Continue</button>
+          </div>
+        ) : (
+          <button className="btn-next" onClick={onNext}>Continue</button>
+        )}
       </div>
     </div>
   );
