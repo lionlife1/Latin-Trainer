@@ -158,3 +158,8 @@ a.subject:hover { border-color: var(--primary); }
 .header-meta .link.active { font-weight: 700; }
 .auth-card > p.muted { margin-bottom: 18px; }
 .auth-card .btn-primary { width: 100%; margin-top: 4px; }
+
+/* Forms setup */
+.forms-group { border: 0; margin: 0; min-width: 0; }
+.forms-group legend { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 10px; }
+.checkbox-list.inline { flex-direction: row; flex-wrap: wrap; gap: 10px 18px; font-size: 0.95rem; margin-bottom: 8px; }

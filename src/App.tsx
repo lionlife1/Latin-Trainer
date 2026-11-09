@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { StudentShell } from './components/StudentShell';
 import { AuthProvider, useAuth } from './features/auth/AuthProvider';
@@ -13,6 +14,9 @@ import { SessionSyncProvider } from './features/practice/useSessionSync';
 import { StudentRoutes } from './features/student/StudentRoutes';
 import { TeacherRoutes } from './features/teacher/TeacherRoutes';
 import { hasBackend } from './lib/supabase';
+
+// Lazy: keeps the generated nouns and adjectives out of the main bundle.
+const FormsRoute = lazy(() => import('./features/practice/forms/FormsRoute'));
 
 /** Students land on Class, teachers on their classes, everyone else on Practice. */
 export function Home() {
@@ -31,6 +35,7 @@ export function AppRoutes() {
       <Route path="/practice/grammar" element={<StudentShell><GrammarPath /></StudentShell>} />
       <Route path="/practice/grammar/:moduleId" element={<ModuleRoute />} />
       <Route path="/practice/endless" element={<EndlessRoute />} />
+      <Route path="/practice/forms" element={<Suspense fallback={null}><FormsRoute /></Suspense>} />
       {hasBackend && (
         <>
           <Route path="/join" element={<StudentJoin />} />
