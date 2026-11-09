@@ -42,6 +42,16 @@ describe('GrammarPath', () => {
     expect(steps[2]).toHaveAttribute('data-state', 'new');
     expect(within(steps[2]).getByRole('link')).toHaveAttribute('href', `/practice/grammar/${MODULES[2].id}`);
   });
+  it('sends a student who finished the subjunctive modules on to M10', () => {
+    localStorage.setItem('latiniq_progress', JSON.stringify(
+      Object.fromEntries(MODULES.slice(0, 10).map(m => [m.id, { completed: true }]))));
+    at(<GrammarPath />);
+    const steps = screen.getAllByRole('listitem');
+    expect(steps[10]).toHaveAttribute('data-state', 'new');
+    expect(within(steps[10]).getByText('Up next')).toBeInTheDocument();
+    expect(within(steps[10]).getByRole('link')).toHaveAttribute('href', '/practice/grammar/participles_ablative_absolute');
+    expect(screen.getByText(`From subjunctive forms to case uses. 10 of ${MODULES.length} complete.`)).toBeInTheDocument();
+  });
 });
 
 describe('PracticeHome', () => {

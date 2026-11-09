@@ -7,6 +7,33 @@ export const SUBJUNCTIVE_IDS = [
 ];
 const ALL = MODULES.flatMap(m => m.questions);
 
+interface NewModuleSpec {
+  id: string; badge: string; title: string; concepts: string[];
+  prerequisites: string[]; xp_reward: number; mc: number; typein: number;
+}
+
+function expectNewModule(index: number, s: NewModuleSpec): void {
+  const m = MODULES[index];
+  expect(m?.id).toBe(s.id);
+  expect(m.badge).toBe(s.badge);
+  expect(m.title).toBe(s.title);
+  expect(m.prerequisites).toEqual(s.prerequisites);
+  expect(m.xp_reward).toBe(s.xp_reward);
+  expect(m.concepts).toEqual(s.concepts);
+  expect(m.tagline.trim()).toBeTruthy();
+  expect(m.description.trim()).toBeTruthy();
+  expect(m.questions.filter(q => q.type === 'mc')).toHaveLength(s.mc);
+  expect(m.questions.filter(q => q.type === 'typein')).toHaveLength(s.typein);
+  expect(m.questions.length).toBeGreaterThanOrEqual(30);
+  expect(m.questions.length).toBeLessThanOrEqual(35);
+  for (const q of m.questions) {
+    expect(q.id.startsWith(`${s.badge.toLowerCase()}-`), q.id).toBe(true);
+    expect(q.hint?.trim(), q.id).toBeTruthy();
+  }
+  const earlier = MODULES.slice(0, index).map(e => e.id);
+  for (const p of s.prerequisites) expect(earlier, p).toContain(p);
+}
+
 describe('MODULES content', () => {
   it('starts with the 10 subjunctive modules in order', () => {
     expect(MODULES.slice(0, 10).map(m => m.id)).toEqual(SUBJUNCTIVE_IDS);
@@ -43,4 +70,11 @@ describe('MODULES content', () => {
       if (q.type === 'typein') expect(q.answers.length, q.id).toBeGreaterThan(0);
     }
   });
+  it('M10 Participles and the Ablative Absolute follows the path', () => expectNewModule(10, {
+    id: 'participles_ablative_absolute', badge: 'M10', title: 'Participles and the Ablative Absolute',
+    concepts: ['Present Active Participle', 'Perfect Passive Participle', 'Future Active Participle',
+      'Participles of Deponent Verbs', 'Agreement and Relative Time', 'Ablative Absolute',
+      'Ablative Absolute without a Participle'],
+    prerequisites: [], xp_reward: 110, mc: 21, typein: 12,
+  }));
 });

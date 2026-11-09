@@ -4664,5 +4664,475 @@ export const MODULES: ModuleContent[] = [
         "correct": "Hic est mīles quī in bellō pugnāvit."
       }
     ]
+  },
+  {
+    "id": "participles_ablative_absolute",
+    "badge": "M10",
+    "title": "Participles and the Ablative Absolute",
+    "tagline": "Verbal adjectives and absolute phrases",
+    "description": "Form the present, perfect and future participles, including those of deponent verbs, and translate each by its time relative to the main verb. Then spot the ablative absolute and translate it as a when, after, since or although clause.",
+    "concepts": [
+      "Present Active Participle",
+      "Perfect Passive Participle",
+      "Future Active Participle",
+      "Participles of Deponent Verbs",
+      "Agreement and Relative Time",
+      "Ablative Absolute",
+      "Ablative Absolute without a Participle"
+    ],
+    "prerequisites": [],
+    "xp_reward": 110,
+    "questions": [
+      {
+        "id": "m10-101",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Give the <strong>present active participle</strong> (nominative masculine singular) of <span class='latin-word'>portō, portāre, portāvī, portātum</span>.",
+        "hint": "1st conjugation: present stem portā- + -ns.",
+        "explanation": "Add -ns to the present stem: portāns, portantis, 'carrying'.",
+        "answers": [
+          "portans"
+        ]
+      },
+      {
+        "id": "m10-102",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Give the <strong>present active participle</strong> (nominative masculine singular) of <span class='latin-word'>moneō, monēre, monuī, monitum</span>.",
+        "hint": "2nd conjugation: present stem monē- + -ns.",
+        "explanation": "Add -ns to the present stem: monēns, monentis, 'warning'.",
+        "answers": [
+          "monens"
+        ]
+      },
+      {
+        "id": "m10-103",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Give the <strong>present active participle</strong> (nominative masculine singular) of <span class='latin-word'>regō, regere, rēxī, rēctum</span>.",
+        "hint": "3rd conjugation: the short e of the stem becomes long before -ns.",
+        "explanation": "3rd conjugation verbs form the present participle with -ēns: regēns, regentis, 'ruling'.",
+        "answers": [
+          "regens"
+        ]
+      },
+      {
+        "id": "m10-104",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Give the <strong>present active participle</strong> (nominative masculine singular) of <span class='latin-word'>capiō, capere, cēpī, captum</span>.",
+        "hint": "3rd conjugation -iō verbs keep the i: capi- + -ēns.",
+        "explanation": "3rd -iō and 4th conjugation verbs form the present participle with -iēns: capiēns, capientis, 'taking'.",
+        "answers": [
+          "capiens"
+        ]
+      },
+      {
+        "id": "m10-105",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Give the <strong>genitive singular</strong> of the present active participle of <span class='latin-word'>audiō, audīre, audīvī, audītum</span>.",
+        "hint": "The nominative is audiēns. Present participles decline like 3rd declension adjectives.",
+        "explanation": "The nominative -ns becomes -ntis in the genitive: audiēns, audientis, 'of the one hearing'.",
+        "answers": [
+          "audientis"
+        ]
+      },
+      {
+        "id": "m10-106",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Give the <strong>genitive plural</strong> of the present active participle of <span class='latin-word'>vocō, vocāre, vocāvī, vocātum</span>.",
+        "hint": "Present participles are i-stems in the genitive plural.",
+        "explanation": "Present participles take -ium in the genitive plural: vocantium, 'of those calling'.",
+        "answers": [
+          "vocantium"
+        ]
+      },
+      {
+        "id": "m10-107",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Give the <strong>perfect passive participle</strong> (nominative masculine singular) of <span class='latin-word'>ferō, ferre, tulī, lātum</span>.",
+        "hint": "The perfect passive participle is built on the 4th principal part, however irregular it looks.",
+        "explanation": "Take the 4th principal part and use the -us ending: lātus, lāta, lātum, 'having been carried'.",
+        "answers": [
+          "latus"
+        ]
+      },
+      {
+        "id": "m10-108",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Give the <strong>future active participle</strong> (nominative masculine singular) of <span class='latin-word'>sum, esse, fuī, futūrus</span>.",
+        "hint": "Sum has no 4th principal part ending in -um; its last part is already the future participle.",
+        "explanation": "The future active participle of sum is futūrus, futūra, futūrum, 'about to be'. It is the source of the English word future.",
+        "answers": [
+          "futurus"
+        ]
+      },
+      {
+        "id": "m10-109",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Give the <strong>perfect participle</strong> (nominative masculine singular) of the deponent verb <span class='latin-word'>sequor, sequī, secūtus sum</span>.",
+        "hint": "Drop sum from the last principal part.",
+        "explanation": "A deponent's perfect participle is its last principal part without sum: secūtus. It is active in meaning: 'having followed'.",
+        "answers": [
+          "secutus"
+        ]
+      },
+      {
+        "id": "m10-201",
+        "type": "mc",
+        "badge": "IDENTIFY",
+        "prompt": "Name the tense and voice of the participle <strong>missus</strong> (from <span class='latin-word'>mittō, mittere, mīsī, missum</span>).",
+        "hint": "Look at the 4th principal part.",
+        "explanation": "missus is built on the 4th principal part missum, so it is the perfect passive participle: 'having been sent'.",
+        "choices": [
+          "Perfect passive",
+          "Present active",
+          "Future active",
+          "Perfect active"
+        ],
+        "correct": "Perfect passive"
+      },
+      {
+        "id": "m10-202",
+        "type": "mc",
+        "badge": "IDENTIFY",
+        "prompt": "Name the tense and voice of the participle <strong>pugnātūrī</strong>.",
+        "hint": "Look for -ūr- before the ending.",
+        "explanation": "The -ūrus, -a, -um ending marks the future active participle: pugnātūrī, 'about to fight'.",
+        "choices": [
+          "Future active",
+          "Future passive",
+          "Perfect passive",
+          "Present active"
+        ],
+        "correct": "Future active"
+      },
+      {
+        "id": "m10-203",
+        "type": "mc",
+        "badge": "IDENTIFY",
+        "prompt": "Which participle shows an action that happened <strong>before</strong> the action of the main verb?",
+        "hint": "Think of 'having been ...ed'.",
+        "explanation": "The perfect participle shows time before the main verb. The present shows the same time, and the future shows time after.",
+        "choices": [
+          "The perfect participle",
+          "The present participle",
+          "The future participle",
+          "All three, depending on the main verb"
+        ],
+        "correct": "The perfect participle"
+      },
+      {
+        "id": "m10-204",
+        "type": "mc",
+        "badge": "IDENTIFY",
+        "prompt": "Mīlitēs <strong>pugnantēs</strong> vulnerātī sunt.<br>When does the fighting happen, compared to the main verb?",
+        "hint": "pugnantēs is a present participle.",
+        "explanation": "A present participle shows the same time as the main verb: 'The soldiers were wounded while they were fighting.'",
+        "choices": [
+          "At the same time",
+          "Before it",
+          "After it",
+          "Participles show no time at all"
+        ],
+        "correct": "At the same time"
+      },
+      {
+        "id": "m10-205",
+        "type": "mc",
+        "badge": "IDENTIFY",
+        "prompt": "Name the tense and meaning of <strong>hortātus</strong> (from the deponent <span class='latin-word'>hortor, hortārī, hortātus sum</span>).",
+        "hint": "Deponent verbs are passive in form but active in meaning.",
+        "explanation": "hortātus is a perfect participle. Because hortor is deponent, it is active in meaning: 'having encouraged'.",
+        "choices": [
+          "Perfect, active in meaning",
+          "Perfect, passive in meaning",
+          "Present, active in meaning",
+          "Future, active in meaning"
+        ],
+        "correct": "Perfect, active in meaning"
+      },
+      {
+        "id": "m10-301",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Cōnsul mīlitēs <strong>fugientēs</strong> vīdit.<br>Who was fleeing?",
+        "hint": "A participle agrees with its noun in case, number and gender.",
+        "explanation": "fugientēs is plural, so it cannot go with cōnsul. It agrees with mīlitēs: 'The consul saw the soldiers fleeing.'",
+        "choices": [
+          "The soldiers",
+          "The consul",
+          "The consul and the soldiers together",
+          "Someone not named in the sentence"
+        ],
+        "correct": "The soldiers"
+      },
+      {
+        "id": "m10-302",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Agricola in agrō <strong>labōrāns</strong> lupum vīdit.<br>Choose the best translation.",
+        "hint": "labōrāns is nominative singular. Which noun is nominative singular?",
+        "explanation": "labōrāns agrees with agricola, and a present participle shows the same time as the main verb: 'While working in the field, the farmer saw a wolf.'",
+        "choices": [
+          "While working in the field, the farmer saw a wolf.",
+          "Having worked in the field, the farmer saw a wolf.",
+          "About to work in the field, the farmer saw a wolf.",
+          "The farmer saw a wolf that was working in the field."
+        ],
+        "correct": "While working in the field, the farmer saw a wolf."
+      },
+      {
+        "id": "m10-303",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Mīlitēs ā cōnsule <strong>laudātī</strong> fortiter pugnāvērunt.<br>Choose the best translation.",
+        "hint": "laudātī is a perfect passive participle. ā cōnsule tells you who did the praising.",
+        "explanation": "A perfect passive participle means 'having been ...ed': 'Having been praised by the consul, the soldiers fought bravely.'",
+        "choices": [
+          "Having been praised by the consul, the soldiers fought bravely.",
+          "Having praised the consul, the soldiers fought bravely.",
+          "While praising the consul, the soldiers fought bravely.",
+          "About to be praised by the consul, the soldiers fought bravely."
+        ],
+        "correct": "Having been praised by the consul, the soldiers fought bravely."
+      },
+      {
+        "id": "m10-304",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Hostēs oppidum <strong>oppugnātūrī</strong> castra posuērunt.<br>Choose the best translation.",
+        "hint": "The -ūr- marks a future participle.",
+        "explanation": "A future active participle means 'about to' or 'going to': 'About to attack the town, the enemy pitched camp.'",
+        "choices": [
+          "About to attack the town, the enemy pitched camp.",
+          "Having attacked the town, the enemy pitched camp.",
+          "While attacking the town, the enemy pitched camp.",
+          "Having been attacked, the enemy pitched camp near the town."
+        ],
+        "correct": "About to attack the town, the enemy pitched camp."
+      },
+      {
+        "id": "m10-305",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Caesar mīlitēs <strong>hortātus</strong> proelium commīsit.<br>Choose the best translation.",
+        "hint": "hortor is deponent.",
+        "explanation": "A deponent's perfect participle is active, so hortātus means 'having encouraged', and mīlitēs is its object: 'Having encouraged the soldiers, Caesar began the battle.'",
+        "choices": [
+          "Having encouraged the soldiers, Caesar began the battle.",
+          "Having been encouraged by the soldiers, Caesar began the battle.",
+          "About to encourage the soldiers, Caesar began the battle.",
+          "Caesar began the battle with the encouraged soldiers."
+        ],
+        "correct": "Having encouraged the soldiers, Caesar began the battle."
+      },
+      {
+        "id": "m10-401",
+        "type": "mc",
+        "badge": "ABLATIVE ABSOLUTE",
+        "prompt": "<strong>Urbe captā</strong>, mīlitēs praedam rapuērunt.<br>How is the bolded phrase best translated?",
+        "hint": "captā is a perfect passive participle in the ablative.",
+        "explanation": "A noun and participle in the ablative, loosely attached to the sentence, form an ablative absolute. The perfect participle shows time before the main verb: 'After the city had been captured, the soldiers seized the loot.'",
+        "choices": [
+          "After the city had been captured",
+          "While the city was capturing",
+          "Before the city was captured",
+          "In order to capture the city"
+        ],
+        "correct": "After the city had been captured"
+      },
+      {
+        "id": "m10-402",
+        "type": "mc",
+        "badge": "ABLATIVE ABSOLUTE",
+        "prompt": "Rēge interfectō, cīvēs ex urbe fūgērunt.<br>Which words form the ablative absolute?",
+        "hint": "Look for a noun and a participle in the ablative with no preposition.",
+        "explanation": "rēge interfectō is a noun and a participle in the ablative with no preposition: 'After the king had been killed, the citizens fled from the city.' ex urbe is a prepositional phrase.",
+        "choices": [
+          "Rēge interfectō",
+          "ex urbe",
+          "cīvēs fūgērunt",
+          "cīvēs ex urbe"
+        ],
+        "correct": "Rēge interfectō"
+      },
+      {
+        "id": "m10-403",
+        "type": "mc",
+        "badge": "ABLATIVE ABSOLUTE",
+        "prompt": "<strong>Mīlitibus fortiter pugnantibus</strong>, castra tamen capta sunt.<br>How is the bolded phrase best translated?",
+        "hint": "tamen means 'nevertheless'. What does that tell you about the link between the two ideas?",
+        "explanation": "tamen shows a contrast, so translate the ablative absolute with 'although'. The present participle shows the same time: 'Although the soldiers were fighting bravely, the camp was nevertheless captured.'",
+        "choices": [
+          "Although the soldiers were fighting bravely",
+          "Because the soldiers were fighting bravely",
+          "After the soldiers had fought bravely",
+          "So that the soldiers would fight bravely"
+        ],
+        "correct": "Although the soldiers were fighting bravely"
+      },
+      {
+        "id": "m10-404",
+        "type": "mc",
+        "badge": "ABLATIVE ABSOLUTE",
+        "prompt": "<strong>Hīs rēbus cognitīs</strong>, Caesar ad castra contendit.<br>How is the bolded phrase best translated?",
+        "hint": "cognitīs is a perfect passive participle.",
+        "explanation": "The perfect participle shows time before the main verb: 'When these things had been learned, Caesar hurried to the camp.'",
+        "choices": [
+          "When these things had been learned",
+          "While these things were being learned",
+          "In order to learn these things",
+          "About to learn these things"
+        ],
+        "correct": "When these things had been learned"
+      },
+      {
+        "id": "m10-405",
+        "type": "mc",
+        "badge": "ABLATIVE ABSOLUTE",
+        "prompt": "<strong>Cicerōne cōnsule</strong>, coniūrātiō Catilīnae patefacta est.<br>How is the bolded phrase best translated?",
+        "hint": "There is no participle. Latin has no present participle of sum, so supply 'being'.",
+        "explanation": "Two nouns in the ablative can form an ablative absolute without a participle: 'Cicero being consul', or better 'When Cicero was consul, the conspiracy of Catiline was exposed.'",
+        "choices": [
+          "When Cicero was consul",
+          "By Cicero the consul",
+          "With Cicero and the consul",
+          "Cicero, the consul,"
+        ],
+        "correct": "When Cicero was consul"
+      },
+      {
+        "id": "m10-406",
+        "type": "mc",
+        "badge": "ABLATIVE ABSOLUTE",
+        "prompt": "Which phrase is an ablative absolute with no participle?<br><em>With Caesar as leader</em>",
+        "hint": "An ablative absolute has no preposition.",
+        "explanation": "Caesare duce is two nouns in the ablative with no preposition, so it is an ablative absolute: 'with Caesar as leader'. The phrases with cum and ā are ordinary prepositional phrases.",
+        "choices": [
+          "Caesare duce",
+          "cum Caesare duce",
+          "ā Caesare duce",
+          "Caesarī ducī"
+        ],
+        "correct": "Caesare duce"
+      },
+      {
+        "id": "m10-407",
+        "type": "typein",
+        "badge": "ABLATIVE ABSOLUTE",
+        "prompt": "Put <strong>oppidum captum</strong> into the ablative absolute:<br>______, cīvēs in silvās fūgērunt.<br><em>After the town had been captured, the citizens fled into the woods.</em>",
+        "hint": "oppidum is 2nd declension neuter. Both words go into the ablative singular.",
+        "explanation": "The noun and participle both go into the ablative: oppidō captō, 'after the town had been captured'.",
+        "answers": [
+          "oppido capto",
+          "capto oppido"
+        ]
+      },
+      {
+        "id": "m10-408",
+        "type": "typein",
+        "badge": "ABLATIVE ABSOLUTE",
+        "prompt": "Put <strong>hostēs victī</strong> into the ablative absolute:<br>______, Rōmānī in castra rediērunt.<br><em>After the enemy had been defeated, the Romans returned to camp.</em>",
+        "hint": "Both words are plural. hostis is 3rd declension; victus is 1st/2nd declension.",
+        "explanation": "The ablative plural of hostēs is hostibus and of victī is victīs: hostibus victīs, 'after the enemy had been defeated'.",
+        "answers": [
+          "hostibus victis",
+          "victis hostibus"
+        ]
+      },
+      {
+        "id": "m10-409",
+        "type": "typein",
+        "badge": "ABLATIVE ABSOLUTE",
+        "prompt": "Put <strong>cōnsul dīcēns</strong> into the ablative absolute:<br>______, senātōrēs tacēbant.<br><em>While the consul was speaking, the senators were silent.</em>",
+        "hint": "In an ablative absolute, the present participle ends in -e, not -ī.",
+        "explanation": "cōnsul becomes cōnsule, and the present participle takes -e in an ablative absolute: cōnsule dīcente, 'while the consul was speaking'.",
+        "answers": [
+          "consule dicente",
+          "dicente consule"
+        ]
+      },
+      {
+        "id": "m10-501",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "Choose the participle that completes the ablative absolute:<br>Rēge ______, cīvēs fēlīcēs erant.<br><em>While the king was ruling, the citizens were happy.</em>",
+        "hint": "Present participles have two ablative singular endings.",
+        "explanation": "In an ablative absolute the present participle ends in -e: regente. The -ī ending is used when the participle acts as a plain adjective.",
+        "choices": [
+          "regente",
+          "regentī",
+          "rēctō",
+          "rēctūrō"
+        ],
+        "correct": "regente"
+      },
+      {
+        "id": "m10-502",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "Which is the better Latin for:<br><em>The soldiers captured the city and destroyed it.</em>",
+        "hint": "The city is the object of the main verb.",
+        "explanation": "When the noun is also the subject or object of the main verb, Latin uses a participle agreeing with it, not an ablative absolute: 'The soldiers destroyed the captured city.'",
+        "choices": [
+          "Mīlitēs urbem captam dēlēvērunt.",
+          "Mīlitēs, urbe captā, urbem dēlēvērunt.",
+          "Mīlitēs urbem capientem dēlēvērunt.",
+          "Mīlitēs urbem captūram dēlēvērunt."
+        ],
+        "correct": "Mīlitēs urbem captam dēlēvērunt."
+      },
+      {
+        "id": "m10-503",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "Mīlitēs, cōnsulem <strong>secūtī</strong>, in castra rediērunt.<br>Choose the best translation.",
+        "hint": "sequor is deponent, and cōnsulem is accusative.",
+        "explanation": "Deponent perfect participles are active, and cōnsulem is the object: 'Having followed the consul, the soldiers returned to camp.'",
+        "choices": [
+          "Having followed the consul, the soldiers returned to camp.",
+          "Having been followed by the consul, the soldiers returned to camp.",
+          "About to follow the consul, the soldiers returned to camp.",
+          "The soldiers returned to camp and the consul followed them."
+        ],
+        "correct": "Having followed the consul, the soldiers returned to camp."
+      },
+      {
+        "id": "m10-504",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "Mīlitēs <strong>dormientēs</strong> ab hostibus captī sunt.<br>Choose the best translation.",
+        "hint": "The present participle shows the same time as the main verb. What tense is captī sunt?",
+        "explanation": "A present participle shows the same time as the main verb, so with a past main verb it becomes 'while they were ...ing': 'While they were sleeping, the soldiers were captured by the enemy.'",
+        "choices": [
+          "While they were sleeping, the soldiers were captured by the enemy.",
+          "While they are sleeping, the soldiers were captured by the enemy.",
+          "After they had slept, the soldiers were captured by the enemy.",
+          "About to sleep, the soldiers were captured by the enemy."
+        ],
+        "correct": "While they were sleeping, the soldiers were captured by the enemy."
+      },
+      {
+        "id": "m10-505",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "In which sentence do the noun and participle in the ablative <strong>not</strong> form an ablative absolute?",
+        "hint": "An ablative absolute is never the object of a preposition.",
+        "explanation": "In 'in urbe captā' the phrase is governed by the preposition in, 'in the captured city', so it is not absolute. The others stand apart from the rest of the sentence.",
+        "choices": [
+          "Mīlitēs in urbe captā manēbant.",
+          "Urbe captā, mīlitēs discessērunt.",
+          "Duce occīsō, hostēs fūgērunt.",
+          "Signō datō, mīlitēs prōcessērunt."
+        ],
+        "correct": "Mīlitēs in urbe captā manēbant."
+      }
+    ]
   }
 ];
