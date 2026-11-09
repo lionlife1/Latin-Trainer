@@ -20,6 +20,10 @@ const RATES: { rate: Rate; label: string }[] = [
   { rate: 'easy', label: 'Easy' },
 ];
 
+/** True when Space should activate a focused control (not the card) instead of flipping. */
+const ownsSpace = (t: EventTarget | null) =>
+  t instanceof Element && !!t.closest('button, a, input, textarea, select, [role="button"]') && !t.closest('.flashcard');
+
 export function FlashcardSession({ questions, onRate, onFinish, onExit, exitWarning = "Exit this session? Your answers so far won't be saved." }: Props) {
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -40,6 +44,7 @@ export function FlashcardSession({ questions, onRate, onFinish, onExit, exitWarn
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === ' ') {
+        if (ownsSpace(e.target)) return;
         e.preventDefault();
         setFlipped(f => !f);
       } else if (flipped && e.key >= '1' && e.key <= '4') {
@@ -48,7 +53,7 @@ export function FlashcardSession({ questions, onRate, onFinish, onExit, exitWarn
     };
     // A focused card button would also flip on Space's keyup (Firefox), undoing our flip.
     const onKeyUp = (e: KeyboardEvent) => {
-      if (e.key === ' ') e.preventDefault();
+      if (e.key === ' ' && !ownsSpace(e.target)) e.preventDefault();
     };
     document.addEventListener('keydown', onKey);
     document.addEventListener('keyup', onKeyUp);

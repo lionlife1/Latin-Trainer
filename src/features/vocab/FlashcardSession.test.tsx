@@ -49,6 +49,24 @@ describe('FlashcardSession', () => {
     expect(onRate).toHaveBeenCalledWith(qs[0], 'again');
   });
 
+  it('Space activates a focused button instead of flipping', async () => {
+    const user = userEvent.setup();
+    const { onExit } = setup(true);
+    screen.getByRole('button', { name: 'Exit session' }).focus();
+    await user.keyboard(' ');
+    expect(onExit).toHaveBeenCalledTimes(1);
+    expect(screen.getByText('puella')).toBeInTheDocument();
+  });
+
+  it('Space on a focused rating button rates it', async () => {
+    const user = userEvent.setup();
+    const { onRate } = setup();
+    await user.keyboard(' ');
+    screen.getByRole('button', { name: 'Hard' }).focus();
+    await user.keyboard(' ');
+    expect(onRate).toHaveBeenCalledWith(qs[0], 'hard');
+  });
+
   it('finishes with results', async () => {
     const user = userEvent.setup();
     const { onFinish } = setup();

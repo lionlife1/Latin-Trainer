@@ -32,7 +32,7 @@ export function StudyRoute() {
   const set = getSet(setId);
   if (!set) return <Navigate to="/practice/vocab" replace />;
   if (!MODES.includes(mode)) return <Navigate to={`/practice/vocab/${set.id}`} replace />;
-  return <Study set={set} mode={mode as StudyMode} />;
+  return <Study key={`${set.id}:${mode}`} set={set} mode={mode as StudyMode} />;
 }
 
 function Notice({ title, children, onBack }: { title: string; children: string; onBack: () => void }) {
