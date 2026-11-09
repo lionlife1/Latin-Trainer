@@ -49,6 +49,25 @@ describe('PracticeHome', () => {
     expect(screen.getAllByText('Coming soon')).toHaveLength(2);
   });
 
+  it('links to Forms between Grammar and Vocab', () => {
+    at(<PracticeHome />);
+    const titles = Array.from(document.querySelectorAll('.subject-title')).map(e => e.textContent);
+    expect(titles).toEqual(['Grammar', 'Forms', 'Vocab', 'Translation']);
+    expect(screen.getByRole('link', { name: /Forms/ })).toHaveAttribute('href', '/practice/forms');
+  });
+
+  it('shows Forms sessions in recents', () => {
+    saveSessions([sess({ kind: 'forms', module_id: null, correct: 1, total: 2 })]);
+    at(<PracticeHome />);
+    expect(screen.getByRole('button', { name: /Forms/ })).toHaveTextContent('1/2 correct');
+  });
+
+  it('tolerates an unknown session kind', () => {
+    saveSessions([sess({ kind: 'mystery' as never, module_id: null })]);
+    at(<PracticeHome />);
+    expect(screen.getByRole('button', { name: /Practice/ })).toBeInTheDocument();
+  });
+
   it('lists the five newest sessions with scores, skipping imports', () => {
     saveSessions([
       ...Array.from({ length: 6 }, (_, i) => sess({ finished_at: new Date(Date.now() - i * 60_000).toISOString(), correct: i })),

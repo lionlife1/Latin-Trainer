@@ -23,3 +23,4 @@ export const Layers = (p: P) => <Svg {...p}><path d="M12 3l9 5-9 5-9-5z" /><path
 export const Cards = (p: P) => <Svg {...p}><rect x="3" y="6" width="14" height="14" rx="2" /><path d="M7 3h12a2 2 0 012 2v12" /></Svg>;
 export const Translate = (p: P) => <Svg {...p}><path d="M4 5h9M8.5 3v2M6 5c.5 3 2.5 5.5 5 7M11 5c-.8 3.5-3 6.5-6.5 8" /><path d="M13 21l4-9 4 9M14.5 18h5" /></Svg>;
 export const Repeat = (p: P) => <Svg {...p}><path d="M17 2l3 3-3 3" /><path d="M4 11V9a4 4 0 014-4h12M7 22l-3-3 3-3" /><path d="M20 13v2a4 4 0 01-4 4H4" /></Svg>;
+export const Table = (p: P) => <Svg {...p}><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 10h18M9 4v16" /></Svg>;

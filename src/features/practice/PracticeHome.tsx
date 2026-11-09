@@ -1,13 +1,18 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Cards, ChevronRight, Layers, Translate } from '../../components/icons';
+import { Cards, ChevronRight, Layers, Table, Translate } from '../../components/icons';
 import { MODULES } from '../../content/modules';
 import { loadProgress, loadStreak, loadTotalXP, todayISO } from '../solo/progressStore';
 import { relativeDay } from './relativeDay';
 import { loadSessions, pct, type PracticeSession } from './sessionLog';
 import { useSyncVersion } from './useSessionSync';
 
-const titleOf = (s: PracticeSession) =>
-  s.kind === 'endless' ? 'Endless Train' : MODULES.find(m => m.id === s.module_id)?.title ?? 'Grammar module';
+const RECENT: Record<PracticeSession['kind'], { title: (s: PracticeSession) => string; path: (s: PracticeSession) => string }> = {
+  module: { title: s => MODULES.find(m => m.id === s.module_id)?.title ?? 'Grammar module', path: s => `/practice/grammar/${s.module_id}` },
+  endless: { title: () => 'Endless Train', path: () => '/practice/endless' },
+  forms: { title: () => 'Forms', path: () => '/practice/forms' },
+  import: { title: () => 'Grammar module', path: () => '/practice/grammar' },
+};
+const FALLBACK = { title: () => 'Practice', path: () => '/practice' };
 
 const scoreClass = (p: number) => (p >= 80 ? 'good' : p >= 60 ? 'mid' : 'low');
 
@@ -51,12 +56,13 @@ export function PracticeHome() {
             <ul className="rows">
               {recents.map(s => {
                 const p = pct(s);
-                const open = () => navigate(s.kind === 'endless' ? '/practice/endless' : `/practice/grammar/${s.module_id}`);
+                const recent = RECENT[s.kind] ?? FALLBACK;
+                const open = () => navigate(recent.path(s));
                 return (
                   <li key={s.id}>
                     <button className="row-item" onClick={open}>
                       <span className="row-main">
-                        <span className="row-title" style={{ display: 'block' }}>{titleOf(s)}</span>
+                        <span className="row-title" style={{ display: 'block' }}>{recent.title(s)}</span>
                         <span className="row-sub">{relativeDay(s.finished_at)} · {s.correct}/{s.total} correct</span>
                       </span>
                       <span className="row-side">
@@ -79,6 +85,11 @@ export function PracticeHome() {
             <span className="subject-icon"><Layers /></span>
             <span className="subject-title">Grammar</span>
             <span className="subject-sub">{done} of {MODULES.length} modules complete</span>
+          </Link>
+          <Link className="subject" to="/practice/forms">
+            <span className="subject-icon"><Table /></span>
+            <span className="subject-title">Forms</span>
+            <span className="subject-sub">Make and identify any form</span>
           </Link>
           <div className="subject soon" aria-disabled="true">
             <span className="subject-icon"><Cards /></span>
