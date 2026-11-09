@@ -91,4 +91,12 @@ describe('MODULES content', () => {
       'Purpose: ad + Gerund or Gerundive', 'Purpose: causā or grātiā + Genitive'],
     prerequisites: ['participles_ablative_absolute'], xp_reward: 110, mc: 20, typein: 13,
   }));
+  it('M13 Noun Case Uses ends the path', () => expectNewModule(13, {
+    id: 'case_uses', badge: 'M13', title: 'Noun Case Uses',
+    concepts: ['Ablative: Means, Manner, Accompaniment', 'Ablative: Time When and Time Within Which',
+      'Ablative: Agent, Comparison, Separation, Cause', 'Ablative of Description',
+      'Dative: Indirect Object and Special Verbs', 'Dative: Possession, Purpose and Reference',
+      'Genitive: Partitive and Description', 'Accusative: Extent and Place to Which'],
+    prerequisites: [], xp_reward: 120, mc: 22, typein: 13,
+  }));
 });

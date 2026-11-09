@@ -6071,5 +6071,506 @@ export const MODULES: ModuleContent[] = [
         "correct": "The consul gave me a book to read."
       }
     ]
+  },
+  {
+    "id": "case_uses",
+    "badge": "M13",
+    "title": "Noun Case Uses",
+    "tagline": "Ablative, dative, genitive and accusative at work",
+    "description": "Name the job a noun's case is doing, and choose the right case for each job. Covers the main uses of the ablative (means, manner, accompaniment, time when and within which, agent, comparison, separation, cause and description), the dative (indirect object, special verbs, possession, purpose and reference), the genitive (partitive and description) and the accusative (extent of time and space, and place to which).",
+    "concepts": [
+      "Ablative: Means, Manner, Accompaniment",
+      "Ablative: Time When and Time Within Which",
+      "Ablative: Agent, Comparison, Separation, Cause",
+      "Ablative of Description",
+      "Dative: Indirect Object and Special Verbs",
+      "Dative: Possession, Purpose and Reference",
+      "Genitive: Partitive and Description",
+      "Accusative: Extent and Place to Which"
+    ],
+    "prerequisites": [],
+    "xp_reward": 120,
+    "questions": [
+      {
+        "id": "m13-101",
+        "type": "mc",
+        "badge": "ABLATIVE",
+        "prompt": "Mīlitēs hostēs <strong>gladiīs</strong> necāvērunt.<br>What use of the ablative is bolded?",
+        "hint": "Is it a person or a tool? Is there a preposition?",
+        "explanation": "A tool, with no preposition: ablative of means. 'The soldiers killed the enemy with swords.'",
+        "choices": [
+          "Means",
+          "Manner",
+          "Accompaniment",
+          "Agent"
+        ],
+        "correct": "Means"
+      },
+      {
+        "id": "m13-102",
+        "type": "mc",
+        "badge": "ABLATIVE",
+        "prompt": "Mīlitēs <strong>magnā cum virtūte</strong> pugnāvērunt.<br>What use of the ablative is bolded?",
+        "hint": "Ask what the bolded phrase tells you about the action, and check for a preposition.",
+        "explanation": "A quality that shows how something was done, with cum: ablative of manner. 'The soldiers fought with great courage.' Means never takes cum.",
+        "choices": [
+          "Manner",
+          "Means",
+          "Accompaniment",
+          "Cause"
+        ],
+        "correct": "Manner"
+      },
+      {
+        "id": "m13-103",
+        "type": "mc",
+        "badge": "ABLATIVE",
+        "prompt": "Lēgātus <strong>cum mīlitibus</strong> ad castra vēnit.<br>What use of the ablative is bolded?",
+        "hint": "Ask what the bolded phrase tells you about the action, and check for a preposition.",
+        "explanation": "cum + a person who goes along: ablative of accompaniment. 'The envoy came to the camp with the soldiers.'",
+        "choices": [
+          "Accompaniment",
+          "Manner",
+          "Means",
+          "Agent"
+        ],
+        "correct": "Accompaniment"
+      },
+      {
+        "id": "m13-104",
+        "type": "mc",
+        "badge": "ABLATIVE",
+        "prompt": "<strong>Prīmā lūce</strong> Caesar castra mōvit.<br>What use of the ablative is bolded?",
+        "hint": "Ask what the bolded phrase tells you about the action, and check for a preposition.",
+        "explanation": "A point in time, with no preposition: ablative of time when. 'At dawn Caesar moved camp.'",
+        "choices": [
+          "Time when",
+          "Means",
+          "Manner",
+          "Cause"
+        ],
+        "correct": "Time when"
+      },
+      {
+        "id": "m13-105",
+        "type": "mc",
+        "badge": "ABLATIVE",
+        "prompt": "Hostēs <strong>tribus hōrīs</strong> oppidum cēpērunt.<br>What use of the ablative is bolded?",
+        "hint": "Ask what the bolded phrase tells you about the action, and check for a preposition.",
+        "explanation": "A stretch of time inside which something is done: ablative of time within which. 'The enemy took the town within three hours.'",
+        "choices": [
+          "Time within which",
+          "Means",
+          "Manner",
+          "Cause"
+        ],
+        "correct": "Time within which"
+      },
+      {
+        "id": "m13-106",
+        "type": "mc",
+        "badge": "ABLATIVE",
+        "prompt": "Hostēs <strong>ā Rōmānīs</strong> victī sunt.<br>What use of the ablative is bolded?",
+        "hint": "Ask what the bolded phrase tells you about the action, and check for a preposition.",
+        "explanation": "ā/ab + a person with a passive verb: ablative of agent. 'The enemy were defeated by the Romans.'",
+        "choices": [
+          "Agent",
+          "Means",
+          "Separation",
+          "Cause"
+        ],
+        "correct": "Agent"
+      },
+      {
+        "id": "m13-107",
+        "type": "mc",
+        "badge": "ABLATIVE",
+        "prompt": "Nihil est <strong>virtūte</strong> amābilius.<br>What use of the ablative is bolded?",
+        "hint": "Ask what the bolded phrase tells you about the action, and check for a preposition.",
+        "explanation": "After a comparative (amābilius), the ablative means 'than': ablative of comparison. 'Nothing is more lovable than virtue.'",
+        "choices": [
+          "Comparison",
+          "Means",
+          "Manner",
+          "Cause"
+        ],
+        "correct": "Comparison"
+      },
+      {
+        "id": "m13-108",
+        "type": "mc",
+        "badge": "ABLATIVE",
+        "prompt": "Mīlitēs hostēs <strong>oppidō</strong> prohibuērunt.<br>What use of the ablative is bolded?",
+        "hint": "Ask what the bolded phrase tells you about the action, and check for a preposition.",
+        "explanation": "prohibeō, 'keep away', takes an ablative of the thing kept away from: ablative of separation. 'The soldiers kept the enemy away from the town.'",
+        "choices": [
+          "Separation",
+          "Means",
+          "Cause",
+          "Agent"
+        ],
+        "correct": "Separation"
+      },
+      {
+        "id": "m13-109",
+        "type": "mc",
+        "badge": "ABLATIVE",
+        "prompt": "Cōnsul <strong>victōriā</strong> gaudēbat.<br>What use of the ablative is bolded?",
+        "hint": "Ask what the bolded phrase tells you about the action, and check for a preposition.",
+        "explanation": "Verbs of feeling such as gaudeō take an ablative of the reason for the feeling: ablative of cause. 'The consul was glad because of the victory.'",
+        "choices": [
+          "Cause",
+          "Time when",
+          "Separation",
+          "Comparison"
+        ],
+        "correct": "Cause"
+      },
+      {
+        "id": "m13-110",
+        "type": "mc",
+        "badge": "ABLATIVE",
+        "prompt": "Ille mīles erat <strong>ingentī corpore</strong>.<br>What use of the ablative is bolded?",
+        "hint": "Ask what the bolded phrase tells you about the action, and check for a preposition.",
+        "explanation": "A noun with an adjective that describes a person: ablative of description. 'That soldier was of huge build.'",
+        "choices": [
+          "Description",
+          "Manner",
+          "Means",
+          "Cause"
+        ],
+        "correct": "Description"
+      },
+      {
+        "id": "m13-201",
+        "type": "mc",
+        "badge": "DATIVE",
+        "prompt": "<strong>Mihi</strong> est fīlia.<br>What use of the dative is bolded?",
+        "hint": "Dative + a form of sum.",
+        "explanation": "Dative with sum names the owner: 'I have a daughter' (literally 'there is a daughter to me').",
+        "choices": [
+          "Possession",
+          "Indirect object",
+          "Purpose",
+          "Agent"
+        ],
+        "correct": "Possession"
+      },
+      {
+        "id": "m13-202",
+        "type": "mc",
+        "badge": "DATIVE",
+        "prompt": "Caesar quīnque cohortēs castrīs <strong>praesidiō</strong> relīquit.<br>What use of the dative is bolded?",
+        "hint": "Ask what the bolded word tells you about the cohorts.",
+        "explanation": "praesidiō names the job the cohorts are meant to do: dative of purpose. With castrīs it forms a double dative. 'Caesar left five cohorts as a guard for the camp.'",
+        "choices": [
+          "Purpose",
+          "Indirect object",
+          "With a special verb",
+          "Agent"
+        ],
+        "correct": "Purpose"
+      },
+      {
+        "id": "m13-203",
+        "type": "mc",
+        "badge": "DATIVE",
+        "prompt": "Agricola <strong>līberīs</strong> agrum colit.<br>What use of the dative is bolded?",
+        "hint": "Ask how the bolded word is connected to the action.",
+        "explanation": "No giving or telling and no sum: the dative names the people the action is done for. Dative of reference. 'The farmer works the land for his children.'",
+        "choices": [
+          "Reference",
+          "Indirect object",
+          "With a special verb",
+          "Agent"
+        ],
+        "correct": "Reference"
+      },
+      {
+        "id": "m13-204",
+        "type": "mc",
+        "badge": "DATIVE",
+        "prompt": "Lēgātus <strong>cōnsulī</strong> epistulam trādidit.<br>What use of the dative is bolded?",
+        "hint": "Look at everything trādō has with it in the sentence.",
+        "explanation": "trādō, 'hand over', takes an accusative (epistulam) and a dative of the person who receives it: indirect object. 'The envoy handed the letter to the consul.'",
+        "choices": [
+          "Indirect object",
+          "With a special verb",
+          "Purpose",
+          "Agent"
+        ],
+        "correct": "Indirect object"
+      },
+      {
+        "id": "m13-205",
+        "type": "mc",
+        "badge": "DATIVE",
+        "prompt": "Caesar <strong>hostibus</strong> pepercit.<br>What use of the dative is bolded?",
+        "hint": "Ask what job the bolded word does for pepercit.",
+        "explanation": "parcō, 'spare', is one of the verbs that take the dative instead of an accusative: dative with a special verb. 'Caesar spared the enemy.'",
+        "choices": [
+          "With a special verb",
+          "Possession",
+          "Purpose",
+          "Agent"
+        ],
+        "correct": "With a special verb"
+      },
+      {
+        "id": "m13-301",
+        "type": "mc",
+        "badge": "GENITIVE",
+        "prompt": "Nēmō <strong>nostrum</strong> hoc fēcit.<br>What use of the genitive is bolded?",
+        "hint": "nostrum and nostrī are both genitives of nōs, but they have different jobs.",
+        "explanation": "nostrum names the whole group that nēmō is taken from: partitive genitive. 'None of us did this.' The objective genitive would be nostrī.",
+        "choices": [
+          "Partitive",
+          "Description",
+          "Possession",
+          "Objective"
+        ],
+        "correct": "Partitive"
+      },
+      {
+        "id": "m13-302",
+        "type": "mc",
+        "badge": "GENITIVE",
+        "prompt": "Erat in castrīs mīles <strong>summae audāciae</strong>.<br>What use of the genitive is bolded?",
+        "hint": "Ask what the bolded phrase tells you about the soldier.",
+        "explanation": "A noun with an adjective in the genitive that describes a person: genitive of description. 'There was in the camp a soldier of the greatest daring.'",
+        "choices": [
+          "Description",
+          "Partitive",
+          "Possession",
+          "Objective"
+        ],
+        "correct": "Description"
+      },
+      {
+        "id": "m13-401",
+        "type": "mc",
+        "badge": "ACCUSATIVE",
+        "prompt": "Mūrus <strong>decem pedēs</strong> altus erat.<br>What use of the accusative is bolded?",
+        "hint": "altus is an adjective, so it cannot take a direct object.",
+        "explanation": "The accusative measures how far something stretches: accusative of extent of space. 'The wall was ten feet high.'",
+        "choices": [
+          "Extent of space",
+          "Extent of time",
+          "Place to which",
+          "Direct object"
+        ],
+        "correct": "Extent of space"
+      },
+      {
+        "id": "m13-402",
+        "type": "mc",
+        "badge": "ACCUSATIVE",
+        "prompt": "Cōnsul <strong>Athēnās</strong> profectus est.<br>What use of the accusative is bolded?",
+        "hint": "profectus est is deponent, so it cannot take a direct object.",
+        "explanation": "Names of cities take the accusative with no preposition to show where someone goes: place to which. 'The consul set out for Athens.'",
+        "choices": [
+          "Place to which",
+          "Extent of space",
+          "Extent of time",
+          "Direct object"
+        ],
+        "correct": "Place to which"
+      },
+      {
+        "id": "m13-501",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Cōnsul ______ (amīcus) in forum vēnit.<br><em>The consul came into the forum with a friend.</em>",
+        "hint": "A person who goes along with someone.",
+        "explanation": "Ablative of accompaniment: cum + the ablative of a person. cum amīcō, 'with a friend'.",
+        "answers": [
+          "cum amico"
+        ]
+      },
+      {
+        "id": "m13-502",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Mīles hostem ______ (gladius) vulnerāvit.<br><em>The soldier wounded the enemy with a sword.</em>",
+        "hint": "A sword is a tool, not a person.",
+        "explanation": "Ablative of means: a tool, in the ablative with no preposition. gladiō, 'with a sword'.",
+        "answers": [
+          "gladio"
+        ]
+      },
+      {
+        "id": "m13-503",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Mīlitēs ______ (magnus clāmor) impetum fēcērunt.<br><em>The soldiers attacked with a great shout.</em>",
+        "hint": "This phrase tells how they attacked.",
+        "explanation": "Ablative of manner. With an adjective, cum is optional and usually sits between the adjective and the noun: magnō cum clāmōre or magnō clāmōre, 'with a great shout'.",
+        "answers": [
+          "magno cum clamore",
+          "magno clamore",
+          "cum magno clamore"
+        ]
+      },
+      {
+        "id": "m13-504",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Lēgātī ______ (rēx) missī sunt.<br><em>The envoys were sent by the king.</em>",
+        "hint": "The doer of a passive verb is a person.",
+        "explanation": "Ablative of agent: ā/ab + the ablative of a person with a passive verb. ā rēge, 'by the king'.",
+        "answers": [
+          "a rege",
+          "ab rege"
+        ]
+      },
+      {
+        "id": "m13-505",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Nēmō fortior est ______ (Caesar).<br><em>No one is braver than Caesar.</em>",
+        "hint": "After a comparative, use the ablative of comparison, or quam + the same case as the other noun.",
+        "explanation": "Ablative of comparison: Caesare. Latin can also say quam Caesar, with Caesar in the same case as nēmō.",
+        "answers": [
+          "caesare",
+          "quam caesar"
+        ]
+      },
+      {
+        "id": "m13-506",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Hostēs ______ (metus) fūgērunt.<br><em>The enemy fled out of fear.</em>",
+        "hint": "The phrase gives the reason they fled. metus is 4th declension.",
+        "explanation": "Ablative of cause: metū, 'out of fear'. propter metum, 'because of fear', says the same thing.",
+        "answers": [
+          "metu",
+          "propter metum"
+        ]
+      },
+      {
+        "id": "m13-507",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Caesar ______ (paucī diēs) ad urbem pervēnit.<br><em>Caesar reached the city within a few days.</em>",
+        "hint": "Time within which uses the same case as time when.",
+        "explanation": "Ablative of time within which: paucīs diēbus, 'within a few days'. intrā paucōs diēs says the same thing.",
+        "answers": [
+          "paucis diebus",
+          "intra paucos dies"
+        ]
+      },
+      {
+        "id": "m13-508",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Cōnsul ______ (ego) nōn crēdit.<br><em>The consul does not believe me.</em>",
+        "hint": "Think about which case crēdō takes.",
+        "explanation": "crēdō, 'believe, trust', takes the dative: mihi. 'The consul does not believe me.'",
+        "answers": [
+          "mihi"
+        ]
+      },
+      {
+        "id": "m13-509",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Caesar legiōnem sociīs ______ (auxilium) mīsit.<br><em>Caesar sent a legion to help the allies.</em> (literally <em>as a help to the allies</em>)",
+        "hint": "The blank names the job the legion is sent to do.",
+        "explanation": "Dative of purpose: auxiliō, 'as a help'. With sociīs it forms a double dative: 'as a help to the allies'.",
+        "answers": [
+          "auxilio"
+        ]
+      },
+      {
+        "id": "m13-510",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Magna pars ______ (mīles) in castrīs mānsit.<br><em>A large part of the soldiers stayed in the camp.</em>",
+        "hint": "pars needs the whole it is a part of.",
+        "explanation": "Partitive genitive: mīlitum names the whole group that pars is taken from. 'A large part of the soldiers'.",
+        "answers": [
+          "militum"
+        ]
+      },
+      {
+        "id": "m13-511",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Mīlitēs ______ (trēs hōrae) pugnāvērunt.<br><em>The soldiers fought for three hours.</em>",
+        "hint": "How long did the fighting last?",
+        "explanation": "Accusative of extent of time: trēs hōrās, 'for three hours'. per trēs hōrās says the same thing.",
+        "answers": [
+          "tres horas",
+          "per tres horas"
+        ]
+      },
+      {
+        "id": "m13-512",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Lēgātī ______ (Rōma) profectī sunt.<br><em>The envoys set out for Rome.</em>",
+        "hint": "Rōma is the name of a city.",
+        "explanation": "Place to which: names of cities take the accusative with no preposition. Rōmam, 'to Rome'.",
+        "answers": [
+          "romam"
+        ]
+      },
+      {
+        "id": "m13-513",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with the right form, adding a preposition only if Latin needs one:<br>Post proelium mīlitēs ______ (domus) rediērunt.<br><em>After the battle the soldiers went back home.</em>",
+        "hint": "domus follows the same rule as names of cities.",
+        "explanation": "Place to which: domus, like a city name, takes the accusative with no preposition. domum, 'home'.",
+        "answers": [
+          "domum"
+        ]
+      },
+      {
+        "id": "m13-601",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "<strong>Vir magnae virtūtis</strong> and <strong>vir magnā virtūte</strong> are both offered for <em>a man of great courage</em>. Which statement is true?",
+        "hint": "Check what the ablative of description needs.",
+        "explanation": "A quality described by a noun with an adjective can be genitive (magnae virtūtis) or ablative (magnā virtūte), and the ablative needs no cum. Both mean 'a man of great courage'.",
+        "choices": [
+          "Both are correct; a quality with an adjective can be either case.",
+          "Only the genitive is correct; magnā virtūte must mean 'by great courage'.",
+          "Only the ablative is correct; the genitive is only for size and number.",
+          "The ablative needs cum here, so it must be vir cum magnā virtūte."
+        ],
+        "correct": "Both are correct; a quality with an adjective can be either case."
+      },
+      {
+        "id": "m13-602",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "Which sentence means <em>The soldier was wounded by the enemy with an arrow</em>?",
+        "hint": "One phrase is a person and one is a thing. Do they both take a preposition?",
+        "explanation": "The person who does a passive action is ā/ab + ablative (ab hoste). The thing used is a bare ablative of means (sagittā). 'The soldier was wounded by the enemy with an arrow.'",
+        "choices": [
+          "Mīles ab hoste sagittā vulnerātus est.",
+          "Mīles hoste ā sagittā vulnerātus est.",
+          "Mīles ab hoste ā sagittā vulnerātus est.",
+          "Mīles hoste sagittā vulnerātus est."
+        ],
+        "correct": "Mīles ab hoste sagittā vulnerātus est."
+      },
+      {
+        "id": "m13-603",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "Mīlitēs <strong>tōtam noctem</strong> vigilāvērunt.<br>Why is the bolded phrase accusative, not ablative?",
+        "hint": "Ask what question the phrase answers about vigilāvērunt.",
+        "explanation": "The accusative shows how long an action lasts (extent of time). The ablative would show when it happened. 'The soldiers stayed awake all night.'",
+        "choices": [
+          "It says how long the action lasted.",
+          "It says when the action happened.",
+          "It says where the soldiers went.",
+          "It is the direct object of vigilāvērunt."
+        ],
+        "correct": "It says how long the action lasted."
+      }
+    ]
   }
 ];
