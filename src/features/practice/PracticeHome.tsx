@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Cards, ChevronRight, Layers, Table, Translate } from '../../components/icons';
 import { MODULES } from '../../content/modules';
+import { getSet } from '../vocab/storage';
 import { loadProgress, loadStreak, loadTotalXP, todayISO } from '../solo/progressStore';
 import { relativeDay } from './relativeDay';
 import { loadSessions, pct, type PracticeSession } from './sessionLog';
@@ -10,6 +11,7 @@ const RECENT: Record<PracticeSession['kind'], { title: (s: PracticeSession) => s
   module: { title: s => MODULES.find(m => m.id === s.module_id)?.title ?? 'Grammar module', path: s => `/practice/grammar/${s.module_id}` },
   endless: { title: () => 'Endless Train', path: () => '/practice/endless' },
   forms: { title: () => 'Forms', path: () => '/practice/forms' },
+  vocab: { title: s => getSet(s.set_id ?? '')?.name ?? 'Vocab set', path: s => `/practice/vocab/${s.set_id}` },
   import: { title: () => 'Grammar module', path: () => '/practice/grammar' },
 };
 const FALLBACK = { title: () => 'Practice', path: () => '/practice' };

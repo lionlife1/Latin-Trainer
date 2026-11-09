@@ -9,8 +9,10 @@ export const syncsToServer = (s: Pick<PracticeSession, 'kind'>): boolean => SERV
 export interface PracticeSession {
   /** Also the server primary key, so pushes are idempotent. */
   id: string;
-  kind: 'module' | 'endless' | 'import' | 'forms';
+  kind: 'module' | 'endless' | 'import' | 'forms' | 'vocab';
   module_id: string | null;
+  /** Study set this session was on (vocab only; vocab sessions never sync). */
+  set_id?: string;
   correct: number;
   total: number;
   /** XP earned by this session (0 if it didn't qualify). */

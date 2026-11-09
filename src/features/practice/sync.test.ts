@@ -58,6 +58,26 @@ describe('syncSessions', () => {
     expect(pushes).toHaveLength(1);
   });
 
+  it('never pushes vocab sessions and keeps them locally', async () => {
+    appendSession({ ...base, kind: 'vocab', module_id: null, set_id: 's1' });
+    appendSession(base);
+    const { sb, pushes } = fakeClient();
+    await syncSessions(sb, 'u1');
+    expect(pushes).toHaveLength(1);
+    expect(pushes[0]).toHaveLength(1);
+    expect(pushes[0][0]).toMatchObject({ kind: 'module' });
+    expect(pushes[0][0]).not.toHaveProperty('set_id');
+    const vocab = loadSessions().find(x => x.kind === 'vocab');
+    expect(vocab).toMatchObject({ set_id: 's1', synced: false });
+  });
+
+  it('sends nothing when only vocab sessions are unsynced', async () => {
+    appendSession({ ...base, kind: 'vocab', module_id: null, set_id: 's1' });
+    const { sb, pushes } = fakeClient();
+    await syncSessions(sb, 'u1');
+    expect(pushes).toHaveLength(0);
+  });
+
   it('failed push leaves sessions unsynced', async () => {
     appendSession(base);
     await syncSessions(fakeClient({ failPush: true }).sb, 'u1');

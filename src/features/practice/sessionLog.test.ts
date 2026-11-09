@@ -36,6 +36,22 @@ describe('sessionLog', () => {
     expect(kept.some(x => x.id === 'id0')).toBe(false);
   });
 
+  it('keeps set_id on vocab sessions', () => {
+    appendSession({ kind: 'vocab', module_id: null, set_id: 's1', correct: 3, total: 4, xp: 0, completed: false });
+    expect(loadSessions()[0]).toMatchObject({ kind: 'vocab', set_id: 's1', synced: false });
+  });
+
+  it('when capping, drops local-only sessions before unsynced server ones', () => {
+    const t = (i: number) => new Date(Date.UTC(2026, 0, 1, 0, i)).toISOString();
+    const vocab = [0, 1].map(i => s(`v${i}`, t(i), { kind: 'vocab', module_id: null, synced: false }));
+    const mods = Array.from({ length: 199 }, (_, i) => s(`m${i}`, t(i + 10), { synced: false }));
+    saveSessions([...vocab, ...mods]);
+    const kept = loadSessions();
+    expect(kept).toHaveLength(200);
+    expect(kept.filter(x => x.kind === 'module')).toHaveLength(199);
+    expect(kept.some(x => x.id === 'v0')).toBe(false);
+  });
+
   it('drops malformed entries', () => {
     const valid = s('ok', '2026-10-01T00:00:00Z');
     localStorage.setItem('latiniq_sessions', JSON.stringify([valid, null, 42, { id: 'x' }, { ...valid, id: 'y', total: 'NaN' }]));

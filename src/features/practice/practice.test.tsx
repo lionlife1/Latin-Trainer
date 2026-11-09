@@ -2,6 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { MODULES } from '../../content/modules';
 import { logEndless } from './EndlessRoute';
+import { createSet } from '../vocab/storage';
 import { GrammarPath } from './GrammarPath';
 import { PracticeHome } from './PracticeHome';
 import { relativeDay } from './relativeDay';
@@ -60,6 +61,17 @@ describe('PracticeHome', () => {
     saveSessions([sess({ kind: 'forms', module_id: null, correct: 1, total: 2 })]);
     at(<PracticeHome />);
     expect(screen.getByRole('button', { name: /Forms/ })).toHaveTextContent('1/2 correct');
+  });
+
+  it('shows vocab sessions under the set name, or Vocab set when it is gone', () => {
+    const set = createSet('Chapter 1')!;
+    saveSessions([
+      sess({ kind: 'vocab', module_id: null, set_id: set.id }),
+      sess({ kind: 'vocab', module_id: null, set_id: 'gone' }),
+    ]);
+    at(<PracticeHome />);
+    expect(screen.getByRole('button', { name: /Chapter 1/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Vocab set/ })).toBeInTheDocument();
   });
 
   it('tolerates an unknown session kind', () => {
