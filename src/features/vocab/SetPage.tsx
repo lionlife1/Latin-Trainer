@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { Cards, ChevronLeft, Layers, Repeat } from '../../components/icons';
 import { useSyncVersion } from '../practice/useSessionSync';
+import { QuizletExport } from './QuizletExport';
 import { setCounts } from './scheduler';
 import { getSet, loadSrs } from './storage';
 
@@ -32,7 +33,7 @@ export function SetPage() {
         <Link className="btn-secondary" to={`${base}/edit`}>Edit set</Link>
       </div>
 
-      {/* QuizletExport (Task 11) */}
+      {n > 0 && <QuizletExport set={set} />}
 
       <div className="stats">
         <div className="stat"><div className="stat-val">{counts.new}</div><div className="stat-label">New</div></div>
