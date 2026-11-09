@@ -4670,7 +4670,7 @@ export const MODULES: ModuleContent[] = [
     "badge": "M10",
     "title": "Participles and the Ablative Absolute",
     "tagline": "Verbal adjectives and absolute phrases",
-    "description": "Form the present, perfect and future participles, including those of deponent verbs, and translate each by its time relative to the main verb. Then spot the ablative absolute and translate it as a when, after, since or although clause.",
+    "description": "Form the present, perfect and future participles, including those of deponent verbs, and translate each by its time relative to the main verb. Then spot the ablative absolute and translate it as a when, while, after or although clause.",
     "concepts": [
       "Present Active Participle",
       "Perfect Passive Participle",
@@ -5011,8 +5011,8 @@ export const MODULES: ModuleContent[] = [
         "id": "m10-406",
         "type": "mc",
         "badge": "ABLATIVE ABSOLUTE",
-        "prompt": "Which phrase is an ablative absolute with no participle?<br><em>With Caesar as leader</em>",
-        "hint": "An ablative absolute has no preposition.",
+        "prompt": "Which phrase is an ablative absolute with no participle and no preposition?<br><em>With Caesar as leader</em>",
+        "hint": "Look for two nouns in the ablative standing on their own.",
         "explanation": "Caesare duce is two nouns in the ablative with no preposition, so it is an ablative absolute: 'with Caesar as leader'. The phrases with cum and ā are ordinary prepositional phrases.",
         "choices": [
           "Caesare duce",
@@ -5051,7 +5051,7 @@ export const MODULES: ModuleContent[] = [
         "type": "typein",
         "badge": "ABLATIVE ABSOLUTE",
         "prompt": "Put <strong>cōnsul dīcēns</strong> into the ablative absolute:<br>______, senātōrēs tacēbant.<br><em>While the consul was speaking, the senators were silent.</em>",
-        "hint": "In an ablative absolute, the present participle ends in -e, not -ī.",
+        "hint": "Both words go into the ablative singular. Check the participle's ending carefully.",
         "explanation": "cōnsul becomes cōnsule, and the present participle takes -e in an ablative absolute: cōnsule dīcente, 'while the consul was speaking'.",
         "answers": [
           "consule dicente",
@@ -5077,9 +5077,9 @@ export const MODULES: ModuleContent[] = [
         "id": "m10-502",
         "type": "mc",
         "badge": "EXAM TRAP",
-        "prompt": "Which is the better Latin for:<br><em>The soldiers captured the city and destroyed it.</em>",
-        "hint": "The city is the object of the main verb.",
-        "explanation": "When the noun is also the subject or object of the main verb, Latin uses a participle agreeing with it, not an ablative absolute: 'The soldiers destroyed the captured city.'",
+        "prompt": "Rule: Latin does not use an ablative absolute when its noun is also the subject or object of the main verb.<br>Which sentence follows this rule and means:<br><em>The soldiers destroyed the city they had captured.</em>",
+        "hint": "The city is the object of the main verb, so its participle must agree with it in the accusative.",
+        "explanation": "urbs is the object of dēlēvērunt, so the participle agrees with it: urbem captam, 'the city having been captured'. 'The soldiers destroyed the city they had captured.'",
         "choices": [
           "Mīlitēs urbem captam dēlēvērunt.",
           "Mīlitēs, urbe captā, urbem dēlēvērunt.",
