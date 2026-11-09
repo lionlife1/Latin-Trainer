@@ -67,4 +67,33 @@ describe('PasteImport', () => {
     expect(getSet(id)!.cards).toHaveLength(0);
     expect(onAdded).not.toHaveBeenCalled();
   });
+
+  it('says "Added 1 card." for a single card', async () => {
+    const user = userEvent.setup();
+    setup();
+    await paste(user, 'rosa - rose');
+    await user.click(screen.getByRole('button', { name: 'Add 1 card' }));
+    expect(screen.getByText('Added 1 card.')).toBeInTheDocument();
+  });
+
+  it('clears a stale save error when the text changes or Preview is pressed', async () => {
+    const user = userEvent.setup();
+    setup();
+    await paste(user, 'rosa - rose');
+    const spy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('full'); });
+    await user.click(screen.getByRole('button', { name: 'Add 1 card' }));
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    spy.mockRestore();
+    await user.click(screen.getByRole('textbox', { name: 'Cards to import' }));
+    await user.paste('x');
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+
+    const spy2 = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('full'); });
+    await user.click(screen.getByRole('button', { name: 'Preview' }));
+    await user.click(screen.getByRole('button', { name: /^Add \d+ cards?$/ }));
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+    spy2.mockRestore();
+    await user.click(screen.getByRole('button', { name: 'Preview' }));
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
 });

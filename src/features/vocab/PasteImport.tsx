@@ -37,7 +37,7 @@ export function PasteImport({ set, onAdded }: { set: StudySet; onAdded: () => vo
     if (!r.ok) return setError(SAVE_FAILED);
     close();
     setMessage(
-      `Added ${r.added} cards.` + (plan.overflow > 0 || r.overflow > 0 ? ` This set is full (${MAX_CARDS} cards).` : ''),
+      `Added ${plural(r.added, 'card', 'cards')}.` + (plan.overflow > 0 || r.overflow > 0 ? ` This set is full (${MAX_CARDS} cards).` : ''),
     );
     onAdded();
   };
@@ -66,11 +66,11 @@ export function PasteImport({ set, onAdded }: { set: StudySet; onAdded: () => vo
           rows={6}
           aria-label="Cards to import"
           value={text}
-          onValueChange={v => { setText(v); setPreviewed(null); }}
+          onValueChange={v => { setText(v); setPreviewed(null); setError(''); }}
         />
       </label>
       <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-        <button className="btn-primary" onClick={() => setPreviewed(text)}>Preview</button>
+        <button className="btn-primary" onClick={() => { setError(''); setPreviewed(text); }}>Preview</button>
         <button className="btn-ghost" onClick={close}>Cancel</button>
       </div>
       {plan && (
