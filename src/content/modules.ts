@@ -5190,7 +5190,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "TRIGGER",
         "prompt": "Which sentence contains an <strong>indirect statement</strong>?",
-        "hint": "Look for a verb of perceiving followed by an accusative and an infinitive.",
+        "hint": "An indirect statement reports a fact or belief with an accusative subject and an infinitive.",
         "explanation": "vīdērunt is a verb of perceiving, followed by hostēs (accusative) and appropinquāre (infinitive): 'The soldiers saw that the enemy were approaching.' The others are an indirect command, an indirect question and a purpose clause.",
         "choices": [
           "Mīlitēs vīdērunt hostēs appropinquāre.",
@@ -5211,7 +5211,7 @@ export const MODULES: ModuleContent[] = [
           "nūntiāvit",
           "quaesīvit",
           "ōrāvit",
-          "timuit"
+          "hortātus est"
         ],
         "correct": "nūntiāvit"
       },
@@ -5357,7 +5357,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "TENSE",
         "prompt": "Spērāmus nōs <strong>______</strong>.<br><em>We hope that we will win.</em><br>Choose the infinitive.",
-        "hint": "The winning is still to come. Check the agreement with nōs.",
+        "hint": "The winning is still to come.",
         "explanation": "Verbs of hoping look ahead, so they take the future infinitive. The participle agrees with nōs, masculine accusative plural: victūrōs esse.",
         "choices": [
           "victūrōs esse",
@@ -5504,13 +5504,13 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "REFLEXIVE",
         "prompt": "Lēgātī nūntiāvērunt <strong>______</strong> ā rēge captōs esse.<br><em>The envoys announced that they (other men, not the envoys) had been captured by the king.</em><br>Which word fills the blank?",
-        "hint": "Were the envoys captured, or other men? The subject of an infinitive is accusative.",
+        "hint": "Were the envoys captured, or other men? The subject of an infinitive is accusative and agrees with captōs.",
         "explanation": "When the subject of the infinitive is not the subject of the main verb, Latin uses a form of is, ea, id: eōs. sē would mean that the envoys themselves had been captured.",
         "choices": [
           "eōs",
           "sē",
-          "suōs",
-          "eī"
+          "eum",
+          "eās"
         ],
         "correct": "eōs"
       },
@@ -5522,18 +5522,19 @@ export const MODULES: ModuleContent[] = [
         "hint": "The subject of the infinitive is the same person as the subject of putat.",
         "explanation": "When the subject of the infinitive is the subject of the main verb, Latin uses the reflexive sē: 'The king thinks that he is praised by everyone.'",
         "answers": [
-          "se"
+          "se",
+          "sese"
         ]
       },
       {
         "id": "m11-505",
         "type": "typein",
         "badge": "REFLEXIVE",
-        "prompt": "Complete with a possessive adjective:<br>Rēgīna dīxit ______ urbem pulcherrimam esse.<br><em>The queen said that her own city was very beautiful.</em>",
-        "hint": "Use the reflexive possessive, and make it agree with urbem.",
-        "explanation": "The city belongs to the subject of dīxit, so Latin uses the reflexive possessive suus. It agrees with urbem: suam.",
+        "prompt": "Complete with a possessive adjective:<br>Rēgīna dīxit ______ oppidum pulcherrimum esse.<br><em>The queen said that her own town was very beautiful.</em>",
+        "hint": "Use the reflexive possessive, and make it agree with oppidum.",
+        "explanation": "The town belongs to the subject of dīxit, so Latin uses the reflexive possessive suus. It agrees with oppidum: suum.",
         "answers": [
-          "suam"
+          "suum"
         ]
       },
       {
@@ -5579,7 +5580,7 @@ export const MODULES: ModuleContent[] = [
         "badge": "EXAM TRAP",
         "prompt": "Choose the correct Latin for:<br><em>The envoys said that the king was coming.</em>",
         "hint": "English 'that' after a verb of saying has no Latin word of its own.",
-        "explanation": "Indirect statement has no word for 'that': the subject becomes accusative and the verb becomes an infinitive. ut would make it a command, quod is not used after dīcō, and vēnisse would mean 'had come'.",
+        "explanation": "Indirect statement has no word for 'that': the subject becomes accusative and the verb becomes an infinitive. ut would make it a command, in classical prose quod is not used after dīcō, and vēnisse would mean 'had come'.",
         "choices": [
           "Lēgātī dīxērunt rēgem venīre.",
           "Lēgātī dīxērunt ut rēx venīret.",
@@ -5592,7 +5593,7 @@ export const MODULES: ModuleContent[] = [
         "id": "m11-702",
         "type": "mc",
         "badge": "EXAM TRAP",
-        "prompt": "A student writes <strong>Spērō cōnsulem urbem servāre</strong> for <em>I hope that the consul will save the city.</em><br>The present infinitive servāre shows the same time as spērō, not a later time. What should replace servāre?",
+        "prompt": "A student writes <strong>Spērō cōnsulem urbem servāre</strong> for <em>I hope that the consul will save the city.</em><br>Which form should replace servāre so the Latin matches the English?",
         "hint": "The saving is still to come, and the participle agrees with cōnsulem.",
         "explanation": "A hope looks ahead, so verbs of hoping take the future infinitive. servātūrum agrees with cōnsulem: 'Spērō cōnsulem urbem servātūrum esse.'",
         "choices": [
