@@ -44,6 +44,20 @@ describe('syncSessions', () => {
     expect(loadSessions().every(s => s.synced)).toBe(true);
   });
 
+  it('never pushes a kind the server rejects', async () => {
+    appendSession({ ...base, kind: 'forms', module_id: null });
+    appendSession(base);
+    const { sb, pushes } = fakeClient();
+    await syncSessions(sb, 'u1');
+    expect(pushes).toHaveLength(1);
+    expect(pushes[0]).toHaveLength(1);
+    expect(pushes[0][0]).toMatchObject({ kind: 'module' });
+    const forms = loadSessions().find(x => x.kind === 'forms');
+    expect(forms?.synced).toBe(false);
+    await syncSessions(sb, 'u1');
+    expect(pushes).toHaveLength(1);
+  });
+
   it('failed push leaves sessions unsynced', async () => {
     appendSession(base);
     await syncSessions(fakeClient({ failPush: true }).sb, 'u1');

@@ -2,10 +2,14 @@
 const KEY = 'latiniq_sessions';
 const CAP = 200;
 
+/** Kinds the practice_sessions check constraint accepts. Anything else stays on this device. */
+export const SERVER_KINDS: ReadonlySet<string> = new Set(['module', 'endless', 'import']);
+export const syncsToServer = (s: Pick<PracticeSession, 'kind'>): boolean => SERVER_KINDS.has(s.kind);
+
 export interface PracticeSession {
   /** Also the server primary key, so pushes are idempotent. */
   id: string;
-  kind: 'module' | 'endless' | 'import';
+  kind: 'module' | 'endless' | 'import' | 'forms';
   module_id: string | null;
   correct: number;
   total: number;
@@ -21,22 +25,29 @@ export type NewSession = Omit<PracticeSession, 'id' | 'synced' | 'finished_at'> 
 
 const newestFirst = (a: PracticeSession, b: PracticeSession) => b.finished_at.localeCompare(a.finished_at);
 
+const isSession = (v: unknown): v is PracticeSession => {
+  if (!v || typeof v !== 'object') return false;
+  const o = v as Record<string, unknown>;
+  return typeof o.id === 'string' && typeof o.finished_at === 'string' && typeof o.kind === 'string'
+    && Number.isFinite(o.correct) && Number.isFinite(o.total);
+};
+
 export function loadSessions(): PracticeSession[] {
   try {
     const v = JSON.parse(localStorage.getItem(KEY) ?? '[]');
-    return Array.isArray(v) ? (v as PracticeSession[]).sort(newestFirst) : [];
+    return Array.isArray(v) ? v.filter(isSession).sort(newestFirst) : [];
   } catch {
     return [];
   }
 }
 
-/** Keeps the newest CAP entries, but never drops an unsynced one while synced ones remain. */
+/** Keeps the newest CAP entries, but never drops an unsynced one while synced or local-only ones remain. */
 export function saveSessions(sessions: PracticeSession[]) {
   let list = [...sessions].sort(newestFirst);
   while (list.length > CAP) {
     let drop = -1;
     for (let i = list.length - 1; i >= 0; i--) {
-      if (list[i].synced) {
+      if (list[i].synced || !syncsToServer(list[i])) {
         drop = i;
         break;
       }

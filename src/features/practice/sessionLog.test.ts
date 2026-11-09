@@ -1,4 +1,4 @@
-import { appendSession, bestScores, loadSessions, mergeSessions, recentSessions, saveSessions, type PracticeSession } from './sessionLog';
+import { appendSession, bestScores, loadSessions, mergeSessions, recentSessions, saveSessions, SERVER_KINDS, type PracticeSession } from './sessionLog';
 
 const s = (id: string, finished_at: string, over: Partial<PracticeSession> = {}): PracticeSession => ({
   id, kind: 'module', module_id: 'm0', correct: 5, total: 10, xp: 0, completed: false, finished_at, synced: true, ...over,
@@ -25,6 +25,25 @@ describe('sessionLog', () => {
     expect(kept).toHaveLength(200);
     expect(kept.some(x => x.id === 'id0')).toBe(true); // oldest, but unsynced
     expect(kept.some(x => x.id === 'id1')).toBe(false);
+  });
+
+  it('may drop local-only sessions when capping', () => {
+    const many = Array.from({ length: 205 }, (_, i) =>
+      s(`id${i}`, new Date(Date.UTC(2026, 0, 1, 0, i)).toISOString(), i === 0 ? { kind: 'forms', synced: false } : {}));
+    saveSessions(many);
+    const kept = loadSessions();
+    expect(kept).toHaveLength(200);
+    expect(kept.some(x => x.id === 'id0')).toBe(false);
+  });
+
+  it('drops malformed entries', () => {
+    const valid = s('ok', '2026-10-01T00:00:00Z');
+    localStorage.setItem('latiniq_sessions', JSON.stringify([valid, null, 42, { id: 'x' }, { ...valid, id: 'y', total: 'NaN' }]));
+    expect(loadSessions().map(x => x.id)).toEqual(['ok']);
+  });
+
+  it('only module, endless and import go to the server', () => {
+    expect([...SERVER_KINDS].sort()).toEqual(['endless', 'import', 'module']);
   });
 
   it('merges by id and marks remote copies synced', () => {

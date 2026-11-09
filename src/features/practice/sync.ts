@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { legacyImports, loadProgress, rebuildFromSessions } from '../solo/progressStore';
-import { appendSession, loadSessions, mergeSessions, saveSessions, type PracticeSession } from './sessionLog';
+import { appendSession, loadSessions, mergeSessions, saveSessions, syncsToServer, type PracticeSession } from './sessionLog';
 
 const KEY_IMPORTED = 'latiniq_imported';
 const COLS = 'id, kind, module_id, correct, total, xp, completed, finished_at';
@@ -16,7 +16,7 @@ export async function syncSessions(sb: SupabaseClient, userId: string): Promise<
       localStorage.setItem(KEY_IMPORTED, '1');
     }
 
-    const unsynced = loadSessions().filter(s => !s.synced);
+    const unsynced = loadSessions().filter(s => !s.synced && syncsToServer(s));
     if (unsynced.length) {
       const rows = unsynced.map(({ synced: _synced, ...row }) => ({ ...row, user_id: userId }));
       const { error } = await sb.from('practice_sessions').upsert(rows, { onConflict: 'id', ignoreDuplicates: true });
