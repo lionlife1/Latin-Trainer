@@ -2,7 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { MODULES } from '../../content/modules';
 import { logEndless } from './EndlessRoute';
-import { createSet } from '../vocab/storage';
+import { createSet, saveSrsRecord, itemKey } from '../vocab/storage';
 import { GrammarPath } from './GrammarPath';
 import { PracticeHome } from './PracticeHome';
 import { relativeDay } from './relativeDay';
@@ -47,7 +47,7 @@ describe('PracticeHome', () => {
   it('shows an empty state with no sessions', () => {
     at(<PracticeHome />);
     expect(screen.getByText('Your practice sessions will show up here.')).toBeInTheDocument();
-    expect(screen.getAllByText('Coming soon')).toHaveLength(2);
+    expect(screen.getAllByText('Coming soon')).toHaveLength(1);
   });
 
   it('links to Forms between Grammar and Vocab', () => {
@@ -55,6 +55,23 @@ describe('PracticeHome', () => {
     const titles = Array.from(document.querySelectorAll('.subject-title')).map(e => e.textContent);
     expect(titles).toEqual(['Grammar', 'Forms', 'Vocab', 'Translation']);
     expect(screen.getByRole('link', { name: /Forms/ })).toHaveAttribute('href', '/practice/forms');
+  });
+
+  it('links to Vocab with set and due counts', () => {
+    at(<PracticeHome />);
+    expect(screen.getByRole('link', { name: /Vocab/ })).toHaveAttribute('href', '/practice/vocab');
+    expect(screen.getByText('Make your own study sets')).toBeInTheDocument();
+  });
+
+  it('counts sets and due items on the Vocab card', () => {
+    const a = createSet('A', [{ latin: 'puella', english: 'girl' }])!;
+    createSet('B');
+    saveSrsRecord(itemKey(a.id, a.cards[0].id, 'l2e'), {
+      due: new Date(Date.now() - 86400000).toISOString(), stability: 1, difficulty: 5, elapsed_days: 0, scheduled_days: 1,
+      learning_steps: 0, reps: 1, lapses: 0, state: 2, introduced: '2020-01-01',
+    });
+    at(<PracticeHome />);
+    expect(screen.getByText('2 sets · 1 due today')).toBeInTheDocument();
   });
 
   it('shows Forms sessions in recents', () => {

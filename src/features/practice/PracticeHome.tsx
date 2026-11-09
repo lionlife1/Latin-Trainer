@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Cards, ChevronRight, Layers, Table, Translate } from '../../components/icons';
 import { MODULES } from '../../content/modules';
-import { getSet } from '../vocab/storage';
+import { setCounts } from '../vocab/scheduler';
+import { getSet, loadSets, loadSrs } from '../vocab/storage';
 import { loadProgress, loadStreak, loadTotalXP, todayISO } from '../solo/progressStore';
 import { relativeDay } from './relativeDay';
 import { loadSessions, pct, type PracticeSession } from './sessionLog';
@@ -33,6 +34,10 @@ export function PracticeHome() {
   const done = MODULES.filter(m => progress[m.id]?.completed).length;
   const recents = loadSessions().filter(s => s.kind !== 'import').slice(0, 5);
   const streak = liveStreak();
+  const sets = loadSets();
+  const srs = loadSrs();
+  const dueToday = sets.reduce((n, s) => n + setCounts(s, srs, new Date()).due, 0);
+  const vocabSub = sets.length ? `${sets.length} ${sets.length === 1 ? 'set' : 'sets'} · ${dueToday} due today` : 'Make your own study sets';
 
   return (
     <>
@@ -93,11 +98,11 @@ export function PracticeHome() {
             <span className="subject-title">Forms</span>
             <span className="subject-sub">Make and identify any form</span>
           </Link>
-          <div className="subject soon" aria-disabled="true">
+          <Link className="subject" to="/practice/vocab">
             <span className="subject-icon"><Cards /></span>
             <span className="subject-title">Vocab</span>
-            <span className="subject-sub">Coming soon</span>
-          </div>
+            <span className="subject-sub">{vocabSub}</span>
+          </Link>
           <div className="subject soon" aria-disabled="true">
             <span className="subject-icon"><Translate /></span>
             <span className="subject-title">Translation</span>

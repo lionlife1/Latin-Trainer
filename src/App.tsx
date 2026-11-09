@@ -11,6 +11,8 @@ import { GrammarPath } from './features/practice/GrammarPath';
 import { ModuleRoute } from './features/practice/ModuleRoute';
 import { PracticeHome } from './features/practice/PracticeHome';
 import { SessionSyncProvider } from './features/practice/useSessionSync';
+import { VocabHome } from './features/vocab/VocabHome';
+import { SetPage } from './features/vocab/SetPage';
 import { SetEditor } from './features/vocab/SetEditor';
 import { StudyRoute } from './features/vocab/StudyRoute';
 import { StudentRoutes } from './features/student/StudentRoutes';
@@ -38,6 +40,8 @@ export function AppRoutes() {
       <Route path="/practice/grammar/:moduleId" element={<ModuleRoute />} />
       <Route path="/practice/endless" element={<EndlessRoute />} />
       <Route path="/practice/forms" element={<Suspense fallback={null}><FormsRoute /></Suspense>} />
+      <Route path="/practice/vocab" element={<StudentShell><VocabHome /></StudentShell>} />
+      <Route path="/practice/vocab/:setId" element={<StudentShell><SetPage /></StudentShell>} />
       <Route path="/practice/vocab/:setId/edit" element={<StudentShell><SetEditor /></StudentShell>} />
       <Route path="/practice/vocab/:setId/:mode" element={<StudyRoute />} />
       {hasBackend && (
