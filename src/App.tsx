@@ -11,7 +11,6 @@ import { GrammarPath } from './features/practice/GrammarPath';
 import { ModuleRoute } from './features/practice/ModuleRoute';
 import { PracticeHome } from './features/practice/PracticeHome';
 import { SessionSyncProvider } from './features/practice/useSessionSync';
-import { VocabHome } from './features/vocab/VocabHome';
 import { SetPage } from './features/vocab/SetPage';
 import { SetEditor } from './features/vocab/SetEditor';
 import { StudyRoute } from './features/vocab/StudyRoute';
@@ -20,6 +19,8 @@ import { TeacherRoutes } from './features/teacher/TeacherRoutes';
 import { hasBackend } from './lib/supabase';
 
 // Lazy: keeps the generated nouns and adjectives out of the main bundle.
+// VocabHome pulls in the starter-set data (nouns, adjectives), so keep it out of the main bundle.
+const VocabHome = lazy(() => import('./features/vocab/VocabHome').then(m => ({ default: m.VocabHome })));
 const FormsRoute = lazy(() => import('./features/practice/forms/FormsRoute'));
 
 /** Students land on Class, teachers on their classes, everyone else on Practice. */
@@ -40,7 +41,7 @@ export function AppRoutes() {
       <Route path="/practice/grammar/:moduleId" element={<ModuleRoute />} />
       <Route path="/practice/endless" element={<EndlessRoute />} />
       <Route path="/practice/forms" element={<Suspense fallback={null}><FormsRoute /></Suspense>} />
-      <Route path="/practice/vocab" element={<StudentShell><VocabHome /></StudentShell>} />
+      <Route path="/practice/vocab" element={<StudentShell><Suspense fallback={null}><VocabHome /></Suspense></StudentShell>} />
       <Route path="/practice/vocab/:setId" element={<StudentShell><SetPage /></StudentShell>} />
       <Route path="/practice/vocab/:setId/edit" element={<StudentShell><SetEditor /></StudentShell>} />
       <Route path="/practice/vocab/:setId/:mode" element={<StudyRoute />} />

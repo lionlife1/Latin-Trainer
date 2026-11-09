@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { CORE_VERBS } from '../../content/verbs.generated';
-import { principalParts } from '../../lib/morph';
+import { CORE_ADJECTIVES } from '../../content/adjectives.generated';
+import { CORE_NOUNS } from '../../content/nouns.generated';
+import { adjectiveEntry, nounEntry, principalParts } from '../../lib/morph';
 import { normalize } from '../../lib/grading';
 import { MAX_CARDS } from './storage';
 import { starterSets } from './starterSets';
@@ -27,6 +29,14 @@ describe('starterSets', () => {
     const total = sets.filter(s => s.id.startsWith('verbs-')).reduce((n, s) => n + s.cards.length, 0);
     const distinct = new Set(CORE_VERBS.map(v => `${principalParts(v)}|${v.trans}`)).size;
     expect(total).toBe(distinct);
+  });
+
+  it('every noun and adjective lands in a set', () => {
+    const size = (prefix: string) => sets.filter(s => s.id.startsWith(prefix)).reduce((n, s) => n + s.cards.length, 0);
+    expect(size('nouns-')).toBe(new Set(CORE_NOUNS.map(n => `${nounEntry(n)}|${n.trans}`)).size);
+    expect(size('adj-')).toBe(new Set(CORE_ADJECTIVES.map(a => `${adjectiveEntry(a)}|${a.trans}`)).size);
+    expect(size('nouns-')).toBe(CORE_NOUNS.length);
+    expect(size('adj-')).toBe(CORE_ADJECTIVES.length);
   });
 
   it('ids are unique and names match the deck', () => {
