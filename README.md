@@ -9,6 +9,7 @@ teachers create classes, assign practice or tests, and see a gradebook and per-q
 - 10 subjunctive modules (forms, sequence of tenses, independent uses, purpose/result/indirect command,
   cum clauses, indirect questions, fear clauses, conditionals, quin, relative clauses), 335 questions.
 - Endless Train: unlimited generated subjunctive conjugation drills.
+- Forms: make or identify any verb, noun, adjective or pronoun form, generated from about 780 verbs, 755 nouns and 364 adjectives, with filters by conjugation, declension, mood, tense, voice and degree.
 - XP, streaks and progress are stored in this browser only.
 
 **Classroom (needs a Supabase backend)**
@@ -113,6 +114,7 @@ Use them for low-stakes quizzes, and use your own vocab lists for anything that 
 
 ```
 src/lib/            grading, conjugator, vocab question generator, CSV, offline queue
+src/lib/morph/       morphology engine: verb, noun, adjective and pronoun forms, parse
 src/content/        built-in modules and questions
 src/features/       solo, drill engine, auth, student, teacher screens
 supabase/migrations schema, row level security, grading functions
@@ -123,7 +125,5 @@ docs/superpowers    design spec and implementation plan
 
 ## Roadmap
 
-Video lessons with checkpoint questions, paradigm-chart mode, parse/identify mode, per-student spaced
-repetition, Microsoft school sign-in, teacher-authored grammar questions, a live class game mode, and a
-content audit of the conjugation engine (known issues: `effugere` is given a passive participle,
-`fieri` perfect forms, `ire` perfect variants).
+Video lessons with checkpoint questions, paradigm-chart mode, per-student spaced
+repetition, Microsoft school sign-in, teacher-authored grammar questions, and a live class game mode.
