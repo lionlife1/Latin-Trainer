@@ -77,4 +77,11 @@ describe('MODULES content', () => {
       'Ablative Absolute without a Participle'],
     prerequisites: [], xp_reward: 110, mc: 21, typein: 12,
   }));
+  it('M11 Indirect Statement follows M10', () => expectNewModule(11, {
+    id: 'indirect_statement', badge: 'M11', title: 'Indirect Statement',
+    concepts: ['Verbs of Saying, Thinking, Knowing and Perceiving', 'Accusative Subject + Infinitive',
+      'Present Infinitive: Same Time', 'Perfect Infinitive: Time Before', 'Future Infinitive: Time After',
+      'Reflexive sē and suus', 'negō: Say That ... Not'],
+    prerequisites: ['participles_ablative_absolute'], xp_reward: 110, mc: 20, typein: 13,
+  }));
 });

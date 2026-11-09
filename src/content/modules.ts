@@ -5134,5 +5134,475 @@ export const MODULES: ModuleContent[] = [
         "correct": "Mīlitēs in urbe captā manēbant."
       }
     ]
+  },
+  {
+    "id": "indirect_statement",
+    "badge": "M11",
+    "title": "Indirect Statement",
+    "tagline": "Reporting what people say and think",
+    "description": "Report what someone says, thinks, knows or perceives with an accusative subject and an infinitive. Choose the present, perfect or future infinitive by its time relative to the main verb, use sē and suus for the subject of the main verb, and use negō for 'say that ... not'.",
+    "concepts": [
+      "Verbs of Saying, Thinking, Knowing and Perceiving",
+      "Accusative Subject + Infinitive",
+      "Present Infinitive: Same Time",
+      "Perfect Infinitive: Time Before",
+      "Future Infinitive: Time After",
+      "Reflexive sē and suus",
+      "negō: Say That ... Not"
+    ],
+    "prerequisites": [
+      "participles_ablative_absolute"
+    ],
+    "xp_reward": 110,
+    "questions": [
+      {
+        "id": "m11-101",
+        "type": "mc",
+        "badge": "TRIGGER",
+        "prompt": "Which verb introduces an <strong>indirect statement</strong> (accusative subject + infinitive)?",
+        "hint": "Indirect statement follows verbs of saying, thinking, knowing and perceiving.",
+        "explanation": "putō means 'think', so it takes an accusative and infinitive. imperō and ōrō introduce indirect commands, and quaerō introduces indirect questions.",
+        "choices": [
+          "putō",
+          "imperō",
+          "quaerō",
+          "ōrō"
+        ],
+        "correct": "putō"
+      },
+      {
+        "id": "m11-102",
+        "type": "mc",
+        "badge": "TRIGGER",
+        "prompt": "Which verb is followed by an <strong>indirect command</strong> (ut + subjunctive), not an indirect statement?",
+        "hint": "Three of these are verbs of knowing, perceiving or believing.",
+        "explanation": "rogō, 'ask', takes ut + subjunctive for a request. sciō, audiō and crēdō report a fact or belief, so they take an accusative and infinitive.",
+        "choices": [
+          "rogō",
+          "sciō",
+          "audiō",
+          "crēdō"
+        ],
+        "correct": "rogō"
+      },
+      {
+        "id": "m11-103",
+        "type": "mc",
+        "badge": "TRIGGER",
+        "prompt": "Which sentence contains an <strong>indirect statement</strong>?",
+        "hint": "Look for a verb of perceiving followed by an accusative and an infinitive.",
+        "explanation": "vīdērunt is a verb of perceiving, followed by hostēs (accusative) and appropinquāre (infinitive): 'The soldiers saw that the enemy were approaching.' The others are an indirect command, an indirect question and a purpose clause.",
+        "choices": [
+          "Mīlitēs vīdērunt hostēs appropinquāre.",
+          "Cōnsul mīlitibus imperāvit ut pugnārent.",
+          "Rēx quaesīvit cūr hostēs appropinquārent.",
+          "Mīlitēs fortiter pugnāvērunt ut urbem servārent."
+        ],
+        "correct": "Mīlitēs vīdērunt hostēs appropinquāre."
+      },
+      {
+        "id": "m11-104",
+        "type": "mc",
+        "badge": "TRIGGER",
+        "prompt": "Nūntius <strong>______</strong> hostēs adesse.<br>Which verb fits the blank?",
+        "hint": "hostēs adesse is an accusative and infinitive. Which verb reports a fact?",
+        "explanation": "nūntiō, 'announce', is a verb of saying, so it takes an accusative and infinitive: 'The messenger announced that the enemy were present.'",
+        "choices": [
+          "nūntiāvit",
+          "quaesīvit",
+          "ōrāvit",
+          "timuit"
+        ],
+        "correct": "nūntiāvit"
+      },
+      {
+        "id": "m11-201",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete the indirect statement:<br>Nūntius dīxit hostēs urbem ______ (capere).<br><em>The messenger said that the enemy had captured the city.</em>",
+        "hint": "The capturing happened before the saying: perfect active infinitive.",
+        "explanation": "The perfect active infinitive is the perfect stem + -isse: cēpisse. It shows time before the main verb.",
+        "answers": [
+          "cepisse"
+        ]
+      },
+      {
+        "id": "m11-202",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete the indirect statement:<br>Audīvimus captīvōs ad urbem ______ (dūcere).<br><em>We heard that the prisoners were being led to the city.</em>",
+        "hint": "Same time as the hearing, and the prisoners are being led: present passive infinitive.",
+        "explanation": "3rd conjugation verbs form the present passive infinitive with -ī: dūcī, 'to be led'. It shows the same time as audīvimus.",
+        "answers": [
+          "duci"
+        ]
+      },
+      {
+        "id": "m11-203",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete the indirect statement:<br>Sciō mē ab amīcīs ______ (amāre).<br><em>I know that I am loved by my friends.</em>",
+        "hint": "Same time as the knowing, and I am being loved: present passive infinitive.",
+        "explanation": "1st conjugation verbs form the present passive infinitive with -ārī: amārī, 'to be loved'.",
+        "answers": [
+          "amari"
+        ]
+      },
+      {
+        "id": "m11-204",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete the indirect statement:<br>Lēgātī nūntiāvērunt urbem ______ (capere).<br><em>The envoys announced that the city had been captured.</em>",
+        "hint": "Perfect passive infinitive: perfect passive participle + esse. The participle agrees with urbem.",
+        "explanation": "The perfect passive infinitive is the perfect passive participle + esse. It agrees with urbem, feminine accusative singular: captam esse.",
+        "answers": [
+          "captam esse",
+          "captam"
+        ]
+      },
+      {
+        "id": "m11-205",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete the indirect statement:<br>Putāmus cīvēs urbem ______ (relinquere).<br><em>We think that the citizens will leave the city.</em>",
+        "hint": "The 4th principal part is relictum. Future active infinitive: future active participle + esse, agreeing with cīvēs.",
+        "explanation": "The future active infinitive is the future active participle + esse. It agrees with cīvēs, masculine accusative plural: relictūrōs esse.",
+        "answers": [
+          "relicturos esse",
+          "relicturos"
+        ]
+      },
+      {
+        "id": "m11-206",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete the indirect statement:<br>Scīmus hostēs nōs ______ (sequor).<br><em>We know that the enemy are following us.</em>",
+        "hint": "sequor is deponent: passive in form, active in meaning. The following happens at the same time as the knowing.",
+        "explanation": "A deponent's present infinitive is passive in form. sequor is 3rd conjugation, so it is sequī, 'to follow'.",
+        "answers": [
+          "sequi"
+        ]
+      },
+      {
+        "id": "m11-207",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete the indirect statement:<br>Audīvī lēgātōs Rōmam ______ (proficīscor).<br><em>I heard that the envoys had set out for Rome.</em>",
+        "hint": "The principal parts are proficīscor, proficīscī, profectus sum. Perfect infinitive: participle + esse, agreeing with lēgātōs.",
+        "explanation": "A deponent's perfect infinitive is passive in form but active in meaning: profectōs esse, 'to have set out'. profectōs agrees with lēgātōs.",
+        "answers": [
+          "profectos esse",
+          "profectos"
+        ]
+      },
+      {
+        "id": "m11-208",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete the indirect statement:<br>Mārcus crēdit Iūliam crās ______ (discēdere).<br><em>Marcus believes that Julia will leave tomorrow.</em>",
+        "hint": "The 4th principal part is discessum. Future active infinitive, agreeing with Iūliam.",
+        "explanation": "The future active infinitive is the future active participle + esse. It agrees with Iūliam, feminine accusative singular: discessūram esse.",
+        "answers": [
+          "discessuram esse",
+          "discessuram"
+        ]
+      },
+      {
+        "id": "m11-301",
+        "type": "mc",
+        "badge": "TENSE",
+        "prompt": "Dīcit mīlitēs fortiter <strong>______</strong>.<br><em>He says that the soldiers are fighting bravely.</em><br>Choose the infinitive.",
+        "hint": "The fighting happens at the same time as the saying.",
+        "explanation": "The present infinitive shows the same time as the main verb: 'He says that the soldiers are fighting bravely.'",
+        "choices": [
+          "pugnāre",
+          "pugnāvisse",
+          "pugnātūrōs esse",
+          "pugnārent"
+        ],
+        "correct": "pugnāre"
+      },
+      {
+        "id": "m11-302",
+        "type": "mc",
+        "badge": "TENSE",
+        "prompt": "Lēgātus nūntiāvit hostēs <strong>______</strong>.<br><em>The envoy announced that the enemy had fled.</em><br>Choose the infinitive.",
+        "hint": "The fleeing happened before the announcing.",
+        "explanation": "The perfect infinitive shows time before the main verb. After a past verb, English says 'had fled'.",
+        "choices": [
+          "fūgisse",
+          "fugere",
+          "fugitūrōs esse",
+          "fūgissent"
+        ],
+        "correct": "fūgisse"
+      },
+      {
+        "id": "m11-303",
+        "type": "mc",
+        "badge": "TENSE",
+        "prompt": "Cōnsul putābat hostēs castra mox <strong>______</strong>.<br><em>The consul thought that the enemy would soon attack the camp.</em><br>Choose the infinitive.",
+        "hint": "The attack comes after the thinking, and the enemy are the ones attacking.",
+        "explanation": "The future active infinitive shows time after the main verb. After a past verb, English says 'would attack'.",
+        "choices": [
+          "oppugnātūrōs esse",
+          "oppugnāre",
+          "oppugnāvisse",
+          "oppugnātōs esse"
+        ],
+        "correct": "oppugnātūrōs esse"
+      },
+      {
+        "id": "m11-304",
+        "type": "mc",
+        "badge": "TENSE",
+        "prompt": "Spērāmus nōs <strong>______</strong>.<br><em>We hope that we will win.</em><br>Choose the infinitive.",
+        "hint": "The winning is still to come. Check the agreement with nōs.",
+        "explanation": "Verbs of hoping look ahead, so they take the future infinitive. The participle agrees with nōs, masculine accusative plural: victūrōs esse.",
+        "choices": [
+          "victūrōs esse",
+          "victūrum esse",
+          "vīcisse",
+          "victōs esse"
+        ],
+        "correct": "victūrōs esse"
+      },
+      {
+        "id": "m11-305",
+        "type": "mc",
+        "badge": "TENSE",
+        "prompt": "Sciēbam hostēs urbem <strong>oppugnāre</strong>.<br>When was the attack happening?",
+        "hint": "The present infinitive is timed from the main verb, not from now.",
+        "explanation": "The present infinitive shows the same time as the main verb. sciēbam is past, so: 'I knew that the enemy were attacking the city.'",
+        "choices": [
+          "At the time when I knew it",
+          "Before I knew it",
+          "After I knew it",
+          "Right now, as I speak"
+        ],
+        "correct": "At the time when I knew it"
+      },
+      {
+        "id": "m11-306",
+        "type": "typein",
+        "badge": "TENSE",
+        "prompt": "Complete the indirect statement:<br>Dux spērābat mīlitēs urbem ______ (dēfendere).<br><em>The general hoped that the soldiers would defend the city.</em>",
+        "hint": "The 4th principal part is dēfēnsum. A hope looks ahead: future active infinitive, agreeing with mīlitēs.",
+        "explanation": "Verbs of hoping take the future infinitive. The participle agrees with mīlitēs, masculine accusative plural: dēfēnsūrōs esse.",
+        "answers": [
+          "defensuros esse",
+          "defensuros"
+        ]
+      },
+      {
+        "id": "m11-401",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Translate: <strong>Puella putābat sē fēlīcem esse.</strong>",
+        "hint": "putābat is past; esse shows the same time as the thinking.",
+        "explanation": "The present infinitive shows the same time as the main verb. After a past verb, English says 'was'. sē points back to the girl.",
+        "choices": [
+          "The girl thought that she was happy.",
+          "The girl thinks that she is happy.",
+          "The girl thought that she had been happy.",
+          "The girl thought that she would be happy."
+        ],
+        "correct": "The girl thought that she was happy."
+      },
+      {
+        "id": "m11-402",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Translate: <strong>Dīcunt rēgem mortuum esse.</strong>",
+        "hint": "mortuum esse is the perfect infinitive of the deponent morior, and dīcunt is present.",
+        "explanation": "The perfect infinitive shows time before the main verb. dīcunt is present, so English says 'has died'.",
+        "choices": [
+          "They say that the king has died.",
+          "They say that the king is dying.",
+          "They said that the king had died.",
+          "They say that the king will die."
+        ],
+        "correct": "They say that the king has died."
+      },
+      {
+        "id": "m11-403",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Translate: <strong>Mīles dīxit sē in proeliō fortiter pugnāvisse.</strong>",
+        "hint": "pugnāvisse is a perfect infinitive, and dīxit is past.",
+        "explanation": "The perfect infinitive shows time before the main verb. After a past verb, English says 'had fought'. sē points back to the soldier.",
+        "choices": [
+          "The soldier said that he had fought bravely in the battle.",
+          "The soldier said that he would fight bravely in the battle.",
+          "The soldier says that he has fought bravely in the battle.",
+          "The soldier said that another man had fought bravely in the battle."
+        ],
+        "correct": "The soldier said that he had fought bravely in the battle."
+      },
+      {
+        "id": "m11-404",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Translate: <strong>Cōnsul nūntiāvit sē crās Rōmam reditūrum esse.</strong>",
+        "hint": "reditūrum esse looks ahead in time, and nūntiāvit is past.",
+        "explanation": "The future infinitive shows time after the main verb. After a past verb, English says 'would return'. sē points back to the consul.",
+        "choices": [
+          "The consul announced that he would return to Rome tomorrow.",
+          "The consul announces that he will return to Rome tomorrow.",
+          "The consul announced that he had returned to Rome.",
+          "The consul announced that another man would return to Rome tomorrow."
+        ],
+        "correct": "The consul announced that he would return to Rome tomorrow."
+      },
+      {
+        "id": "m11-405",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Translate: <strong>Audīmus urbem ab hostibus oppugnārī.</strong>",
+        "hint": "oppugnārī is a present passive infinitive, and audīmus is present.",
+        "explanation": "The present passive infinitive shows the same time as the main verb: 'We hear that the city is being attacked by the enemy.'",
+        "choices": [
+          "We hear that the city is being attacked by the enemy.",
+          "We heard that the city was being attacked by the enemy.",
+          "We hear that the city has been attacked by the enemy.",
+          "We hear that the city is attacking the enemy."
+        ],
+        "correct": "We hear that the city is being attacked by the enemy."
+      },
+      {
+        "id": "m11-501",
+        "type": "mc",
+        "badge": "REFLEXIVE",
+        "prompt": "Mārcus dīcit <strong>eum</strong> aegrum esse.<br>Who is sick?",
+        "hint": "Compare sē, which points back to the subject of dīcit.",
+        "explanation": "eum refers to someone else. If Marcus meant himself, the Latin would be: Mārcus dīcit sē aegrum esse.",
+        "choices": [
+          "Someone other than Marcus",
+          "Marcus himself",
+          "Marcus and his friend together",
+          "Nobody: eum is the object of dīcit"
+        ],
+        "correct": "Someone other than Marcus"
+      },
+      {
+        "id": "m11-502",
+        "type": "mc",
+        "badge": "REFLEXIVE",
+        "prompt": "Cōnsul dīxit <strong>suam</strong> fīliam aegram esse.<br>Whose daughter was sick?",
+        "hint": "In an indirect statement, suus points back to the subject of the verb of saying.",
+        "explanation": "suam is reflexive and points back to the subject of dīxit: 'The consul said that his own daughter was sick.' With eius, the daughter would belong to someone else.",
+        "choices": [
+          "The consul's own daughter",
+          "Another man's daughter",
+          "The daughter of the person the consul was talking to",
+          "The daughter of a man mentioned earlier"
+        ],
+        "correct": "The consul's own daughter"
+      },
+      {
+        "id": "m11-503",
+        "type": "mc",
+        "badge": "REFLEXIVE",
+        "prompt": "Lēgātī nūntiāvērunt <strong>______</strong> ā rēge captōs esse.<br><em>The envoys announced that they (other men, not the envoys) had been captured by the king.</em><br>Which word fills the blank?",
+        "hint": "Were the envoys captured, or other men? The subject of an infinitive is accusative.",
+        "explanation": "When the subject of the infinitive is not the subject of the main verb, Latin uses a form of is, ea, id: eōs. sē would mean that the envoys themselves had been captured.",
+        "choices": [
+          "eōs",
+          "sē",
+          "suōs",
+          "eī"
+        ],
+        "correct": "eōs"
+      },
+      {
+        "id": "m11-504",
+        "type": "typein",
+        "badge": "REFLEXIVE",
+        "prompt": "Complete with a pronoun:<br>Rēx putat ______ ab omnibus laudārī.<br><em>The king thinks that he (the king himself) is praised by everyone.</em>",
+        "hint": "The subject of the infinitive is the same person as the subject of putat.",
+        "explanation": "When the subject of the infinitive is the subject of the main verb, Latin uses the reflexive sē: 'The king thinks that he is praised by everyone.'",
+        "answers": [
+          "se"
+        ]
+      },
+      {
+        "id": "m11-505",
+        "type": "typein",
+        "badge": "REFLEXIVE",
+        "prompt": "Complete with a possessive adjective:<br>Rēgīna dīxit ______ urbem pulcherrimam esse.<br><em>The queen said that her own city was very beautiful.</em>",
+        "hint": "Use the reflexive possessive, and make it agree with urbem.",
+        "explanation": "The city belongs to the subject of dīxit, so Latin uses the reflexive possessive suus. It agrees with urbem: suam.",
+        "answers": [
+          "suam"
+        ]
+      },
+      {
+        "id": "m11-601",
+        "type": "mc",
+        "badge": "NEGATIVE",
+        "prompt": "Translate: <strong>Explōrātōrēs negant hostēs prope esse.</strong>",
+        "hint": "negō does not mean 'say'. It carries its own 'not'.",
+        "explanation": "negō means 'say that ... not' or 'deny': 'The scouts say that the enemy are not near.'",
+        "choices": [
+          "The scouts say that the enemy are not near.",
+          "The scouts say that the enemy are near.",
+          "The scouts said that the enemy were not near.",
+          "The scouts ask whether the enemy are near."
+        ],
+        "correct": "The scouts say that the enemy are not near."
+      },
+      {
+        "id": "m11-602",
+        "type": "typein",
+        "badge": "NEGATIVE",
+        "prompt": "Complete with one verb in the perfect tense:<br>______ sē ventūrum esse.<br><em>He said that he would not come.</em>",
+        "hint": "Latin avoids dīxit ... nōn here. Use the verb that means 'say that ... not'.",
+        "explanation": "negō means 'say that ... not' or 'deny': Negāvit sē ventūrum esse.",
+        "answers": [
+          "negavit"
+        ]
+      },
+      {
+        "id": "m11-603",
+        "type": "typein",
+        "badge": "NEGATIVE",
+        "prompt": "Complete with one verb in the present tense:<br>Cōnsul ______ urbem in perīculō esse.<br><em>The consul says that the city is not in danger.</em>",
+        "hint": "Latin avoids dīcit ... nōn here. Use the verb that means 'say that ... not'.",
+        "explanation": "negō means 'say that ... not' or 'deny': Cōnsul negat urbem in perīculō esse.",
+        "answers": [
+          "negat"
+        ]
+      },
+      {
+        "id": "m11-701",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "Choose the correct Latin for:<br><em>The envoys said that the king was coming.</em>",
+        "hint": "English 'that' after a verb of saying has no Latin word of its own.",
+        "explanation": "Indirect statement has no word for 'that': the subject becomes accusative and the verb becomes an infinitive. ut would make it a command, quod is not used after dīcō, and vēnisse would mean 'had come'.",
+        "choices": [
+          "Lēgātī dīxērunt rēgem venīre.",
+          "Lēgātī dīxērunt ut rēx venīret.",
+          "Lēgātī dīxērunt quod rēx veniēbat.",
+          "Lēgātī dīxērunt rēgem vēnisse."
+        ],
+        "correct": "Lēgātī dīxērunt rēgem venīre."
+      },
+      {
+        "id": "m11-702",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "A student writes <strong>Spērō cōnsulem urbem servāre</strong> for <em>I hope that the consul will save the city.</em><br>The present infinitive servāre shows the same time as spērō, not a later time. What should replace servāre?",
+        "hint": "The saving is still to come, and the participle agrees with cōnsulem.",
+        "explanation": "A hope looks ahead, so verbs of hoping take the future infinitive. servātūrum agrees with cōnsulem: 'Spērō cōnsulem urbem servātūrum esse.'",
+        "choices": [
+          "servātūrum esse",
+          "servātūrus esse",
+          "servāvisse",
+          "ut servet"
+        ],
+        "correct": "servātūrum esse"
+      }
+    ]
   }
 ];
