@@ -84,4 +84,11 @@ describe('MODULES content', () => {
       'Reflexive sē and suus', 'negō: Say That ... Not'],
     prerequisites: ['participles_ablative_absolute'], xp_reward: 110, mc: 20, typein: 13,
   }));
+  it('M12 Gerund and Gerundive follows M11', () => expectNewModule(12, {
+    id: 'gerund_gerundive', badge: 'M12', title: 'Gerund and Gerundive',
+    concepts: ['Gerund: a Verbal Noun', 'Gerundive: a Verbal Adjective', 'Gerundive in Place of Gerund + Object',
+      'Passive Periphrastic (Obligation)', 'Dative of Agent', 'Impersonal Passive Periphrastic',
+      'Purpose: ad + Gerund or Gerundive', 'Purpose: causā or grātiā + Genitive'],
+    prerequisites: ['participles_ablative_absolute'], xp_reward: 110, mc: 20, typein: 13,
+  }));
 });

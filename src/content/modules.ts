@@ -5605,5 +5605,471 @@ export const MODULES: ModuleContent[] = [
         "correct": "servātūrum esse"
       }
     ]
+  },
+  {
+    "id": "gerund_gerundive",
+    "badge": "M12",
+    "title": "Gerund and Gerundive",
+    "tagline": "Verbal nouns, verbal adjectives and 'must'",
+    "description": "Form and recognize the gerund, a verbal noun, and the gerundive, a verbal adjective. Use the gerundive in place of a gerund with an object, express purpose with ad or with causā and grātiā, and show obligation with gerundive + sum and a dative of agent.",
+    "concepts": [
+      "Gerund: a Verbal Noun",
+      "Gerundive: a Verbal Adjective",
+      "Gerundive in Place of Gerund + Object",
+      "Passive Periphrastic (Obligation)",
+      "Dative of Agent",
+      "Impersonal Passive Periphrastic",
+      "Purpose: ad + Gerund or Gerundive",
+      "Purpose: causā or grātiā + Genitive"
+    ],
+    "prerequisites": [
+      "participles_ablative_absolute"
+    ],
+    "xp_reward": 110,
+    "questions": [
+      {
+        "id": "m12-101",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with a gerund:<br>Captīvī occāsiōnem ______ (fugere) exspectābant.<br><em>The prisoners were waiting for a chance to escape.</em>",
+        "hint": "occāsiōnem needs a genitive: 'a chance of escaping'. -iō verbs keep their i.",
+        "explanation": "The genitive gerund ends in -ndī. fugiō is a 3rd conjugation -iō verb, so the stem keeps its i: fugiendī. 'a chance to escape'.",
+        "answers": [
+          "fugiendi"
+        ]
+      },
+      {
+        "id": "m12-102",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with a gerund:<br>Aqua ūtilis est ______ (bibere).<br><em>Water is useful for drinking.</em>",
+        "hint": "ūtilis takes the dative.",
+        "explanation": "The dative gerund ends in -ndō. ūtilis takes the dative, so bibendō means 'for drinking'.",
+        "answers": [
+          "bibendo"
+        ]
+      },
+      {
+        "id": "m12-103",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with a gerund:<br>Hostēs ad ______ (resistere) parātī erant.<br><em>The enemy were ready to resist.</em>",
+        "hint": "ad takes the accusative.",
+        "explanation": "After ad the gerund is accusative and ends in -ndum: ad resistendum, 'ready to resist'.",
+        "answers": [
+          "resistendum"
+        ]
+      },
+      {
+        "id": "m12-104",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with a gerund:<br>Discipulī ______ (audīre) multa discunt.<br><em>Pupils learn many things by listening.</em>",
+        "hint": "'By listening' shows the means. 4th conjugation verbs add -ie- before -nd-.",
+        "explanation": "The ablative gerund shows means and ends in -ndō. audiō is 4th conjugation, so the stem is audie-: audiendō, 'by listening'.",
+        "answers": [
+          "audiendo"
+        ]
+      },
+      {
+        "id": "m12-105",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with a gerund:<br>Dux ______ (hortārī) perītus erat.<br><em>The general was skilled at encouraging.</em>",
+        "hint": "perītus takes the genitive. A deponent verb's gerund is formed the same way as any other.",
+        "explanation": "perītus takes the genitive, so the gerund ends in -ndī. Deponent verbs have ordinary gerunds with active meaning: hortandī, 'skilled at encouraging'.",
+        "answers": [
+          "hortandi"
+        ]
+      },
+      {
+        "id": "m12-106",
+        "type": "typein",
+        "badge": "FORM",
+        "prompt": "Complete with a gerundive:<br>Cīvēs spem urbis ______ (dēfendere) āmīsērunt.<br><em>The citizens lost hope of defending the city.</em>",
+        "hint": "The gerundive agrees with urbis. What gender, number and case is urbis?",
+        "explanation": "Instead of a gerund with an object, Latin puts the noun in the gerund's case and makes the gerundive agree with it. urbis is feminine genitive singular, so: urbis dēfendendae, 'of defending the city'.",
+        "answers": [
+          "defendendae"
+        ]
+      },
+      {
+        "id": "m12-201",
+        "type": "mc",
+        "badge": "IDENTIFY",
+        "prompt": "In the phrase <strong>ars bene dīcendī</strong>, what is dīcendī?",
+        "hint": "Is there a noun for it to agree with?",
+        "explanation": "dīcendī does not agree with ars (feminine nominative), so it is a gerund, a verbal noun, in the genitive: 'the art of speaking well'.",
+        "choices": [
+          "A gerund in the genitive",
+          "A gerundive agreeing with ars",
+          "A present participle",
+          "A present passive infinitive"
+        ],
+        "correct": "A gerund in the genitive"
+      },
+      {
+        "id": "m12-202",
+        "type": "mc",
+        "badge": "IDENTIFY",
+        "prompt": "Mīlitēs in mūrō <strong>aedificandō</strong> labōrābant.<br><em>The soldiers were working on building the wall.</em><br>What is aedificandō?",
+        "hint": "Look for a noun in the same gender, number and case.",
+        "explanation": "aedificandō agrees with mūrō (masculine ablative singular), so it is a gerundive, a verbal adjective. A gerund with an object would need mūrum in the accusative.",
+        "choices": [
+          "A gerundive agreeing with mūrō",
+          "A gerund in the ablative",
+          "A present participle",
+          "A perfect passive participle"
+        ],
+        "correct": "A gerundive agreeing with mūrō"
+      },
+      {
+        "id": "m12-203",
+        "type": "mc",
+        "badge": "IDENTIFY",
+        "prompt": "Mīlitēs urbem <strong>oppugnantēs</strong> vīdimus.<br><em>We saw the soldiers attacking the city.</em><br>What is oppugnantēs?",
+        "hint": "Compare the letters before the ending: -nt- or -nd-?",
+        "explanation": "oppugnantēs has -nt-, so it is a present active participle agreeing with mīlitēs: 'attacking'. Gerunds and gerundives have -nd-.",
+        "choices": [
+          "A present active participle agreeing with mīlitēs",
+          "A gerundive agreeing with mīlitēs",
+          "A gerund in the accusative",
+          "A present active infinitive"
+        ],
+        "correct": "A present active participle agreeing with mīlitēs"
+      },
+      {
+        "id": "m12-204",
+        "type": "mc",
+        "badge": "IDENTIFY",
+        "prompt": "Mīlitēs dē <strong>discēdendō</strong> cōgitābant.<br><em>The soldiers were thinking about leaving.</em><br>What case is the gerund discēdendō?",
+        "hint": "Which case does dē take?",
+        "explanation": "dē takes the ablative, so discēdendō is an ablative gerund: 'about leaving'. The ending -ndō is also dative, but the preposition settles it.",
+        "choices": [
+          "Ablative",
+          "Dative",
+          "Accusative",
+          "Genitive"
+        ],
+        "correct": "Ablative"
+      },
+      {
+        "id": "m12-205",
+        "type": "mc",
+        "badge": "IDENTIFY",
+        "prompt": "<strong>Errāre</strong> hūmānum est.<br><em>To err is human.</em><br>Why is the subject an infinitive and not a gerund?",
+        "hint": "Think about which cases the gerund has.",
+        "explanation": "The gerund has no nominative, so Latin uses the infinitive as a verbal noun subject: errāre, 'to err'. The gerund supplies the other cases: errandī, errandō, ad errandum.",
+        "choices": [
+          "The gerund has no nominative, so the infinitive is used as the subject.",
+          "The gerund is passive in meaning, so it cannot be a subject.",
+          "The gerund is only used after prepositions.",
+          "The gerund must agree with a noun, and there is none here."
+        ],
+        "correct": "The gerund has no nominative, so the infinitive is used as the subject."
+      },
+      {
+        "id": "m12-301",
+        "type": "typein",
+        "badge": "PURPOSE",
+        "prompt": "Complete with a gerundive:<br>Lēgātī vēnērunt ad pācem ______ (petere).<br><em>The envoys came to seek peace.</em>",
+        "hint": "After ad, the gerundive agrees with its noun. pācem is feminine accusative singular.",
+        "explanation": "ad + noun + gerundive shows purpose. The gerundive takes the noun's gender, number and case: pācem petendam.",
+        "answers": [
+          "petendam"
+        ]
+      },
+      {
+        "id": "m12-302",
+        "type": "typein",
+        "badge": "PURPOSE",
+        "prompt": "Complete with a gerund:<br>Mīlitēs ______ (frūmentārī) causā ē castrīs exiērunt.<br><em>The soldiers left the camp to gather grain.</em>",
+        "hint": "causā follows a genitive.",
+        "explanation": "causā, 'for the sake of', takes a genitive placed before it, so the gerund ends in -ndī: frūmentandī causā, 'to gather grain'. frūmentor is deponent, but its gerund is formed as usual.",
+        "answers": [
+          "frumentandi"
+        ]
+      },
+      {
+        "id": "m12-303",
+        "type": "typein",
+        "badge": "PURPOSE",
+        "prompt": "Complete with a gerundive:<br>Plēbs lībertātis ______ (recuperāre) causā arma cēpit.<br><em>The common people took up arms to recover their freedom.</em>",
+        "hint": "The gerundive agrees with lībertātis.",
+        "explanation": "causā takes the genitive, and the gerundive agrees with lībertātis (feminine genitive singular): lībertātis recuperandae causā, 'to recover their freedom'.",
+        "answers": [
+          "recuperandae"
+        ]
+      },
+      {
+        "id": "m12-304",
+        "type": "mc",
+        "badge": "PURPOSE",
+        "prompt": "Mīlitēs vēnērunt <strong>______</strong>.<br><em>The soldiers came to capture the city.</em><br>Which phrase fits the blank?",
+        "hint": "Think about how Latin handles a gerund that would take a direct object.",
+        "explanation": "After ad, Latin does not use a gerund with a direct object. The noun takes the case and the gerundive agrees with it: ad urbem capiendam, 'to capture the city'.",
+        "choices": [
+          "ad urbem capiendam",
+          "ad capiendum urbem",
+          "ad urbem capiendum",
+          "ad urbem capientem"
+        ],
+        "correct": "ad urbem capiendam"
+      },
+      {
+        "id": "m12-305",
+        "type": "mc",
+        "badge": "PURPOSE",
+        "prompt": "Which phrase means <em>for the sake of making peace</em>?",
+        "hint": "Check the case of each word.",
+        "explanation": "causā follows a genitive, and the gerundive agrees with pācis (feminine genitive singular): pācis faciendae causā, 'for the sake of making peace'.",
+        "choices": [
+          "pācis faciendae causā",
+          "pācem faciendam causā",
+          "pācis faciendae causam",
+          "pāce faciendā causā"
+        ],
+        "correct": "pācis faciendae causā"
+      },
+      {
+        "id": "m12-306",
+        "type": "mc",
+        "badge": "PURPOSE",
+        "prompt": "Translate: <strong>Mīlitēs frūmentī comparandī grātiā in agrōs exiērunt.</strong>",
+        "hint": "Look at the case of frūmentī comparandī and the word after it.",
+        "explanation": "grātiā after a genitive means 'for the sake of', just like causā. frūmentī comparandī grātiā shows purpose: 'The soldiers went out into the fields to get grain.'",
+        "choices": [
+          "The soldiers went out into the fields to get grain.",
+          "The soldiers went out into the fields after getting grain.",
+          "The soldiers went out into the fields thanks to the grain they had gathered.",
+          "The soldiers went out into the fields while grain was being gathered."
+        ],
+        "correct": "The soldiers went out into the fields to get grain."
+      },
+      {
+        "id": "m12-307",
+        "type": "mc",
+        "badge": "PURPOSE",
+        "prompt": "Translate: <strong>Hostēs ad agrōs vāstandōs vēnērunt.</strong>",
+        "hint": "ad + noun + gerundive is a purpose phrase.",
+        "explanation": "ad agrōs vāstandōs is ad + accusative + gerundive, which shows purpose: 'The enemy came to ravage the fields.'",
+        "choices": [
+          "The enemy came to ravage the fields.",
+          "The enemy came to the fields that had to be ravaged.",
+          "The enemy came to the fields they were ravaging.",
+          "The enemy came after ravaging the fields."
+        ],
+        "correct": "The enemy came to ravage the fields."
+      },
+      {
+        "id": "m12-401",
+        "type": "mc",
+        "badge": "OBLIGATION",
+        "prompt": "Translate: <strong>Hostēs nōbīs vincendī sunt.</strong>",
+        "hint": "Gerundive + sum shows obligation. Who does the conquering?",
+        "explanation": "This is a passive periphrastic: the enemy are 'to be conquered'. nōbīs is a dative of agent, 'by us'.",
+        "choices": [
+          "The enemy must be conquered by us.",
+          "The enemy must conquer us.",
+          "The enemy were conquered by us.",
+          "We must be conquered by the enemy."
+        ],
+        "correct": "The enemy must be conquered by us."
+      },
+      {
+        "id": "m12-402",
+        "type": "mc",
+        "badge": "OBLIGATION",
+        "prompt": "Translate: <strong>Pōns mīlitibus rescindendus erat.</strong>",
+        "hint": "The tense of sum gives the time of the obligation.",
+        "explanation": "Gerundive + erat is a passive periphrastic in the past: 'had to be broken down'. mīlitibus is a dative of agent: 'The bridge had to be broken down by the soldiers.'",
+        "choices": [
+          "The bridge had to be broken down by the soldiers.",
+          "The bridge must be broken down by the soldiers.",
+          "The bridge will have to be broken down by the soldiers.",
+          "The bridge was being broken down by the soldiers."
+        ],
+        "correct": "The bridge had to be broken down by the soldiers."
+      },
+      {
+        "id": "m12-403",
+        "type": "typein",
+        "badge": "OBLIGATION",
+        "prompt": "Complete with a form of sum:<br>Castra mīlitibus crās mūnienda ______.<br><em>The camp will have to be fortified by the soldiers tomorrow.</em>",
+        "hint": "castra is plural in form. Which tense looks ahead?",
+        "explanation": "castra is neuter plural, so the gerundive is mūnienda and sum is plural. 'Will have to' needs the future: erunt.",
+        "answers": [
+          "erunt"
+        ]
+      },
+      {
+        "id": "m12-404",
+        "type": "typein",
+        "badge": "OBLIGATION",
+        "prompt": "Complete with a gerundive:<br>Haec epistula tibi ______ est (mittere).<br><em>This letter must be sent by you.</em>",
+        "hint": "The gerundive agrees with the subject, epistula.",
+        "explanation": "In a passive periphrastic the gerundive agrees with the subject. epistula is feminine nominative singular: mittenda est, 'must be sent'.",
+        "answers": [
+          "mittenda"
+        ]
+      },
+      {
+        "id": "m12-405",
+        "type": "typein",
+        "badge": "OBLIGATION",
+        "prompt": "Complete with a dative of agent:<br>Lēgēs ______ servandae sunt (cīvēs).<br><em>The laws must be kept by the citizens.</em>",
+        "hint": "With gerundive + sum, the person who must act goes in the dative.",
+        "explanation": "With a passive periphrastic, 'by' a person is a dative of agent, not ā/ab + ablative: cīvibus, 'by the citizens'.",
+        "answers": [
+          "civibus"
+        ]
+      },
+      {
+        "id": "m12-406",
+        "type": "mc",
+        "badge": "OBLIGATION",
+        "prompt": "Translate: <strong>Nōbīs pugnandum est.</strong>",
+        "hint": "pugnō takes no direct object, so the gerundive is neuter and impersonal.",
+        "explanation": "With a verb that has no direct object, the periphrastic is impersonal: 'it must be fought by us', that is, 'We must fight.'",
+        "choices": [
+          "We must fight.",
+          "We are about to fight.",
+          "We were fighting.",
+          "They must fight us."
+        ],
+        "correct": "We must fight."
+      },
+      {
+        "id": "m12-407",
+        "type": "mc",
+        "badge": "OBLIGATION",
+        "prompt": "Which sentence means <em>The soldiers had to hurry</em>?",
+        "hint": "Who does the hurrying, and when?",
+        "explanation": "festīnō has no direct object, so Latin says 'it had to be hurried by the soldiers': neuter festīnandum, dative mīlitibus, and erat for the past.",
+        "choices": [
+          "Mīlitibus festīnandum erat.",
+          "Mīlitēs festīnandī erant.",
+          "Mīlitibus festīnandum est.",
+          "Mīlitibus festīnātum erat."
+        ],
+        "correct": "Mīlitibus festīnandum erat."
+      },
+      {
+        "id": "m12-408",
+        "type": "mc",
+        "badge": "OBLIGATION",
+        "prompt": "Cato ended his speeches with <strong>Carthāgō dēlenda est</strong>. What does it mean?",
+        "hint": "dēlenda is a gerundive.",
+        "explanation": "dēlenda is a gerundive agreeing with Carthāgō, and with est it shows obligation: 'Carthage must be destroyed.'",
+        "choices": [
+          "Carthage must be destroyed.",
+          "Carthage has been destroyed.",
+          "Carthage is being destroyed.",
+          "Carthage must destroy."
+        ],
+        "correct": "Carthage must be destroyed."
+      },
+      {
+        "id": "m12-501",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Translate: <strong>ars scrībendī</strong>",
+        "hint": "Look at the -nd- form and its case.",
+        "explanation": "scrībendī is a genitive gerund, a verbal noun: 'the art of writing'.",
+        "choices": [
+          "the art of writing",
+          "the art that must be written",
+          "the written art",
+          "the art of the writer"
+        ],
+        "correct": "the art of writing"
+      },
+      {
+        "id": "m12-502",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Translate: <strong>Puerī cupidī videndī ad forum cucurrērunt.</strong>",
+        "hint": "cupidus takes a genitive.",
+        "explanation": "cupidus takes the genitive, and videndī is a genitive gerund: 'eager to see'. 'The boys, eager to see, ran to the forum.'",
+        "choices": [
+          "The boys, eager to see, ran to the forum.",
+          "The boys ran to the forum to be seen.",
+          "The boys ran to the forum because they had seen it.",
+          "The boys, who had to be seen, ran to the forum."
+        ],
+        "correct": "The boys, eager to see, ran to the forum."
+      },
+      {
+        "id": "m12-503",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Translate: <strong>Legendō discimus.</strong>",
+        "hint": "legendō is ablative. What does the ablative often show?",
+        "explanation": "legendō is an ablative gerund showing means: 'We learn by reading.'",
+        "choices": [
+          "We learn by reading.",
+          "We learn in order to read.",
+          "We must learn to read.",
+          "We learn what must be read."
+        ],
+        "correct": "We learn by reading."
+      },
+      {
+        "id": "m12-504",
+        "type": "mc",
+        "badge": "TRANSLATE",
+        "prompt": "Translate: <strong>Tempus est abeundī.</strong>",
+        "hint": "abeundī comes from abeō and depends on tempus.",
+        "explanation": "abeundī is the genitive gerund of abeō, depending on tempus: 'time of going away', so 'It is time to leave.'",
+        "choices": [
+          "It is time to leave.",
+          "It is time to have left.",
+          "Time is leaving.",
+          "Time must leave."
+        ],
+        "correct": "It is time to leave."
+      },
+      {
+        "id": "m12-505",
+        "type": "typein",
+        "badge": "TRANSLATE",
+        "prompt": "Complete the set phrase with a gerund:<br>Cōnsul fīnem ______ (loquī) fēcit.<br><em>The consul stopped speaking.</em> (literally <em>made an end of speaking</em>)",
+        "hint": "fīnem needs a genitive.",
+        "explanation": "fīnem facere, 'to make an end', takes a genitive. loquor is deponent, and its gerund is loquendī: 'made an end of speaking', so 'stopped speaking'.",
+        "answers": [
+          "loquendi"
+        ]
+      },
+      {
+        "id": "m12-601",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "Which sentence means <em>The city is being attacked by the consul</em>?",
+        "hint": "Is this an ordinary passive or an obligation?",
+        "explanation": "With an ordinary passive verb, the person who does the action is ā/ab + ablative: ā cōnsule. The dative of agent goes with gerundive + sum, which would mean 'must be attacked'.",
+        "choices": [
+          "Urbs ā cōnsule oppugnātur.",
+          "Urbs cōnsulī oppugnātur.",
+          "Urbs cōnsulī oppugnanda est.",
+          "Urbs ā cōnsule oppugnanda est."
+        ],
+        "correct": "Urbs ā cōnsule oppugnātur."
+      },
+      {
+        "id": "m12-602",
+        "type": "mc",
+        "badge": "EXAM TRAP",
+        "prompt": "Translate: <strong>Cōnsul librum legendum mihi dedit.</strong>",
+        "hint": "What does a gerundive mean on its own?",
+        "explanation": "legendum is a gerundive agreeing with librum. With dō it shows what is to be done: 'a book to be read', so 'The consul gave me a book to read.' A gerundive means 'to be ...ed', never 'being ...ed'.",
+        "choices": [
+          "The consul gave me a book to read.",
+          "The consul gave me a book that was being read.",
+          "The consul gave me a book while reading.",
+          "The consul gave me the book he had read."
+        ],
+        "correct": "The consul gave me a book to read."
+      }
+    ]
   }
 ];
