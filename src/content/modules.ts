@@ -5644,7 +5644,7 @@ export const MODULES: ModuleContent[] = [
         "badge": "FORM",
         "prompt": "Complete with a gerund:<br>Aqua ūtilis est ______ (bibere).<br><em>Water is useful for drinking.</em>",
         "hint": "ūtilis takes the dative.",
-        "explanation": "The dative gerund ends in -ndō. ūtilis takes the dative, so bibendō means 'for drinking'.",
+        "explanation": "The dative gerund ends in -ndō. ūtilis takes the dative, so bibendō means 'for drinking'. ad bibendum is also common.",
         "answers": [
           "bibendo"
         ]
@@ -5728,7 +5728,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "IDENTIFY",
         "prompt": "Mīlitēs urbem <strong>oppugnantēs</strong> vīdimus.<br><em>We saw the soldiers attacking the city.</em><br>What is oppugnantēs?",
-        "hint": "Compare the letters before the ending: -nt- or -nd-?",
+        "hint": "Look at the letters just before the ending.",
         "explanation": "oppugnantēs has -nt-, so it is a present active participle agreeing with mīlitēs: 'attacking'. Gerunds and gerundives have -nd-.",
         "choices": [
           "A present active participle agreeing with mīlitēs",
@@ -5758,15 +5758,15 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "IDENTIFY",
         "prompt": "<strong>Errāre</strong> hūmānum est.<br><em>To err is human.</em><br>Why is the subject an infinitive and not a gerund?",
-        "hint": "Think about which cases the gerund has.",
+        "hint": "Think about the forms the gerund has.",
         "explanation": "The gerund has no nominative, so Latin uses the infinitive as a verbal noun subject: errāre, 'to err'. The gerund supplies the other cases: errandī, errandō, ad errandum.",
         "choices": [
-          "The gerund has no nominative, so the infinitive is used as the subject.",
-          "The gerund is passive in meaning, so it cannot be a subject.",
-          "The gerund is only used after prepositions.",
-          "The gerund must agree with a noun, and there is none here."
+          "The gerund has no nominative, so the infinitive serves as the subject.",
+          "The gerund is passive in meaning, so it cannot be the subject.",
+          "The gerund needs a preposition, so it cannot stand alone as the subject.",
+          "The gerund must agree with a noun, so it cannot stand alone here."
         ],
-        "correct": "The gerund has no nominative, so the infinitive is used as the subject."
+        "correct": "The gerund has no nominative, so the infinitive serves as the subject."
       },
       {
         "id": "m12-301",
@@ -5807,7 +5807,7 @@ export const MODULES: ModuleContent[] = [
         "badge": "PURPOSE",
         "prompt": "Mīlitēs vēnērunt <strong>______</strong>.<br><em>The soldiers came to capture the city.</em><br>Which phrase fits the blank?",
         "hint": "Think about how Latin handles a gerund that would take a direct object.",
-        "explanation": "After ad, Latin does not use a gerund with a direct object. The noun takes the case and the gerundive agrees with it: ad urbem capiendam, 'to capture the city'.",
+        "explanation": "After ad, Latin normally avoids a gerund with a direct object and prefers the gerundive. The noun takes the case and the gerundive agrees with it: ad urbem capiendam, 'to capture the city'.",
         "choices": [
           "ad urbem capiendam",
           "ad capiendum urbem",
@@ -5851,11 +5851,11 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "PURPOSE",
         "prompt": "Translate: <strong>Hostēs ad agrōs vāstandōs vēnērunt.</strong>",
-        "hint": "ad + noun + gerundive is a purpose phrase.",
+        "hint": "Look at how vāstandōs relates to agrōs.",
         "explanation": "ad agrōs vāstandōs is ad + accusative + gerundive, which shows purpose: 'The enemy came to ravage the fields.'",
         "choices": [
           "The enemy came to ravage the fields.",
-          "The enemy came to the fields that had to be ravaged.",
+          "The enemy came because the fields had been ravaged.",
           "The enemy came to the fields they were ravaging.",
           "The enemy came after ravaging the fields."
         ],
@@ -5929,7 +5929,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "OBLIGATION",
         "prompt": "Translate: <strong>Nōbīs pugnandum est.</strong>",
-        "hint": "pugnō takes no direct object, so the gerundive is neuter and impersonal.",
+        "hint": "Look at the ending of pugnandum and the case of nōbīs.",
         "explanation": "With a verb that has no direct object, the periphrastic is impersonal: 'it must be fought by us', that is, 'We must fight.'",
         "choices": [
           "We must fight.",
@@ -6019,7 +6019,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "TRANSLATE",
         "prompt": "Translate: <strong>Tempus est abeundī.</strong>",
-        "hint": "abeundī comes from abeō and depends on tempus.",
+        "hint": "Look at the case of abeundī.",
         "explanation": "abeundī is the genitive gerund of abeō, depending on tempus: 'time of going away', so 'It is time to leave.'",
         "choices": [
           "It is time to leave.",
