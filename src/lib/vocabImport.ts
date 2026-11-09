@@ -4,8 +4,8 @@ import { lemmaOf } from './lexicon';
 import { rankLexicon } from './lexiconRank';
 
 /** Column limits from the lexicon / vocab_list_items checks. */
-const MAX_HEADWORD = 120;
-const MAX_DEFINITION = 200;
+export const MAX_HEADWORD = 120;
+export const MAX_DEFINITION = 200;
 
 /** Parts of speech offered for custom words (guessPos returns one of these). */
 export const PARTS_OF_SPEECH = ['noun', 'verb', 'adjective', 'adverb', 'pronoun', 'preposition', 'conjunction', 'other'];
