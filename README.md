@@ -10,7 +10,8 @@ teachers create classes, assign practice or tests, and see a gradebook and per-q
   cum clauses, indirect questions, fear clauses, conditionals, quin, relative clauses), 335 questions.
 - Endless Train: unlimited generated subjunctive conjugation drills.
 - Forms: make or identify any verb, noun, adjective or pronoun form, generated from about 780 verbs, 755 nouns and 364 adjectives, with filters by conjugation, declension, mood, tense, voice and degree.
-- XP, streaks and progress are stored in this browser only.
+- Vocab: make your own study sets (type them in or paste from Quizlet), then study with Review (spaced repetition with FSRS), Learn (multiple choice) or Flashcards. Sets can be exported to Quizlet. Sets live in this browser only. Starter sets of core verbs, nouns and adjectives are built in.
+- XP, streaks, progress and vocab sets are stored in this browser only.
 
 **Classroom (needs a Supabase backend)**
 - Teachers sign up with email. Students join with a **class code + first name/nickname + 6-digit PIN**.
@@ -117,6 +118,7 @@ src/lib/            grading, conjugator, vocab question generator, CSV, offline 
 src/lib/morph/       morphology engine: verb, noun, adjective and pronoun forms, parse
 src/content/        built-in modules and questions
 src/features/       solo, drill engine, auth, student, teacher screens
+src/features/vocab  study sets, FSRS scheduling, flashcards
 supabase/migrations schema, row level security, grading functions
 supabase/functions  student account edge functions (logic in _shared/handlers.ts)
 supabase/tests      SQL tests (scripts/test-db.sh)
@@ -125,5 +127,5 @@ docs/superpowers    design spec and implementation plan
 
 ## Roadmap
 
-Video lessons with checkpoint questions, paradigm-chart mode, per-student spaced
-repetition, Microsoft school sign-in, teacher-authored grammar questions, and a live class game mode.
+Video lessons with checkpoint questions, paradigm-chart mode, spaced repetition for
+class vocab lists, Microsoft school sign-in, teacher-authored grammar questions, and a live class game mode.

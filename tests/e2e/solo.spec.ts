@@ -75,7 +75,7 @@ test('forms drill from Practice home, then it shows in recents', async ({ page }
 
 test.describe('phone width', () => {
   test.use({ viewport: { width: 375, height: 812 } });
-  for (const path of ['/#/practice', '/#/practice/grammar', '/#/practice/grammar/forms_bootcamp', '/#/practice/forms']) {
+  for (const path of ['/#/practice', '/#/practice/grammar', '/#/practice/grammar/forms_bootcamp', '/#/practice/forms', '/#/practice/vocab']) {
     test(`no horizontal scroll on ${path}`, async ({ page }) => {
       await page.goto(path);
       await page.waitForLoadState('networkidle');
