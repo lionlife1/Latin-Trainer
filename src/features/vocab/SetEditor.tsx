@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { ChevronLeft } from '../../components/icons';
 import type { VocabDirection } from '../../lib/vocab';
 import { LatinField } from '../teacher/LatinField';
+import { PasteImport } from './PasteImport';
 import { MAX_CARDS, addCards, deleteSet, getSet, removeCard, updateCard, updateSet, type StudyCard } from './storage';
 
 const SAVE_FAILED = "Couldn't save. Your browser's storage may be full.";
@@ -148,7 +149,7 @@ export function SetEditor() {
           <button className="btn-primary" onClick={add}>Add card</button>
         </div>
         {error && <p className="form-error" role="alert">{error}</p>}
-        {/* PasteImport (Task 5) */}
+        <PasteImport set={set} onAdded={refresh} />
         {set.cards.length > 0 && (
           <div className="panel" style={{ marginTop: 16 }}>
             <ul className="rows">
