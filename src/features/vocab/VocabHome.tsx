@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight } from '../../components/icons';
 import { useSyncVersion } from '../practice/useSessionSync';
 import { setCounts } from './scheduler';
+import { starterSets, type StarterSet } from './starterSets';
 import { createSet, loadSets, loadSrs } from './storage';
 
 export function VocabHome() {
@@ -13,7 +14,8 @@ export function VocabHome() {
   const [error, setError] = useState('');
   const srs = loadSrs();
   const now = new Date();
-  const sets = loadSets()
+  const existing = loadSets();
+  const sets = existing
     .map(s => ({ set: s, counts: setCounts(s, srs, now) }))
     .sort((a, b) => b.set.updatedAt.localeCompare(a.set.updatedAt));
 
@@ -21,6 +23,12 @@ export function VocabHome() {
     const set = createSet(name);
     if (!set) return setError("Couldn't save. Your browser's storage may be full.");
     navigate(`/practice/vocab/${set.id}/edit`);
+  };
+
+  const add = (st: StarterSet) => {
+    const set = createSet(st.name, st.cards, st.id);
+    if (!set) return setError("Couldn't save. Your browser's storage may be full.");
+    navigate(`/practice/vocab/${set.id}`);
   };
 
   return (
@@ -32,6 +40,8 @@ export function VocabHome() {
         </div>
         {!adding && <button className="btn-primary" onClick={() => setAdding(true)}>New set</button>}
       </div>
+
+      {!adding && error && <p className="error" role="alert">{error}</p>}
 
       {adding && (
         <form className="panel" onSubmit={e => { e.preventDefault(); create(); }}>
@@ -71,7 +81,37 @@ export function VocabHome() {
         </div>
       </section>
 
-      {/* Starter sets (Task 10) */}
+      <section className="section">
+        <h2>Starter sets</h2>
+        <p className="muted">Core words from the LatinIQ dictionary, grouped for study. Adding one gives you your own copy to edit.</p>
+        <div className="panel">
+          <ul className="rows">
+            {starterSets().map(st => {
+              const copy = existing.find(s => s.source === st.id);
+              return (
+                <li key={st.id}>
+                  <div className="row-item">
+                    <span className="row-main">
+                      <span className="row-title" style={{ display: 'block' }}>{st.name}</span>
+                      <span className="row-sub">{st.cards.length} cards</span>
+                    </span>
+                    <span className="row-side">
+                      {copy ? (
+                        <>
+                          <span className="tag info">Added</span>
+                          <Link to={`/practice/vocab/${copy.id}`} aria-label={`Open ${st.name}`}><ChevronRight size={18} /></Link>
+                        </>
+                      ) : (
+                        <button className="btn-secondary btn-small" onClick={() => add(st)}>Add</button>
+                      )}
+                    </span>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
 
       <p className="muted small">Sets are saved in this browser only. They don't sync to your account or other devices.</p>
     </>

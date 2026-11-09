@@ -114,3 +114,25 @@ describe('SetPage', () => {
     expect(screen.getByRole('heading', { name: 'Vocab' })).toBeInTheDocument();
   });
 });
+
+describe('VocabHome starter sets', () => {
+  it('adding a starter set makes an editable copy once', async () => {
+    const user = userEvent.setup();
+    renderAt('/practice/vocab');
+    const rowOf = (name: string) => screen.getByText(name).closest('li')!;
+    await user.click(within(rowOf('Verbs: 1st conjugation')).getByRole('button', { name: 'Add' }));
+    const sets = loadSets();
+    expect(sets).toHaveLength(1);
+    expect(sets[0].source).toBe('verbs-1');
+    expect(sets[0].name).toBe('Verbs: 1st conjugation');
+    expect(screen.getByRole('heading', { name: 'Verbs: 1st conjugation' })).toBeInTheDocument();
+  });
+
+  it('shows Added instead of Add for a copied set', () => {
+    createSet('Verbs: 1st conjugation', words(1), 'verbs-1');
+    renderAt('/practice/vocab');
+    const row = screen.getAllByText('Verbs: 1st conjugation').map(e => e.closest('li')!).find(li => li.textContent?.includes('Added'))!;
+    expect(within(row).queryByRole('button', { name: 'Add' })).not.toBeInTheDocument();
+    expect(within(row).getByText('Added')).toBeInTheDocument();
+  });
+});
