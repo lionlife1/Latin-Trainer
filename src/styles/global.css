@@ -116,6 +116,26 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .intro-concepts { margin-bottom: 24px; }
 .intro-concepts-title { font-size: 0.8rem; font-weight: 600; color: var(--ink-2); margin-bottom: 8px; }
 @media (max-width: 560px) { .intro-card, .complete-card { padding: 24px 20px; margin-top: 16px; } }
+.intro-card > .btn-secondary { display: flex; width: 100%; margin-bottom: 10px; }
+
+/* ---- Grammar lesson ---- */
+.lesson { max-width: 720px; font-size: 1rem; line-height: 1.6; }
+.lesson-heading { font-size: 1.15rem; margin: 28px 0 10px; }
+.lesson-p { max-width: 68ch; margin-bottom: 14px; }
+.lesson-table-wrap { overflow-x: auto; margin-bottom: 16px; max-width: 100%; }
+.lesson-table { border-collapse: collapse; font-size: 0.92rem; min-width: 100%; }
+.lesson-table caption { text-align: left; font-weight: 600; color: var(--ink-2); padding-bottom: 6px; }
+.lesson-table th, .lesson-table td { border: 1px solid var(--border); padding: 7px 10px; text-align: left; vertical-align: top; }
+.lesson-table th { background: var(--surface-subtle); font-weight: 600; }
+.lesson-examples { list-style: none; margin: 0 0 16px; padding: 0; }
+.lesson-examples li { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.lesson-examples li:last-child { border-bottom: none; }
+.lesson-la { font-weight: 600; overflow-wrap: anywhere; }
+.lesson-en { color: var(--ink-2); }
+.lesson-note { color: var(--ink-2); font-size: 0.88rem; margin-top: 2px; }
+.lesson-tip { background: var(--primary-tint); border-radius: var(--r-control); padding: 12px 16px; margin: 0 0 16px; max-width: 68ch; }
+.lesson-tip strong { display: block; margin-bottom: 2px; }
+.lesson > .btn-primary { margin-top: 12px; }
 .concept-tag {
   display: inline-block; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 99px;
   padding: 3px 10px; margin: 0 6px 6px 0; color: var(--ink-2);

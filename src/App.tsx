@@ -7,6 +7,7 @@ import { StudentJoin } from './features/auth/StudentJoin';
 import { StudentLogin } from './features/auth/StudentLogin';
 import { TeacherLogin } from './features/auth/TeacherLogin';
 import { EndlessRoute } from './features/practice/EndlessRoute';
+import { LessonRoute } from './features/practice/LessonRoute';
 import { GrammarPath } from './features/practice/GrammarPath';
 import { ModuleRoute } from './features/practice/ModuleRoute';
 import { PracticeHome } from './features/practice/PracticeHome';
@@ -39,6 +40,7 @@ export function AppRoutes() {
       <Route path="/practice" element={<StudentShell><PracticeHome /></StudentShell>} />
       <Route path="/practice/grammar" element={<StudentShell><GrammarPath /></StudentShell>} />
       <Route path="/practice/grammar/:moduleId" element={<ModuleRoute />} />
+      <Route path="/practice/grammar/:moduleId/lesson" element={<LessonRoute />} />
       <Route path="/practice/endless" element={<EndlessRoute />} />
       <Route path="/practice/forms" element={<Suspense fallback={null}><FormsRoute /></Suspense>} />
       <Route path="/practice/vocab" element={<StudentShell><Suspense fallback={null}><VocabHome /></Suspense></StudentShell>} />

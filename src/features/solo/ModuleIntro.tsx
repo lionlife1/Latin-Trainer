@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { ChevronLeft } from '../../components/icons';
+import { lessonFor } from '../../content/lessons';
 import type { ModuleContent } from '../../lib/types';
+import { hasReadLesson } from '../practice/lessonStore';
 import type { ModuleProgress } from './progressStore';
 
 interface Props {
@@ -8,6 +10,7 @@ interface Props {
   progress?: ModuleProgress;
   onBack: () => void;
   onStart: (count: number | 'all') => void;
+  onLesson?: () => void;
 }
 
 export function sessionLengthOptions(totalQ: number): { value: number | 'all'; label: string }[] {
@@ -18,7 +21,7 @@ export function sessionLengthOptions(totalQ: number): { value: number | 'all'; l
   return opts;
 }
 
-export function ModuleIntro({ mod, progress, onBack, onStart }: Props) {
+export function ModuleIntro({ mod, progress, onBack, onStart, onLesson }: Props) {
   const totalQ = mod.questions.length;
   const options = sessionLengthOptions(totalQ);
   const recommended = totalQ > 20 ? 20 : totalQ > 10 ? 10 : 'all';
@@ -61,6 +64,11 @@ export function ModuleIntro({ mod, progress, onBack, onStart }: Props) {
             ))}
           </select>
         </div>
+        {onLesson && lessonFor(mod.id) && (
+          <button className="btn-secondary" onClick={onLesson}>
+            {hasReadLesson(mod.id) ? 'Review the lesson' : 'Read the lesson'}
+          </button>
+        )}
         <button className="btn-primary" onClick={() => onStart(count)}>Start session</button>
       </div>
     </div>

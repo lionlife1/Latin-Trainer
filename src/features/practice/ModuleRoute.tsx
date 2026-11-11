@@ -62,6 +62,7 @@ export function ModuleRoute() {
         mod={mod}
         progress={loadProgress()[mod.id]}
         onBack={toPath}
+        onLesson={() => navigate(`/practice/grammar/${mod.id}/lesson`)}
         onStart={count => {
           const qs = shuffle(mod.questions);
           start(count === 'all' ? qs : qs.slice(0, count));
