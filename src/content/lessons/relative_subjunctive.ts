@@ -145,8 +145,8 @@ export const lesson: Lesson = {
           kind: 'examples',
           items: [
             {
-              la: 'Hic liber **dignus est quī legātur**.',
-              en: 'This book deserves to be read.',
+              la: 'Haec fābula **digna est quae nārrētur**.',
+              en: 'This story deserves to be told.',
             },
             {
               la: 'Puer **idōneus** nōn erat **quī** nāvem **regeret**.',

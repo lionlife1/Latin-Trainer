@@ -161,7 +161,7 @@ export const lesson: Lesson = {
         {
           kind: 'examples',
           items: [
-            { la: 'Omnibus **moriendum est**.', en: 'Everyone must die.' },
+            { la: 'Nōbīs mox **discēdendum est**.', en: 'We must leave soon.' },
             {
               la: 'Mīlitibus tōtam noctem **vigilandum erit**.',
               en: 'The soldiers will have to stay awake all night.',
