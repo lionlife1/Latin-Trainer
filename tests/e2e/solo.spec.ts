@@ -73,6 +73,25 @@ test('forms drill from Practice home, then it shows in recents', async ({ page }
   expect(errors).toEqual([]);
 });
 
+test.describe('module lesson', () => {
+  test.use({ viewport: { width: 375, height: 812 } });
+  test('read the lesson, no horizontal scroll, back to the intro as Review', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', e => errors.push(e.message));
+    await page.goto('/');
+    await page.getByRole('link', { name: /grammar/i }).first().click();
+    await page.getByRole('link', { name: /forms bootcamp/i }).click();
+    await page.getByRole('button', { name: 'Read the lesson' }).click();
+    await expect(page.getByRole('heading', { level: 1, name: 'The Four Subjunctive Tenses' })).toBeVisible();
+    await expect(page.locator('table.lesson-table').first()).toBeVisible();
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    expect(overflow).toBeLessThanOrEqual(0);
+    await page.getByRole('button', { name: 'Practise this module' }).click();
+    await expect(page.getByRole('button', { name: 'Review the lesson' })).toBeVisible();
+    expect(errors).toEqual([]);
+  });
+});
+
 test.describe('phone width', () => {
   test.use({ viewport: { width: 375, height: 812 } });
   for (const path of ['/#/practice', '/#/practice/grammar', '/#/practice/grammar/forms_bootcamp', '/#/practice/forms', '/#/practice/vocab']) {

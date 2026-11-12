@@ -8,6 +8,7 @@ teachers create classes, assign practice or tests, and see a gradebook and per-q
 **Solo practice (no account, works offline)**
 - 10 subjunctive modules (forms, sequence of tenses, independent uses, purpose/result/indirect command,
   cum clauses, indirect questions, fear clauses, conditionals, quin, relative clauses), 335 questions.
+- Reading lessons: every grammar module has a short lesson with tables and examples, opened from the module intro with "Read the lesson". Lessons are marked read in this browser only.
 - Endless Train: unlimited generated subjunctive conjugation drills.
 - Forms: make or identify any verb, noun, adjective or pronoun form, generated from about 780 verbs, 755 nouns and 364 adjectives, with filters by conjugation, declension, mood, tense, voice and degree.
 - Vocab: make your own study sets (type them in or paste from Quizlet), then study with Review (spaced repetition with FSRS), Learn (multiple choice) or Flashcards. Sets can be exported to Quizlet. Sets live in this browser only. Starter sets of core verbs, nouns and adjectives are built in.
@@ -117,6 +118,7 @@ Use them for low-stakes quizzes, and use your own vocab lists for anything that 
 src/lib/            grading, conjugator, vocab question generator, CSV, offline queue
 src/lib/morph/       morphology engine: verb, noun, adjective and pronoun forms, parse
 src/content/        built-in modules and questions
+src/content/lessons/ reading lessons, one per grammar module
 src/features/       solo, drill engine, auth, student, teacher screens
 src/features/vocab  study sets, FSRS scheduling, flashcards
 supabase/migrations schema, row level security, grading functions

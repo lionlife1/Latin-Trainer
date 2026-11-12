@@ -61,6 +61,10 @@ describe('lessons', () => {
     expect(lessonFor('no-such-module')).toBeUndefined();
   });
 
+  it('every module has a lesson', () => {
+    expect(MODULES.map((m) => m.id).sort()).toEqual(Object.keys(LESSONS).sort());
+  });
+
   for (const lesson of Object.values(LESSONS)) {
     it(`lesson ${lesson.moduleId} is valid`, () => {
       expect(lessonProblems(lesson, LESSONS)).toEqual([]);
