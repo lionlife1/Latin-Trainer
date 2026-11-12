@@ -181,7 +181,7 @@ export const MODULES: ModuleContent[] = [
         "type": "typein",
         "badge": "CONJUGATE",
         "prompt": "Give the <strong>1st person singular perfect active subjunctive</strong> of <span class='latin-word'>amare</span>. (Perf. stem: amāv-)",
-        "hint": "Perfect active subjunctive: perfect stem + -erim, -eris, -erit...",
+        "hint": "Perfect active subjunctive: perfect stem + -erim, -erīs, -erit...",
         "explanation": "Perfect active subjunctive = perfect stem + -erim/-erīs/-erit/-erīmus/-erītis/-erint. amāv + erim = amāverim.",
         "answers": [
           "amaverim"
@@ -203,8 +203,8 @@ export const MODULES: ModuleContent[] = [
         "type": "typein",
         "badge": "CONJUGATE",
         "prompt": "Give the <strong>2nd person singular perfect active subjunctive</strong> of <span class='latin-word'>ducere</span>. (Perf. stem: dūx-)",
-        "hint": "Perfect active subjunctive 2sg = -eris.",
-        "explanation": "dūx + eris = dūxeris.",
+        "hint": "Perfect active subjunctive 2sg = -erīs.",
+        "explanation": "dūx + erīs = dūxerīs.",
         "answers": [
           "duxeris"
         ]
@@ -330,9 +330,9 @@ export const MODULES: ModuleContent[] = [
         "id": "f041",
         "type": "mc",
         "badge": "IDENTIFY",
-        "prompt": "Identify the tense and mood of: <span class='latin-word'>dūxerint</span>",
-        "hint": "The -eri- infix is characteristic of one subjunctive tense.",
-        "explanation": "dūx (perfect stem) + erint = perfect active subjunctive 3pl. Future perfect would be dūxerint too — in practice, context decides. On a form-ID question, 'perfect active subjunctive' is the expected answer.",
+        "prompt": "Identify the tense and mood of <span class='latin-word'>dūxerint</span> in this sentence:<br><strong>Quaerō quō servī equōs dūxerint.</strong>",
+        "hint": "Quaerō quō... introduces an indirect question. What mood does an indirect question need?",
+        "explanation": "dūx- (perfect stem) + -erint. On its own, dūxerint could be perfect subjunctive or future perfect indicative; the sentence decides. Here quō after quaerō begins an indirect question, which always takes the subjunctive, so dūxerint is perfect active subjunctive (primary sequence, time before): 'I am asking where the slaves have led the horses.'",
         "choices": [
           "Pluperfect active subjunctive",
           "Future perfect indicative",
@@ -405,13 +405,13 @@ export const MODULES: ModuleContent[] = [
         "id": "f050",
         "type": "mc",
         "badge": "DISTINGUISH",
-        "prompt": "Which form is <em>indicative</em>, not subjunctive?\n<br><br><span class='latin-word'>amāret / amābat / amāverim / amāverit</span>",
-        "hint": "The indicative imperfect has a distinctive infix.",
-        "explanation": "amābat = imperfect INDICATIVE (3sg). The -bā- infix always signals indicative imperfect. amāret is subjunctive, amāverit/amāverim are perfect subjunctive.",
+        "prompt": "Which form is <em>indicative</em>, not subjunctive?\n<br><br><span class='latin-word'>amāret / amābat / amāverim / amāvisset</span>",
+        "hint": "Look for the tense sign of the imperfect indicative.",
+        "explanation": "amābat = imperfect indicative (3sg). -ba- (or -bā-) right before the personal ending marks the imperfect indicative. amāret is imperfect subjunctive (the infinitive amāre + -t), amāverim is perfect subjunctive (a form in -erim can only be subjunctive), and amāvisset is pluperfect subjunctive.",
         "choices": [
           "amāret",
           "amābat",
-          "amāverit",
+          "amāvisset",
           "amāverim"
         ],
         "correct": "amābat"
@@ -521,7 +521,7 @@ export const MODULES: ModuleContent[] = [
         "id": "f066",
         "type": "mc",
         "badge": "IDENTIFY",
-        "prompt": "What tense and mood is <span class='latin-word'>ducāmur</span>?",
+        "prompt": "What tense and mood is <span class='latin-word'>dūcāmur</span>?",
         "hint": "The -ā- infix in a 3rd conjugation verb is telling.",
         "explanation": "dūcā + mur = present passive subjunctive 1pl. In 3rd conjugation, -ā- signals present subjunctive (compare future indicative dūcēmur with -ē-).",
         "choices": [
@@ -991,7 +991,7 @@ export const MODULES: ModuleContent[] = [
         "badge": "EXAM TRAP",
         "prompt": "If a main verb is a <strong>Historical Present</strong> (a present tense verb used to narrate past events vividly), what sequence does the subordinate clause usually take?",
         "hint": "Even though it looks present, it's narrating the past.",
-        "explanation": "Historical presents are typically treated as past tenses in Latin grammar, so they trigger Secondary Sequence (Imperfect/Pluperfect subjunctives).",
+        "explanation": "A historical present can take either sequence, but secondary sequence (imperfect or pluperfect subjunctive) is very common, because the events are really past. Primary sequence also appears, so check the tense of the subjunctive to see which one the writer chose.",
         "choices": [
           "Primary",
           "Secondary",
@@ -1037,7 +1037,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "TRANSLATE",
         "prompt": "How do you translate: <strong>Nē in urbe maneāmus.</strong>",
-        "hint": "maneamus is 1st person plural. nē makes it negative.",
+        "hint": "maneāmus is 1st person plural. nē makes it negative.",
         "explanation": "Hortatory negative is formed with 'nē'. Maneāmus = let us stay. Nē maneāmus = let us not stay.",
         "choices": [
           "Let them not stay in the city.",
@@ -1052,7 +1052,7 @@ export const MODULES: ModuleContent[] = [
         "type": "typein",
         "badge": "FORM",
         "prompt": "Fill in the blank for the Hortatory subjunctive: 'Let us love Rome!'<br>______ Romam!",
-        "hint": "1st person plural present active subjunctive of amare.",
+        "hint": "1st person plural present active subjunctive of amāre.",
         "explanation": "amēmus (Let us love).",
         "answers": [
           "amemus"
@@ -1100,7 +1100,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "TRANSLATE",
         "prompt": "Translate: <strong>Nē dēspērēmus!</strong>",
-        "hint": "desperare = to despair.",
+        "hint": "dēspērāre = to despair.",
         "explanation": "1st person plural present subjunctive + nē = negative Hortatory.",
         "choices": [
           "Let us not despair!",
@@ -1156,7 +1156,7 @@ export const MODULES: ModuleContent[] = [
         "type": "typein",
         "badge": "FORM",
         "prompt": "Fill in the blank for the Jussive subjunctive: 'Let the king speak!'<br>Rex ______!",
-        "hint": "3rd person singular present active subjunctive of dicere (3rd conj).",
+        "hint": "3rd person singular present active subjunctive of dīcere (3rd conj).",
         "explanation": "dīcere -> dīcat (Let him speak).",
         "answers": [
           "dicat"
@@ -1204,7 +1204,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "TRANSLATE",
         "prompt": "Translate: <strong>Nē hoc credant.</strong>",
-        "hint": "credant = 3rd plural.",
+        "hint": "crēdant = 3rd plural.",
         "explanation": "Negative Jussive command. 'Let them not...'",
         "choices": [
           "Let us not believe this.",
@@ -1315,8 +1315,8 @@ export const MODULES: ModuleContent[] = [
         "id": "m2-306",
         "type": "mc",
         "badge": "TRANSLATE",
-        "prompt": "<strong>Utinam nē venisset!</strong><br>How is this translated?",
-        "hint": "venisset = pluperfect subjunctive. This means the wish is impossible in the past.",
+        "prompt": "<strong>Utinam nē vēnisset!</strong><br>How is this translated?",
+        "hint": "vēnisset = pluperfect subjunctive. This means the wish is impossible in the past.",
         "explanation": "Pluperfect subjunctive = past unfulfilled wish. 'If only he had not come!'",
         "choices": [
           "If only he would not come!",
@@ -1330,7 +1330,7 @@ export const MODULES: ModuleContent[] = [
         "id": "m2-307",
         "type": "mc",
         "badge": "IDENTIFY",
-        "prompt": "<strong>Utinam dī vōbīs pacem dent!</strong><br>What type of wish is this?",
+        "prompt": "<strong>Utinam dī vōbīs pācem dent!</strong><br>What type of wish is this?",
         "hint": "dent = present subjunctive.",
         "explanation": "Present subjunctive = future possible wish. 'May the gods grant you peace!'",
         "choices": [
@@ -1346,7 +1346,7 @@ export const MODULES: ModuleContent[] = [
         "type": "typein",
         "badge": "FORM",
         "prompt": "Translate the verb: 'If only you <strong>had warned</strong> me!'<br>Utinam me ______!",
-        "hint": "2nd person singular pluperfect active subjunctive of monere.",
+        "hint": "2nd person singular pluperfect active subjunctive of monēre.",
         "explanation": "monuisses. Pluperfect because it's an impossible wish in the past.",
         "answers": [
           "monuisses"
@@ -1372,7 +1372,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "TRANSLATE",
         "prompt": "<strong>Utinam vīveret!</strong><br>How is this translated?",
-        "hint": "viveret = imperfect subjunctive.",
+        "hint": "vīveret = imperfect subjunctive.",
         "explanation": "Imperfect subjunctive = impossible present wish. 'If only he were alive (now) [but he is dead].'",
         "choices": [
           "May he live!",
@@ -1387,7 +1387,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "TRANSLATE",
         "prompt": "<strong>Utinam vincāmus!</strong><br>How is this translated?",
-        "hint": "vincamus = present subjunctive.",
+        "hint": "vincāmus = present subjunctive.",
         "explanation": "Present subjunctive = future possible wish. 'May we win!'",
         "choices": [
           "If only we were winning!",
@@ -1440,14 +1440,14 @@ export const MODULES: ModuleContent[] = [
         "badge": "IDENTIFY",
         "prompt": "Which of these correctly expresses: 'If only we had not lost!'",
         "hint": "Past impossible wish, negative.",
-        "explanation": "Optative uses 'nē' for the negative, and past impossible requires the pluperfect subjunctive.",
+        "explanation": "A wish is negated with nē, not nōn, and a wish about the past that can no longer come true takes the pluperfect subjunctive: āmīsissēmus. Āmittāmus (present) is a wish for the future, and āmitterēmus (imperfect) is a wish about the present.",
         "choices": [
-          "Utinam nōn āmīssissēmus!",
-          "Utinam nē āmīttāmus!",
-          "Utinam nē āmīssissēmus!",
-          "Utinam nē āmītterēmus!"
+          "Utinam nē āmīsimus!",
+          "Utinam nē āmittāmus!",
+          "Utinam nē āmīsissēmus!",
+          "Utinam nē āmitterēmus!"
         ],
-        "correct": "Utinam nē āmīssissēmus!"
+        "correct": "Utinam nē āmīsissēmus!"
       },
       {
         "id": "m2-401",
@@ -1469,7 +1469,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "TRANSLATE",
         "prompt": "How do you translate: <strong>Quid dicerem?</strong>",
-        "hint": "dicerem = imperfect subjunctive (past tense doubt).",
+        "hint": "dīcerem = imperfect subjunctive (past tense doubt).",
         "explanation": "Imperfect deliberative expresses past doubt. 'What was I to say?' or 'What should I have said?'",
         "choices": [
           "What am I to say?",
@@ -1499,7 +1499,7 @@ export const MODULES: ModuleContent[] = [
         "type": "typein",
         "badge": "FORM",
         "prompt": "Fill in the blank for the Deliberative: 'Where are we to remain?'<br>Ubi ______?",
-        "hint": "1st person plural present active subjunctive of manere.",
+        "hint": "1st person plural present active subjunctive of manēre.",
         "explanation": "maneāmus (Where are we to stay?)",
         "answers": [
           "maneamus"
@@ -1536,7 +1536,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "TRANSLATE",
         "prompt": "Translate: <strong>Quō eam?</strong>",
-        "hint": "quo = to where. eam = 1st sg present subjunctive of ire.",
+        "hint": "quō = to where. eam = 1st sg present subjunctive of īre.",
         "explanation": "Present deliberative expressing current doubt. 'Where am I to go?' or 'Where should I go?'",
         "choices": [
           "Where was I going?",
@@ -1551,7 +1551,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "TRANSLATE",
         "prompt": "Translate: <strong>Cūr in urbe remanērem?</strong>",
-        "hint": "remanerem = imperfect subjunctive.",
+        "hint": "remanērem = imperfect subjunctive.",
         "explanation": "Imperfect deliberative expresses past doubt. 'Why was I to stay...?'",
         "choices": [
           "Why should I stay in the city?",
@@ -1566,7 +1566,7 @@ export const MODULES: ModuleContent[] = [
         "type": "typein",
         "badge": "FORM",
         "prompt": "Give the correct Latin for: 'Why shouldn't we leave?' (discēdere)",
-        "hint": "Cur non + 1st plural present active subjunctive.",
+        "hint": "Cūr nōn + 1st plural present active subjunctive.",
         "explanation": "Cūr nōn discēdāmus? (Deliberatives use nōn for negation).",
         "answers": [
           "discedamus"
@@ -1652,7 +1652,7 @@ export const MODULES: ModuleContent[] = [
         "type": "mc",
         "badge": "MIXED",
         "prompt": "Read the sentence: <strong>Cūr nōn discēdāmus?</strong><br>What type is it?",
-        "hint": "Question + non.",
+        "hint": "Question + nōn.",
         "explanation": "Question weighing an action = Deliberative ('Why shouldn't we depart?').",
         "choices": [
           "Hortatory",
@@ -1711,7 +1711,7 @@ export const MODULES: ModuleContent[] = [
         "id": "m2-601",
         "type": "mc",
         "badge": "EXAM TRAP",
-        "prompt": "<strong>Nē hoc fēceris!</strong><br>How is this best translated for a Latin 3 exam?",
+        "prompt": "<strong>Nē hoc fēcerīs!</strong><br>How is this best translated for a Latin 3 exam?",
         "hint": "Perfect Subjunctive + nē in the 2nd person.",
         "explanation": "This is the Prohibitive Subjunctive. While it looks like a perfect tense, it functions as a sharp, immediate negative command.",
         "choices": [
@@ -1728,7 +1728,7 @@ export const MODULES: ModuleContent[] = [
         "badge": "PROHIBITION",
         "prompt": "Translate using the Perfect Subjunctive: 'Do not fear!' (timēre; stem: timu-)",
         "hint": "Use 'nē' + 2nd person singular perfect active subjunctive.",
-        "explanation": "nē timueris. This is the standard way to issue a negative command in formal Latin.",
+        "explanation": "nē timuerīs. Nē + perfect subjunctive is one standard way to forbid someone. The other is nōlī (or nōlīte) + infinitive: nōlī timēre.",
         "answers": [
           "ne timueris"
         ]
@@ -1757,7 +1757,7 @@ export const MODULES: ModuleContent[] = [
         "explanation": "Deliberative questions (Quid agam?) are negated by 'nōn', not 'nē'. It should be 'Cūr nōn agam?'",
         "choices": [
           "Nē eāmus.",
-          "Utinam nē venisset.",
+          "Utinam nē vēnisset.",
           "Nē hoc fēceris.",
           "Nē quid agam?"
         ],
@@ -1767,12 +1767,14 @@ export const MODULES: ModuleContent[] = [
         "id": "m2-605",
         "type": "typein",
         "badge": "OPTATIVE",
-        "prompt": "Translate into Latin: 'May the gods help us!' (diuvāre; 3pl: diuvent)",
+        "prompt": "Translate into Latin: 'May the gods help us!' (adiuvāre; 3pl present subjunctive: adiuvent)",
         "hint": "Use the present subjunctive for a future possible wish. Gods = dī (nom. pl.).",
-        "explanation": "Dī nōs diuvent! (Present subjunctive for a wish that can still come true).",
+        "explanation": "Dī nōs adiuvent! The present subjunctive expresses a wish that can still come true. Utinam may be added: Utinam dī nōs adiuvent!",
         "answers": [
-          "di nos diuvent",
-          "utinam di nos diuvent"
+          "di nos adiuvent",
+          "utinam di nos adiuvent",
+          "dei nos adiuvent",
+          "utinam dei nos adiuvent"
         ]
       }
     ]
@@ -2044,7 +2046,7 @@ export const MODULES: ModuleContent[] = [
         "badge": "SEQUENCE",
         "prompt": "Rogat ut <strong>veniāmus</strong>.<br>Why is the subjunctive in the present tense?",
         "hint": "Look at 'Rogat'.",
-        "explanation": "Rogat (present = primary). Purpose/Result/IndCmd only use Present or Imperfect subjunctive. Primary main verb -> Present subjunctive.",
+        "explanation": "Rogat is present, so this is primary sequence. Rogat ut is an indirect command, which points forward from the main verb and uses the 'same time' column: present subjunctive after a primary verb, imperfect after a secondary one. Purpose clauses work the same way. (Result clauses usually do too, though after a past main verb they sometimes use the perfect subjunctive.)",
         "choices": [
           "Secondary sequence, simultaneous action",
           "Primary sequence, simultaneous/subsequent action",
@@ -2072,7 +2074,7 @@ export const MODULES: ModuleContent[] = [
         "id": "m3-503",
         "type": "typein",
         "badge": "FORM",
-        "prompt": "Conjugate the verb to fit the Sequence of Tenses:<br>Venit ut pacem ______ (petere). <br><em>He comes so that he may seek peace.</em>",
+        "prompt": "Conjugate the verb to fit the Sequence of Tenses:<br>Venit ut pācem ______ (petere). <br><em>He comes so that he may seek peace.</em>",
         "hint": "Venit (present). Needs 3rd person singular present subjunctive.",
         "explanation": "petat. (Primary sequence).",
         "answers": [
@@ -2083,7 +2085,7 @@ export const MODULES: ModuleContent[] = [
         "id": "m3-504",
         "type": "typein",
         "badge": "FORM",
-        "prompt": "Conjugate the verb to fit the Sequence of Tenses:<br>Vēnit ut pacem ______ (petere). <br><em>He came so that he might seek peace.</em>",
+        "prompt": "Conjugate the verb to fit the Sequence of Tenses:<br>Vēnit ut pācem ______ (petere). <br><em>He came so that he might seek peace.</em>",
         "hint": "Vēnit (perfect). Needs 3rd person singular imperfect subjunctive.",
         "explanation": "peteret. (Secondary sequence).",
         "answers": [
@@ -2638,14 +2640,14 @@ export const MODULES: ModuleContent[] = [
         "badge": "IDENTIFY",
         "prompt": "Which sentence contains a <strong>Causal</strong> cum clause?",
         "hint": "Look for a cause-and-effect relationship.",
-        "explanation": "Since the sun had set, we slept. The setting of the sun is the reason for the sleeping.",
+        "explanation": "Cum fessī sīmus, domī manēbimus: 'Since we are tired, we will stay at home.' Being tired is the reason for staying home. A circumstantial cum clause describes past background, so this cum clause is causal or concessive, and the meaning (a reason, not an obstacle) shows it is causal. Cum amīcīs is the preposition 'with', Cum veniet has the indicative (temporal 'when'), and Vesperāscēbat, cum cecidit is inverse cum with the indicative.",
         "choices": [
           "Cum amīcīs ambulat.",
-          "Cum sōl occidisset, dormīvimus.",
+          "Cum fessī sīmus, domī manēbimus.",
           "Cum veniet, eum vidēbō.",
           "Vesperāscēbat, cum cecidit."
         ],
-        "correct": "Cum sōl occidisset, dormīvimus."
+        "correct": "Cum fessī sīmus, domī manēbimus."
       },
       {
         "id": "m4-503",
@@ -3373,16 +3375,16 @@ export const MODULES: ModuleContent[] = [
         "id": "m6-409",
         "type": "mc",
         "badge": "EXAM TRAP",
-        "prompt": "Read the sentence: <strong>Veritus est cūr nēmō adesset.</strong><br>What type of clause is this?",
-        "hint": "Look at the trigger word 'cūr'.",
-        "explanation": "This is a trap! Even though 'veritus est' (he feared) is the main verb, it is followed by an interrogative word (cūr = why). 'He feared why no one was present.' If it were a Fear Clause, it would use nē or ut.",
+        "prompt": "Read the sentence: <strong>Mīlitēs castra mūniēbant nē ab hostibus caperentur.</strong><br>What type of clause is the nē clause?",
+        "hint": "Is there a verb or expression of fearing in the main clause?",
+        "explanation": "Nē + subjunctive does not always mean a fear clause. There is no verb of fearing here: mūniēbant ('they were fortifying') is an ordinary action, and the nē clause gives its aim. 'The soldiers were fortifying the camp so that it would not be captured by the enemy.' A fear clause needs a word of fearing such as timeō, metuō or vereor, and a result clause would use ut nōn, not nē.",
         "choices": [
           "Fear Clause",
           "Indirect Question",
           "Purpose Clause",
           "Result Clause"
         ],
-        "correct": "Indirect Question"
+        "correct": "Purpose Clause"
       },
       {
         "id": "m6-410",
@@ -3980,7 +3982,7 @@ export const MODULES: ModuleContent[] = [
         "badge": "TRIGGER WORD",
         "prompt": "Which of these phrases is a classic trigger for a <strong>quīn</strong> clause?",
         "hint": "Requires a negative + a word of doubting.",
-        "explanation": "A positive 'dubitō' (I doubt) usually takes an indirect question with 'an' or 'num'. It must be NEGATED ('nōn dubitō' or 'nēmō dubitat') to trigger 'quīn'.",
+        "explanation": "A positive dubitō ('I doubt') takes an indirect question, usually with num ('whether'). It must be negated (nōn dubitō, nēmō dubitat) or put in a question expecting 'no' (quis dubitat?) to take quīn.",
         "choices": [
           "dubitō",
           "nōn dubitō",
@@ -3993,9 +3995,9 @@ export const MODULES: ModuleContent[] = [
         "id": "m8-102",
         "type": "mc",
         "badge": "TRIGGER WORD",
-        "prompt": "Which of these verbs of <strong>preventing or hindering</strong> triggers a quīn clause?",
+        "prompt": "Which of these is a verb of <strong>preventing or hindering</strong>, which takes a quīn clause when it is negated?",
         "hint": "Means 'to hinder/impede'.",
-        "explanation": "Verbs of preventing, hindering, or deterring (impediō, dēterreō, retineō, obstō) trigger quīn or quōminus clauses.",
+        "explanation": "Impediō (hinder, prevent) is a verb of preventing, like dēterreō, retineō and obstō. These verbs take quīn only when they are negated (nōn impedit, nihil obstat) or in a question expecting 'no'. When the verb is positive, Latin uses nē or quōminus instead.",
         "choices": [
           "imperō",
           "impediō",
@@ -4023,9 +4025,9 @@ export const MODULES: ModuleContent[] = [
         "id": "m8-104",
         "type": "mc",
         "badge": "TRANSLATION RULE",
-        "prompt": "After a verb of <strong>preventing or hindering</strong>, how is <em>quīn</em> translated?",
+        "prompt": "After a <strong>negated</strong> verb of preventing or hindering, how is <em>quīn</em> translated?",
         "hint": "Nothing prevents me _____ doing this.",
-        "explanation": "After words of hindering, quīn (or quōminus) is translated as 'from [verb]ing'. (Nothing prevents us FROM leaving).",
+        "explanation": "After a negated verb of hindering, quīn (or quōminus) is translated 'from ...ing': Nihil eum impedit quīn scrībat, 'Nothing prevents him from writing.' A positive verb of hindering takes nē or quōminus instead, also translated 'from ...ing'.",
         "choices": [
           "who",
           "from",
@@ -4083,16 +4085,16 @@ export const MODULES: ModuleContent[] = [
         "id": "m8-204",
         "type": "mc",
         "badge": "TRANSLATE",
-        "prompt": "How do you translate: <strong>Mīlitēs dēterrēbīmus quīn pugnent.</strong>",
-        "hint": "dēterrēbīmus = we will deter. pugnent = they fight.",
-        "explanation": "dēterreō is a verb of preventing. quīn = from [verb]ing.",
+        "prompt": "How do you translate: <strong>Nihil mīlitēs dēterrēbit quīn pugnent.</strong>",
+        "hint": "dēterrēbit = will deter. pugnent = they fight. Does quīn's built-in 'not' show up in English?",
+        "explanation": "Nihil ... dēterrēbit is a negated verb of deterring, so the clause can begin with quīn, translated 'from ...ing': 'Nothing will deter the soldiers from fighting.' The 'not' inside quīn is not translated, so 'from not fighting' is wrong. Dēterrēbit is future, not present.",
         "choices": [
-          "We will deter the soldiers from fighting.",
-          "We deter the soldiers from fighting.",
-          "We did not doubt that the soldiers fought.",
-          "We will order the soldiers not to fight."
+          "Nothing will deter the soldiers from fighting.",
+          "Nothing deters the soldiers from fighting.",
+          "No one doubted that the soldiers would fight.",
+          "Nothing will deter the soldiers from not fighting."
         ],
-        "correct": "We will deter the soldiers from fighting."
+        "correct": "Nothing will deter the soldiers from fighting."
       },
       {
         "id": "m8-301",
@@ -4187,9 +4189,9 @@ export const MODULES: ModuleContent[] = [
         "id": "m8-405",
         "type": "typein",
         "badge": "FORM",
-        "prompt": "Complete the quīn clause: <br>They deter him from <strong>speaking</strong>.<br>Eum dēterrent quīn ______ (dīcere).",
+        "prompt": "Complete the quīn clause: <br>They do not deter him from <strong>speaking</strong>.<br>Nōn eum dēterrent quīn ______ (dīcere).",
         "hint": "Primary sequence. Simultaneous action = 3rd singular present active subjunctive.",
-        "explanation": "dīcat. (Present subjunctive of 3rd conjugation dīcere).",
+        "explanation": "dīcat. Nōn dēterrent is a negated verb of deterring, so quīn is used. Dēterrent is present (primary sequence) and the action is at the same time, so the present subjunctive: dīcat.",
         "answers": [
           "dicat"
         ]
@@ -4198,9 +4200,9 @@ export const MODULES: ModuleContent[] = [
         "id": "m8-406",
         "type": "typein",
         "badge": "FORM",
-        "prompt": "Complete the quīn clause: <br>They deterred him from <strong>speaking</strong>.<br>Eum dēterruērunt quīn ______ (dīcere).",
+        "prompt": "Complete the quīn clause: <br>They did not deter him from <strong>speaking</strong>.<br>Nōn eum dēterruērunt quīn ______ (dīcere).",
         "hint": "Secondary sequence (dēterruērunt = perfect). Simultaneous action = 3rd singular imperfect active subjunctive.",
-        "explanation": "dīceret. (Imperfect subjunctive).",
+        "explanation": "dīceret. Nōn dēterruērunt is a negated verb of deterring, so quīn is used. Dēterruērunt is perfect (secondary sequence) and the action is at the same time, so the imperfect subjunctive: dīceret.",
         "answers": [
           "diceret"
         ]
@@ -4657,7 +4659,7 @@ export const MODULES: ModuleContent[] = [
         "explanation": "The first one is a simple fact: 'This is the soldier who fought.' The others are purpose, characteristic, and result-oriented.",
         "choices": [
           "Hic est mīles quī in bellō pugnāvit.",
-          "Mīles mīssus est quī pugnāret.",
+          "Mīles missus est quī pugnāret.",
           "Sunt mīlitēs quī pugnent.",
           "Dignus est mīles quī pugnet."
         ],

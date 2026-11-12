@@ -6,8 +6,9 @@ teachers create classes, assign practice or tests, and see a gradebook and per-q
 ## What's in it
 
 **Solo practice (no account, works offline)**
-- 10 subjunctive modules (forms, sequence of tenses, independent uses, purpose/result/indirect command,
-  cum clauses, indirect questions, fear clauses, conditionals, quin, relative clauses), 335 questions.
+- 14 grammar modules (forms, sequence of tenses, independent uses, purpose/result/indirect command,
+  cum clauses, indirect questions, fear clauses, conditionals, quin, relative clauses, participles and
+  the ablative absolute, indirect statement, gerund and gerundive, case uses), 469 questions.
 - Reading lessons: every grammar module has a short lesson with tables and examples, opened from the module intro with "Read the lesson". Lessons are marked read in this browser only.
 - Endless Train: unlimited generated subjunctive conjugation drills.
 - Forms: make or identify any verb, noun, adjective or pronoun form, generated from about 780 verbs, 755 nouns and 364 adjectives, with filters by conjugation, declension, mood, tense, voice and degree.
