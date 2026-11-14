@@ -3,7 +3,7 @@
 Written 2026-11-05. A companion to [plan.md](plan.md): how each teacher-side feature shows up on the student
 side (Class tab, assignment runner, results), and where it connects to independent Practice. It is based on
 the current code (`src/features/student/*`, `src/features/drill/*`, `src/features/practice/*`) and the student
-redesign spec (`docs/superpowers/specs/2026-11-01-student-redesign-design.md`).
+redesign spec (`docs/superpowers/archive/specs/2026-11-01-student-redesign-design.md`).
 
 ## Where the student side is today
 

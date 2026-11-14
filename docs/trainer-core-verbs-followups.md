@@ -1,6 +1,6 @@
 # Core verbs and the morphology engine: follow-ups
 
-The Endless trainer draws about 870 verbs: the 130 hand-written `VERBS` in `src/lib/conjugator.ts` plus 778 core lexicon verbs generated into `src/content/verbs.generated.ts` (see `docs/superpowers/plans/2026-11-04-trainer-core-verbs.md`). The same data feeds the morphology engine in `src/lib/morph/`, which powers Forms. This page lists what is still left out and the limits we know about.
+The Endless trainer draws about 870 verbs: the 130 hand-written `VERBS` in `src/lib/conjugator.ts` plus 778 core lexicon verbs generated into `src/content/verbs.generated.ts` (see `docs/superpowers/archive/plans/2026-11-04-trainer-core-verbs.md`). The same data feeds the morphology engine in `src/lib/morph/`, which powers Forms. This page lists what is still left out and the limits we know about.
 
 `npm run seed` regenerates the verb file. Fixes to the data belong in `scripts/lexicon/verbs.ts`, never in the generated file.
 
