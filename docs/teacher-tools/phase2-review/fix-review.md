@@ -27,13 +27,14 @@ F5 and F6, and Sonnet for the rest. The F10 to F12 layout was rechecked in Chrom
 - G7: `maxLength=200` on the inputs where students type answers (type-in, grid cells), so the server's
   20,000-character limit (F5) is only a backstop.
 
-## Parked (decision for the owner)
+## Parked for Phase 3 (owner decision, 2026-11-14)
 
 - **`assignments.source` is readable by enrolled students.** For a forms assignment it holds each word's
   full entry (for a verb, all four principal parts). A student who queries the REST API directly can read it.
   Parked because the same answers are already public: `lexicon` and `questions` are readable by everyone, so
   this is no worse than looking the word up. Closing it means column grants on `assignments` and a
-  teacher-only way to read `source`, which is a design change. Candidate for Phase 3.
+  teacher-only way to read `source`, which is a design change. The owner chose to handle it in Phase 3; Step 2
+  adds it to `OPEN-WORK.md` and Step 3 names it in the PR body.
 
 ## Not verified
 
