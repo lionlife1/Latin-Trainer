@@ -239,7 +239,7 @@ function buildParadigm(c: Extract<FormsAssignmentConfig, { kind: 'paradigm' }>, 
 /** The printed part first; the 4th part also as the supine (-um); a deponent's 3rd part also without "sum". */
 function acceptedPart(part: string, index: number): string[] {
     const out = [part];
-    if (index === 3 && part.endsWith('us')) out.push(`${part.slice(0, -2)}um`);
+    if (index === 3 && part.endsWith('us') && !normalize(part).endsWith('urus')) out.push(`${part.slice(0, -2)}um`);
     if (index === 2 && part.endsWith(' sum')) out.push(part.slice(0, -4));
     return out;
 }

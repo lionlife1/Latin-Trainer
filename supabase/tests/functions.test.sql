@@ -292,6 +292,13 @@ update attempts set score = 3, total = 10, submitted_at = now() - interval '5 ho
 select tests.as_user('tA');
 select tests.ok((select best_attempt_id = (select other from gb) from gradebook(tests.uid('c1'))
                  where student_id = tests.uid('s1') and assignment_id = (select aid from gb)), 'gradebook: equal ratio and score, the later attempt wins');
+select tests.as_admin();
+update attempts set score = 1, total = 2, submitted_at = now() where id = (select other from gb);
+update attempts set score = 5, total = 10, submitted_at = now() - interval '5 hours' where id = (select best from gb);
+select tests.as_user('tA');
+select tests.ok((select best_score = 5 and total = 10 and best_attempt_id = (select best from gb)
+                 from gradebook(tests.uid('c1')) where student_id = tests.uid('s1') and assignment_id = (select aid from gb)),
+  'gradebook: equal ratio, the higher score wins over a later attempt (5/10 beats 1/2)');
 
 -- grade_parts is pinned to the public schema
 select tests.as_admin();

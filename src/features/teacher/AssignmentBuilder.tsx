@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { MODULES } from '../../content/modules';
 import { buildFormsPool, type FormsAssignmentConfig } from '../../lib/formsItems';
 import type { AssignmentMode } from '../../lib/types';
+import { shuffle } from '../../lib/shuffle';
 import { errorMessage } from '../../lib/useAsync';
 import { buildVocabQuestions, type PoolItem, type VocabDirection, type VocabItem } from '../../lib/vocab';
 import {
@@ -26,6 +27,11 @@ export function modulePool(moduleIds: string[], badges: string[], types: QType[]
     .flatMap(m => m.questions)
     .filter(q => (badges.length === 0 || badges.includes(q.badge)) && (types.length === 0 || types.includes(q.type as QType)))
     .map(q => ({ item_key: q.id, question: q }));
+}
+
+/** Module choices are stored with the answer in a fixed place; shuffle them so the snapshot does not give it away. `correct` is the choice text, so it stays valid. */
+export function shuffleModuleChoices(pool: PoolItem[], rng: () => number = Math.random): PoolItem[] {
+  return pool.map(it => (it.question.type === 'mc' ? { ...it, question: { ...it.question, choices: shuffle(it.question.choices, rng) } } : it));
 }
 
 export function AssignmentBuilder({ classId, onPublished }: Props) {
@@ -84,7 +90,7 @@ export function AssignmentBuilder({ classId, onPublished }: Props) {
       let pool: PoolItem[];
       let source: AssignmentSource;
       if (kind === 'modules') {
-        pool = modulePool(moduleIds, activeBadges, types);
+        pool = shuffleModuleChoices(modulePool(moduleIds, activeBadges, types));
         source = { kind: 'modules', moduleIds };
         if (activeBadges.length) source.badges = activeBadges;
         if (types.length) source.types = types;

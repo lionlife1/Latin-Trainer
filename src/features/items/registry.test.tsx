@@ -24,6 +24,7 @@ describe('item renderer registry', () => {
     const { Test, answered } = rendererFor(typein);
     render(<Test q={typein} value="am" onChange={() => {}} />);
     expect(screen.getByPlaceholderText('Type your answer…')).toHaveValue('am');
+    expect(screen.getByRole('textbox')).toHaveAttribute('maxlength', '200');
     expect(answered(typein, 'am')).toBe('full');
     expect(answered(typein, ' ')).toBe('none');
   });

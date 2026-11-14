@@ -1,6 +1,8 @@
-interface Scored { score: number | null; total: number; submitted_at: string | null }
+interface Scored { score: number | null; total: number | null; submitted_at: string | null }
 
-const ratio = (t: Scored) => (t.total > 0 ? (t.score ?? 0) / t.total : 0);
+/** null when there is no real ratio; SQL orders those after every real one (nulls last). */
+const ratio = (t: Scored): number | null => (t.score !== null && t.total !== null && t.total > 0 ? t.score / t.total : null);
+const cmpNullsLast = (a: number | null, b: number | null) => (a === b ? 0 : a === null ? -1 : b === null ? 1 : a - b);
 
 /**
  * The best submitted attempt: highest score/total, then higher score, then most recent.
@@ -11,7 +13,7 @@ export function bestAttempt<T extends Scored>(attempts: T[]): T | null {
   for (const t of attempts) {
     if (!t.submitted_at) continue;
     if (!best?.submitted_at) { best = t; continue; }
-    const d = ratio(t) - ratio(best) || (t.score ?? 0) - (best.score ?? 0) || t.submitted_at.localeCompare(best.submitted_at);
+    const d = cmpNullsLast(ratio(t), ratio(best)) || cmpNullsLast(t.score, best.score) || t.submitted_at.localeCompare(best.submitted_at);
     if (d > 0) best = t;
   }
   return best;

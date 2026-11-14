@@ -105,16 +105,26 @@ describe('grid in DrillSession and TestRunner', () => {
     expect(screen.getByRole('button', { name: /Submit test \(1\/1 answered\)/ })).toBeInTheDocument();
     expect(JSON.parse(sessionStorage.getItem('latiniq_test_a1')!)).toEqual({ p1: { 'nom-pl': 'puellae' } });
   });
-  it('a grid with more than four columns is marked wide; a narrow one is not', () => {
-    const wide: GridQuestion = {
-      ...q, columns: ['a', 'b', 'c', 'd', 'e', 'f'],
-      rows: [{ label: 'Nom', cells: ['a', 'b', 'c', 'd', 'e', 'f'].map(x => ({ id: x })) }],
-    };
+  it('a grid with four or more columns is marked wide; a narrow one is not', () => {
+    const cols = (names: string[]): GridQuestion => ({
+      ...q, columns: names,
+      rows: [{ label: 'Nom', cells: names.map(x => ({ id: x })) }],
+    });
     const { Practice } = rendererFor(q);
     const { container, rerender } = render(<Practice q={q} onSubmit={() => {}} />);
     expect(container.querySelector('table.grid-item')).not.toHaveAttribute('data-wide');
-    rerender(<Practice q={wide} onSubmit={() => {}} />);
+    rerender(<Practice q={cols(['a', 'b', 'c'])} onSubmit={() => {}} />);
+    expect(container.querySelector('table.grid-item')).not.toHaveAttribute('data-wide');
+    rerender(<Practice q={cols(['a', 'b', 'c', 'd'])} onSubmit={() => {}} />);
     expect(container.querySelector('table.grid-item')).toHaveAttribute('data-wide', 'true');
+    rerender(<Practice q={cols(['a', 'b', 'c', 'd', 'e', 'f'])} onSubmit={() => {}} />);
+    expect(container.querySelector('table.grid-item')).toHaveAttribute('data-wide', 'true');
+  });
+
+  it('answer inputs are capped at 200 characters', () => {
+    const { Practice } = rendererFor(q);
+    render(<Practice q={q} onSubmit={() => {}} />);
+    expect(screen.getByLabelText('Genitive, Singular')).toHaveAttribute('maxlength', '200');
   });
 
   it('right and wrong cells carry a mark with a text alternative, in practice and review', () => {

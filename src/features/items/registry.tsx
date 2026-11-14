@@ -86,6 +86,7 @@ const typein: ItemRenderer = {
       <div className="input-wrap">
         <input
           className="answer-input"
+          maxLength={200}
           placeholder="Type your answer…"
           autoFocus
           autoComplete="off"

@@ -11,7 +11,10 @@ vi.mock('./api', () => ({
   publishAssignment: (...a: unknown[]) => publishAssignment(...a),
 }));
 
-import { AssignmentBuilder } from './AssignmentBuilder';
+import { grade } from '../../lib/grading';
+import { seededRng } from '../../lib/shuffle';
+import type { MCQuestion } from '../../lib/types';
+import { AssignmentBuilder, modulePool, shuffleModuleChoices } from './AssignmentBuilder';
 
 const renderBuilder = () =>
   render(
@@ -65,7 +68,22 @@ describe('AssignmentBuilder', () => {
     expect(input).toMatchObject({ classId: 'c1', title: 'Forms quiz', mode: 'practice', questionCount: 20 });
     expect(input.source).toEqual({ kind: 'modules', moduleIds: [MODULES[0].id] });
     expect(pool).toHaveLength(MODULES[0].questions.length);
-    expect(pool[0]).toEqual({ item_key: MODULES[0].questions[0].id, question: MODULES[0].questions[0] });
+    expect(pool.map((p: { item_key: string }) => p.item_key)).toEqual(MODULES[0].questions.map(q => q.id));
+  });
+
+  it('shuffles module multiple-choice options and keeps the correct one gradable', () => {
+    const mcs = modulePool([MODULES[0].id], [], ['mc']);
+    expect(mcs.length).toBeGreaterThan(0);
+    const shuffled = shuffleModuleChoices(mcs, seededRng(3));
+    let moved = 0;
+    shuffled.forEach((it, i) => {
+      const orig = mcs[i].question as MCQuestion;
+      const q = it.question as MCQuestion;
+      expect([...q.choices].sort()).toEqual([...orig.choices].sort());
+      expect(grade(q, q.correct).right).toBe(1);
+      if (q.choices.join('|') !== orig.choices.join('|')) moved++;
+    });
+    expect(moved).toBeGreaterThan(0);
   });
 
   it('shows the error and lets the teacher retry when publishing throws', async () => {
@@ -110,5 +128,21 @@ describe('AssignmentBuilder forms', () => {
     expect(input.questionCount).toBe(5);
     expect(pool.length).toBeGreaterThanOrEqual(5);
     expect(pool.every((p: { question: { type: string } }) => p.question.type === 'parse')).toBe(true);
+  });
+});
+
+describe('AssignmentBuilder forms default count', () => {
+  beforeEach(() => publishAssignment.mockReset().mockResolvedValue({ ok: true, id: 'a1' }));
+
+  it('defaults the question count to 20 when the pool is larger', async () => {
+    renderBuilder();
+    await userEvent.type(screen.getByLabelText(/title/i), 'Big pool');
+    await userEvent.click(screen.getByLabelText('Forms'));
+    await userEvent.selectOptions(screen.getByLabelText(/kind of question/i), 'principalParts');
+    for (let i = 0; i < 8; i++) await userEvent.click(screen.getByRole('button', { name: /add 5 random/i }));
+    const size = Number(/\d+/.exec(screen.getByTestId('pool-size').textContent ?? '')?.[0]);
+    expect(size).toBeGreaterThan(20);
+    await userEvent.click(screen.getByRole('button', { name: /publish/i }));
+    expect(publishAssignment.mock.calls[0][0].questionCount).toBe(20);
   });
 });

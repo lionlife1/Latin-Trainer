@@ -117,8 +117,8 @@
 .grid-correct { display: block; font-size: 0.85rem; color: var(--green); }
 .grid-answer, .grid-correct { overflow-wrap: anywhere; }
 .grid-actions { margin-top: 12px; }
-/* Phone layout: one card per row, column label beside its input. Wide grids (more than four columns) keep the
-   cards up to 900px so a six-column table is never squeezed. */
+/* Phone layout: one card per row, column label beside its input. Wide grids (four or more columns) are
+   handled below. */
 @media (max-width: 640px) {
   .grid-item, .grid-item tbody, .grid-item tr, .grid-item th, .grid-item td { display: block; width: 100%; box-sizing: border-box; }
   .grid-item thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
@@ -128,6 +128,15 @@
   .grid-item td[data-col]::before { content: attr(data-col); flex: 0 0 5.5em; font-size: 0.8rem; color: var(--text-secondary); }
   .grid-item .grid-cell { flex: 1 1 0; min-width: 0; }
 }
+/* Practice and test pages cap content at 680px, so inside .drill-body a wide grid (4+ columns) is always cards. */
+.drill-body .grid-item[data-wide], .drill-body .grid-item[data-wide] tbody, .drill-body .grid-item[data-wide] tr, .drill-body .grid-item[data-wide] th, .drill-body .grid-item[data-wide] td { display: block; width: 100%; box-sizing: border-box; }
+.drill-body .grid-item[data-wide] thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.drill-body .grid-item[data-wide] tr { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 10px; padding: 6px; }
+.drill-body .grid-item[data-wide] tbody th { white-space: normal; }
+.drill-body .grid-item[data-wide] td[data-col] { display: flex; align-items: center; gap: 8px; }
+.drill-body .grid-item[data-wide] td[data-col]::before { content: attr(data-col); flex: 0 0 5.5em; font-size: 0.8rem; color: var(--text-secondary); }
+.drill-body .grid-item[data-wide] .grid-cell { flex: 1 1 0; min-width: 0; }
+/* Elsewhere (the review page) wide grids are cards up to 900px, a table above. */
 @media (max-width: 900px) {
   .grid-item[data-wide], .grid-item[data-wide] tbody, .grid-item[data-wide] tr, .grid-item[data-wide] th, .grid-item[data-wide] td { display: block; width: 100%; box-sizing: border-box; }
   .grid-item[data-wide] thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }

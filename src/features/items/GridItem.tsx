@@ -19,7 +19,7 @@ function GridTable({ q, renderCell, className = 'grid-item' }: {
   className?: string;
 }) {
   return (
-    <table className={className} data-wide={q.columns.length > 4 ? 'true' : undefined}>
+    <table className={className} data-wide={q.columns.length >= 4 ? 'true' : undefined}>
       <thead>
         <tr>
           <td />
@@ -72,6 +72,7 @@ function GridInput({ q, values, onChange, onEnter, readOnly, parts, firstAccepte
             <span className="grid-field">
             <input
               type="text"
+              maxLength={200}
               className={`grid-input ${ok === true ? 'correct' : ok === false ? 'wrong' : ''}`}
               aria-label={`${rowLabelOf(q, id)}, ${column}`}
               autoComplete="off"

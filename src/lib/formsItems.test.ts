@@ -131,6 +131,13 @@ describe('principal parts, accepted variants', () => {
         expect(grade(q, { pp2: 'monere', pp3: 'monui', pp4: 'monitum' }).right).toBe(3);
         expect(grade(q, { pp2: 'monere', pp3: 'monui', pp4: 'monitus' }).right).toBe(3);
     });
+    it('sum: the 4th part is the future participle and does not accept a supine form', () => {
+        const [item] = buildFormsPool({ kind: 'principalParts', words: [verbW('esse')] }, rng());
+        const q = item.question as GridQuestion;
+        expect(q.key.pp4).toEqual(['futurus']);
+        expect(grade(q, { pp4: 'futurus' }).parts.find(p => p.id === 'pp4')!.ok).toBe(true);
+        expect(grade(q, { pp4: 'futurum' }).parts.find(p => p.id === 'pp4')!.ok).toBe(false);
+    });
     it('a deponent accepts the 3rd part with or without sum', () => {
         const [item] = buildFormsPool({ kind: 'principalParts', words: [hortor] }, rng());
         const q = item.question as GridQuestion;

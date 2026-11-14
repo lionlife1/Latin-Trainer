@@ -17,4 +17,8 @@ describe('bestAttempt', () => {
     expect(bestAttempt([at('z', 0, 0), at('a', 1, 4)])?.id).toBe('a');
     expect(bestAttempt([])).toBeNull();
   });
+  it('a zero or null total sorts after any real ratio, like SQL nulls last', () => {
+    expect(bestAttempt([at('a', 0, 10, '2026-01-01T00:00:00Z'), at('z', 0, 0, '2026-02-01T00:00:00Z')])?.id).toBe('a');
+    expect(bestAttempt([at('z', 0, 0, '2026-02-01T00:00:00Z'), at('a', 0, 10, '2026-01-01T00:00:00Z')])?.id).toBe('a');
+  });
 });
