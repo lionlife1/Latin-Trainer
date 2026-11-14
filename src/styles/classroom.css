@@ -115,14 +115,34 @@
 .grid-answer.correct { color: var(--green); }
 .grid-answer.wrong { color: var(--red); text-decoration: line-through; }
 .grid-correct { display: block; font-size: 0.85rem; color: var(--green); }
+.grid-answer, .grid-correct { overflow-wrap: anywhere; }
 .grid-actions { margin-top: 12px; }
+/* Phone layout: one card per row, column label beside its input. Wide grids (more than four columns) keep the
+   cards up to 900px so a six-column table is never squeezed. */
 @media (max-width: 640px) {
   .grid-item, .grid-item tbody, .grid-item tr, .grid-item th, .grid-item td { display: block; width: 100%; box-sizing: border-box; }
   .grid-item thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .grid-item tr { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 10px; padding: 6px; }
   .grid-item tbody th { white-space: normal; }
-  .grid-item td[data-col]::before { content: attr(data-col); display: block; font-size: 0.8rem; color: var(--text-secondary); }
+  .grid-item td[data-col] { display: flex; align-items: center; gap: 8px; }
+  .grid-item td[data-col]::before { content: attr(data-col); flex: 0 0 5.5em; font-size: 0.8rem; color: var(--text-secondary); }
+  .grid-item .grid-cell { flex: 1 1 0; min-width: 0; }
 }
+@media (max-width: 900px) {
+  .grid-item[data-wide], .grid-item[data-wide] tbody, .grid-item[data-wide] tr, .grid-item[data-wide] th, .grid-item[data-wide] td { display: block; width: 100%; box-sizing: border-box; }
+  .grid-item[data-wide] thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .grid-item[data-wide] tr { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 10px; padding: 6px; }
+  .grid-item[data-wide] tbody th { white-space: normal; }
+  .grid-item[data-wide] td[data-col] { display: flex; align-items: center; gap: 8px; }
+  .grid-item[data-wide] td[data-col]::before { content: attr(data-col); flex: 0 0 5.5em; font-size: 0.8rem; color: var(--text-secondary); }
+  .grid-item[data-wide] .grid-cell { flex: 1 1 0; min-width: 0; }
+}
+.grid-field { display: flex; align-items: center; gap: 6px; }
+.grid-field .grid-input { flex: 1 1 auto; }
+.grid-field .grid-answer { min-width: 0; }
+.grid-mark { flex: none; font-weight: 700; }
+.grid-mark.ok { color: var(--green); }
+.grid-mark.bad { color: var(--red); }
 
 .parse-item { display: flex; flex-direction: column; gap: 12px; }
 .parse-field { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }

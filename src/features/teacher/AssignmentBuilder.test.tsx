@@ -93,7 +93,7 @@ describe('AssignmentBuilder forms', () => {
     const [input, pool] = publishAssignment.mock.calls[0];
     expect(input.source.kind).toBe('forms');
     expect(input.source.config.words[0].key).toMatch(/^verb:moneo/);
-    expect(input.questionCount).toBe(1);
+    expect(input.questionCount).toBe(6);
     expect(pool).toHaveLength(6);
     expect(pool.every((p: { question: { type: string }; points: number }) => p.question.type === 'grid' && p.points > 0)).toBe(true);
   });

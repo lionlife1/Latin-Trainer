@@ -1,5 +1,5 @@
 import fixtures from '../../tests/fixtures/normalize.json';
-import { normalize, isCorrect, correctDisplay, grade, earnedPoints, fmtPoints } from './grading';
+import { normalize, isCorrect, correctDisplay, grade, fmtPoints } from './grading';
 import type { DrillQuestion } from './types';
 
 const typein: DrillQuestion = { id: 't', type: 'typein', badge: 'B', prompt: 'p', answers: ['amem', 'amātus sim'] };
@@ -100,11 +100,6 @@ describe('grade', () => {
   it('correctDisplay for grid and parse', () => {
     expect(correctDisplay(grid)).toBe('amo, amas, amatus est');
     expect(correctDisplay(parse)).toBe('genitive singular / dative singular / nominative plural');
-  });
-
-  it('earnedPoints', () => {
-    expect(earnedPoints({ right: 2, outOf: 3, parts: [] }, 3)).toBe(2);
-    expect(earnedPoints({ right: 1, outOf: 3, parts: [] }, 1)).toBe(0.33);
   });
 });
 

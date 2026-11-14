@@ -19,7 +19,7 @@ function GridTable({ q, renderCell, className = 'grid-item' }: {
   className?: string;
 }) {
   return (
-    <table className={className}>
+    <table className={className} data-wide={q.columns.length > 4 ? 'true' : undefined}>
       <thead>
         <tr>
           <td />
@@ -34,13 +34,19 @@ function GridTable({ q, renderCell, className = 'grid-item' }: {
               const col = q.columns[i];
               if (cell === null) return <td key={i} data-col={col} className="grid-none">–</td>;
               if (cell.given !== undefined) return <td key={i} data-col={col} className="grid-given">{cell.given}</td>;
-              return <td key={i} data-col={col}>{renderCell(cell.id, col)}</td>;
+              return <td key={i} data-col={col}><div className="grid-cell">{renderCell(cell.id, col)}</div></td>;
             })}
           </tr>
         ))}
       </tbody>
     </table>
   );
+}
+
+/** A visible right/wrong mark, so a verdict never rests on colour alone. */
+function Mark({ ok }: { ok: boolean | undefined }) {
+  if (ok === undefined) return null;
+  return <span className={`grid-mark ${ok ? 'ok' : 'bad'}`} role="img" aria-label={ok ? 'Correct' : 'Incorrect'}>{ok ? '✓' : '✗'}</span>;
 }
 
 const answerCellIds = (q: GridLike): string[] => q.rows.flatMap(r => r.cells.filter(isAnswerCell).map(c => c.id));
@@ -63,6 +69,7 @@ function GridInput({ q, values, onChange, onEnter, readOnly, parts, firstAccepte
         const ok = verdict(id);
         return (
           <>
+            <span className="grid-field">
             <input
               type="text"
               className={`grid-input ${ok === true ? 'correct' : ok === false ? 'wrong' : ''}`}
@@ -81,6 +88,8 @@ function GridInput({ q, values, onChange, onEnter, readOnly, parts, firstAccepte
                 }
               }}
             />
+            <Mark ok={ok} />
+            </span>
             {ok === false && firstAccepted && <span className="grid-correct">{firstAccepted(id)}</span>}
           </>
         );
@@ -159,7 +168,10 @@ export function GridReview({ q, given, parts, correct, revealed }: {
           const v = verdict(id);
           return (
             <>
-              <span className={`grid-answer ${v === true ? 'correct' : v === false ? 'wrong' : ''}`}>{values[id] || '(blank)'}</span>
+              <span className="grid-field">
+                <span className={`grid-answer ${v === true ? 'correct' : v === false ? 'wrong' : ''}`}>{values[id] || '(blank)'}</span>
+                <Mark ok={v} />
+              </span>
               {revealed && v === false && g.key?.[id] && <span className="grid-correct">{g.key[id][0]}</span>}
             </>
           );

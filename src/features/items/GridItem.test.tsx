@@ -105,4 +105,27 @@ describe('grid in DrillSession and TestRunner', () => {
     expect(screen.getByRole('button', { name: /Submit test \(1\/1 answered\)/ })).toBeInTheDocument();
     expect(JSON.parse(sessionStorage.getItem('latiniq_test_a1')!)).toEqual({ p1: { 'nom-pl': 'puellae' } });
   });
+  it('a grid with more than four columns is marked wide; a narrow one is not', () => {
+    const wide: GridQuestion = {
+      ...q, columns: ['a', 'b', 'c', 'd', 'e', 'f'],
+      rows: [{ label: 'Nom', cells: ['a', 'b', 'c', 'd', 'e', 'f'].map(x => ({ id: x })) }],
+    };
+    const { Practice } = rendererFor(q);
+    const { container, rerender } = render(<Practice q={q} onSubmit={() => {}} />);
+    expect(container.querySelector('table.grid-item')).not.toHaveAttribute('data-wide');
+    rerender(<Practice q={wide} onSubmit={() => {}} />);
+    expect(container.querySelector('table.grid-item')).toHaveAttribute('data-wide', 'true');
+  });
+
+  it('right and wrong cells carry a mark with a text alternative, in practice and review', () => {
+    const given = { 'nom-pl': 'puella', 'gen-sg': 'puellae' };
+    const { Practice, Review } = rendererFor(q);
+    const first = render(<Practice q={q} result={{ given, grade: grade(q, given) }} onSubmit={() => {}} />);
+    expect(screen.getAllByRole('img', { name: 'Correct' })).toHaveLength(1);
+    expect(screen.getAllByRole('img', { name: 'Incorrect' })).toHaveLength(1);
+    first.unmount();
+    render(<Review q={q} given={given} revealed />);
+    expect(screen.getAllByRole('img', { name: 'Correct' })).toHaveLength(1);
+    expect(screen.getAllByRole('img', { name: 'Incorrect' })).toHaveLength(1);
+  });
 });

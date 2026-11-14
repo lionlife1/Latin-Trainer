@@ -236,6 +236,14 @@ function buildParadigm(c: Extract<FormsAssignmentConfig, { kind: 'paradigm' }>, 
 
 // ---- principal parts ----
 
+/** The printed part first; the 4th part also as the supine (-um); a deponent's 3rd part also without "sum". */
+function acceptedPart(part: string, index: number): string[] {
+    const out = [part];
+    if (index === 3 && part.endsWith('us')) out.push(`${part.slice(0, -2)}um`);
+    if (index === 2 && part.endsWith(' sum')) out.push(part.slice(0, -4));
+    return out;
+}
+
 function buildPrincipalParts(words: MorphWord[]): PoolItem[] {
     const out: PoolItem[] = [];
     for (const w of words) {
@@ -244,7 +252,7 @@ function buildPrincipalParts(words: MorphWord[]): PoolItem[] {
         if (parts.length < 2) continue;
         const ids = parts.map((_, i) => `pp${i + 1}`);
         const key: Record<string, string[]> = {};
-        parts.forEach((p, i) => { if (i > 0) key[ids[i]] = [p]; });
+        parts.forEach((p, i) => { if (i > 0) key[ids[i]] = acceptedPart(p, i); });
         const item_key = `pp|${wordKey(w)}`;
         const question: GridQuestion = {
             id: item_key, type: 'grid', badge: 'PRINCIPAL PARTS',

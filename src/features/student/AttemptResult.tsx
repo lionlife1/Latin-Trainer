@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { fmtPoints } from '../../lib/grading';
+import { fmtPoints, isRevealed } from '../../lib/grading';
 import { useAsync } from '../../lib/useAsync';
 import { rendererFor } from '../items/registry';
 import { getAttempt, getAttemptItems, getResponses } from './api';
@@ -17,7 +17,7 @@ export function AttemptReview({ attemptId }: { attemptId: string }) {
         const r = data.data!.responses.get(i.pool_id);
         const q = i.question;
         const { Review } = rendererFor(q);
-        const revealed = 'answers' in q || 'correct' in q;
+        const revealed = isRevealed(q);
         return (
           <li key={i.pool_id} className="card">
             <div className="q-prompt small" dangerouslySetInnerHTML={{ __html: q.prompt }} />

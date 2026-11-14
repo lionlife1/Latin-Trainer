@@ -225,5 +225,77 @@ select tests.ok(record_practice_response((select id from pp_att), tests.pool('pp
 select tests.ok((finish_practice((select id from pp_att)) ->> 'score')::numeric = 4, 'finish_practice sums earned');
 select tests.ok((select total from attempts where id = (select id from pp_att)) = 5, 'practice total in points');
 
+-- Hidden items never carry their own item_key: a principal-parts key spells out the answer, and the question id is the key.
+select tests.as_admin();
+create temp table lk on commit drop as select gen_random_uuid() as tid, gen_random_uuid() as pid;
+grant select on lk to authenticated;
+insert into assignments (id, class_id, title, mode, source, question_count, max_attempts)
+  values ((select tid from lk), tests.uid('c1'), 'Leak test', 'test', '{"kind":"forms"}', 5, 3),
+         ((select pid from lk), tests.uid('c1'), 'Leak practice', 'practice', '{"kind":"forms"}', 5, null);
+insert into assignment_pool (assignment_id, item_key, question, points)
+select a, 'pp|verb:moneo, monere, monui, monitus',
+  '{"id":"pp|verb:moneo, monere, monui, monitus","type":"grid","badge":"PRINCIPAL PARTS","prompt":"moneo<br>Principal parts",
+    "columns":["1st","2nd","3rd","4th"],
+    "rows":[{"label":"Principal parts","cells":[{"id":"pp1","given":"moneo"},{"id":"pp2"},{"id":"pp3"},{"id":"pp4"}]}],
+    "key":{"pp2":["monere"],"pp3":["monui"],"pp4":["monitus","monitum"]}}'::jsonb, 3
+from (select tid a from lk union all select pid from lk) x;
+insert into tests.users select 'lk', tid from lk;
+insert into tests.users select 'lkp', pid from lk;
+
+select tests.as_user('s1');
+create temp table lk_att on commit drop as select start_attempt(tests.uid('lk')) as id;
+grant select on lk_att to authenticated;
+select tests.ok(not exists (select 1 from get_attempt_items((select id from lk_att)) g
+                            where position('pp|verb:moneo, monere, monui, monitus' in g.question::text) > 0),
+  'a hidden item does not contain its own item_key');
+select tests.ok(not exists (select 1 from get_attempt_items((select id from lk_att)) g
+                            where g.question::text ~ '(monere|monui|monitus|monitum)'),
+  'a hidden principal parts item does not contain the 2nd to 4th parts');
+select tests.ok((select (g.question ->> 'id') = g.pool_id::text from get_attempt_items((select id from lk_att)) g),
+  'a hidden item id is the pool row id');
+select tests.as_user('tA');
+select tests.ok((select g.question ->> 'id' from get_attempt_items((select id from lk_att)) g) = 'pp|verb:moneo, monere, monui, monitus',
+  'a revealed item keeps its own id');
+
+-- Oversized answers are rejected
+select tests.as_user('s1');
+select tests.throws(format($$select submit_test(%L, %L::jsonb)$$, (select id from lk_att),
+  jsonb_build_array(jsonb_build_object('pool_id', tests.pool('lk','pp|verb:moneo, monere, monui, monitus'),
+                    'given', jsonb_build_object('pp2', repeat('a', 20001))))),
+  'submit_test rejects an oversized answer', 'P0001');
+select tests.ok((select submitted_at is null from attempts where id = (select id from lk_att)), 'a rejected submit leaves the attempt open');
+create temp table lkp_att on commit drop as select start_attempt(tests.uid('lkp')) as id;
+grant select on lkp_att to authenticated;
+select tests.throws(format($$select record_practice_response_v2(%L, %L, %L::jsonb, 1)$$, (select id from lkp_att),
+  tests.pool('lkp','pp|verb:moneo, monere, monui, monitus'), jsonb_build_object('pp2', repeat('a', 20001))),
+  'record_practice_response_v2 rejects an oversized answer', 'P0001');
+select tests.ok(jsonb_array_length(record_practice_response_v2((select id from lkp_att),
+  tests.pool('lkp','pp|verb:moneo, monere, monui, monitus'), jsonb_build_object('pp2', repeat('a', 100)), 1) -> 'parts') = 3,
+  'a normal answer is still accepted');
+
+-- Gradebook: best attempt is the highest ratio, and score and total come from that one attempt
+select tests.as_admin();
+create temp table gb as select gen_random_uuid() as aid, gen_random_uuid() as best, gen_random_uuid() as other;
+grant select on gb to authenticated;
+insert into assignments (id, class_id, title, mode, source, question_count, max_attempts)
+  values ((select aid from gb), tests.uid('c1'), 'Best attempt', 'test', '{"kind":"forms"}', 1, 2);
+insert into attempts (id, assignment_id, student_id, score, total, submitted_at) values
+  ((select best from gb), (select aid from gb), tests.uid('s1'), 9, 10, now() - interval '2 hours'),
+  ((select other from gb), (select aid from gb), tests.uid('s1'), 8, 30, now() - interval '1 hour');
+select tests.as_user('tA');
+select tests.ok((select best_score = 9 and total = 10 and best_attempt_id = (select best from gb) and attempts = 2
+                 from gradebook(tests.uid('c1')) where student_id = tests.uid('s1') and assignment_id = (select aid from gb)),
+  'gradebook: 9/10 beats 8/30 and reports that attempt score, total and id');
+select tests.as_admin();
+update attempts set score = 3, total = 10, submitted_at = now() where id = (select other from gb);
+update attempts set score = 3, total = 10, submitted_at = now() - interval '5 hours' where id = (select best from gb);
+select tests.as_user('tA');
+select tests.ok((select best_attempt_id = (select other from gb) from gradebook(tests.uid('c1'))
+                 where student_id = tests.uid('s1') and assignment_id = (select aid from gb)), 'gradebook: equal ratio and score, the later attempt wins');
+
+-- grade_parts is pinned to the public schema
+select tests.as_admin();
+select tests.ok((select 'search_path=public' = any (proconfig) from pg_proc where proname = 'grade_parts'), 'grade_parts sets search_path');
+
 rollback;
 \echo functions ok

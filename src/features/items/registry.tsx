@@ -32,13 +32,14 @@ const text = (given: Given | undefined): string => (typeof given === 'string' ? 
 const stringAnswered = (_q: PublicQuestion, given: Given | undefined): Answered => (text(given).trim() ? 'full' : 'none');
 
 function ReviewBody({ q, given, correct, revealed, html }: { q: DrillQuestion | PublicQuestion; given: Given | undefined; correct?: boolean; revealed: boolean; html: boolean }) {
-  const shown = correctDisplay(q as DrillQuestion);
+  const showCorrect = revealed && !correct;
+  const shown = showCorrect ? correctDisplay(q as DrillQuestion) : '';
   return (
     <>
       <p>
         <span className={`tag ${correct ? 'ok' : 'bad'}`}>{correct ? 'Right' : 'Wrong'}</span> Your answer: <strong>{text(given) || '(blank)'}</strong>
       </p>
-      {revealed && !correct && (
+      {showCorrect && (
         <p className="muted">
           Correct:{' '}
           {html ? <strong dangerouslySetInnerHTML={{ __html: shown }} /> : <strong>{shown}</strong>}

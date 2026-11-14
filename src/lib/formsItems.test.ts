@@ -117,9 +117,26 @@ describe('principal parts', () => {
         expect(q.rows).toHaveLength(1);
         expect(q.rows[0].cells).toHaveLength(4);
         expect(q.rows[0].cells[0]).toEqual({ id: 'pp1', given: 'moneo' });
-        expect(q.key).toEqual({ pp2: ['monere'], pp3: ['monui'], pp4: ['monitus'] });
+        expect(q.key).toEqual({ pp2: ['monere'], pp3: ['monui'], pp4: ['monitus', 'monitum'] });
         expect(item.points).toBe(3);
         expect(q.badge).toBe('PRINCIPAL PARTS');
+    });
+});
+
+describe('principal parts, accepted variants', () => {
+    it('moneo: the 4th part accepts the participle and the supine; the key starts with the engine form', () => {
+        const [item] = buildFormsPool({ kind: 'principalParts', words: [moneo] }, rng());
+        const q = item.question as GridQuestion;
+        expect(q.key.pp4).toEqual(['monitus', 'monitum']);
+        expect(grade(q, { pp2: 'monere', pp3: 'monui', pp4: 'monitum' }).right).toBe(3);
+        expect(grade(q, { pp2: 'monere', pp3: 'monui', pp4: 'monitus' }).right).toBe(3);
+    });
+    it('a deponent accepts the 3rd part with or without sum', () => {
+        const [item] = buildFormsPool({ kind: 'principalParts', words: [hortor] }, rng());
+        const q = item.question as GridQuestion;
+        expect(q.key.pp3).toEqual(['hortatus sum', 'hortatus']);
+        expect(grade(q, { pp2: 'hortari', pp3: 'hortatus' }).parts.find(p => p.id === 'pp3')!.ok).toBe(true);
+        expect(grade(q, { pp2: 'hortari', pp3: 'hortatus sum' }).parts.find(p => p.id === 'pp3')!.ok).toBe(true);
     });
 });
 

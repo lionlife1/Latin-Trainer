@@ -66,7 +66,7 @@ export function AssignmentBuilder({ classId, onPublished }: Props) {
     kind === 'modules' ? modulePool(moduleIds, activeBadges, types).length
       : kind === 'forms' ? formsPool.length
         : vocabItems.length * directions.length;
-  const formsDefault = formsConfig.kind === 'parse' || formsConfig.kind === 'make' ? formsConfig.count : 1;
+  const formsDefault = formsConfig.kind === 'parse' || formsConfig.kind === 'make' ? formsConfig.count : 20;
   const defaultCount = Math.min(kind === 'forms' ? formsDefault : 20, poolSize);
   const questionCount = count === '' ? defaultCount : Math.max(1, Math.min(poolSize, Number(count) || 1));
   const pointValues = formsPool.map(p => p.points ?? 1);

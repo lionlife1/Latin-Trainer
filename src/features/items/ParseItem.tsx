@@ -53,7 +53,7 @@ function Fields({ q, picks, onPick, disabled, verdict, shownCorrect }: {
                 </button>
               ))}
             </div>
-            {ok !== undefined && <span className={`tag ${ok ? 'ok' : 'bad'}`}>{ok ? 'Right' : 'Wrong'}</span>}
+            {ok !== undefined && <span className={`tag ${ok ? 'ok' : 'bad'}`}><span aria-hidden="true">{ok ? '✓' : '✗'} </span>{ok ? 'Right' : 'Wrong'}</span>}
             {ok === false && shownCorrect && <span className="parse-correct">Correct: {optionLabel(f, shownCorrect[f.id])}</span>}
           </div>
         );
@@ -129,7 +129,7 @@ export function ParseReview({ q, given, parts, correct, revealed }: {
           return (
             <li key={f.id}>
               {f.label}: <strong>{picks[f.id] ? optionLabel(f, picks[f.id]) : '(blank)'}</strong>
-              {v !== undefined && <> <span className={`tag ${v ? 'ok' : 'bad'}`}>{v ? 'Right' : 'Wrong'}</span></>}
+              {v !== undefined && <> <span className={`tag ${v ? 'ok' : 'bad'}`}><span aria-hidden="true">{v ? '✓' : '✗'} </span>{v ? 'Right' : 'Wrong'}</span></>}
             </li>
           );
         })}

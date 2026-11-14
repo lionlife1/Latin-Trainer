@@ -64,10 +64,9 @@ export function grade(q: DrillQuestion, given: Given): Grade {
   return { right: parts.filter(p => p.ok).length, outOf: parts.length, parts };
 }
 
-/** points * right / outOf, rounded to 2 places. */
-export function earnedPoints(g: Grade, points: number): number {
-  if (g.outOf === 0) return 0;
-  return Math.round(points * g.right / g.outOf * 100) / 100;
+/** True when the question still carries its answers (the server withholds them until the test may be reviewed). */
+export function isRevealed(q: object): boolean {
+  return 'answers' in q || 'correct' in q || 'key' in q;
 }
 
 export function isCorrect(q: DrillQuestion, given: Given): boolean {

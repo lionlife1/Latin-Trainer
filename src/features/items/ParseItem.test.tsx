@@ -61,6 +61,14 @@ describe('parse renderer', () => {
     expect(screen.getByText('genitive singular / dative singular / nominative plural')).toBeInTheDocument();
   });
 
+  it('review: right and wrong fields have a visible check or cross as well as the words', () => {
+    const { Review } = rendererFor(q);
+    const parts = [{ id: 'case', ok: true }, { id: 'num', ok: false }];
+    const { container } = render(<Review q={q} given={{ case: 'gen', num: 'pl' }} parts={parts} correct={false} revealed />);
+    const tags = [...container.querySelectorAll('li .tag')].map(t => t.textContent);
+    expect(tags).toEqual(['✓ Right', '✗ Wrong']);
+  });
+
   it('print: copy has a labelled blank per field, key lists the parses', () => {
     const { PrintCopy, PrintKey } = rendererFor(q);
     const pq = { number: 1, question: q as DrillQuestion } as PrintQuestion;

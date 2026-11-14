@@ -16,7 +16,7 @@ alter table public.attempts
 
 -- SQL twin of grade() in src/lib/grading.ts. Returns {"right", "outOf", "parts": [{"id", "ok"}]}.
 create function public.grade_parts(q jsonb, given jsonb) returns jsonb
-language plpgsql immutable as $$
+language plpgsql immutable set search_path = public as $$
 declare
   t text := q ->> 'type';
   parts jsonb := '[]';
@@ -147,6 +147,8 @@ begin
   if t.student_id <> auth.uid() and not is_class_teacher(a.class_id) then
     raise exception 'not your attempt' using errcode = '42501';
   end if;
+  -- A hidden item also gets the pool row id as its question id: generated ids (for example principal parts)
+  -- are built from the answer.
   -- Test answers are revealed only when the student can no longer retake (attempts used up or due date
   -- passed); otherwise a student could submit blank, read the answers and retake.
   reveal := a.mode = 'practice' or is_class_teacher(a.class_id) or (
@@ -157,7 +159,7 @@ begin
   return query
     select i.pool_id, i.position,
            case when reveal then p.question
-                else p.question - 'answers' - 'correct' - 'explanation' - 'key' end,
+                else jsonb_set(p.question - 'answers' - 'correct' - 'explanation' - 'key', '{id}', to_jsonb(i.pool_id::text)) end,
            p.points
     from attempt_items i join assignment_pool p on p.id = i.pool_id
     where i.attempt_id = p_attempt_id
@@ -176,6 +178,7 @@ declare
   r responses;
 begin
   perform own_open_attempt(p_attempt_id, 'practice');
+  if length(gj::text) > 20000 then raise exception 'answer too long' using errcode = 'P0001'; end if;
   select p.question, p.points into q, pts
   from attempt_items i join assignment_pool p on p.id = i.pool_id
   where i.attempt_id = p_attempt_id and i.pool_id = p_pool_id;
@@ -231,6 +234,9 @@ declare
 begin
   t := own_open_attempt(p_attempt_id, 'test');
   select * into a from assignments where id = t.assignment_id;
+  if exists (select 1 from jsonb_array_elements(coalesce(p_responses, '[]')) e where length((e -> 'given')::text) > 20000) then
+    raise exception 'answer too long' using errcode = 'P0001';
+  end if;
 
   insert into responses (attempt_id, pool_id, given, given_json, correct, earned, possible, parts, ms)
   select p_attempt_id, i.pool_id,
@@ -272,17 +278,28 @@ begin
   if not is_class_teacher(p_class_id) then
     raise exception 'not your class' using errcode = '42501';
   end if;
+  -- best = highest score/total of one submitted attempt (ties: higher score, then latest); score and total
+  -- come from that attempt.
   return query
     select e.student_id, e.display_name, a.id,
-           max(t.score), max(t.total), count(t.id)::int, max(t.submitted_at),
-           coalesce(bool_or(t.is_late or t.over_time), false),
-           (array_agg(t.id order by t.submitted_at desc) filter (where t.id is not null))[1],
-           (array_agg(t.id order by t.score desc nulls last, t.submitted_at desc) filter (where t.id is not null))[1]
+           b.score, b.total, coalesce(agg.n, 0)::int, agg.last_at,
+           coalesce(agg.late, false), agg.latest_id, b.id
     from enrollments e
     cross join assignments a
-    left join attempts t on t.assignment_id = a.id and t.student_id = e.student_id and t.submitted_at is not null
-    where e.class_id = p_class_id and a.class_id = p_class_id
-    group by e.student_id, e.display_name, a.id;
+    left join lateral (
+      select count(*) as n, max(t.submitted_at) as last_at, bool_or(t.is_late or t.over_time) as late,
+             (array_agg(t.id order by t.submitted_at desc))[1] as latest_id
+      from attempts t
+      where t.assignment_id = a.id and t.student_id = e.student_id and t.submitted_at is not null
+    ) agg on true
+    left join lateral (
+      select t.id, t.score, t.total
+      from attempts t
+      where t.assignment_id = a.id and t.student_id = e.student_id and t.submitted_at is not null
+      order by t.score / nullif(t.total, 0) desc nulls last, t.score desc nulls last, t.submitted_at desc
+      limit 1
+    ) b on true
+    where e.class_id = p_class_id and a.class_id = p_class_id;
 end $$;
 
 -- Grants, as in the functions migration.
