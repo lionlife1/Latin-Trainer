@@ -1,10 +1,10 @@
 import { useCallback, useRef, useState } from 'react';
 import { isCorrect } from '../../lib/grading';
-import type { AssignmentMode, DrillQuestion } from '../../lib/types';
+import type { AssignmentMode, DrillQuestion, Given } from '../../lib/types';
 
 export interface DrillResult {
   q: DrillQuestion;
-  given: string;
+  given: Given;
   /** undefined in test mode: grading happens on the server. */
   correct: boolean | undefined;
 }
@@ -28,11 +28,12 @@ export function useDrill(initial: DrillQuestion[], opts: DrillOptions) {
   const score = results.filter(r => r.correct === true).length;
 
   const answer = useCallback(
-    (given: string) => {
+    (given: Given) => {
       if (!current || results.length > index) return;
       const correct = opts.mode === 'practice' ? isCorrect(current, given) : undefined;
       setResults(r => [...r, { q: current, given, correct }]);
-      opts.onAnswer?.(current, given, correct, Date.now() - shownAt.current);
+      // onAnswer still takes a string until the typed plumbing lands; structured answers are serialised.
+      opts.onAnswer?.(current, typeof given === 'string' ? given : JSON.stringify(given), correct, Date.now() - shownAt.current);
     },
     [current, index, results.length, opts],
   );

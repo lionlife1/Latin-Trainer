@@ -33,7 +33,8 @@ export function DrillSession({ questions, mode, onAnswer, generate, onEasy, onFi
   }, [finished]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!current) return null;
-  const { Practice, answerIsHtml } = rendererFor(current);
+  const { Practice, answerIsHtml, showsScore } = rendererFor(current);
+  const scoreText = (g: { right: number; outOf: number }) => `${g.right}/${g.outOf} correct`;
   const endless = Boolean(generate);
 
   return (
@@ -65,7 +66,7 @@ export function DrillSession({ questions, mode, onAnswer, generate, onEasy, onFi
         <Practice
           q={current}
           result={lastResult ? { given: lastResult.given, grade: grade(current, lastResult.given) } : undefined}
-          onSubmit={given => drill.answer(given as string)}
+          onSubmit={drill.answer}
         />
       </div>
 
@@ -74,6 +75,7 @@ export function DrillSession({ questions, mode, onAnswer, generate, onEasy, onFi
           correct={lastResult.correct === true}
           answer={correctDisplay(current)}
           answerIsHtml={answerIsHtml}
+          summary={showsScore ? scoreText(grade(current, lastResult.given)) : undefined}
           explanation={current.explanation}
           onNext={drill.next}
           onEasy={onEasy && lastResult.correct ? () => { onEasy(current); drill.next(); } : undefined}

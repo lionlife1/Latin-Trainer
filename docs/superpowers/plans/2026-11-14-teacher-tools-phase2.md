@@ -221,7 +221,7 @@ mc and typein render).
 
 ## Task 5: Grid and parse renderers
 
-- [ ] Done
+- [x] Done
 
 Files: `src/features/items/GridItem.tsx`, `src/features/items/ParseItem.tsx`, tests beside them,
 `src/features/items/registry.tsx`, `src/styles/classroom.css` (or the stylesheet the drill screens use; put

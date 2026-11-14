@@ -4,6 +4,8 @@ import type { DrillQuestion, Given, MCQuestion, PublicQuestion } from '../../lib
 import type { PrintQuestion } from '../../lib/print';
 import { MCAnswer } from '../drill/MCAnswer';
 import { TypeInAnswer } from '../drill/TypeInAnswer';
+import { GridPractice, GridPrintCopy, GridPrintKey, GridReview, GridTest, gridAnswered } from './GridItem';
+import { ParsePractice, ParsePrintCopy, ParsePrintKey, ParseReview, ParseTest, parseAnswered } from './ParseItem';
 
 type Answered = 'none' | 'partial' | 'full';
 
@@ -18,6 +20,8 @@ export interface ItemRenderer {
   Answer: FC<{ q: DrillQuestion }>;
   /** True when the correct answer (from correctDisplay) is HTML rather than plain text. */
   answerIsHtml: boolean;
+  /** Practice feedback says "7/10 correct" instead of "Correct answer: …". */
+  showsScore?: boolean;
   PrintCopy: FC<{ pq: PrintQuestion }>;
   PrintKey: FC<{ pq: PrintQuestion }>;
   /** For the test runner's progress and question grid. */
@@ -105,24 +109,30 @@ const typein: ItemRenderer = {
   answered: stringAnswered,
 };
 
-const Unsupported: FC = () => <p className="muted">This question type is not supported yet.</p>;
-
-const placeholder: ItemRenderer = {
-  Practice: Unsupported,
-  Test: Unsupported,
-  Review: Unsupported,
+const grid: ItemRenderer = {
+  Practice: GridPractice,
+  Test: GridTest,
+  Review: GridReview,
   Answer: ({ q }) => <>{correctDisplay(q)}</>,
   answerIsHtml: false,
-  PrintCopy: Unsupported,
-  PrintKey: Unsupported,
-  answered: () => 'none',
+  showsScore: true,
+  PrintCopy: GridPrintCopy,
+  PrintKey: GridPrintKey,
+  answered: gridAnswered,
 };
 
-export const ITEM_RENDERERS: Record<DrillQuestion['type'], ItemRenderer> = {
-  mc,
-  typein,
-  grid: placeholder,
-  parse: placeholder,
+const parse: ItemRenderer = {
+  Practice: ParsePractice,
+  Test: ParseTest,
+  Review: ParseReview,
+  Answer: ({ q }) => <>{correctDisplay(q)}</>,
+  answerIsHtml: false,
+  showsScore: true,
+  PrintCopy: ParsePrintCopy,
+  PrintKey: ParsePrintKey,
+  answered: parseAnswered,
 };
+
+export const ITEM_RENDERERS: Record<DrillQuestion['type'], ItemRenderer> = { mc, typein, grid, parse };
 
 export const rendererFor = (q: { type: DrillQuestion['type'] }): ItemRenderer => ITEM_RENDERERS[q.type];

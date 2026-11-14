@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { PublicQuestion } from '../../lib/types';
+import type { Given, PublicQuestion } from '../../lib/types';
 import { QuestionCard } from '../drill/QuestionCard';
 import { rendererFor } from '../items/registry';
 
@@ -25,7 +25,7 @@ interface Props {
 
 const storageKey = (attemptId: string) => `latiniq_test_${attemptId}`;
 
-function loadAnswers(attemptId: string): Record<string, string> {
+function loadAnswers(attemptId: string): Record<string, Given> {
   try {
     return JSON.parse(sessionStorage.getItem(storageKey(attemptId)) ?? '{}') ?? {};
   } catch {
@@ -45,7 +45,7 @@ function remainingSec(startedAt: string, limit: number | null): number | null {
 const fmtClock = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 
 export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit, error }: Props) {
-  const [answers, setAnswers] = useState<Record<string, string>>(() => loadAnswers(attemptId));
+  const [answers, setAnswers] = useState<Record<string, Given>>(() => loadAnswers(attemptId));
   const [index, setIndex] = useState(0);
   const [left, setLeft] = useState(() => remainingSec(startedAt, timeLimitSec));
   const [submitting, setSubmitting] = useState(false);
@@ -55,7 +55,13 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
     if (submitted.current) return;
     submitted.current = true;
     setSubmitting(true);
-    const responses = items.filter(i => answers[i.pool_id]?.trim()).map(i => ({ pool_id: i.pool_id, given: answers[i.pool_id] }));
+    // TestResponse.given is still a string until the typed plumbing lands; structured answers are serialised.
+    const responses = items
+      .filter(i => rendererFor(i.question).answered(i.question, answers[i.pool_id]) !== 'none')
+      .map(i => {
+        const g = answers[i.pool_id];
+        return { pool_id: i.pool_id, given: typeof g === 'string' ? g : JSON.stringify(g) };
+      });
     try {
       await onSubmit(responses);
     } catch {
@@ -82,7 +88,7 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
   if (!item) return null;
   const q = item.question;
   const { Test } = rendererFor(q);
-  const setAnswer = (v: string) => setAnswers(a => ({ ...a, [item.pool_id]: v }));
+  const setAnswer = (v: Given) => setAnswers(a => ({ ...a, [item.pool_id]: v }));
   const isAnswered = (i: TestItem) => rendererFor(i.question).answered(i.question, answers[i.pool_id]) !== 'none';
   const answeredCount = items.filter(isAnswered).length;
 
@@ -103,7 +109,7 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
         <Test
           q={q}
           value={answers[item.pool_id]}
-          onChange={given => setAnswer(given as string)}
+          onChange={setAnswer}
           onEnter={() => { if (index < items.length - 1) setIndex(index + 1); }}
         />
 

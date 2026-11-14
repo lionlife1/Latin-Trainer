@@ -6,12 +6,14 @@ interface Props {
   /** MC choices may contain markup from built-in content; typed answers are plain text. */
   answerIsHtml?: boolean;
   explanation?: string;
+  /** Grid and parse items: "7/10 correct", shown instead of the answer. */
+  summary?: string;
   onNext: () => void;
   /** Vocab review only: re-rate the answer as easy and move on. */
   onEasy?: () => void;
 }
 
-export function Feedback({ correct, answer, answerIsHtml, explanation, onNext, onEasy }: Props) {
+export function Feedback({ correct, answer, answerIsHtml, explanation, summary, onNext, onEasy }: Props) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Enter') onNext();
@@ -29,8 +31,14 @@ export function Feedback({ correct, answer, answerIsHtml, explanation, onNext, o
       <div className={`feedback-card ${correct ? 'is-correct' : 'is-wrong'}`}>
         <div className="feedback-verdict">{correct ? 'Correct' : 'Not quite'}</div>
         <div className="feedback-correct">
-          {correct ? 'Answer: ' : 'Correct answer: '}
-          {answerIsHtml ? <strong dangerouslySetInnerHTML={{ __html: answer }} /> : <strong>{answer}</strong>}
+          {summary !== undefined ? (
+            <strong>{summary}</strong>
+          ) : (
+            <>
+              {correct ? 'Answer: ' : 'Correct answer: '}
+              {answerIsHtml ? <strong dangerouslySetInnerHTML={{ __html: answer }} /> : <strong>{answer}</strong>}
+            </>
+          )}
         </div>
         {explanation && <div className="feedback-explanation">{explanation}</div>}
         {onEasy ? (

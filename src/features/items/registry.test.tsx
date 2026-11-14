@@ -27,10 +27,4 @@ describe('item renderer registry', () => {
     expect(answered(typein, 'am')).toBe('full');
     expect(answered(typein, ' ')).toBe('none');
   });
-
-  it('shows a placeholder for grid and parse', () => {
-    const { Test } = rendererFor({ type: 'grid' });
-    render(<Test q={mc} value={undefined} onChange={() => {}} />);
-    expect(screen.getByText('This question type is not supported yet.')).toBeInTheDocument();
-  });
 });
