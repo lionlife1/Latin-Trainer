@@ -48,7 +48,7 @@ Grade table to test (Task 2 tests the same rows in SQL):
 
 ## Task 2: Migration and SQL tests
 
-- [ ] Done
+- [x] Done
 
 Files: new `supabase/migrations/20261114000001_points_and_structured_answers.sql`,
 `supabase/tests/functions.test.sql` (extend), `supabase/tests/_helpers.sql` (add fixtures only if needed;
