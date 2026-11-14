@@ -1,15 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Given, PublicQuestion } from '../../lib/types';
+import type { TestResponse } from './api';
 import { QuestionCard } from '../drill/QuestionCard';
 import { rendererFor } from '../items/registry';
 
 export interface TestItem {
   pool_id: string;
   question: PublicQuestion;
-}
-export interface TestResponse {
-  pool_id: string;
-  given: string;
 }
 
 interface Props {
@@ -55,13 +52,9 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
     if (submitted.current) return;
     submitted.current = true;
     setSubmitting(true);
-    // TestResponse.given is still a string until the typed plumbing lands; structured answers are serialised.
-    const responses = items
+    const responses: TestResponse[] = items
       .filter(i => rendererFor(i.question).answered(i.question, answers[i.pool_id]) !== 'none')
-      .map(i => {
-        const g = answers[i.pool_id];
-        return { pool_id: i.pool_id, given: typeof g === 'string' ? g : JSON.stringify(g) };
-      });
+      .map(i => ({ pool_id: i.pool_id, given: answers[i.pool_id] }));
     try {
       await onSubmit(responses);
     } catch {
@@ -89,8 +82,8 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
   const q = item.question;
   const { Test } = rendererFor(q);
   const setAnswer = (v: Given) => setAnswers(a => ({ ...a, [item.pool_id]: v }));
-  const isAnswered = (i: TestItem) => rendererFor(i.question).answered(i.question, answers[i.pool_id]) !== 'none';
-  const answeredCount = items.filter(isAnswered).length;
+  const state = (i: TestItem) => rendererFor(i.question).answered(i.question, answers[i.pool_id]);
+  const answeredCount = items.filter(i => state(i) !== 'none').length;
 
   return (
     <div className="screen active">
@@ -126,7 +119,7 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
           {items.map((it, i) => (
             <button
               key={it.pool_id}
-              className={`${isAnswered(it) ? 'answered' : ''} ${i === index ? 'current' : ''}`}
+              className={`${state(it) === 'full' ? 'answered' : state(it) === 'partial' ? 'partial' : ''} ${i === index ? 'current' : ''}`}
               aria-label={`Question ${i + 1}`}
               onClick={() => setIndex(i)}
             >

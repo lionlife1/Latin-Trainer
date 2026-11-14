@@ -53,6 +53,7 @@
   background: var(--bg-surface); color: var(--text-primary); cursor: pointer;
 }
 .q-nav button.answered { border-color: var(--gold-dim); color: var(--gold); }
+.q-nav button.partial { border-style: dashed; border-color: var(--gold-dim); color: var(--gold); }
 .q-nav button.current { outline: 2px solid var(--gold); }
 .timer { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--primary); }
 .timer.low { color: var(--red); }

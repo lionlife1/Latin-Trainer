@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { fmtPoints } from '../../lib/grading';
 import { useAsync } from '../../lib/useAsync';
 import { AttemptReview } from '../student/AttemptResult';
 import { getAttempt } from '../student/api';
@@ -12,7 +13,7 @@ export function AttemptDetail() {
   return (
     <>
       <div className="crumbs"><button className="btn-ghost link" onClick={() => history.back()}>← Back</button></div>
-      <h1>Attempt: {t.score ?? 0}/{t.total}</h1>
+      <h1>Attempt: {fmtPoints(t.score ?? 0)}/{fmtPoints(t.total)}</h1>
       <p className="muted small">
         Started {new Date(t.started_at).toLocaleString()}
         {t.submitted_at && ` · submitted ${new Date(t.submitted_at).toLocaleString()}`}

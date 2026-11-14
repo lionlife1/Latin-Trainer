@@ -89,3 +89,8 @@ export function correctDisplay(q: DrillQuestion): string {
       .join(' '))
     .join(' / ');
 }
+
+/** Points for display: integers as they are, otherwise up to 2 decimals without trailing zeros. */
+export function fmtPoints(n: number): string {
+  return String(Math.round(n * 100) / 100);
+}

@@ -1,5 +1,5 @@
 import fixtures from '../../tests/fixtures/normalize.json';
-import { normalize, isCorrect, correctDisplay, grade, earnedPoints } from './grading';
+import { normalize, isCorrect, correctDisplay, grade, earnedPoints, fmtPoints } from './grading';
 import type { DrillQuestion } from './types';
 
 const typein: DrillQuestion = { id: 't', type: 'typein', badge: 'B', prompt: 'p', answers: ['amem', 'amātus sim'] };
@@ -105,5 +105,16 @@ describe('grade', () => {
   it('earnedPoints', () => {
     expect(earnedPoints({ right: 2, outOf: 3, parts: [] }, 3)).toBe(2);
     expect(earnedPoints({ right: 1, outOf: 3, parts: [] }, 1)).toBe(0.33);
+  });
+});
+
+describe('fmtPoints', () => {
+  it('shows integers as they are and trims decimals to 2 places', () => {
+    expect(fmtPoints(24)).toBe('24');
+    expect(fmtPoints(0)).toBe('0');
+    expect(fmtPoints(18.5)).toBe('18.5');
+    expect(fmtPoints(6.6667)).toBe('6.67');
+    expect(fmtPoints(2.25)).toBe('2.25');
+    expect(fmtPoints(3.001)).toBe('3');
   });
 });

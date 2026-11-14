@@ -290,7 +290,7 @@ the modules and vocab paths behave as before.
 
 ## Task 7: Structured answers and points through the student and teacher screens
 
-- [ ] Done
+- [x] Done
 
 Files: `src/features/drill/useDrill.ts`, `DrillSession.tsx`, `SessionSummary.tsx` if needed,
 `src/lib/offlineQueue.ts`, `src/features/student/api.ts`, `RunAssignment.tsx`, `TestRunner.tsx`,
