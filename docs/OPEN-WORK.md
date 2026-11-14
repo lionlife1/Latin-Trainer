@@ -4,16 +4,17 @@ Reviewed 2026-11-14 against `main` at `4b478fd`. On that commit `npm test` (708 
 `npm run build` and the solo Playwright suite (15 tests) pass. All seven plans in
 `docs/superpowers/archive/plans/` are implemented. This page lists what is left, with the source of each item.
 
-## 1. Classroom backend is not deployed
+## 1. Classroom backend: exists, deployment state not verified
 
 Source: student redesign plan, Task 10; README "Deploying".
 
-- No Supabase project for LatinIQ exists in the connected account (only "Competition Productivity", which
-  must not be reused: it has a clashing `attempts` table). The public site therefore runs in solo mode.
-- To do: create the project, apply the 8 migrations, load `seed.sql` and `seed-lexicon.sql`, deploy
-  `student-join`, `student-login` and `reset-pin`, set the Auth Site URL and rate limits, and add the
-  GitHub Actions Variables `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
-- Still undecided: project name and region.
+- The LatinIQ Supabase project exists (per the owner, 2026-11-14). The Supabase connector cannot see it:
+  it is connected to another account and shows only "Competition Productivity". Access is through a
+  `.env` token on the owner's computer, in local sessions. See `CLAUDE.md`, "Supabase backend".
+- Not checked in this review, because a cloud session cannot reach the project: whether all 8 migrations
+  are applied, both seed files are loaded, the three edge functions are deployed, the Auth Site URL and
+  rate limits are set, and the GitHub Actions Variables `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
+  are set so the public site runs in classroom mode. Check these from a local session.
 - Never run against a real stack in review: `npm run test:db` and the classroom e2e (`E2E_SUPABASE=1`).
 
 ## 2. Teacher tools, Phases 2 to 5

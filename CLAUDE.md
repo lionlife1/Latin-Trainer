@@ -26,6 +26,16 @@ npm run seed                             # regenerate supabase/seed.sql, seed-le
 - Specs and plans live in `docs/superpowers/specs/` and `docs/superpowers/plans/`. Finished ones move to
   `docs/superpowers/archive/`. `docs/OPEN-WORK.md` lists what is still outstanding.
 
+## Supabase backend
+
+- The LatinIQ Supabase project exists. It is not visible through the Supabase connector, which can hold
+  only one account and is connected to a different one (it shows only "Competition Productivity", an
+  unrelated app). Do not conclude from the connector that there is no backend, and never apply LatinIQ
+  migrations or SQL to "Competition Productivity".
+- Access to the LatinIQ project is through a token in `.env` on the owner's computer, so backend work
+  (migrations, edge function deploys, SQL checks) happens in local sessions there. Cloud sessions have
+  no access: prepare the change and say what has to be run locally.
+
 ## Delegation
 
 The main session does design, debugging and review. Routine work goes to the agents in `.claude/agents/`.
