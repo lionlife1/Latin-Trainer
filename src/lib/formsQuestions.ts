@@ -146,10 +146,17 @@ function takesGender(w: MorphWord, cell: Cell): boolean {
 
 const nextId = (rng: () => number) => `forms_${Date.now()}_${Math.floor(rng() * 1e9)}`;
 
-export function makeFormQuestion(w: MorphWord, cell: Cell, rng: () => number): TypeInQuestion {
+/** Every form a student may type for a cell: the engine's forms, plus feminine and neuter participle variants. */
+export function acceptedForms(w: MorphWord, cell: Cell): string[] {
     const forms = formsOf(w, cell);
     const answers = [...forms];
     if (takesGender(w, cell)) for (const f of forms) for (const v of genderVariants(f)) if (!answers.includes(v)) answers.push(v);
+    return answers;
+}
+
+export function makeFormQuestion(w: MorphWord, cell: Cell, rng: () => number): TypeInQuestion {
+    const forms = formsOf(w, cell);
+    const answers = acceptedForms(w, cell);
     const variants = forms.slice(1);
     return {
         id: nextId(rng),

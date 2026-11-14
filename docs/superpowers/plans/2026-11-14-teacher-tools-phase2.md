@@ -105,7 +105,7 @@ change from int to numeric forces it):
 
 ## Task 3: Generators
 
-- [ ] Done
+- [x] Done
 
 Files: new `src/lib/formsItems.ts`, `src/lib/formsItems.test.ts`; `src/lib/formsQuestions.ts` (export
 `genderVariants`/`takesGender` helpers, or one `acceptedForms(word, cell)` that both files use).
