@@ -10,7 +10,7 @@ export function bestAttempt<T extends Scored>(attempts: T[]): T | null {
   let best: T | null = null;
   for (const t of attempts) {
     if (!t.submitted_at) continue;
-    if (!best) { best = t; continue; }
+    if (!best?.submitted_at) { best = t; continue; }
     const d = ratio(t) - ratio(best) || (t.score ?? 0) - (best.score ?? 0) || t.submitted_at.localeCompare(best.submitted_at);
     if (d > 0) best = t;
   }

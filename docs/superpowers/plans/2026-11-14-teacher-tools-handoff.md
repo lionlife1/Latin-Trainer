@@ -18,19 +18,22 @@ Done:
   `docs/teacher-tools/phase2-review/phone-check.md`. 2 real defects, 2 minor.
 - The fix decisions for all of the above: `docs/teacher-tools/phase2-review/fix-brief.md` (F1 to F12).
 
-In progress when this was written:
+State of the fix wave:
 
-- A Sonnet implementer was applying F1 to F12. Its changes may be in the working tree, uncommitted and
-  **unreviewed**, or committed as a commit titled "wip". Either way they have not been reviewed or verified.
-- An Opus agent was drafting the Phase 3 spec. If the draft was finished it is at
+- The implementer finished F1 to F12 (commits `86cfab5` and the one after it; its own report is
+  `docs/teacher-tools/phase2-review/fix-report.md`). It reports 778 unit tests, `tsc -b`, the build and
+  `test:db` passing. **None of this has been reviewed or independently verified.**
+- Its own concerns: the F10 to F12 CSS and UI tests were written after the code and nothing was checked in
+  a browser; a six-column grid between about 901px and 1000px is still a cramped table; F8 lets any 4th
+  part in -us accept -um (for example *futurum*).
+- The Phase 3 spec draft: if finished it is at
   `docs/superpowers/specs/2026-11-14-teacher-tools-phase3-design.md`, marked DRAFT. If that file does not
-  exist, the draft was lost with the session and Step 5 starts from the brief below.
+  exist, the draft was lost with the session and Step 5 starts from Step 4's scope.
 
 ## Step 1: finish the Phase 2 fix wave
 
-1. Check `git status` and `git log`. For each of F1 to F12 in the fix brief, find out whether it is done
-   (the test named for it exists and passes). Dispatch the `implementer` for whatever is missing, with the
-   fix brief as its requirements.
+1. Read the fix report. Re-run the phone harness check for F10 to F12 (the method is in
+   `phone-check.md`), including a 6-column grid at 950px.
 2. Dispatch a reviewer (Sonnet is enough; Opus for F1, F2 and F5, which touch the migration) on the diff
    since `786dcd5`, with the fix brief as the spec. Fix what it finds.
 3. Run the `verifier`: `npm test`, `npx tsc -b`, `npm run build`,
