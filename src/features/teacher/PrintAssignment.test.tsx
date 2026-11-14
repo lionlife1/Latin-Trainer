@@ -87,6 +87,50 @@ describe('PrintAssignment', () => {
     expect(screen.queryByRole('region', { name: 'Answer key' })).not.toBeInTheDocument();
   });
 
+  it('offers different questions per version only when the pool is larger and there are several versions', async () => {
+    assignment.question_count = 2;
+    renderPrint();
+    await screen.findByRole('region', { name: 'Student copy' });
+    expect(screen.queryByLabelText('Different questions on each version')).not.toBeInTheDocument();
+    await userEvent.selectOptions(screen.getByLabelText(/versions/i), '2');
+    await userEvent.click(screen.getByLabelText('Different questions on each version'));
+    expect(screen.getByRole('region', { name: 'Student copy, version B' })).toBeInTheDocument();
+  });
+
+  it('hides the option when the count equals the pool size', async () => {
+    assignment.question_count = 4;
+    renderPrint();
+    await screen.findByRole('region', { name: 'Student copy' });
+    await userEvent.selectOptions(screen.getByLabelText(/versions/i), '2');
+    expect(screen.queryByLabelText('Different questions on each version')).not.toBeInTheDocument();
+  });
+
+  it('prints a grid as a blank table in the copy and filled cells in the key, with total points', async () => {
+    const grid: PoolItem = {
+      item_key: 'grid:1',
+      points: 4,
+      question: {
+        id: 'grid:1', type: 'grid', badge: 'FORMS', prompt: 'Decline <strong>puella</strong>', columns: ['Sg'],
+        rows: [{ label: 'Nom', cells: [{ id: 'n' }] }, { label: 'Gen', cells: [{ id: 'g' }] }],
+        key: { n: ['puella'], g: ['puellae'] },
+      },
+    };
+    pool.push(grid);
+    try {
+      assignment.question_count = 5;
+      renderPrint();
+      const copy = await screen.findByRole('region', { name: 'Student copy' });
+      expect(copy.querySelector('table.print-grid')).not.toBeNull();
+      expect(within(copy).queryByText('puellae')).not.toBeInTheDocument();
+      expect(within(copy).getByText('___ / 8')).toBeInTheDocument();
+      const key = screen.getByRole('region', { name: 'Answer key' });
+      expect(within(key).getByText('puellae')).toBeInTheDocument();
+      expect(key.querySelector('ol')).toHaveClass('print-key-block');
+    } finally {
+      pool.pop();
+    }
+  });
+
   it('opens the browser print dialog', async () => {
     const print = vi.spyOn(window, 'print').mockImplementation(() => {});
     renderPrint();

@@ -78,6 +78,8 @@
 .print-answer-line { border-bottom: 1px solid #000; height: 1.8em; max-width: 26em; }
 .print-key { padding-left: 1.6em; columns: 2; column-gap: 32px; }
 .print-key li { break-inside: avoid; margin-bottom: 4px; }
+.print-key.print-key-block { columns: 1; }
+.print-points { font-weight: 600; white-space: nowrap; }
 @media print {
   .app-header, .no-print { display: none !important; }
   body { background: #fff; }

@@ -1,3 +1,4 @@
+import { correctDisplay } from './grading';
 import { buildPrintVersions, VERSION_LABELS } from './print';
 import { seededRng } from './shuffle';
 import type { DrillQuestion } from './types';
@@ -96,5 +97,33 @@ describe('buildPrintVersions', () => {
 
   it('numbers questions from 1', () => {
     expect(buildPrintVersions(pool, 3, 1, 1)[0].questions.map(q => q.number)).toEqual([1, 2, 3]);
+  });
+
+  it('passes grid and parse questions through unchanged, keyed by correctDisplay', () => {
+    const grid: PoolItem = {
+      item_key: 'g1',
+      points: 4,
+      question: {
+        id: 'g1', type: 'grid', badge: 'B', prompt: 'Fill in', columns: ['Sg'],
+        rows: [{ label: 'Nom', cells: [{ id: 'a' }] }, { label: 'Gen', cells: [{ id: 'b', given: 'x' }] }],
+        key: { a: ['puella', 'puela'] },
+      },
+    };
+    const [v] = buildPrintVersions([grid], 1, 1, 1);
+    expect(v.questions[0].question).toBe(grid.question);
+    expect(v.questions[0].keyText).toBe(correctDisplay(grid.question));
+    expect(v.questions[0].points).toBe(4);
+  });
+
+  it('redraw gives each version its own items, deterministically', () => {
+    const a = buildPrintVersions(pool, 1, 3, 5, true);
+    const sets = a.map(v => ids(v.questions).join());
+    expect(new Set(sets).size).toBeGreaterThan(1);
+    a.forEach(v => expect(v.questions).toHaveLength(1));
+    expect(buildPrintVersions(pool, 1, 3, 5, true).map(v => ids(v.questions).join())).toEqual(sets);
+  });
+
+  it('redraw changes nothing when the pool is not larger than the count', () => {
+    expect(buildPrintVersions(pool, 6, 3, 5, true)).toEqual(buildPrintVersions(pool, 6, 3, 5));
   });
 });

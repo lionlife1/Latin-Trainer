@@ -325,7 +325,7 @@ which).
 
 ## Task 8: Print
 
-- [ ] Done
+- [x] Done
 
 Files: `src/lib/print.ts`, `src/lib/print.test.ts`, `src/features/teacher/PrintAssignment.tsx`,
 `PrintAssignment.test.tsx`, CSS for `print-grid`.
