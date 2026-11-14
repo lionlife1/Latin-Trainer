@@ -256,7 +256,7 @@ List every label or message a student reads in your report.
 
 ## Task 6: Builder panel for forms assignments
 
-- [ ] Done
+- [x] Done
 
 Files: new `src/features/teacher/FormsSource.tsx` + test, `src/features/teacher/AssignmentBuilder.tsx`,
 `src/features/teacher/api.ts` (`AssignmentSource`, `publishAssignment` writes `points: p.points ?? 1`),

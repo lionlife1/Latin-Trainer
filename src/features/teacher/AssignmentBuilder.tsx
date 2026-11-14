@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MODULES } from '../../content/modules';
+import { buildFormsPool, type FormsAssignmentConfig } from '../../lib/formsItems';
 import type { AssignmentMode } from '../../lib/types';
 import { errorMessage } from '../../lib/useAsync';
 import { buildVocabQuestions, type PoolItem, type VocabDirection, type VocabItem } from '../../lib/vocab';
@@ -7,6 +8,7 @@ import {
   listVocabLists, loadFallbackLexicon, loadVocabItems, publishAssignment,
   type AssignmentSource, type VocabListRow,
 } from './api';
+import { DEFAULT_FORMS_ASSIGNMENT, FormsSource, toStoredFormsConfig } from './FormsSource';
 
 interface Props {
   classId: string;
@@ -29,7 +31,8 @@ export function modulePool(moduleIds: string[], badges: string[], types: QType[]
 export function AssignmentBuilder({ classId, onPublished }: Props) {
   const [title, setTitle] = useState('');
   const [mode, setMode] = useState<AssignmentMode>('practice');
-  const [kind, setKind] = useState<'modules' | 'vocab'>('modules');
+  const [kind, setKind] = useState<'modules' | 'vocab' | 'forms'>('modules');
+  const [formsConfig, setFormsConfig] = useState<FormsAssignmentConfig>(DEFAULT_FORMS_ASSIGNMENT);
   const [moduleIds, setModuleIds] = useState<string[]>([]);
   const [badges, setBadges] = useState<string[]>([]);
   const [types, setTypes] = useState<QType[]>([]);
@@ -58,10 +61,20 @@ export function AssignmentBuilder({ classId, onPublished }: Props) {
     [moduleIds],
   );
   const activeBadges = badges.filter(b => availableBadges.includes(b));
+  const formsPool = useMemo(() => (kind === 'forms' ? buildFormsPool(formsConfig, Math.random) : []), [kind, formsConfig]);
   const poolSize =
-    kind === 'modules' ? modulePool(moduleIds, activeBadges, types).length : vocabItems.length * directions.length;
-  const defaultCount = Math.min(20, poolSize);
+    kind === 'modules' ? modulePool(moduleIds, activeBadges, types).length
+      : kind === 'forms' ? formsPool.length
+        : vocabItems.length * directions.length;
+  const formsDefault = formsConfig.kind === 'parse' || formsConfig.kind === 'make' ? formsConfig.count : 1;
+  const defaultCount = Math.min(kind === 'forms' ? formsDefault : 20, poolSize);
   const questionCount = count === '' ? defaultCount : Math.max(1, Math.min(poolSize, Number(count) || 1));
+  const pointValues = formsPool.map(p => p.points ?? 1);
+  const minPoints = pointValues.length ? Math.min(...pointValues) : 0;
+  const maxPoints = pointValues.length ? Math.max(...pointValues) : 0;
+  const pointsLabel = minPoints === maxPoints
+    ? String(minPoints * questionCount)
+    : `${minPoints * questionCount} to ${maxPoints * questionCount}`;
   const canPublish = title.trim() !== '' && poolSize > 0 && !busy;
 
   const publish = async () => {
@@ -75,6 +88,9 @@ export function AssignmentBuilder({ classId, onPublished }: Props) {
         source = { kind: 'modules', moduleIds };
         if (activeBadges.length) source.badges = activeBadges;
         if (types.length) source.types = types;
+      } else if (kind === 'forms') {
+        pool = formsPool;
+        source = { kind: 'forms', config: toStoredFormsConfig(formsConfig) };
       } else {
         pool = buildVocabQuestions(vocabItems, directions, await loadFallbackLexicon());
         source = { kind: 'vocab', listId, directions };
@@ -133,6 +149,7 @@ export function AssignmentBuilder({ classId, onPublished }: Props) {
         <div className="row">
           <label><input type="radio" name="kind" checked={kind === 'modules'} onChange={() => setKind('modules')} /> Grammar modules</label>
           <label><input type="radio" name="kind" checked={kind === 'vocab'} onChange={() => setKind('vocab')} /> Vocab list</label>
+          <label><input type="radio" name="kind" checked={kind === 'forms'} onChange={() => setKind('forms')} /> Forms</label>
         </div>
       </div>
 
@@ -164,6 +181,8 @@ export function AssignmentBuilder({ classId, onPublished }: Props) {
             </div>
           )}
         </>
+      ) : kind === 'forms' ? (
+        <FormsSource value={formsConfig} onChange={setFormsConfig} />
       ) : (
         <>
           <label className="field">
@@ -188,6 +207,11 @@ export function AssignmentBuilder({ classId, onPublished }: Props) {
       )}
 
       <p className="muted" data-testid="pool-size">Pool: {poolSize} questions</p>
+      {kind === 'forms' && poolSize > 0 && (
+        <p className="muted" data-testid="points-per-attempt">
+          Points per attempt: {pointsLabel}
+        </p>
+      )}
 
       <div className="row">
         <label className="field">

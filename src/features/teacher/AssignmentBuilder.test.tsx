@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { MODULES } from '../../content/modules';
@@ -76,5 +76,39 @@ describe('AssignmentBuilder', () => {
     await userEvent.click(screen.getByRole('button', { name: /publish/i }));
     expect(await screen.findByRole('alert')).toHaveTextContent('Failed to fetch');
     expect(screen.getByRole('button', { name: /publish assignment/i })).toBeEnabled();
+  });
+});
+
+describe('AssignmentBuilder forms', () => {
+  beforeEach(() => publishAssignment.mockReset().mockResolvedValue({ ok: true, id: 'a1' }));
+
+  it('publishes a synopsis as six grid items with points', async () => {
+    renderBuilder();
+    await userEvent.type(screen.getByLabelText(/title/i), 'Synopsis');
+    await userEvent.click(screen.getByLabelText('Forms'));
+    await userEvent.type(screen.getByLabelText(/find a verb/i), 'moneo');
+    await userEvent.click(screen.getAllByRole('button', { name: /^moneo, monere/ })[0]);
+    expect(screen.getByTestId('pool-size')).toHaveTextContent('6 questions');
+    await userEvent.click(screen.getByRole('button', { name: /publish/i }));
+    const [input, pool] = publishAssignment.mock.calls[0];
+    expect(input.source.kind).toBe('forms');
+    expect(input.source.config.words[0].key).toMatch(/^verb:moneo/);
+    expect(input.questionCount).toBe(1);
+    expect(pool).toHaveLength(6);
+    expect(pool.every((p: { question: { type: string }; points: number }) => p.question.type === 'grid' && p.points > 0)).toBe(true);
+  });
+
+  it('builds at least 5 parse items for count 5', async () => {
+    renderBuilder();
+    await userEvent.type(screen.getByLabelText(/title/i), 'Parse');
+    await userEvent.click(screen.getByLabelText('Forms'));
+    await userEvent.selectOptions(screen.getByLabelText(/kind of question/i), 'parse');
+    const n = screen.getByLabelText(/number of questions/i);
+    fireEvent.change(n, { target: { value: '5' } });
+    await userEvent.click(screen.getByRole('button', { name: /publish/i }));
+    const [input, pool] = publishAssignment.mock.calls[0];
+    expect(input.questionCount).toBe(5);
+    expect(pool.length).toBeGreaterThanOrEqual(5);
+    expect(pool.every((p: { question: { type: string } }) => p.question.type === 'parse')).toBe(true);
   });
 });
