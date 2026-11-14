@@ -312,3 +312,23 @@ paper score entry. A derivatives library.
     because `=` is a separator there.
   - Deferred: Kahoot export (needs .xlsx, so a dependency); white space / large print options; tags and
     "combine lists"; re-drawing generated items per version (Phase 2, needs generators).
+- 2026-11-14: **Phase 2 shipped in part** (branch `claude/eager-mayer-rsdbnr`; spec and plan in
+  `docs/superpowers/archive/`, dated 2026-11-14). The spec was written without the owner, so its answers
+  to the pilot questions are assumptions.
+  - *Item types*: `grid` and `parse` in `DrillQuestion`, answers in a top-level `key`. One grader,
+    `grade(q, given)` in `src/lib/grading.ts`, with a SQL twin `grade_parts`. Give-the-form is the existing
+    `typein`.
+  - *Schema*: migration `20261114000001_points_and_structured_answers.sql` adds `assignment_pool.points`,
+    `responses.given_json/earned/possible/parts`, makes `attempts.score/total` numeric and adds
+    `record_practice_response_v2`. **It is not applied to the LatinIQ project yet**, and the new client
+    needs it.
+  - *Generators* (`src/lib/formsItems.ts`): synopsis, paradigm chart, principal parts, parse, make.
+  - *Student side*: item renderer registry (`src/features/items/`), grid and parse inputs with per-cell
+    feedback and partial credit, structured answers through practice, tests, the offline queue and review,
+    scores in points.
+  - *Teacher side*: **Forms** content in the assignment builder; print renders grids and parse items, shows
+    total points, and can redraw questions per version.
+  - Not done, moved to later phases: sections and mixed assessments, server-picked variant sets (a student
+    gets a different draw only when the pool is larger than the question count), meaning rows and strict
+    macrons, noun-adjective pairs, words from a teacher's vocab list, grids in solo Practice, "try the
+    wrong cells again", item analysis by part. See `docs/OPEN-WORK.md`.

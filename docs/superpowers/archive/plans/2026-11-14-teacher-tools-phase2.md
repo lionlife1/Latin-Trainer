@@ -347,10 +347,10 @@ for the same seed.
 
 ## Task 9: Verify and close
 
-- [ ] Done
+- [x] Done
 
-- [ ] Verifier: `npm test`, `npx tsc -b`, `npm run build`, `npm run test:db`, solo Playwright suite.
-- [ ] Review every diff, including each label students read.
-- [ ] `docs/teacher-tools/plan.md` progress log entry; README if it lists features or migrations.
-- [ ] Move this plan and its spec to `docs/superpowers/archive/`, add the row to the archive README.
-- [ ] Update `docs/OPEN-WORK.md`: what Phase 2 left open, and the local steps the owner must run.
+- [x] Verifier: `npm test`, `npx tsc -b`, `npm run build`, `npm run test:db`, solo Playwright suite.
+- [x] Review every diff, including each label students read.
+- [x] `docs/teacher-tools/plan.md` progress log entry; README if it lists features or migrations.
+- [x] Move this plan and its spec to `docs/superpowers/archive/`, add the row to the archive README.
+- [x] Update `docs/OPEN-WORK.md`: what Phase 2 left open, and the local steps the owner must run.
