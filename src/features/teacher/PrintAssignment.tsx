@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { buildPrintVersions, type PrintVersion } from '../../lib/print';
 import { useAsync } from '../../lib/useAsync';
+import { rendererFor } from '../items/registry';
 import { getAssignment, getAssignmentPool } from './api';
 
 /** Stable default seed per assignment, so reprinting gives the same versions. */
@@ -26,19 +27,16 @@ function StudentCopy({ title, version, header, multi }: { title: string; version
         </div>
       )}
       <ol className="print-questions">
-        {version.questions.map(pq => (
+        {version.questions.map(pq => {
+          const { PrintCopy } = rendererFor(pq.question);
+          return (
           <li key={pq.question.id} className="print-q">
             {/* Prompt and choice HTML is escaped at generation, as in the student runner. */}
             <div className="print-prompt" dangerouslySetInnerHTML={{ __html: pq.question.prompt }} />
-            {pq.question.type === 'mc' ? (
-              <ol className="print-choices" type="A">
-                {pq.question.choices.map(c => <li key={c} dangerouslySetInnerHTML={{ __html: c }} />)}
-              </ol>
-            ) : (
-              <div className="print-answer-line" />
-            )}
+            <PrintCopy pq={pq} />
           </li>
-        ))}
+          );
+        })}
       </ol>
     </section>
   );
@@ -52,17 +50,14 @@ function AnswerKey({ title, version, multi }: { title: string; version: PrintVer
         {multi && <span className="print-version">Version {version.label}</span>}
       </div>
       <ol className="print-key">
-        {version.questions.map(pq => (
-          <li key={pq.question.id}>
-            {pq.question.type === 'mc' ? (
-              <>
-                <strong>{pq.keyLetter}</strong> <span dangerouslySetInnerHTML={{ __html: pq.keyHtml ?? '' }} />
-              </>
-            ) : (
-              pq.keyText
-            )}
-          </li>
-        ))}
+        {version.questions.map(pq => {
+          const { PrintKey } = rendererFor(pq.question);
+          return (
+            <li key={pq.question.id}>
+              <PrintKey pq={pq} />
+            </li>
+          );
+        })}
       </ol>
     </section>
   );

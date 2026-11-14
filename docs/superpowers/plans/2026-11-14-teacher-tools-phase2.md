@@ -183,7 +183,7 @@ non-given, non-null cells; item keys are unique; the same seed gives the same po
 
 ## Task 4: Item renderer registry (no behaviour change)
 
-- [ ] Done
+- [x] Done
 
 Files: new `src/features/items/registry.tsx` (plus one file per type if it reads better),
 `src/features/drill/DrillSession.tsx`, `src/features/student/TestRunner.tsx`,

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { PublicQuestion } from '../../lib/types';
-import { MCAnswer } from '../drill/MCAnswer';
 import { QuestionCard } from '../drill/QuestionCard';
+import { rendererFor } from '../items/registry';
 
 export interface TestItem {
   pool_id: string;
@@ -81,8 +81,10 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
   const item = items[index];
   if (!item) return null;
   const q = item.question;
+  const { Test } = rendererFor(q);
   const setAnswer = (v: string) => setAnswers(a => ({ ...a, [item.pool_id]: v }));
-  const answeredCount = items.filter(i => answers[i.pool_id]?.trim()).length;
+  const isAnswered = (i: TestItem) => rendererFor(i.question).answered(i.question, answers[i.pool_id]) !== 'none';
+  const answeredCount = items.filter(isAnswered).length;
 
   return (
     <div className="screen active">
@@ -98,29 +100,12 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
 
       <div className="drill-body" key={item.pool_id}>
         <QuestionCard badge={q.badge} prompt={q.prompt} hint={q.hint} />
-        {q.type === 'typein' ? (
-          <div className="answer-area">
-            <div className="input-wrap">
-              <input
-                className="answer-input"
-                placeholder="Type your answer…"
-                autoFocus
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                spellCheck={false}
-                value={answers[item.pool_id] ?? ''}
-                onChange={e => setAnswer(e.target.value)}
-                onKeyDown={e => {
-                  if (e.key === 'Enter' && index < items.length - 1) setIndex(index + 1);
-                }}
-              />
-            </div>
-            <div className="macron-toolbar"><span className="macron-hint">Macrons optional</span></div>
-          </div>
-        ) : q.type === 'mc' ? (
-          <MCAnswer choices={q.choices} picked={answers[item.pool_id]} onPick={setAnswer} />
-        ) : null}
+        <Test
+          q={q}
+          value={answers[item.pool_id]}
+          onChange={given => setAnswer(given as string)}
+          onEnter={() => { if (index < items.length - 1) setIndex(index + 1); }}
+        />
 
         <div className="row" style={{ justifyContent: 'space-between', width: '100%' }}>
           <button className="btn-secondary" disabled={index === 0} onClick={() => setIndex(index - 1)}>Previous</button>
@@ -135,7 +120,7 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
           {items.map((it, i) => (
             <button
               key={it.pool_id}
-              className={`${answers[it.pool_id]?.trim() ? 'answered' : ''} ${i === index ? 'current' : ''}`}
+              className={`${isAnswered(it) ? 'answered' : ''} ${i === index ? 'current' : ''}`}
               aria-label={`Question ${i + 1}`}
               onClick={() => setIndex(i)}
             >

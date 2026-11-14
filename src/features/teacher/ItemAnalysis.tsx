@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
-import { correctDisplay } from '../../lib/grading';
 import { useAsync } from '../../lib/useAsync';
+import { rendererFor } from '../items/registry';
 import { getAssignment, itemAnalysis } from './api';
 
 export function ItemAnalysis() {
@@ -28,7 +28,7 @@ export function ItemAnalysis() {
             <tr key={r.pool_id}>
               <td><div className="small" dangerouslySetInnerHTML={{ __html: r.question.prompt }} /></td>
               <td className="small">
-                {r.question.type === 'mc' ? <span dangerouslySetInnerHTML={{ __html: correctDisplay(r.question) }} /> : correctDisplay(r.question)}
+                {(() => { const { Answer } = rendererFor(r.question); return <Answer q={r.question} />; })()}
               </td>
               <td>
                 {r.pct_correct === null ? (

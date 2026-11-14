@@ -1,7 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
-import { correctDisplay } from '../../lib/grading';
-import type { DrillQuestion } from '../../lib/types';
 import { useAsync } from '../../lib/useAsync';
+import { rendererFor } from '../items/registry';
 import { getAttempt, getAttemptItems, getResponses } from './api';
 
 export function AttemptReview({ attemptId }: { attemptId: string }) {
@@ -16,23 +15,12 @@ export function AttemptReview({ attemptId }: { attemptId: string }) {
       {data.data.items.map(i => {
         const r = data.data!.responses.get(i.pool_id);
         const q = i.question;
+        const { Review } = rendererFor(q);
         const revealed = 'answers' in q || 'correct' in q;
         return (
           <li key={i.pool_id} className="card">
             <div className="q-prompt small" dangerouslySetInnerHTML={{ __html: q.prompt }} />
-            <p>
-              <span className={`tag ${r?.correct ? 'ok' : 'bad'}`}>{r?.correct ? 'Right' : 'Wrong'}</span> Your answer: <strong>{r?.given || '(blank)'}</strong>
-            </p>
-            {revealed && !r?.correct && (
-              <p className="muted">
-                Correct:{' '}
-                {q.type === 'mc' ? (
-                  <strong dangerouslySetInnerHTML={{ __html: correctDisplay(q as DrillQuestion) }} />
-                ) : (
-                  <strong>{correctDisplay(q as DrillQuestion)}</strong>
-                )}
-              </p>
-            )}
+            <Review q={q} given={r?.given} correct={r?.correct} revealed={revealed} />
           </li>
         );
       })}
