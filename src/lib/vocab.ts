@@ -15,6 +15,7 @@ export type VocabDirection = 'l2e' | 'e2l';
 export interface PoolItem {
   item_key: string;
   question: DrillQuestion;
+  points?: number; // absent means 1
 }
 
 const DISTRACTORS = 3;

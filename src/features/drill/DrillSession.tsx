@@ -64,9 +64,9 @@ export function DrillSession({ questions, mode, onAnswer, generate, onEasy, onFi
         <QuestionCard badge={current.badge} prompt={current.prompt} hint={current.hint} />
         {current.type === 'typein' ? (
           <TypeInAnswer disabled={!!lastResult} verdict={lastResult?.correct} onSubmit={drill.answer} />
-        ) : (
+        ) : current.type === 'mc' ? (
           <MCAnswer choices={current.choices} correct={current.correct} picked={lastResult?.given} onPick={drill.answer} />
-        )}
+        ) : null}
       </div>
 
       {lastResult && (

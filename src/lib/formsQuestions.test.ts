@@ -104,7 +104,7 @@ describe('generateFormsQuestion', () => {
             if (q.type === 'typein') {
                 expect(q.answers.length).toBeGreaterThanOrEqual(1);
                 for (const a of q.answers) expect(a).toMatch(/^[a-z]+( [a-z]+)?$/);
-            } else {
+            } else if (q.type === 'mc') {
                 expect(new Set(q.choices).size).toBe(4);
                 expect(q.choices).toContain(q.correct);
             }

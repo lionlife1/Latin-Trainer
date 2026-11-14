@@ -118,9 +118,9 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
             </div>
             <div className="macron-toolbar"><span className="macron-hint">Macrons optional</span></div>
           </div>
-        ) : (
+        ) : q.type === 'mc' ? (
           <MCAnswer choices={q.choices} picked={answers[item.pool_id]} onPick={setAnswer} />
-        )}
+        ) : null}
 
         <div className="row" style={{ justifyContent: 'space-between', width: '100%' }}>
           <button className="btn-secondary" disabled={index === 0} onClick={() => setIndex(index - 1)}>Previous</button>

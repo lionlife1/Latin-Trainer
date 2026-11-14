@@ -22,7 +22,7 @@ function toggle<T>(xs: T[], x: T): T[] {
 export function modulePool(moduleIds: string[], badges: string[], types: QType[]): PoolItem[] {
   return MODULES.filter(m => moduleIds.includes(m.id))
     .flatMap(m => m.questions)
-    .filter(q => (badges.length === 0 || badges.includes(q.badge)) && (types.length === 0 || types.includes(q.type)))
+    .filter(q => (badges.length === 0 || badges.includes(q.badge)) && (types.length === 0 || types.includes(q.type as QType)))
     .map(q => ({ item_key: q.id, question: q }));
 }
 

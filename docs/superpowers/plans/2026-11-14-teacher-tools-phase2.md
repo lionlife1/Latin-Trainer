@@ -11,7 +11,7 @@ Order: 1 → (2, 3, 4 in parallel) → (5, 6 in parallel) → (7, 8 in parallel)
 
 ## Task 1: Types and the TypeScript grader
 
-- [ ] Done
+- [x] Done
 
 Files: `src/lib/types.ts`, `src/lib/grading.ts`, `src/lib/grading.test.ts`, `src/lib/vocab.ts` (PoolItem).
 

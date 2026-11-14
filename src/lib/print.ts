@@ -1,4 +1,4 @@
-import { normalize } from './grading';
+import { correctDisplay, normalize } from './grading';
 import { seededRng, shuffle } from './shuffle';
 import type { DrillQuestion } from './types';
 import type { PoolItem } from './vocab';
@@ -26,6 +26,7 @@ export interface PrintVersion {
 
 function toPrint(q: DrillQuestion, number: number, rng: () => number): PrintQuestion {
   if (q.type === 'typein') return { number, question: q, keyText: q.answers.join(' / ') };
+  if (q.type !== 'mc') return { number, question: q, keyText: correctDisplay(q) };
   const choices = shuffle(q.choices, rng);
   const keyIndex = choices.findIndex(c => normalize(c) === normalize(q.correct));
   return { number, question: { ...q, choices }, keyIndex, keyLetter: LETTERS[keyIndex], keyHtml: choices[keyIndex] };
