@@ -1,7 +1,7 @@
 // Algorithmic Latin subjunctive conjugation engine (ported from legacy trainer.js).
 import type { DrillQuestion, EndlessConfig } from './types';
 import type { Verb, Voice, GrammaticalNumber, Person } from './morph/types';
-import { principalParts, verbForms } from './morph/verbs';
+import { genderVariants, hasVerbCell, principalParts, verbForms } from './morph/verbs';
 import { CORE_VERBS } from '../content/verbs.generated';
 
 export type { Verb, Voice, GrammaticalNumber, Person } from './morph/types';
@@ -32,16 +32,16 @@ export const VERBS: Verb[] = [
 
     // --- 1st Conjugation ---
     { inf: "amare", conj: 1, pres: "am", perf: "amav", ppp: "amat", trans: "to love" },
-    { inf: "ambulare", conj: 1, pres: "ambul", perf: "ambulav", ppp: "ambulat", trans: "to walk" },
+    { inf: "ambulare", conj: 1, pres: "ambul", perf: "ambulav", noPassive: true, ppp: "ambulat", trans: "to walk" },
     { inf: "clamare", conj: 1, pres: "clam", perf: "clamav", ppp: "clamat", trans: "to shout" },
     { inf: "dare", conj: 1, pres: "d", perf: "ded", ppp: "dat", trans: "to give" },
     { inf: "demonstrare", conj: 1, pres: "demonstr", perf: "demonstrav", ppp: "demonstrat", trans: "to show" },
     { inf: "dubitare", conj: 1, pres: "dubit", perf: "dubitav", ppp: "dubitat", trans: "to doubt" },
-    { inf: "errare", conj: 1, pres: "err", perf: "errav", ppp: "errat", trans: "to err" },
+    { inf: "errare", conj: 1, pres: "err", perf: "errav", noPassive: true, ppp: "errat", trans: "to err" },
     { inf: "exspectare", conj: 1, pres: "exspect", perf: "exspectav", ppp: "exspectat", trans: "to wait for" },
     { inf: "habitare", conj: 1, pres: "habit", perf: "habitav", ppp: "habitat", trans: "to live" },
     { inf: "imperare", conj: 1, pres: "imper", perf: "imperav", ppp: "imperat", trans: "to order" },
-    { inf: "laborare", conj: 1, pres: "labor", perf: "laborav", ppp: "laborat", trans: "to work" },
+    { inf: "laborare", conj: 1, pres: "labor", perf: "laborav", noPassive: true, ppp: "laborat", trans: "to work" },
     { inf: "laudare", conj: 1, pres: "laud", perf: "laudav", ppp: "laudat", trans: "to praise" },
     { inf: "liberare", conj: 1, pres: "liber", perf: "liberav", ppp: "liberat", trans: "to free" },
     { inf: "monstrare", conj: 1, pres: "monstr", perf: "monstrav", ppp: "monstrat", trans: "to show" },
@@ -52,13 +52,13 @@ export const VERBS: Verb[] = [
     { inf: "oppugnare", conj: 1, pres: "oppugn", perf: "oppugnav", ppp: "oppugnat", trans: "to attack" },
     { inf: "parare", conj: 1, pres: "par", perf: "parav", ppp: "parat", trans: "to prepare" },
     { inf: "portare", conj: 1, pres: "port", perf: "portav", ppp: "portat", trans: "to carry" },
-    { inf: "pugnare", conj: 1, pres: "pugn", perf: "pugnav", ppp: "pugnat", trans: "to fight" },
+    { inf: "pugnare", conj: 1, pres: "pugn", perf: "pugnav", noPassive: true, ppp: "pugnat", trans: "to fight" },
     { inf: "putare", conj: 1, pres: "put", perf: "putav", ppp: "putat", trans: "to think" },
     { inf: "rogare", conj: 1, pres: "rog", perf: "rogav", ppp: "rogat", trans: "to ask" },
     { inf: "servare", conj: 1, pres: "serv", perf: "servav", ppp: "servat", trans: "to save" },
     { inf: "spectare", conj: 1, pres: "spect", perf: "spectav", ppp: "spectat", trans: "to look at" },
     { inf: "sperare", conj: 1, pres: "sper", perf: "sperav", ppp: "sperat", trans: "to hope" },
-    { inf: "stare", conj: 1, pres: "st", perf: "stet", ppp: "stat", trans: "to stand" },
+    { inf: "stare", conj: 1, pres: "st", perf: "stet", noPassive: true, ppp: "stat", trans: "to stand" },
     { inf: "superare", conj: 1, pres: "super", perf: "superav", ppp: "superat", trans: "to overcome" },
     { inf: "temptare", conj: 1, pres: "tempt", perf: "temptav", ppp: "temptat", trans: "to try" },
     { inf: "vocare", conj: 1, pres: "voc", perf: "vocav", ppp: "vocat", trans: "to call" },
@@ -71,7 +71,7 @@ export const VERBS: Verb[] = [
     { inf: "docere", conj: 2, pres: "doc", perf: "docu", ppp: "doct", trans: "to teach" },
     { inf: "habere", conj: 2, pres: "hab", perf: "habu", ppp: "habit", trans: "to have" },
     { inf: "iubere", conj: 2, pres: "iub", perf: "iuss", ppp: "iuss", trans: "to order" },
-    { inf: "manere", conj: 2, pres: "man", perf: "mans", ppp: "mans", trans: "to remain" },
+    { inf: "manere", conj: 2, pres: "man", perf: "mans", noPassive: true, ppp: "mans", trans: "to remain" },
     { inf: "monere", conj: 2, pres: "mon", perf: "monu", ppp: "monit", trans: "to warn" },
     { inf: "movere", conj: 2, pres: "mov", perf: "mov", ppp: "mot", trans: "to move" },
     { inf: "praebere", conj: 2, pres: "praeb", perf: "praebu", ppp: "praebit", trans: "to provide" },
@@ -79,7 +79,7 @@ export const VERBS: Verb[] = [
     { inf: "respondere", conj: 2, pres: "respond", perf: "respond", ppp: "respons", trans: "to answer" },
     { inf: "retinere", conj: 2, pres: "retin", perf: "retinu", ppp: "retent", trans: "to hold back" },
     { inf: "ridere", conj: 2, pres: "rid", perf: "ris", ppp: "ris", trans: "to laugh" },
-    { inf: "sedere", conj: 2, pres: "sed", perf: "sed", ppp: "sess", trans: "to sit" },
+    { inf: "sedere", conj: 2, pres: "sed", perf: "sed", noPassive: true, ppp: "sess", trans: "to sit" },
     { inf: "sustinere", conj: 2, pres: "sustin", perf: "sustinu", ppp: "sustent", trans: "to withstand" },
     { inf: "tenere", conj: 2, pres: "ten", perf: "tenu", ppp: "tent", trans: "to hold" },
     { inf: "terrere", conj: 2, pres: "terr", perf: "terru", ppp: "territ", trans: "to frighten" },
@@ -88,9 +88,9 @@ export const VERBS: Verb[] = [
     // --- 3rd Conjugation ---
     { inf: "agere", conj: 3, pres: "ag", perf: "eg", ppp: "act", trans: "to drive / do" },
     { inf: "amittere", conj: 3, pres: "amitt", perf: "amis", ppp: "amiss", trans: "to lose" },
-    { inf: "cadere", conj: 3, pres: "cad", perf: "cecid", ppp: "cas", trans: "to fall" },
+    { inf: "cadere", conj: 3, pres: "cad", perf: "cecid", noPassive: true, ppp: "cas", trans: "to fall" },
     { inf: "caedere", conj: 3, pres: "caed", perf: "cecid", ppp: "caes", trans: "to cut / kill" },
-    { inf: "cedere", conj: 3, pres: "ced", perf: "cess", ppp: "cess", trans: "to yield" },
+    { inf: "cedere", conj: 3, pres: "ced", perf: "cess", noPassive: true, ppp: "cess", trans: "to yield" },
     { inf: "claudere", conj: 3, pres: "claud", perf: "claus", ppp: "claus", trans: "to close" },
     { inf: "cogere", conj: 3, pres: "cog", perf: "coeg", ppp: "coact", trans: "to compel" },
     { inf: "cognoscere", conj: 3, pres: "cognosc", perf: "cognov", ppp: "cognit", trans: "to learn" },
@@ -98,10 +98,10 @@ export const VERBS: Verb[] = [
     { inf: "constituere", conj: 3, pres: "constitu", perf: "constitu", ppp: "constitut", trans: "to decide" },
     { inf: "consumere", conj: 3, pres: "consum", perf: "consumps", ppp: "consumpt", trans: "to consume" },
     { inf: "credere", conj: 3, pres: "cred", perf: "credid", ppp: "credit", trans: "to believe" },
-    { inf: "currere", conj: 3, pres: "curr", perf: "cucurr", ppp: "curs", trans: "to run" },
+    { inf: "currere", conj: 3, pres: "curr", perf: "cucurr", noPassive: true, ppp: "curs", trans: "to run" },
     { inf: "defendere", conj: 3, pres: "defend", perf: "defend", ppp: "defens", trans: "to defend" },
     { inf: "dicere", conj: 3, pres: "dic", perf: "dix", ppp: "dict", trans: "to say" },
-    { inf: "discedere", conj: 3, pres: "disced", perf: "discess", ppp: "discess", trans: "to depart" },
+    { inf: "discedere", conj: 3, pres: "disced", perf: "discess", noPassive: true, ppp: "discess", trans: "to depart" },
     { inf: "dividere", conj: 3, pres: "divid", perf: "divis", ppp: "divis", trans: "to divide" },
     { inf: "ducere", conj: 3, pres: "duc", perf: "dux", ppp: "duct", trans: "to lead" },
     { inf: "expellere", conj: 3, pres: "expell", perf: "expul", ppp: "expuls", trans: "to drive out" },
@@ -114,7 +114,7 @@ export const VERBS: Verb[] = [
     { inf: "pellere", conj: 3, pres: "pell", perf: "pepul", ppp: "puls", trans: "to push" },
     { inf: "petere", conj: 3, pres: "pet", perf: "petiv", ppp: "petit", trans: "to seek" },
     { inf: "ponere", conj: 3, pres: "pon", perf: "posu", ppp: "posit", trans: "to put" },
-    { inf: "procedere", conj: 3, pres: "proced", perf: "process", ppp: "process", trans: "to advance" },
+    { inf: "procedere", conj: 3, pres: "proced", perf: "process", noPassive: true, ppp: "process", trans: "to advance" },
     { inf: "promittere", conj: 3, pres: "promitt", perf: "promis", ppp: "promiss", trans: "to promise" },
     { inf: "quaerere", conj: 3, pres: "quaer", perf: "quaesiv", ppp: "quaesit", trans: "to seek" },
     { inf: "regere", conj: 3, pres: "reg", perf: "rex", ppp: "rect", trans: "to rule" },
@@ -147,17 +147,18 @@ export const VERBS: Verb[] = [
     { inf: "audire", conj: 4, pres: "aud", perf: "audiv", ppp: "audit", trans: "to hear" },
     { inf: "convenire", conj: 4, pres: "conven", perf: "conven", ppp: "convent", trans: "to assemble" },
     { inf: "custodire", conj: 4, pres: "custod", perf: "custodiv", ppp: "custodit", trans: "to guard" },
-    { inf: "dormire", conj: 4, pres: "dorm", perf: "dormiv", ppp: "dormit", trans: "to sleep" },
+    { inf: "dormire", conj: 4, pres: "dorm", perf: "dormiv", noPassive: true, ppp: "dormit", trans: "to sleep" },
     { inf: "impedire", conj: 4, pres: "imped", perf: "impediv", ppp: "impedit", trans: "to hinder" },
     { inf: "invenire", conj: 4, pres: "inven", perf: "inven", ppp: "invent", trans: "to find" },
     { inf: "munire", conj: 4, pres: "mun", perf: "muniv", ppp: "munit", trans: "to fortify" },
     { inf: "nescire", conj: 4, pres: "nesc", perf: "nesciv", ppp: "nescit", trans: "to not know" },
-    { inf: "pervenire", conj: 4, pres: "perven", perf: "perven", ppp: "pervent", trans: "to arrive" },
+    { inf: "pervenire", conj: 4, pres: "perven", perf: "perven", noPassive: true, ppp: "pervent", trans: "to arrive" },
     { inf: "punire", conj: 4, pres: "pun", perf: "puniv", ppp: "punit", trans: "to punish" },
     { inf: "reperire", conj: 4, pres: "reper", perf: "repper", ppp: "repert", trans: "to discover" },
     { inf: "scire", conj: 4, pres: "sc", perf: "sciv", ppp: "scit", trans: "to know" },
     { inf: "sentire", conj: 4, pres: "sent", perf: "sens", ppp: "sens", trans: "to feel" },
-    { inf: "venire", conj: 4, pres: "ven", perf: "ven", ppp: "vent", trans: "to come" }
+    // pp1 so Endless can tell it from the generated vēnīre (veneo, "to be sold").
+    { inf: "venire", conj: 4, pres: "ven", perf: "ven", noPassive: true, ppp: "vent", pp1: "venio", trans: "to come" }
 ];
 
 const TENSES: Tense[] = ["present", "imperfect", "perfect", "pluperfect"];
@@ -223,12 +224,20 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
         if (availableVoices.length === 0) availableVoices = ["active"];
     }
 
+    // Drop a voice this verb has no form for in this tense (no 4th principal part: no perfect passive).
+    availableVoices = availableVoices.filter(v =>
+        hasVerbCell(verb, { mood: 'subjunctive', tense, voice: v, person: 3, number: 'singular' }));
+    if (availableVoices.length === 0) availableVoices = ["active"];
+
     const voice = pick(availableVoices);
     const person = pick(PERSONS);
     const number = pick(NUMBERS);
 
-    const answers = verbForms(verb, { mood: 'subjunctive', tense, voice, person, number });
-    const answer = answers[0] ?? '';
+    const forms = verbForms(verb, { mood: 'subjunctive', tense, voice, person, number });
+    const answer = forms[0] ?? '';
+    // amatus sit also accepts amata sit and amatum sit; the explanation shows the masculine.
+    const answers = [...forms];
+    for (const f of forms) for (const v of genderVariants(f)) if (!answers.includes(v)) answers.push(v);
 
     let ord = person === 1 ? "1st" : person === 2 ? "2nd" : "3rd";
     let numAbbr = number === "singular" ? "sg." : "pl.";
