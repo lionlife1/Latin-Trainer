@@ -54,3 +54,11 @@ Tests in `src/lib/morph/nouns.test.ts`: *sitim, siti*; *turrem/turrim, turre/tur
 `npm run seed`. The diff of `src/content/nouns.generated.ts` should touch only *imber, caro, vates,
 fors, vicis* and the twelve nouns given `iForms`; the diff of `src/content/adjectives.generated.ts` only
 *vetus* and *polus*. Then `npm test`, `npx tsc -b`, `npm run build`.
+
+## Follow-up (not in this plan): strict / exceptions mode
+
+Requested 2026-11-15. These fixes make grading stricter on exceptions (*vātum*, *imbrium*, *sitim*,
+and on the verb side *ruitūrus*), and not every student has learned every exception. Keep exceptions
+out of the normal drills and put them in a separate strict mode that forces them in and grades them
+strictly. Details and scope in `docs/trainer-core-verbs-followups.md` ("Strict / exceptions mode").
+It needs its own spec.
