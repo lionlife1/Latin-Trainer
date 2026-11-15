@@ -1,8 +1,9 @@
 # Open work
 
-Reviewed 2026-11-14 against `main` at `4b478fd`, then updated the same day for teacher tools Phase 2 on
-branch `claude/eager-mayer-rsdbnr`. On that branch `npm test` (766 tests), `npx tsc -b`, `npm run build`,
-`npm run test:db` and the solo Playwright suite (15 tests) pass. This page lists what is left, with the
+Reviewed 2026-11-14 against `main` at `4b478fd`, then updated the same day for teacher tools Phase 2 and
+its review fixes on branch `claude/jolly-ritchie-xg28qj`. On that branch `npm test` (783 tests),
+`npx tsc -b`, `npm run build` and the solo Playwright suite (15 tests) pass. `npm run test:db` passed before
+the review fixes and has not been run since (see Phase 2, to-do 1). This page lists what is left, with the
 source of each item.
 
 ## 1. Teacher tools, Phases 2 to 5
@@ -17,13 +18,37 @@ assignment builder, print.
 
 **To do on the owner's computer before this is deployed:**
 
-1. Apply `supabase/migrations/20261114000001_points_and_structured_answers.sql` to the LatinIQ project
-   (`supabase db push`). The new client calls `record_practice_response_v2`, which does not exist before
-   that, so practice answers fail to save if the client is deployed first.
+1. **Apply the migration before merging the PR.** `main` deploys on every push
+   (`.github/workflows/pages.yml`), so merging first puts the new client on the live site against the old
+   schema. Until `supabase/migrations/20261114000001_points_and_structured_answers.sql` is applied to the
+   LatinIQ project (`supabase db push`):
+   - publishing **any** assignment fails, module and vocab ones included (the insert sends a `points`
+     column that does not exist);
+   - the student result page and the teacher attempt detail fail (they select `given_json`, `earned`,
+     `possible` and `parts`);
+   - grid and parse answers in tests are graded wrong (the old `submit_test` reads `given` as text);
+   - practice answers fail to save (`record_practice_response_v2` does not exist).
+
+   Run `npm run test:db` first: the fix wave (F1 to F12, G1 to G7) changed the migration and its SQL tests
+   were reviewed by reading only, because the machine that made them had no Postgres 16.
 2. Check the whole path once against the real backend, which no cloud session can do: publish a synopsis,
    take it as a student in practice and in test mode, look at the result, the gradebook, the attempt detail
    and the print page.
-3. Look at a grid on a phone (375px). The card layout was written from the spec and tested only in jsdom.
+3. Look at a grid on a real phone (375px) on the real route. The layout was checked at 375 to 1024px in
+   Chrome with a test harness (`docs/teacher-tools/phase2-review/phone-recheck.md`), not on a phone.
+
+**Parked from the Phase 2 review** (`docs/teacher-tools/phase2-review/review.md` and `fix-review.md`):
+
+- `assignments.source` is readable by enrolled students. For a forms assignment it holds each word's full
+  entry (all four principal parts of a verb), so a student who queries the REST API directly can read it.
+  No worse than `lexicon` and `questions`, which everyone can read. The owner chose to close it in Phase 3
+  (column grants and a teacher-only way to read `source`).
+- A deponent synopsis has a single "Forms" column, so the gerundive never appears.
+- No word picker for parse and make: the generator takes `words`, but the Forms panel does not offer it.
+- `responses.earned` and `possible` stay nullable after the backfill (consider `set not null`).
+- Grader parity on hand-made pool rows: on a grid with duplicate cell ids, ids missing from `rows`, or a
+  key on a given cell, the TypeScript grader and SQL `grade_parts` count differently. Generated items never
+  have these.
 
 **Decided without the owner** (the spec was not brainstormed; change any of these):
 
