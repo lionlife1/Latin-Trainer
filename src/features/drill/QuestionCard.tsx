@@ -4,10 +4,11 @@ interface Props {
   badge: string;
   prompt: string;
   hint?: string;
+  hintKind?: 'definition';
 }
 
 /** Prompt HTML comes from built-in content or teacher-published pools (escaped at generation). */
-export function QuestionCard({ badge, prompt, hint }: Props) {
+export function QuestionCard({ badge, prompt, hint, hintKind }: Props) {
   const [showHint, setShowHint] = useState(false);
   return (
     <div className="question-card" onClick={() => setShowHint(true)}>
@@ -17,10 +18,10 @@ export function QuestionCard({ badge, prompt, hint }: Props) {
         {hint &&
           (showHint ? (
             <>
-              <strong>Hint:</strong> <span dangerouslySetInnerHTML={{ __html: hint }} />
+              <strong>{hintKind === 'definition' ? 'Definition:' : 'Hint:'}</strong> <span dangerouslySetInnerHTML={{ __html: hint }} />
             </>
           ) : (
-            <span>Tap the card for a hint</span>
+            <span>{hintKind === 'definition' ? 'Tap the card to see the definition' : 'Tap the card for a hint'}</span>
           ))}
       </div>
     </div>

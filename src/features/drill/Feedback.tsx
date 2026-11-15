@@ -28,10 +28,12 @@ export function Feedback({ correct, answer, answerIsHtml, explanation, onNext, o
     <div className="feedback-overlay" role="dialog" aria-live="polite">
       <div className={`feedback-card ${correct ? 'is-correct' : 'is-wrong'}`}>
         <div className="feedback-verdict">{correct ? 'Correct' : 'Not quite'}</div>
-        <div className="feedback-correct">
-          {correct ? 'Answer: ' : 'Correct answer: '}
-          {answerIsHtml ? <strong dangerouslySetInnerHTML={{ __html: answer }} /> : <strong>{answer}</strong>}
-        </div>
+        {!correct && (
+          <div className="feedback-correct">
+            Correct answer:{' '}
+            {answerIsHtml ? <strong dangerouslySetInnerHTML={{ __html: answer }} /> : <strong>{answer}</strong>}
+          </div>
+        )}
         {explanation && <div className="feedback-explanation">{explanation}</div>}
         {onEasy ? (
           <div className="feedback-actions">

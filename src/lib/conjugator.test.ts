@@ -94,6 +94,8 @@ describe('generateRandomQuestion with a custom pool', () => {
       const q = generateRandomQuestion({ stdAct: true, stdPass: true, dep: false, irr: false }, rng, [cado]);
       if (q?.type !== 'typein') throw new Error('expected typein');
       expect(q.prompt).not.toContain('passive');
+      expect(q.prompt).not.toContain('>Voice<');
+      expect(q.explanation).toBeUndefined();
       expect(q.answers[0]).not.toMatch(/ |r$|ris$|tur$|mur$|mini$|ntur$/);
     }
   });
@@ -104,7 +106,7 @@ describe('generateRandomQuestion with a custom pool', () => {
       const q = generateRandomQuestion({ stdAct: true, stdPass: false, dep: false, irr: true }, rng, [redeo]);
       if (q?.type !== 'typein') throw new Error('expected typein');
       expect(q.hint).toBe('Principal parts: redeo, redire, redivi');
-      if (q.prompt.includes('1st sg. · pluperfect')) {
+      if (q.prompt.includes("form-chip-v'>pluperfect") && q.prompt.includes("form-chip-v'>1st sg.")) {
         seen++;
         expect(q.answers).toEqual(expect.arrayContaining(['redivissem', 'rediissem', 'redissem']));
       }

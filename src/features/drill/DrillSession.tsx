@@ -61,7 +61,7 @@ export function DrillSession({ questions, mode, onAnswer, generate, onEasy, onFi
       </div>
 
       <div className="drill-body" key={current.id + index}>
-        <QuestionCard badge={current.badge} prompt={current.prompt} hint={current.hint} />
+        <QuestionCard badge={current.badge} prompt={current.prompt} hint={current.hint} hintKind={current.hintKind} />
         {current.type === 'typein' ? (
           <TypeInAnswer disabled={!!lastResult} verdict={lastResult?.correct} onSubmit={drill.answer} />
         ) : (

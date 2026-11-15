@@ -2,6 +2,7 @@
 import type { DrillQuestion, EndlessConfig } from './types';
 import type { Verb, Voice, GrammaticalNumber, Person } from './morph/types';
 import { principalParts, verbForms } from './morph/verbs';
+import { formChipsHtml } from './formChips';
 import { CORE_VERBS } from '../content/verbs.generated';
 
 export type { Verb, Voice, GrammaticalNumber, Person } from './morph/types';
@@ -228,7 +229,6 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
     const number = pick(NUMBERS);
 
     const answers = verbForms(verb, { mood: 'subjunctive', tense, voice, person, number });
-    const answer = answers[0] ?? '';
 
     let ord = person === 1 ? "1st" : person === 2 ? "2nd" : "3rd";
     let numAbbr = number === "singular" ? "sg." : "pl.";
@@ -248,9 +248,13 @@ export function generateRandomQuestion(config: EndlessConfig, rng: () => number 
         id: "endless_" + Date.now() + "_" + Math.floor(rng() * 1e9),
         type: "typein",
         badge: "ENDLESS TRAINER",
-        prompt: `<span class='latin-word' style='font-size: 1.4em;'>${verbLabel}</span><br><span style='font-size: 0.8em; color: var(--text-secondary);'>${ord} ${numAbbr} · ${tense} ${voiceDisplay}</span>`,
+        prompt: `<span class='latin-word' style='font-size: 1.4em;'>${verbLabel}</span>${formChipsHtml([
+            { key: 'Person', value: `${ord} ${numAbbr}` },
+            { key: 'Tense', value: tense },
+            ...(voiceDisplay ? [{ key: 'Voice', value: voiceDisplay }] : []),
+            { key: 'Mood', value: 'subjunctive' },
+        ])}`,
         hint: hint,
         answers: answers,
-        explanation: `The correct algorithmic form is ${answer}.`
     };
 }

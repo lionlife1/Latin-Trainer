@@ -50,3 +50,47 @@ export function cellLabel(w: MorphWord, cell: Cell): string {
         }
     }
 }
+
+/** The same information as cellLabel, one captioned value per feature, in a fixed order. */
+export function cellParts(w: MorphWord, cell: Cell): { key: string; value: string }[] {
+    switch (w.kind) {
+        case 'verb': {
+            const v = w.verb, c = cell as VerbCell;
+            const voice = (x: { voice: string }) => (hasPassive(v) ? [{ key: 'Voice', value: x.voice }] : []);
+            switch (c.mood) {
+                case 'indicative':
+                case 'subjunctive':
+                case 'imperative':
+                    return [
+                        { key: 'Person', value: `${ORD[c.person]} ${NUM[c.number]}` },
+                        { key: 'Tense', value: tenseName(c.tense) },
+                        ...voice(c),
+                        { key: 'Mood', value: c.mood },
+                    ];
+                case 'infinitive':
+                    return [{ key: 'Tense', value: c.tense }, ...voice(c), { key: 'Mood', value: 'infinitive' }];
+                case 'participle':
+                    if (c.tense === 'future' && c.voice === 'passive') return [{ key: 'Form', value: 'gerundive' }];
+                    if (c.tense === 'perfect' && (v.deponent || v.semiDeponent)) return [{ key: 'Tense', value: 'perfect' }, { key: 'Mood', value: 'participle' }];
+                    return [{ key: 'Tense', value: c.tense }, { key: 'Voice', value: c.voice }, { key: 'Mood', value: 'participle' }];
+                case 'gerund':
+                    return [{ key: 'Form', value: 'gerund' }, { key: 'Case', value: c.case }];
+            }
+        }
+        case 'noun': {
+            const c = cell as { case: string; number: string };
+            return [{ key: 'Case', value: c.case }, { key: 'Number', value: c.number }];
+        }
+        case 'adjective': {
+            const c = cell as { case: string; number: string; gender: 'm' | 'f' | 'n'; degree: string };
+            const parts = [{ key: 'Case', value: c.case }, { key: 'Number', value: c.number }, { key: 'Gender', value: GENDER[c.gender] }];
+            return c.degree === 'positive' ? parts : [...parts, { key: 'Degree', value: c.degree }];
+        }
+        case 'pronoun': {
+            const c = cell as { case: string; number: string; gender?: 'm' | 'f' | 'n' };
+            const parts = [{ key: 'Case', value: c.case }];
+            if (c.gender) return [...parts, { key: 'Number', value: c.number }, { key: 'Gender', value: GENDER[c.gender] }];
+            return w.pronoun.id === 'sui' ? parts : [...parts, { key: 'Number', value: c.number }];
+        }
+    }
+}
