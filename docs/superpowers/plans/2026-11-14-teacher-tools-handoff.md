@@ -141,11 +141,16 @@ Facts about the code that the design depends on:
 
 Split into four plans in `docs/superpowers/plans/`, executed in order, each verified on its own:
 
-1. Schema and item types: the migration, the four new types, both graders, the shared case table.
-2. Renderers: registry entries for the four types, print, phone layouts.
-3. Assessments: sections and sources, publish with sections and variants, `start_attempt` per section,
-   vocab-list words in forms, the builder, My questions, tags, templates, assign.
-4. Student side: intro outline, sectioned question grid, kind tags, per-section results.
+The order follows the spec's "Implementation order" (chosen 2026-11-14: the student screens are built against
+fixture data next to the renderers, so they do not wait for the builder):
+
+1. Schema, item types and graders: the migration (including closing the `assignments.source` exposure),
+   the four new types with placeholder renderers, both graders, the shared case table.
+2. Renderers, print and the student side: registry entries for the four types, phone layouts, sectioned
+   print, intro outline, sectioned question grid, kind tags, per-section results.
+3. Library: vocab-list words in forms, tags, My questions and its editor, Library in the nav.
+4. Assessments: sections and sources, variants, the builder and preview, templates, publish and assign,
+   `AssignmentBuilder` retired.
 
 Per task: `implementer` (Sonnet) writes it test-first, a reviewer subagent checks it against the plan
 task, the `verifier` (Haiku) runs the suites, the main session commits. Text that students read goes to
