@@ -4,6 +4,7 @@ import App from './App';
 import './styles/global.css';
 import './styles/classroom.css';
 import './styles/app.css';
+import './styles/motion.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
