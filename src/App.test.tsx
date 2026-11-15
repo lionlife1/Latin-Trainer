@@ -30,9 +30,9 @@ describe('routes and shell', () => {
     expect(screen.getAllByRole('link', { name: 'Class' }).length).toBeGreaterThan(0);
   });
 
-  it('shows the join gate on Class when logged out', () => {
+  it('shows the join gate on Class when logged out', async () => {
     visit('/s');
-    expect(screen.getByRole('heading', { name: 'Join your class' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Join your class' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Join with a class code' })).toHaveAttribute('href', '/join');
   });
 
