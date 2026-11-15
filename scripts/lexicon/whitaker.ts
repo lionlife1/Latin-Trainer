@@ -73,6 +73,16 @@ function headwordFor(pos: string, f: string[], s: string[]): { headword: string;
     }
   }
   if (pos === 'V') {
+    // Irregular compounds, with the stem conventions of verbFromLine in verbs.ts.
+    if (key === '3 2' || key === '6 1') {
+      // Compounds only: the bare fero and eo are not emitted (an existing test keeps them out).
+      if (!have(s1) || (key === '3 2' && (!s1.endsWith('fer') || s1 === 'fer')) || (key === '6 1' && s1 === 'e')) return null;
+      if (key === '6 1' && !have(s2raw)) return null;
+      const parts = key === '3 2' ? [`${s1}o`, `${s1}re`] : [`${s1}o`, `${s2raw}re`];
+      if (have(s3)) parts.push(`${s3}i`);
+      if (have(s4)) parts.push(`${s4}us`);
+      return { headword: parts.join(', '), pos: 'verb' };
+    }
     const t = VERB[key];
     if (!t) return null;
     const kind = f[3];
@@ -138,4 +148,18 @@ export function parseDictline(text: string): WhitakerRow[] {
     if (r) out.push(r);
   }
   return out;
+}
+
+/**
+ * Fixes known coding errors in DICTLINE.GEN. Lines with the stems `ed ed edid edit` (edo, edere,
+ * "give out, publish") are coded 1st conjugation; they are 3rd. Column widths are kept.
+ */
+export function applyDictlineFixes(text: string): string {
+  return text
+    .split('\n')
+    .map((l) => {
+      if (l.length < 86 || ![0, 19, 38, 57].map((i) => l.slice(i, i + 19).trim()).every((x, k) => x === ['ed', 'ed', 'edid', 'edit'][k])) return l;
+      return l.slice(76, 86) === 'V      1 1' ? l.slice(0, 76) + 'V      3 1' + l.slice(86) : l;
+    })
+    .join('\n');
 }

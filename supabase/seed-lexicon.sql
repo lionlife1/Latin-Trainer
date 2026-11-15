@@ -1314,6 +1314,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('abditivus, abditiva, abditivum', 'abditivus', 'removed, separated (from)', 'adjective', null, false),
 ('abdomen, abdominis, n.', 'abdomen', 'abdomen, paunch, lower part of the belly; gluttony; as indicative of obesity', 'noun', null, false),
 ('abductio, abductionis, f.', 'abductio', 'abduction, forcible carrying off; robbing; retirement (Vulg. Eccli.)', 'noun', null, false),
+('abeo, abire, abivi, abitus', 'abeo', 'depart, go away; go off, go forth; pass away, die, disappear; be changed', 'verb', null, true),
 ('abecedaria, abecedariae, f.', 'abecedaria', 'elementary introduction; the ABC of the matter', 'noun', null, false),
 ('abecedarius, abecedarii, m.', 'abecedarius', 'one who learns the ABC''s', 'noun', null, false),
 ('abecedarium, abecedarii, n.', 'abecedarium', 'alphabet', 'noun', null, false),
@@ -1325,6 +1326,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('aberceo, abercere', 'aberceo', 'keep away; forbid', 'verb', null, false),
 ('aberro, aberrare, aberravi, aberratus', 'aberro', 'stray, wander, deviate; go/be/do wrong; be unfaithful; escape; disagree (with)', 'verb', null, false),
 ('aberratio, aberrationis, f.', 'aberratio', 'diversion, relief', 'noun', null, false),
+('abfero, abferre', 'abfero', 'bear, take away, remove, obtain, carry off/away, steal; (error for aufero)', 'verb', null, false),
 ('abfluo, abfluere, abfluxi', 'abfluo', 'flow/stream/issue (from); flow away; be abundant, abound (in w/ABL)', 'verb', null, false),
 ('abfugio, abfugere, abfugi', 'abfugio', 'flee (from), shun; run/fly away, escape; disappear/vanish (things)', 'verb', null, false),
 ('abhibeo, abhibere', 'abhibeo', 'hold at a distance', 'verb', null, false),
@@ -1504,11 +1506,11 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('abstemius, abstemia, abstemium', 'abstemius', 'abstemious, abstaining from drink; sober, temperate; moderate; fasting; saving', 'adjective', null, false),
 ('abstergeo, abstergere, abstersi, abstersus', 'abstergeo', 'wipe off/clean/away, clean away, cleanse, strip off; banish, expel, dispel', 'verb', null, false),
 ('abstergo, abstergere, abstersi, abstersus', 'abstergo', 'wipe off/clean/away, clean away, cleanse, strip off; banish, expel, dispel', 'verb', null, false),
-('absterreo, absterrere, absterrui, absterritus', 'absterreo', 'frighten off/away; drive away; deter, discourage; keep away/withhold from, den', 'verb', null, false),
-('abstineo, abstinere, abstinui, abstentus', 'abstineo', 'withhold, keep away/clear; abstain, fast; refrain (from); avoid; keep hands of', 'verb', null, false),
-('abstinax, abstinacis', 'abstinax', 'abstemious, staying away from liquor; temperate/sparing in drink/food', 'adjective', null, false)
+('absterreo, absterrere, absterrui, absterritus', 'absterreo', 'frighten off/away; drive away; deter, discourage; keep away/withhold from, den', 'verb', null, false)
 on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
 insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('abstineo, abstinere, abstinui, abstentus', 'abstineo', 'withhold, keep away/clear; abstain, fast; refrain (from); avoid; keep hands of', 'verb', null, false),
+('abstinax, abstinacis', 'abstinax', 'abstemious, staying away from liquor; temperate/sparing in drink/food', 'adjective', null, false),
 ('abstinens, abstinentis', 'abstinens', 'abstinent, temperate; showing restraint, self restrained; not covetous; chaste', 'adjective', null, false),
 ('abstinenter', 'abstinenter', 'abstinently, with self restraint (esp. financial dealings); scrupulously', 'adverb', null, false),
 ('abstinentia, abstinentiae, f.', 'abstinentia', 'abstinence; fasting; moderation, self control, restraint; integrity; parsimony', 'noun', null, false),
@@ -2006,11 +2008,11 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('adfabricatus, adfabricata, adfabricatum', 'adfabricatus', 'fitted/added to by art', 'adjective', null, false),
 ('adfamen, adfaminis, n.', 'adfamen', 'greeting, salutation, address', 'noun', null, false),
 ('adfania, adfaniae, f.', 'adfania', 'trifling talk (pl.), chatter; idle jests', 'noun', null, false),
-('adfatus, adfatus, m.', 'adfatus', 'address, speech, converse with; pronouncement, utterance (of)', 'noun', null, false),
-('adfatim', 'adfatim', 'sufficiently, amply, with complete satisfaction', 'adverb', null, false),
-('adfectus, adfectus, m.', 'adfectus', 'affection, passion, love; friendly feeling (Cas); goodwill; loved ones (pl.)', 'noun', null, false)
+('adfatus, adfatus, m.', 'adfatus', 'address, speech, converse with; pronouncement, utterance (of)', 'noun', null, false)
 on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
 insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('adfatim', 'adfatim', 'sufficiently, amply, with complete satisfaction', 'adverb', null, false),
+('adfectus, adfectus, m.', 'adfectus', 'affection, passion, love; friendly feeling (Cas); goodwill; loved ones (pl.)', 'noun', null, false),
 ('adfectus, adfecta, adfectum', 'adfectus', 'endowed with, possessed of; minded; affected; impaired, weakened; emotional', 'adjective', null, false),
 ('adfecto, adfectare, adfectavi, adfectatus', 'adfecto', 'aim at, desire, aspire, try, lay claim to; try to control; feign, pretend', 'verb', null, false),
 ('adfector, adfectari, adfectatus sum', 'adfector', 'aim at, desire, aspire, try, lay claim to; try to control; feign, pretend', 'verb', null, false),
@@ -2508,11 +2510,11 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('adqui', 'adqui', 'but, yet, notwithstanding, however, rather, well/but now; and yet, still', 'conjunction', null, false),
 ('adquiesco, adquiescere, adquiei, adquietus', 'adquiesco', 'lie with (w/cum), rest, relax; repose (in death); acquiesce, assent; subside', 'verb', null, false),
 ('adquiesco, adquiescere, adquievi, adquietus', 'adquiesco', 'lie with (w/cum), rest, relax; repose (in death); acquiesce, assent; subside', 'verb', null, false),
-('adquin', 'adquin', 'but, yet, notwithstanding, however, rather, well/but now; and yet, still', 'conjunction', null, false),
-('adquiro, adquirere, adquisivi, adquisitus', 'adquiro', 'acquire besides/in addition, obtain, gain, win, get; add to stock; accrue', 'verb', null, false),
-('adquisitus, adquisita, adquisitum', 'adquisitus', 'strained, recherche', 'adjective', null, false)
+('adquin', 'adquin', 'but, yet, notwithstanding, however, rather, well/but now; and yet, still', 'conjunction', null, false)
 on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
 insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('adquiro, adquirere, adquisivi, adquisitus', 'adquiro', 'acquire besides/in addition, obtain, gain, win, get; add to stock; accrue', 'verb', null, false),
+('adquisitus, adquisita, adquisitum', 'adquisitus', 'strained, recherche', 'adjective', null, false),
 ('adquisitio, adquisitionis, f.', 'adquisitio', 'acquisition; additional source of supply', 'noun', null, false),
 ('adquisitrix, adquisitricis, f.', 'adquisitrix', 'acquirer (female)', 'noun', null, false),
 ('adquo', 'adquo', 'how far, as far as, as much as', 'adverb', null, false),
@@ -3010,11 +3012,11 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('aequidiale, aequidialis, n.', 'aequidiale', 'equinox', 'noun', null, false),
 ('aequidianus, aequidiana, aequidianum', 'aequidianus', 'equinoctial, at the time of the equinox', 'adjective', null, false),
 ('aequidicus, aequidici, m.', 'aequidicus', 'verses (pl.) containing corresponding words or expressions', 'noun', null, false),
-('aequidistans, aequidistantis', 'aequidistans', 'equidistant; parallel', 'adjective', null, false),
-('aequiformis, aequiforme', 'aequiformis', 'uniform (connected words)', 'adjective', null, false),
-('aequilanx, aequilancis', 'aequilanx', 'with equal scale; of equal weight', 'adjective', null, false)
+('aequidistans, aequidistantis', 'aequidistans', 'equidistant; parallel', 'adjective', null, false)
 on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
 insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('aequiformis, aequiforme', 'aequiformis', 'uniform (connected words)', 'adjective', null, false),
+('aequilanx, aequilancis', 'aequilanx', 'with equal scale; of equal weight', 'adjective', null, false),
 ('aequilatus, aequilata, aequilatum', 'aequilatus', 'equilateral, with equal sides', 'adjective', null, false),
 ('aequilatatio, aequilatationis, f.', 'aequilatatio', 'area of uniform width, space between parallel lines', 'noun', null, false),
 ('aequilaterus, aequilatera, aequilaterum', 'aequilaterus', 'equilateral, equal sides', 'adjective', null, false),
@@ -3178,6 +3180,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('affectualis, affectuale', 'affectualis', 'depending on a temporary condition', 'adjective', null, false),
 ('affectuosus, affectuosa, affectuosum', 'affectuosus', 'affectionate, kind, full of inclination/affection/love', 'adjective', null, false),
 ('affectuose', 'affectuose', 'affectionately, kindly', 'adverb', null, false),
+('affero, afferre, attuli, allatus', 'affero', 'bring to (word/food), carry, convey; report, allege, announce; produce, cause', 'verb', null, true),
 ('afficio, afficere, affeci, affectus', 'afficio', 'affect, make impression; move, influence; cause (hurt/death), afflict, weaken', 'verb', null, true),
 ('afficticius, afficticia, afficticium', 'afficticius', 'attached (to)', 'adjective', null, false),
 ('affigo, affigere, affixi, affixus', 'affigo', 'fasten/fix/pin/attach to (w/DAT), annex; impress upon; pierce; chain, confine', 'verb', null, false),
@@ -3511,12 +3514,12 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('alienatio, alienationis, f.', 'alienatio', 'transference of ownership, the right to; aversion, dislike; numbness, stupor', 'noun', null, false),
 ('alienigena, alienigenae, m.', 'alienigena', 'stranger, foreigner, alien; something imported/exotic; foreign-born', 'noun', null, false),
 ('alienigenus, alienigena, alienigenum', 'alienigenus', 'different, foreign, alien; of/born in another country; imported, exotic; mixed', 'adjective', null, false),
-('alieniloquium, alieniloquii, n.', 'alieniloquium', 'talk of crazy persons; crazy talk', 'noun', null, false),
-('alienitas, alienitatis, f.', 'alienitas', 'external causes of disease', 'noun', null, false),
-('alietum, alieti, n.', 'alietum', 'osprey', 'noun', null, false),
-('alifer, alifera, aliferum', 'alifer', 'winged', 'adjective', null, false)
+('alieniloquium, alieniloquii, n.', 'alieniloquium', 'talk of crazy persons; crazy talk', 'noun', null, false)
 on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
 insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('alienitas, alienitatis, f.', 'alienitas', 'external causes of disease', 'noun', null, false),
+('alietum, alieti, n.', 'alietum', 'osprey', 'noun', null, false),
+('alifer, alifera, aliferum', 'alifer', 'winged', 'adjective', null, false),
 ('aliger, aligera, aligerum', 'aliger', 'winged, having wings; moving with the speed of flight', 'adjective', null, false),
 ('alii', 'alii', 'some ... others (alii ... alii)', 'conjunction', null, false),
 ('alimentum, alimenti, n.', 'alimentum', 'food/nourishment, provisions; sustenance, maintenance, livelihood; alms; fuel', 'noun', null, false),
@@ -4013,12 +4016,12 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('ampelinus, ampelina, ampelinum', 'ampelinus', 'vine-colored/covered; made of vines', 'adjective', null, false),
 ('ampelitis, ampelitidis, f.', 'ampelitis', 'vineyard, vineland; pitch/asphalt (used to preserve vines from insects)', 'noun', null, false),
 ('ampendix, ampendicis, m.', 'ampendix', 'appendix, supplement, annex; appendage, adjunct; hanger on; barberry bush/fruit', 'noun', null, false),
-('amphibius, amphibia, amphibium', 'amphibius', 'amphibious', 'adjective', null, false),
-('amphibolus, amphibola, amphibolum', 'amphibolus', 'amphibious', 'adjective', null, false),
-('amphibolia, amphiboliae, f.', 'amphibolia', 'ambiguity; double meaning', 'noun', null, false),
-('amphibologia, amphibologiae, f.', 'amphibologia', 'ambiguity; double meaning', 'noun', null, false)
+('amphibius, amphibia, amphibium', 'amphibius', 'amphibious', 'adjective', null, false)
 on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
 insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('amphibolus, amphibola, amphibolum', 'amphibolus', 'amphibious', 'adjective', null, false),
+('amphibolia, amphiboliae, f.', 'amphibolia', 'ambiguity; double meaning', 'noun', null, false),
+('amphibologia, amphibologiae, f.', 'amphibologia', 'ambiguity; double meaning', 'noun', null, false),
 ('amphibrevis, amphibrevis, m.', 'amphibrevis', 'poetical foot short-long-short, amphibrach', 'noun', null, false),
 ('amphimacrus, amphimacri, m.', 'amphimacrus', 'metrical foot, a short syllable between two long ones, amphimacer, cretic', 'noun', null, false),
 ('amphimallum, amphimalli, n.', 'amphimallum', 'cloak that is woolly inside and out', 'noun', null, false),
@@ -4365,6 +4368,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('antarcticus, antarctica, antarcticum', 'antarcticus', 'southern, antarctic', 'adjective', null, false),
 ('antarius, antaria, antarium', 'antarius', 'supporting in front (ropes), fore-; (rope) for raising (scaffold, mast)', 'adjective', null, false),
 ('ante', 'ante', 'before, previously, first, before this, earlier; in front/advance of; forwards', 'adverb', null, false),
+('anteo, antire, antivi, antitus', 'anteo', 'go before, go ahead, precede; surpass; anticipate; prevent; (anteeo drop e)', 'verb', null, false),
 ('anteactus, anteacta, anteactum', 'anteactus', 'past, that passed or was spent previously', 'adjective', null, false),
 ('anteambulo, anteambulonis, m.', 'anteambulo', 'forerunner; one who proceeds another to clear the way', 'noun', null, false),
 ('antebasis, antebasis, f.', 'antebasis', 'rear prop of a ballista, hindmost small pillar at pedestal of ballista', 'noun', null, false),
@@ -4382,6 +4386,8 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('antecurro, antecurrere, antecucurri, antecursus', 'antecurro', 'run in front of/before', 'verb', null, false),
 ('antecurro, antecurrere, antecurri, antecursus', 'antecurro', 'run in front of/before', 'verb', null, false),
 ('antecursor, antecursoris, m.', 'antecursor', 'scout, forerunner; vanguard (pl.), leading troops; predecessor in office', 'noun', null, false),
+('anteeo, anteire, anteivi, anteitus', 'anteeo', 'go/walk before/ahead, precede, antedate; surpass; anticipate; prevent', 'verb', null, false),
+('antefero, anteferre, antetuli, antelatus', 'antefero', 'carry before; place before/in front of; bring in advance, anticipate; prefer', 'verb', null, false),
 ('antefixum, antefixi, n.', 'antefixum', 'object/part fixed in front of something; ornamental tiles/figures at roof edge', 'noun', null, false),
 ('antefixus, antefixa, antefixum', 'antefixus', 'fixed/fastened in front of', 'adjective', null, false),
 ('antegenitalis, antegenitale', 'antegenitalis', 'that existed before birth', 'adjective', null, false),
@@ -4483,6 +4489,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('antictonis, antictonis, m.', 'antictonis', 'people (pl.) of the southern hemisphere; antipodes (L+S)', 'noun', null, false),
 ('anticuus, anticua, anticuum', 'anticuus', 'old, ancient; aged; time-honored; primeval; simple, classic, venerable; senior', 'adjective', null, false),
 ('antidactylus, antidactyla, antidactylum', 'antidactylus', 'reversed dactyl (short-short-long) (w/pes)', 'adjective', null, false),
+('antideo, antidire, antidivi, antiditus', 'antideo', 'go before, go ahead, precede; surpass; anticipate; prevent; (anteeo drop e)', 'verb', null, false),
 ('antidea', 'antidea', 'before, before this; formerly, previously, in the past', 'adverb', null, false),
 ('antidhac', 'antidhac', 'before this time, up til now; before now/then; previously, earlier; in the past', 'adverb', null, false),
 ('antidotus, antidoti, f.', 'antidotus', 'antidote, remedy', 'noun', null, false),
@@ -4511,16 +4518,16 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('antiquus, antiqui, m.', 'antiquus', 'men (pl.) of old, ancients, early authorities/writers; ancestors', 'noun', null, false),
 ('antiquum, antiqui, n.', 'antiquum', 'antiquity; things of olden times; old custom/habit', 'noun', null, false),
 ('antiquo, antiquare, antiquavi, antiquatus', 'antiquo', 'reject (bill); vote for the rejection', 'verb', null, false),
-('antiquarius, antiquarii, m.', 'antiquarius', 'antiquarian, student of the past', 'noun', null, false),
+('antiquarius, antiquarii, m.', 'antiquarius', 'antiquarian, student of the past', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('antiquarius, antiquaria, antiquarium', 'antiquarius', 'reading/copying ancient manuscripts (w/ars)', 'adjective', null, false),
 ('antiquatio, antiquationis, f.', 'antiquatio', 'abrogating, annulling', 'noun', null, false),
 ('antique', 'antique', 'in the old way, in an old fashioned manner', 'adverb', null, false),
 ('antiquitas, antiquitatis, f.', 'antiquitas', 'antiquity, the good old days; the ancients; virtues of olden times; being old', 'noun', null, false),
 ('antiquitus', 'antiquitus', 'formerly, in former/ancient/olden times, from antiquity; long ago/before', 'adverb', null, false),
 ('antirrinum, antirrini, n.', 'antirrinum', 'snapdragon, antirrhinum', 'noun', null, false),
-('antis, antis, m.', 'antis', 'rows (pl.) (vines/plants); ranks (soldiers); files (cavalry)', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('antis, antis, m.', 'antis', 'rows (pl.) (vines/plants); ranks (soldiers); files (cavalry)', 'noun', null, false),
 ('antiscius, antiscii, m.', 'antiscius', 'people (pl.) on other side of equator with shadows in the opposite direction', 'noun', null, false),
 ('antisophista, antisophistae, m.', 'antisophista', 'one who seeks to refute another, opponent in argument; counter-sophist', 'noun', null, false),
 ('antisto, antistare, antiseti', 'antisto', 'stand before; surpass, excel, be superior to', 'verb', null, false),
@@ -5013,16 +5020,16 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('arcanus, arcani, m.', 'arcanus', 'confidant, trustworthy friend, keeper of secrets', 'noun', null, false),
 ('arcanum, arcani, n.', 'arcanum', 'secret, mystery; secret/hidden place', 'noun', null, false),
 ('arcanus, arcana, arcanum', 'arcanus', 'secret, private, hidden; intimate, personal; confidential; mysterious, esoteric', 'adjective', null, false),
-('arcano', 'arcano', 'secretly, in confidence; in one''s inner thoughts, privately', 'adverb', null, false),
+('arcano', 'arcano', 'secretly, in confidence; in one''s inner thoughts, privately', 'adverb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('arcarius, arcarii, m.', 'arcarius', 'treasurer; controller of the public monies', 'noun', null, false),
 ('arcarius, arcaria, arcarium', 'arcarius', 'of/concerned with ready money, cash', 'adjective', null, false),
 ('arcatura, arcaturae, f.', 'arcatura', 'square landmark for surveyors', 'noun', null, false),
 ('arcelacus, arcelaca, arcelacum', 'arcelacus', 'variety of vine (arcelacae vites)', 'adjective', null, false),
 ('arcella, arcellae, f.', 'arcella', 'square landmark for surveyors', 'noun', null, false),
 ('arcellacus, arcellaca, arcellacum', 'arcellacus', 'variety of vine (arcelacae vites)', 'adjective', null, false),
-('arcellula, arcellulae, f.', 'arcellula', 'little/small box', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('arcellula, arcellulae, f.', 'arcellula', 'little/small box', 'noun', null, false),
 ('arcera, arcerae, f.', 'arcera', 'kind of covered carriage; the seven bright stars in Ursa Major', 'noun', null, false),
 ('arceracus, arceraca, arceracum', 'arceracus', 'variety of vine (arceracae vites)', 'adjective', null, false),
 ('arcerso, arcersere, arcersivi, arcersitus', 'arcerso', 'send for, summon; indict/accuse; fetch, import; invite; invoke; bring on oneself', 'verb', null, false),
@@ -5515,16 +5522,16 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('asportatio, asportationis, f.', 'asportatio', 'removal, carrying away', 'noun', null, false),
 ('aspratilis, aspratile', 'aspratilis', 'rough (of a stone), with rough scales', 'adjective', null, false),
 ('aspredo, aspredinis, f.', 'aspredo', 'roughness', 'noun', null, false),
-('aspretum, aspreti, n.', 'aspretum', 'rough/broken/uneven ground', 'noun', null, false),
+('aspretum, aspreti, n.', 'aspretum', 'rough/broken/uneven ground', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('aspriter', 'aspriter', 'by rough materials/harsh sound; coarsely/roughly; harshly/severely; drastically', 'adverb', null, false),
 ('aspritudo, aspritudinis, f.', 'aspritudo', 'roughness to touch, grittiness; unevenness (ground); (w/ocularum) trachoma', 'noun', null, false),
 ('aspuo, aspuere, aspui, asputus', 'aspuo', 'spit (at/on)', 'verb', null, false),
 ('assa, assae, f.', 'assa', 'dry-nurse, nurse, nanny', 'noun', null, false),
 ('assum, assi, n.', 'assum', 'sudatorium (pl.), sweating-bath, sauna', 'noun', null, false),
 ('assus, assa, assum', 'assus', 'roasted, baked; dry (from sunbathing); dry (w/o mortar); w/unaccompanied voice', 'adjective', null, false),
-('asso, assare, assavi, assatus', 'asso', 'roast, bake, broil; dry', 'verb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('asso, assare, assavi, assatus', 'asso', 'roast, bake, broil; dry', 'verb', null, false),
 ('assarius, assarii, m.', 'assarius', 'as (penny, copper) as a monetary unit', 'noun', null, false),
 ('assarius, assaria, assarium', 'assarius', 'roasted, browned (?); having the value/weight of an as (?)', 'adjective', null, false),
 ('assatura, assaturae, f.', 'assatura', 'roasted meat', 'noun', null, false),
@@ -5909,6 +5916,8 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('auditorium, auditorii, n.', 'auditorium', 'auditorium, lecture room, hall; body of listeners, audience; hearing a law case', 'noun', null, false),
 ('auditorius, auditoria, auditorium', 'auditorius', 'relating to a hearer or hearing', 'adjective', null, false),
 ('auditorialis, auditoriale', 'auditorialis', 'of/pertaining to a school', 'adjective', null, false),
+('aufero, auferre, abstuli, ablatus', 'aufero', 'bear/carry/take/fetch/sweep/snatch away/off, remove, withdraw; steal, obtain', 'verb', null, true),
+('aufero, auferre, apstuli, ablatus', 'aufero', 'bear/carry/take/fetch/sweep/snatch away/off, remove, withdraw; steal, obtain', 'verb', null, true),
 ('aufugio, aufugere, aufugi', 'aufugio', 'flee, flee from, shun; run/fly away, escape; disappear (things), vanish', 'verb', null, false),
 ('augeo, augere, auxi, auctus', 'augeo', 'increase, enlarge, augment; spread; honor, promote, raise; exalt; make a lot of', 'verb', null, true),
 ('auger, augeris, c.', 'auger', 'augur, one who interprets behavior of birds; diviner, seer, prophet, soothsayer', 'noun', null, false),
@@ -6015,7 +6024,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('aurilegulus, aurileguli, m.', 'aurilegulus', 'gold picker, gold collector', 'noun', null, false),
 ('auriolus, auriola, auriolum', 'auriolus', 'golden, made of gold, gold colored; beautiful, brilliant, excellent, splendid', 'adjective', null, false),
 ('auriphrygius, auriphrygia, auriphrygium', 'auriphrygius', 'gold-embroidered, embroidered with gold', 'adjective', null, false),
-('auriphrygiatus, auriphrygiata, auriphrygiatum', 'auriphrygiatus', 'gold-embroidered, embroidered with gold', 'adjective', null, false),
+('auriphrygiatus, auriphrygiata, auriphrygiatum', 'auriphrygiatus', 'gold-embroidered, embroidered with gold', 'adjective', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('auripigmentum, auripigmenti, n.', 'auripigmentum', 'yellow/trisulphide of arsenic, bright yellow dye mineral, yellow orpiment', 'noun', null, false),
 ('auris, auris, f.', 'auris', 'ear; hearing; a discriminating sense of hearing, "ear" (for); pin on plow', 'noun', null, true),
 ('auriscalpium, auriscalpii, n.', 'auriscalpium', 'ear-pick (medical instrument), probe', 'noun', null, false),
@@ -6024,9 +6035,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('aurochalcinus, aurochalcina, aurochalcinum', 'aurochalcinus', 'made of brass, brass-; of a gold-colored metal', 'adjective', null, false),
 ('aurora, aurorae, f.', 'aurora', 'dawn, daybreak, sunrise; goddess of the dawn; Orient/East, peoples of the East', 'noun', null, false),
 ('auroro, aurorare, auroravi, auroratus', 'auroro', 'shine like the sunrise', 'verb', null, false),
-('aurosus, aurosa, aurosum', 'aurosus', 'containing gold, gold-bearing; of the color of gold, like gold (L+S)', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('aurosus, aurosa, aurosum', 'aurosus', 'containing gold, gold-bearing; of the color of gold, like gold (L+S)', 'adjective', null, false),
 ('aurufex, auruficis, m.', 'aurufex', 'goldsmith', 'noun', null, false),
 ('aurugino, auruginare, auruginavi, auruginatus', 'aurugino', 'have jaundice, be affected with jaundice', 'verb', null, false),
 ('aurugineus, auruginea, aurugineum', 'aurugineus', 'golden/yellow (of color); jaundiced', 'adjective', null, false),
@@ -6517,7 +6526,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('bellicosus, bellicosa, bellicosum', 'bellicosus', 'warlike, fierce; fond of war', 'adjective', null, false),
 ('bellicrepus, bellicrepa, bellicrepum', 'bellicrepus', 'marked by sound of arms; [~a saltio => armed dance, dance in arms]', 'adjective', null, false),
 ('bellifer, bellifera, belliferum', 'bellifer', 'waging war, warring; warlike, martial; war-, battle-', 'adjective', null, false),
-('belliger, belligera, belligerum', 'belliger', 'waging war, warring; warlike, martial; war-, battle-', 'adjective', null, false),
+('belliger, belligera, belligerum', 'belliger', 'waging war, warring; warlike, martial; war-, battle-', 'adjective', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('belligero, belligerare, belligeravi, belligeratus', 'belligero', 'wage or carry on war; be at war', 'verb', null, false),
 ('belligeror, belligerari, belligeratus sum', 'belligeror', 'wage or carry on war; be at war', 'verb', null, false),
 ('belligerator, belligeratoris, m.', 'belligerator', 'warrior, combatant', 'noun', null, false),
@@ -6526,9 +6537,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('bellis, bellis, f.', 'bellis', 'flower (perh. daisy); (white daisy, ox-eye - L+S)', 'noun', null, false),
 ('bellisonus, bellisona, bellisonum', 'bellisonus', 'sounding of/like war/battle', 'adjective', null, false),
 ('bellitudo, bellitudinis, f.', 'bellitudo', 'elegance; beauty, loveliness', 'noun', null, false),
-('bellonaria, bellonariae, f.', 'bellonaria', 'plant (solanum) used by priests at festival of Bellona (goddess of war)', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('bellonaria, bellonariae, f.', 'bellonaria', 'plant (solanum) used by priests at festival of Bellona (goddess of war)', 'noun', null, false),
 ('bellosus, bellosa, bellosum', 'bellosus', 'warlike', 'adjective', null, false),
 ('Bellovacus, Bellovaci, m.', 'Bellovacus', 'Bellovaci, tribe of Gallia Belgica (near Rouen in Normandy) - Caesar', 'noun', null, false),
 ('bellua, belluae, f.', 'bellua', 'beast, wild animal (incl. sea creature); monster, brute (great size/ferocity)', 'noun', null, false),
@@ -7019,7 +7028,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('bregma, bregmae, f.', 'bregma', 'defect/disease of pepper tree', 'noun', null, false),
 ('brephotrophus, brephotrophi, m.', 'brephotrophus', 'one who brings up foundlings; foster carer', 'noun', null, false),
 ('brephotropheum, brephotrophei, n.', 'brephotropheum', 'foundling hospital; orphanage', 'noun', null, false),
-('brephotrophium, brephotrophii, n.', 'brephotrophium', 'foundling hospital; orphanage', 'noun', null, false),
+('brephotrophium, brephotrophii, n.', 'brephotrophium', 'foundling hospital; orphanage', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('breve, brevis, n.', 'breve', 'shallow water, shallows; a short/brief space of time; short speech, a few words', 'noun', null, false),
 ('brevi', 'brevi', 'in a short time; shortly, briefly; in a few words; [in brevi => in brief]', 'adverb', null, false),
 ('brevium, brevii, n.', 'brevium', 'brief, abstract, epitome; summary document; Papal documents on minor matters', 'noun', null, false),
@@ -7028,9 +7039,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('breviarius, breviaria, breviarium', 'breviarius', 'in brief form, summary; abridged', 'adjective', null, false),
 ('breviatio, breviationis, f.', 'breviatio', 'shortening', 'noun', null, false),
 ('breviator, breviatoris, m.', 'breviator', 'epitomiser, abridger; author of a breviarium (summary statement)', 'noun', null, false),
-('breviculus, breviculi, m.', 'breviculus', 'short writing; summary', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('breviculus, breviculi, m.', 'breviculus', 'short writing; summary', 'noun', null, false),
 ('breviculus, brevicula, breviculum', 'breviculus', 'very/rather short/small; quite brief (time)', 'adjective', null, false),
 ('breviloquus, breviloqua, breviloquum', 'breviloquus', 'short in speech, brief; concise; speaking briefly', 'adjective', null, false),
 ('breviloquis, breviloque', 'breviloquis', 'short in speech, brief; concise; speaking briefly', 'adjective', null, false),
@@ -7521,7 +7530,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('caldor, caldoris, m.', 'caldor', 'heat, warmth', 'noun', null, false),
 ('caleco, calecare, calecavi, calecatus', 'caleco', 'coat with lime/whitewash, whitewash', 'verb', null, false),
 ('Caledonia, Caledoniae, f.', 'Caledonia', 'Caledonia, Scotland, northern part of Britain', 'noun', null, false),
-('calefacio, calefacere, calefeci, calefactus', 'calefacio', 'make warm/hot (exert/ferment); heat; excite/rouse; vex/trouble; pursue eagerly', 'verb', null, false),
+('calefacio, calefacere, calefeci, calefactus', 'calefacio', 'make warm/hot (exert/ferment); heat; excite/rouse; vex/trouble; pursue eagerly', 'verb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('calefactus, calefactus, m.', 'calefactus', 'action of heating/warming', 'noun', null, false),
 ('calefactus, calefacta, calefactum', 'calefactus', 'heated, warmed; excited, roused; [calefacta ora => flushed]', 'adjective', null, false),
 ('calefacto, calefactare, calefactavi, calefactatus', 'calefacto', 'heat, warm; make a person warm by beating', 'verb', null, false),
@@ -7530,9 +7541,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('calefactorius, calefactoria, calefactorium', 'calefactorius', 'that has a warming/heating power; warming', 'adjective', null, false),
 ('Calenda, Calendae, f.', 'Calenda', 'Kalends (pl.), 1st of month; abb. Kal./Kl.; day of proclamation, interest due', 'noun', null, false),
 ('calendarium, calendarii, n.', 'calendarium', 'calendar; ledger/account book (for monthly interest payments)', 'noun', null, false),
-('calenter', 'calenter', 'skillfully, cunningly', 'adverb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('calenter', 'calenter', 'skillfully, cunningly', 'adverb', null, false),
 ('calesco, calescere', 'calesco', 'grow/become warm/hot; be heated; become inflamed (w/love/lust); be inspired', 'verb', null, false),
 ('calfacio, calfacere, calfeci, calfactus', 'calfacio', 'make warm/hot (exert/ferment); heat; excite/rouse; vex/trouble; pursue eagerly', 'verb', null, false),
 ('calficio, calficere', 'calficio', 'make warm/hot (exertion/fermentation); heat; excite, rouse; vex, trouble', 'verb', null, false),
@@ -8023,7 +8032,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('carchesium, carchesii, n.', 'carchesium', 'type of drinking-cup/beaker; mast-head of ship; kind of derrick, crane', 'noun', null, false),
 ('carcinodes, carcinodis, n.', 'carcinodes', 'cancerous disease; cancer', 'noun', null, false),
 ('carcinoma, carcinomatis, n.', 'carcinoma', 'ulcer or tumor (malignant?); (term of reproach by Augustus for Julia/Agrippa)', 'noun', null, false),
-('cardamum, cardami, n.', 'cardamum', 'cress-like plant; (pure Latin nasturtium)', 'noun', null, false),
+('cardamum, cardami, n.', 'cardamum', 'cress-like plant; (pure Latin nasturtium)', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('cardamina, cardaminae, f.', 'cardamina', 'cress-like plant', 'noun', null, false),
 ('cardamomum, cardamomi, n.', 'cardamomum', 'cardamom (Elettaris cardamomum); its seeds (used in medicine/spice)', 'noun', null, false),
 ('cardelis, cardelis, f.', 'cardelis', 'goldfinch (Fringilla carduelis); thistle-finch (L+S)', 'noun', null, false),
@@ -8032,9 +8043,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('cardimoma, cardimomae, f.', 'cardimoma', 'pain in stomach, stomach ache', 'noun', null, false),
 ('cardinalis, cardinale', 'cardinalis', 'cardinal/principle/chief; that serves as pivot/on which something turns/depends', 'adjective', null, false),
 ('cardinaliter', 'cardinaliter', 'chiefly, principally; especially', 'adverb', null, false),
-('cardinatus, cardinata, cardinatum', 'cardinatus', 'mortised; hinged to', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('cardinatus, cardinata, cardinatum', 'cardinatus', 'mortised; hinged to', 'adjective', null, false),
 ('cardineus, cardinea, cardineum', 'cardineus', 'of/by hinges; of/pertaining to door-hinge; E:of a cardinal (Latham)', 'adjective', null, false),
 ('cardo, cardinis, m.', 'cardo', 'hinge; pole, axis; chief point/circumstance; crisis; tenon/mortise; area; limit', 'noun', null, true),
 ('carduus, cardui, m.', 'carduus', 'thistle; prickly bur/seed-vessel; cardoon (artichoke-like vegetable)', 'noun', null, false),
@@ -8525,7 +8534,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('celebratio, celebrationis, f.', 'celebratio', 'celebrating a festival/mass; throng/crowd, audience/gathering; common use/vogue', 'noun', null, false),
 ('celebrator, celebratoris, m.', 'celebrator', 'one who celebrates/extols', 'noun', null, false),
 ('celebresco, celebrescere', 'celebresco', 'become famous/renowned/celebrated', 'verb', null, false),
-('celebritas, celebritatis, f.', 'celebritas', 'crowded conditions, crowding, multitude; fame, renown, reputation; frequency', 'noun', null, false),
+('celebritas, celebritatis, f.', 'celebritas', 'crowded conditions, crowding, multitude; fame, renown, reputation; frequency', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('celebriter', 'celebriter', 'solemnly; ceremonially', 'adverb', null, false),
 ('Celer, Celeris, m.', 'Celer', 'knights (pl.) (old name/precursor of equestrian order); Roman kings'' bodyguard', 'noun', null, false),
 ('celero, celerare, celeravi, celeratus', 'celero', 'quicken/accelerate; make haste, act quickly/be quick; hasten, hurry, do quickly', 'verb', null, true),
@@ -8534,9 +8545,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('celere', 'celere', 'quickly/rapidly/speedily; hastily; soon/at an early moment; in a short period', 'adverb', null, false),
 ('celeripes, celeripedis', 'celeripes', 'swift-footed; swift of foot', 'adjective', null, false),
 ('celeritudo, celeritudinis, f.', 'celeritudo', 'speed; swiftness', 'noun', null, false),
-('celeriuscule', 'celeriuscule', 'rather rapidly; somewhat quickly', 'adverb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('celeriuscule', 'celeriuscule', 'rather rapidly; somewhat quickly', 'adverb', null, false),
 ('celes, celetis, m.', 'celes', 'small/fast boat, yacht; (statue of) a race horse', 'noun', null, false),
 ('celeuma, celeumae, f.', 'celeuma', 'call of bosun giving time to rowers; song. shout (Ecc)', 'noun', null, false),
 ('celeuma, celeumatis, n.', 'celeuma', 'call of bosun giving time to rowers; song, shout (Ecc)', 'noun', null, false),
@@ -9027,7 +9036,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('cholera, cholerae, f.', 'cholera', 'European/summer cholera (cholera nostras); an attack of cholera', 'noun', null, false),
 ('cholericus, cholerici, m.', 'cholericus', 'person suffering from European cholera', 'noun', null, false),
 ('choliambus, choliambi, m.', 'choliambus', 'limping iambus; (iambic verse whose last foot not iambus but spondee/trochee)', 'noun', null, false),
-('choma, chomatis, n.', 'choma', 'bank, mound; dike, dam', 'noun', null, false),
+('choma, chomatis, n.', 'choma', 'bank, mound; dike, dam', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('chondris, chondris, f.', 'chondris', 'plant; (bastard dittany?)', 'noun', null, false),
 ('chondrylla, chondryllae, f.', 'chondrylla', 'plant, gum succory? (Chondrilla funcea); Spanish savory, endive/chicory (L+S)', 'noun', null, false),
 ('chora, chorae, f.', 'chora', 'site for a monument', 'noun', null, false),
@@ -9036,9 +9047,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('choragium, choragii, n.', 'choragium', 'place where chorus practiced; preparing chorus; splendid preparation; a spring', 'noun', null, false),
 ('choragius, choragii, m.', 'choragius', 'theatrical supplier, one supplying equipment/properties to dramatic company', 'noun', null, false),
 ('choragiarius, choragiarii, m.', 'choragiarius', 'supplier of stage equipment/properties/gear/trappings', 'noun', null, false),
-('choraula, choraulae, m.', 'choraula', 'player on reed pipes; flute player (L+S)', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('choraula, choraulae, m.', 'choraula', 'player on reed pipes; flute player (L+S)', 'noun', null, false),
 ('choraulicus, choraulica, choraulicum', 'choraulicus', 'of/belonging to player on reed pipes; of/belonging to flute player (L+S)', 'adjective', null, false),
 ('chorda, chordae, f.', 'chorda', 'tripe; catgut, musical instrument (string); rope/cord (binding slave) (L+S)', 'noun', null, false),
 ('chordus, chorda, chordum', 'chordus', 'late-born/produced out of/late in season; second (crop of hay), aftermath', 'adjective', null, false),
@@ -9128,6 +9137,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('chyrogryllius, chyrogryllii, m.', 'chyrogryllius', 'coney (of King James Bible, small gregarious quadruped (Hydrax Syriacus); hare', 'noun', null, false),
 ('chytropus, chytropodis, m.', 'chytropus', 'chafing dish/pot with feet (for cooking directly over coals on ground)', 'noun', null, false),
 ('cieo, ciere, civi, citus', 'cieo', 'move, set in motion; excite/rouse/stir up; urge on; summon/muster/call up', 'verb', null, true),
+('cio, cire, civi, citus', 'cio', 'move, set in motion; excite/rouse/stir up; urge on; summon/muster/call up', 'verb', null, false),
 ('cibo, cibare, cibavi, cibatus', 'cibo', 'feed, give food/fodder to animals/men; (also passive sense) eat, take food', 'verb', null, false),
 ('cibalis, cibale', 'cibalis', 'of/pertaining to food; [w/fistula => esophagus/gullet]', 'adjective', null, false),
 ('cibarium, cibarii, n.', 'cibarium', 'ration/allowance of food (pl.); food, provisions; food for animals, feed/fodder', 'noun', null, false),
@@ -9274,6 +9284,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('circitorius, circitoria, circitorium', 'circitorius', 'of/pertaining to patrols', 'adjective', null, false),
 ('circlus, circli, m.', 'circlus', 'circle; orbit, zone; ring, hoop; belt, collar; company; cycle; circumference', 'noun', null, false),
 ('circuago, circuagere, circuegi, circuactus', 'circuago', 'drive/lead around; turn (around); wheel, revolve; upset; change opinions, sway', 'verb', null, false),
+('circueo, circuire, circuivi, circuitus', 'circueo', 'encircle, surround; border; skirt; circulate/wander through; go/measure round', 'verb', null, false),
 ('circuitus, circuitus, m.', 'circuitus', 'going round; patrol/circuit; way/path round; circumference; outer surface/edge', 'noun', null, true),
 ('circuitio, circuitionis, f.', 'circuitio', 'rotation, revolution; rate of revolution; orbit; circumference; circumlocution', 'noun', null, false),
 ('circuitor, circuitoris, m.', 'circuitor', 'person who goes round; patrol/watchman, overseer/inspector; hawker, peddler', 'noun', null, false),
@@ -9339,6 +9350,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('circumequito, circumequitare, circumequitavi, circumequitatus', 'circumequito', 'ride around', 'verb', null, false),
 ('circumerro, circumerrare, circumerravi, circumerratus', 'circumerro', 'wander/prowl/meander/stroll/hover around; orbit, go around in orbit (planet)', 'verb', null, false),
 ('circumfarcio, circumfarcire, circumfarsi, circumfartus', 'circumfarcio', 'pack/stuff/cram round (with)', 'verb', null, false),
+('circumfero, circumferre, circumtuli, circumlatus', 'circumfero', 'carry/hand/pass/spread/move/take/cast around (in circle); publicize; divulge', 'verb', null, false),
 ('circumferentia, circumferentiae, f.', 'circumferentia', 'circumference', 'noun', null, false),
 ('circumfigo, circumfigere, circumfixi, circumfixus', 'circumfigo', 'fix/fasten/secure all around', 'verb', null, false),
 ('circumfingo, circumfingere, circumfinxi, circumfictus', 'circumfingo', 'form around', 'verb', null, false),
@@ -9463,6 +9475,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('circumquaque', 'circumquaque', 'on every side; all around', 'adverb', null, false),
 ('circumrado, circumradere, circumrasi, circumrasus', 'circumrado', 'scrape/shave/pare around', 'verb', null, false),
 ('circumrasio, circumrasionis, f.', 'circumrasio', 'action of scraping round surface (of); scraping/paring around', 'noun', null, false),
+('circumrefero, circumreferre, circumretuli, circumrelatus', 'circumrefero', 'bring/tell round again', 'verb', null, false),
 ('circumretio, circumretire, circumretivi, circumretitus', 'circumretio', 'encircle with a net; ensnare', 'verb', null, false),
 ('circumrodo, circumrodere, circumrosi, circumrosus', 'circumrodo', 'nibble/gnaw/talk all round, eat off outer part of; speak about; slander', 'verb', null, false),
 ('circumroro, circumrorare, circumroravi, circumroratus', 'circumroro', 'sprinkle (water) over/round', 'verb', null, false),
@@ -9525,7 +9538,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('circumteneo, circumtenere, circumtenui, circumtentus', 'circumteneo', 'posses; keep/hold around', 'verb', null, false),
 ('circumtendo, circumtendere, circumtetendi, circumtentus', 'circumtendo', 'cover/surround by stretching', 'verb', null, false),
 ('circumtentus, circumtenta, circumtentum', 'circumtentus', 'covered/bound with (something); that is stretched/drawn around; begirt', 'adjective', null, false),
-('circumtero, circumterere, circumtrivi, circumtritus', 'circumtero', 'rub/press/stand close/crowd on all sides; wear/rub away all around', 'verb', null, false),
+('circumtero, circumterere, circumtrivi, circumtritus', 'circumtero', 'rub/press/stand close/crowd on all sides; wear/rub away all around', 'verb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('circumtergeo, circumtergere, circumtersi, circumtersus', 'circumtergeo', 'wipe/rub round about/all around', 'verb', null, false),
 ('circumtermino, circumterminare, circumterminavi, circumterminatus', 'circumtermino', 'bound/limit round about/all around', 'verb', null, false),
 ('circumtextum, circumtexti, n.', 'circumtextum', 'garment inwoven with purple', 'noun', null, false),
@@ -9538,9 +9553,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('circumtorqueo, circumtorquere, circumtosi, circumtortus', 'circumtorqueo', 'pull/twist/turn/wind/bend/spin round', 'verb', null, false),
 ('circumtremo, circumtremere, circumtremui', 'circumtremo', 'shake/tremble all around', 'verb', null, false),
 ('circumtueor, circumtueri, circumtutus sum', 'circumtueor', 'look around', 'verb', null, false),
-('circumtumulatus, circumtumulata, circumtumulatum', 'circumtumulatus', 'piled up around', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('circumtumulatus, circumtumulata, circumtumulatum', 'circumtumulatus', 'piled up around', 'adjective', null, false),
 ('circumundique', 'circumundique', 'round about on all sides; from everywhere around', 'adverb', null, false),
 ('circumustus, circumusta, circumustum', 'circumustus', 'burnt round/around/on all sides', 'adjective', null, false),
 ('circumvado, circumvadere, circumvasi', 'circumvado', 'form a ring round, surround, encompass, beset, attack/assail on every side', 'verb', null, false),
@@ -10027,11 +10040,14 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('codex, codicis, m.', 'codex', 'trunk of tree; piece/block of wood; blockhead; (bound) book; note/account book', 'noun', null, false),
 ('codicarius, codicarii, m.', 'codicarius', 'bargeman, lighterman; (esp. those who brought grain from Ostia to Rome (L+S))', 'noun', null, false),
 ('codicarius, codicaria, codicarium', 'codicarius', 'kind of barge/lighter (w/navis)', 'adjective', null, false),
-('codicellus, codicelli, m.', 'codicellus', 'notepad, small log; writing tablets; patent; petition to Emperor; will/codicil', 'noun', null, false),
+('codicellus, codicelli, m.', 'codicellus', 'notepad, small log; writing tablets; patent; petition to Emperor; will/codicil', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('codicillus, codicilli, m.', 'codicillus', 'notepad, small log; writing tablets; patent; petition to Emperor; will/codicil', 'noun', null, false),
 ('codicillaris, codicillare', 'codicillaris', 'named/appointed by written order of Emperor/in Emperor''s handwriting', 'adjective', null, false),
 ('codicillarius, codicillaria, codicillarium', 'codicillarius', 'named/appointed by written order of Emperor/in Emperor''s handwriting', 'adjective', null, false),
 ('codicula, codiculae, f.', 'codicula', 'little tail', 'noun', null, false),
+('coeo, coire, coivi, coitus', 'coeo', 'fit together; have sexual intercourse; collect/gather (fluid); meet; rally', 'verb', null, false),
 ('coel', 'coel', 'sky, heaven; universe, world; space; air, weather; Jehovah; (shortened form)', 'noun', null, false),
 ('coelus, coeli, m.', 'coelus', 'sky, heaven, heavens; space; air, climate, weather; universe, world; Jehovah', 'noun', null, false),
 ('coelum, coeli, n.', 'coelum', 'sky, heaven, heavens; space; air, climate, weather; universe, world; Jehovah', 'noun', null, false),
@@ -10040,9 +10056,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('coeles, coelitis, m.', 'coeles', 'the_Gods (usu. pl.); divinity, dweller in heaven; saint (Ecc)', 'noun', null, false),
 ('coeles, coelitis', 'coeles', 'heavenly; celestial; (not found classical in NOM S)', 'adjective', null, false),
 ('coelestis, coeleste', 'coelestis', 'heavenly, of heavens/sky, from heaven/sky; celestial; divine; of the_Gods', 'adjective', null, false),
-('coeleste, coelestis, n.', 'coeleste', 'supernatural/heavenly matters (pl.); heavenly bodies; astronomy', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('coeleste, coelestis, n.', 'coeleste', 'supernatural/heavenly matters (pl.); heavenly bodies; astronomy', 'noun', null, false),
 ('coelestis, coelestis, c.', 'coelestis', 'divinity, god/goddess; god-like person; the_Gods (pl.); heavenly bodies', 'noun', null, false),
 ('coeliaca, coeliacae, f.', 'coeliaca', 'remedy/medicine for bowel/stomach/abdomen pains/disease', 'noun', null, false),
 ('coeliacus, coeliaci, m.', 'coeliacus', 'person having disease/pain/suffering in bowels; (or stomach/abdomen L+S)', 'noun', null, false),
@@ -10528,7 +10542,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('comiva, comivae, f.', 'comiva', 'county, earldom (England); county court (attendance/fine for non-attendance)', 'noun', null, false),
 ('comma, commae, f.', 'comma', 'phrase, part of a line; division of a period (L+S); comma, punctuation mark', 'noun', null, false),
 ('commacero, commacerare, commaceravi, commaceratus', 'commacero', 'macerate, soften by steeping in liquid', 'verb', null, false),
-('commaceratio, commacerationis, f.', 'commaceratio', 'dissolution, maceration, steeping to soften', 'noun', null, false),
+('commaceratio, commacerationis, f.', 'commaceratio', 'dissolution, maceration, steeping to soften', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('commacesco, commacescere', 'commacesco', 'grow lean', 'verb', null, false),
 ('commaculo, commaculare, commaculavi, commaculatus', 'commaculo', 'stain deeply, pollute, defile; contaminate, defile morally; sully (reputation)', 'verb', null, false),
 ('commadeo, commadere, commadui', 'commadeo', 'become tender or sodden; become very soft (L+S)', 'verb', null, false),
@@ -10542,9 +10558,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('commanduco, commanducare, commanducavi, commanducatus', 'commanduco', 'chew up, chew/masticate thoroughly; chew to pieces (L+S)', 'verb', null, false),
 ('commanducor, commanducari, commanducatus sum', 'commanducor', 'chew up, chew/masticate thoroughly; chew to pieces (L+S)', 'verb', null, false),
 ('commanducatio, commanducationis, f.', 'commanducatio', 'chewing, mastication', 'noun', null, false),
-('commanifesto, commanifestare, commanifestavi, commanifestatus', 'commanifesto', 'manifest together', 'verb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('commanifesto, commanifestare, commanifestavi, commanifestatus', 'commanifesto', 'manifest together', 'verb', null, false),
 ('commaniplus, commanipli, m.', 'commaniplus', 'soldier/comrade of same maniple; fellow soldier', 'noun', null, false),
 ('commaniplaris, commaniplaris, m.', 'commaniplaris', 'soldier/comrade of same maniple; fellow soldier', 'noun', null, false),
 ('commanipulus, commanipuli, m.', 'commanipulus', 'soldier/comrade of same maniple; fellow soldier', 'noun', null, false),
@@ -10830,6 +10844,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('compensato', 'compensato', 'with compensation/reward', 'adverb', null, false),
 ('comperco, compercere, compercui, compersus', 'comperco', 'save, husband well, lay up; forbear/abstain/refrain from (w/INF), spare (w/DAT)', 'verb', null, false),
 ('comperco, compercere, compersi, compersus', 'comperco', 'save, husband well, lay up; forbear/abstain/refrain from (w/INF), spare (w/DAT)', 'verb', null, false),
+('compereo, comperire, comperivi, comperitus', 'compereo', 'perish together', 'verb', null, false),
 ('comperegrinus, comperegrini, m.', 'comperegrinus', 'fellow-stranger', 'noun', null, false),
 ('comperendinus, comperendina, comperendinum', 'comperendinus', 'on which an adjourned trial is resumed (of a day)', 'adjective', null, false),
 ('comperendino, comperendinare, comperendinavi, comperendinatus', 'comperendino', 'adjourn trial of a person; adjourn trial; (for two days or later)', 'verb', null, false),
@@ -11029,7 +11044,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('concalesco, concalescere, concalui', 'concalesco', 'become/grow warm; warm up (with enthusiasm); glow with love (L+S)', 'verb', null, false),
 ('concalfacio, concalfacere, concalfeci, concalfactus', 'concalfacio', 'heat; make warm, warm thoroughly (L+S)', 'verb', null, false),
 ('concalfactorius, concalfactoria, concalfactorium', 'concalfactorius', 'causing warmth, thermogenic; (medical); warming, suitable for warming (L+S)', 'adjective', null, false),
-('concallesco, concallescere, concallui', 'concallesco', 'grow/become hard/hardened/callous/insensitive/shrewd/insensible/dull/obtuse', 'verb', null, false),
+('concallesco, concallescere, concallui', 'concallesco', 'grow/become hard/hardened/callous/insensitive/shrewd/insensible/dull/obtuse', 'verb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('concamaro, concamarare, concamaravi, concamaratus', 'concamaro', 'cover with an arch/vault, vault over', 'verb', null, false),
 ('concamaratus, concamarata, concamaratum', 'concamaratus', 'vaulted, arched', 'adjective', null, false),
 ('concamaratio, concamarationis, f.', 'concamaratio', 'vaulting; vaulted roof; vault', 'noun', null, false),
@@ -11044,9 +11061,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('concastigo, concastigare, concastigavi, concastigatus', 'concastigo', 'chastise severely/thoroughly, punish; censure, dress down', 'verb', null, false),
 ('concatus, concata, concatum', 'concatus', 'fouled w/excrement; [catillus ~ => mince/hash => SOS/chipped beef on toast]', 'adjective', null, false),
 ('concateno, concatenare, concatenavi, concatenatus', 'concateno', 'link/bind together; connect', 'verb', null, false),
-('concatenatio, concatenationis, f.', 'concatenatio', 'connecting/joining; concatenation, sequence; fettering, binding', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('concatenatio, concatenationis, f.', 'concatenatio', 'connecting/joining; concatenation, sequence; fettering, binding', 'noun', null, false),
 ('concatervatus, concatervata, concatervatum', 'concatervatus', 'heaped/crowed together', 'adjective', null, false),
 ('concavum, concavi, n.', 'concavum', 'void, gap, hollow space', 'noun', null, false),
 ('concavus, concava, concavum', 'concavus', 'hollow/hollowed out; concave/curving inward; arched; bent/curved; sunken (eyes)', 'adjective', null, false),
@@ -11104,6 +11119,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('conchylilegulus, conchylileguli, m.', 'conchylilegulus', 'collector of mussels; he who goes in quest for murex/purple-fish (Leverett)', 'noun', null, false),
 ('conchyta, conchytae, m.', 'conchyta', 'one who harvests/gathers mollusks/murex/oysters', 'noun', null, false),
 ('concio, concire, concivi, concitus', 'concio', 'move, set in violent motion, stir up; muster; rouse, excite, incite, provoke', 'verb', null, false),
+('concieo, concire, concivi, concitus', 'concieo', 'move, set in violent motion, stir up; muster; rouse, excite, incite, provoke', 'verb', null, false),
 ('conciens, concientis', 'conciens', 'pregnant, teeming, full', 'adjective', null, false),
 ('concilio, conciliare, conciliavi, conciliatus', 'concilio', 'unite, bring together/about; cause; win over, attract; acquire, procure, buy', 'verb', null, true),
 ('conciliabulum, conciliabuli, n.', 'conciliabulum', 'meeting/assembly/public place; district administrative center; meeting/assembly', 'noun', null, false),
@@ -11530,7 +11546,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('conformitas, conformitatis, f.', 'conformitas', 'likeness; conformity (Ecc); agreement', 'noun', null, false),
 ('confornico, confornicare, confornicavi, confornicatus', 'confornico', 'vault over, over-arch, cover with an arched roof', 'verb', null, false),
 ('confornicatio, confornicationis, f.', 'confornicatio', 'arching/vaulting over (of a space)', 'noun', null, false),
-('conforto, confortare, confortavi, confortatus', 'conforto', 'strengthen very much; (reinforce, fortify); console, comfort (Bee); encourage', 'verb', null, false),
+('conforto, confortare, confortavi, confortatus', 'conforto', 'strengthen very much; (reinforce, fortify); console, comfort (Bee); encourage', 'verb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('confortatio, confortationis, f.', 'confortatio', 'comfort, consolation, solace', 'noun', null, false),
 ('confossus, confossa, confossum', 'confossus', 'punctured, pierced; pierced through; full of holes', 'adjective', null, false),
 ('confoveo, confovere, confovi, confotus', 'confoveo', 'care for, tend; warm (L+S); foster; cherish assiduously', 'verb', null, false),
@@ -11546,9 +11564,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('confragose', 'confragose', 'roughly, unevenly', 'adverb', null, false),
 ('confrater, confratris, m.', 'confrater', 'brother; colleague, confrere, fellow; guild brother', 'noun', null, false),
 ('confratria, confratriae, f.', 'confratria', 'sodality, society', 'noun', null, false),
-('confrax, confragis, c.', 'confrax', 'places (pl.) exposed on all sides to the winds; (L+S)', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('confrax, confragis, c.', 'confrax', 'places (pl.) exposed on all sides to the winds; (L+S)', 'noun', null, false),
 ('confremo, confremere, confremui', 'confremo', 'resound, ring, echo; make a noise; murmur loudly', 'verb', null, false),
 ('confrequento, confrequentare, confrequentavi, confrequentatus', 'confrequento', 'visit frequently/in large numbers, frequent; increase in numbers', 'verb', null, false),
 ('confrio, confriare, confriavi, confriatus', 'confrio', 'cover with power (or the like); rub in (L+S)', 'verb', null, false),
@@ -12032,7 +12048,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('conpotatio, conpotationis, f.', 'conpotatio', 'drinking party; (translation of the Greek);  a drink/drinking together (L+S)', 'noun', null, false),
 ('conpotens, conpotentis', 'conpotens', 'that is able (to grant a prayer); having power with one (epithet of Diana L+S)', 'adjective', null, false),
 ('conpotio, conpotire, conpotivi, conpotitus', 'conpotio', 'put in possession of, make partaker of; (PASS) attain; obtain, come into (L+S)', 'verb', null, false),
-('conpotor, conpotoris, m.', 'conpotor', 'drinking-companion/buddy', 'noun', null, false),
+('conpotor, conpotoris, m.', 'conpotor', 'drinking-companion/buddy', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('conpotrix, conpotricis, f.', 'conpotrix', 'drinking-companion (female); (bar girl?)', 'noun', null, false),
 ('conpraecido, conpraecidere, conpraecidi, conpraecisus', 'conpraecido', 'cut each other off; cut off at the same time (?) (L+S)', 'verb', null, false),
 ('conpraes, conpraedis, m.', 'conpraes', 'joint-surety', 'noun', null, false),
@@ -12048,9 +12066,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('conprensio, conprensionis, f.', 'conprensio', 'arrest, grasping; comprehension, understanding; classifying; idea, perception', 'noun', null, false),
 ('conpressus, conpressus, m.', 'conpressus', 'compression, pressure; closing, pressing together; embracing/copulation', 'noun', null, false),
 ('conpressus, conpressa, conpressum', 'conpressus', 'constricted/narrow/pressed together; bound/tight (bowels), constipated, binding', 'adjective', null, false),
-('conpresse', 'conpresse', 'briefly, succinctly, in a compressed manner; urgently, pressingly', 'adverb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('conpresse', 'conpresse', 'briefly, succinctly, in a compressed manner; urgently, pressingly', 'adverb', null, false),
 ('conpressio, conpressionis, f.', 'conpressio', 'squeezing, compression; sexual embrace, copulation; abridging, compression', 'noun', null, false),
 ('conpressor, conpressoris, m.', 'conpressor', 'ravisher, rapist; one who presses/compresses (L+S)', 'noun', null, false),
 ('conprimo, conprimere, conpressi, conpressus', 'conprimo', 'press/squeeze together, fold, crush; hem/shut/keep/hold in; copulate (male)', 'verb', null, false),
@@ -12534,7 +12550,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('contemplor, contemplari, contemplatus sum', 'contemplor', 'observe/note/notice, gaze/look hard at, regard; contemplate/consider carefully', 'verb', null, false),
 ('contemplabilis, contemplabile', 'contemplabilis', 'aiming, taking aim', 'adjective', null, false),
 ('contemplabiliter', 'contemplabiliter', 'taking aim', 'adverb', null, false),
-('contemplabundus, contemplabunda, contemplabundum', 'contemplabundus', 'considering/contemplating attentively', 'adjective', null, false),
+('contemplabundus, contemplabunda, contemplabundum', 'contemplabundus', 'considering/contemplating attentively', 'adjective', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('contemplatus, contemplatus, m.', 'contemplatus', 'contemplation, pondering; consideration (L+S); observance; regard, respect', 'noun', null, false),
 ('contemplatio, contemplationis, f.', 'contemplatio', 'view, survey; taking aim; contemplation, consideration, study; meditation', 'noun', null, false),
 ('contemplativus, contemplativa, contemplativum', 'contemplativus', 'theoretical, speculative; contemplative', 'adjective', null, false),
@@ -12550,9 +12568,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('contemptus, contempta, contemptum', 'contemptus', 'despised, despicable, paltry, mean; contemptible, vile', 'adjective', null, false),
 ('contempte', 'contempte', 'with great/greater/greatest contempt; contemptibly, despicably', 'adverb', null, false),
 ('contemptibilis, contemptibile', 'contemptibilis', 'contemptible, worthless', 'adjective', null, false),
-('contemptibilitas, contemptibilitatis, f.', 'contemptibilitas', 'contemptibleness', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('contemptibilitas, contemptibilitatis, f.', 'contemptibilitas', 'contemptibleness', 'noun', null, false),
 ('contemptim', 'contemptim', 'contemptuously, with contempt, scornfully; fearlessly, without regard to danger', 'adverb', null, false),
 ('contemptio, contemptionis, f.', 'contemptio', 'contempt/scorn/destain (act/state); (act) disregard/paying no attention to', 'noun', null, false),
 ('contemptor, contemptoris, m.', 'contemptor', 'despiser; one who looks down on/scorns; who disregards/pays no heed (to life)', 'noun', null, false),
@@ -12678,6 +12694,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('contradictio, contradictionis, f.', 'contradictio', 'objection; contradiction; opposition; argument against, counter-argument; reply', 'noun', null, false),
 ('contradictor, contradictoris, m.', 'contradictor', 'opponent, one who replies/objects', 'noun', null, false),
 ('contradictorius, contradictoria, contradictorium', 'contradictorius', 'containing an objection/contradiction', 'adjective', null, false),
+('contraeo, contraire, contraivi, contraitus', 'contraeo', 'go against, oppose; make resistance; (w/DAT)', 'verb', null, false),
 ('contrafactio, contrafactionis, f.', 'contrafactio', 'setting in opposition, contrast', 'noun', null, false),
 ('contrajuris, contrajure', 'contrajuris', 'unlawful, illegal, contrary to law', 'adjective', null, false),
 ('contrapono, contraponere, contraposui, contrapositus', 'contrapono', 'put/place/set/station against/opposite; place in opposition', 'verb', null, false),
@@ -12696,6 +12713,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('contraversia, contraversiae, f.', 'contraversia', 'controversy/dispute; debate; moot case debated in school, forensic exercise', 'noun', null, false),
 ('contraversim', 'contraversim', 'in reverse (as in a mirror)', 'adverb', null, false),
 ('contraversum', 'contraversum', 'on the contrary, on the other hand', 'adverb', null, false),
+('contreo, contrire, contrivi, contritus', 'contreo', 'destroy, crush; go against', 'verb', null, false),
 ('contrectus, contrecta, contrectum', 'contrectus', 'violated; dishonored; touched carnally; stolen, purloined, taken by stealth', 'adjective', null, false),
 ('contrecto, contrectare, contrectavi, contrectatus', 'contrecto', 'touch repeatedly, handle, finger; feel; handle unlawfully (theft/embezzlement)', 'verb', null, false),
 ('contrectabilis, contrectabile', 'contrectabilis', 'that may be felt/handled', 'adjective', null, false),
@@ -13034,7 +13052,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('cornifer, cornifera, corniferum', 'cornifer', 'horn-bearing, horned; having horns/antlers', 'adjective', null, false),
 ('cornifrons, cornifrontis', 'cornifrons', 'horned; having horns on the forehead', 'adjective', null, false),
 ('cornigera, cornigerae, f.', 'cornigera', 'hind; doe, female deer (esp. after third year)', 'noun', null, false),
-('corniger, cornigeri, n.', 'corniger', 'horn-bearing/horned animals/cattle (pl.)', 'noun', null, false),
+('corniger, cornigeri, n.', 'corniger', 'horn-bearing/horned animals/cattle (pl.)', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('corniger, cornigeri, c.', 'corniger', 'horn-bearing/horned animal', 'noun', null, false),
 ('corniger, cornigera, cornigerum', 'corniger', 'horn-bearing, horned; having horns/antlers; [Jupiter Coniger => Ammon]', 'adjective', null, false),
 ('cornipes, cornipedis, m.', 'cornipes', 'hoofed animal; (horse); (centaur)', 'noun', null, false),
@@ -13052,9 +13072,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('cornutus, cornuti, m.', 'cornutus', 'ox, bullock; oxen (pl.), bullocks', 'noun', null, false),
 ('cornutus, cornuta, cornutum', 'cornutus', 'horned; having horns/horn-like appendages; tusked', 'adjective', null, false),
 ('coroliticus, corolitica, coroliticum', 'coroliticus', 'name given to a white marble; made of this stone (of statues)', 'adjective', null, false),
-('corolla, corollae, f.', 'corolla', 'small garland, small wreath/crown of flowers', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('corolla, corollae, f.', 'corolla', 'small garland, small wreath/crown of flowers', 'noun', null, false),
 ('corollaria, corollariae, f.', 'corollaria', 'flower girl; (comedy by Naevius); female flower-garlands merchant (L+S)', 'noun', null, false),
 ('corollarium, corollarii, n.', 'corollarium', 'flower garland; (reward/prize); (money for); present/gift; tip/gratuity', 'noun', null, false),
 ('corolliticus, corollitica, corolliticum', 'corolliticus', 'name given to a white marble; made of this stone (of statues)', 'adjective', null, false),
@@ -13536,7 +13554,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('crustallinus, crustallina, crustallinum', 'crustallinus', 'made of crystal; resembling crystal in appearance/quality', 'adjective', null, false),
 ('crustarius, crustarii, m.', 'crustarius', 'one who makes embossed/chased figures', 'noun', null, false),
 ('crustarius, crustaria, crustarium', 'crustarius', 'of/pertaining to/selling encrusted/embossed ware (shops)', 'adjective', null, false),
-('crustatum, crustati, n.', 'crustatum', 'crustacean; animal with a hard shell; shellfish (L+S)', 'noun', null, false),
+('crustatum, crustati, n.', 'crustatum', 'crustacean; animal with a hard shell; shellfish (L+S)', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('crustosus, crustosa, crustosum', 'crustosus', 'encrusted, covered with a hard crust/rind', 'adjective', null, false),
 ('crustula, crustulae, f.', 'crustula', 'little rind/shell/crust', 'noun', null, false),
 ('crustularius, crustularii, m.', 'crustularius', 'confectioner, seller/maker of cakes', 'noun', null, false),
@@ -13554,9 +13574,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('cubus, cubi, m.', 'cubus', 'cube (geometric figure), die/dice; lump; cubic number', 'noun', null, false),
 ('cubo, cubare, cubui, cubitus', 'cubo', 'lie (down/asleep); recline, incline; lie/be in bed, rest/sleep; be sick/dead', 'verb', null, false),
 ('cubans, cubantis', 'cubans', 'lying, resting on the ground; low lying; sagging, sloping, liable to subside', 'adjective', null, false),
-('cubatio, cubationis, f.', 'cubatio', 'action of lying down', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('cubatio, cubationis, f.', 'cubatio', 'action of lying down', 'noun', null, false),
 ('cubator, cubatoris, m.', 'cubator', 'one who lies down', 'noun', null, false),
 ('cubi', 'cubi', 'at any place; on any occasion; [w/ne necubi => lest at any place/occasion]', 'adverb', null, false),
 ('cubicus, cubica, cubicum', 'cubicus', 'cubic, cubical; of cubes', 'adjective', null, false),
@@ -14038,7 +14056,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('Damascenus, Damascena, Damascenum', 'Damascenus', 'Damascus-, of/from Damascus; (city in Syria); made of damask (fabric)', 'adjective', null, false),
 ('damasonium, damasonii, n.', 'damasonium', 'water plantain', 'noun', null, false),
 ('damium, damii, n.', 'damium', 'sacrifice made in secret in honor of the Bonae Deae', 'noun', null, false),
-('damiurgus, damiurgi, m.', 'damiurgus', 'magistrate in various Greek states; play by Turpilus', 'noun', null, false),
+('damiurgus, damiurgi, m.', 'damiurgus', 'magistrate in various Greek states; play by Turpilus', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('damma, dammae, f.', 'damma', 'fallow/red-deer; small member of deer family; gazelle/antelope; doe', 'noun', null, false),
 ('dammula, dammulae, f.', 'dammula', 'little deer (as a small and harmless animal); little fallow deer (L+S)', 'noun', null, false),
 ('damnum, damni, n.', 'damnum', 'financial/property/physical loss/damage/injury; forfeiture/fine; lost possession', 'noun', null, false),
@@ -14056,9 +14076,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('damnifico, damnificare, damnificavi, damnificatus', 'damnifico', 'injure; fine', 'verb', null, false),
 ('damnigerulus, damnigerula, damnigerulum', 'damnigerulus', 'injurious, hurtful, pernicious', 'adjective', null, false),
 ('damnosus, damnosa, damnosum', 'damnosus', 'harmful/detrimental/ruinous; prodigal/spendthrift; that causes financial loss', 'adjective', null, false),
-('damnose', 'damnose', 'ruinously, so as to cause loss; to the injury of (L+S); excessively', 'adverb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('damnose', 'damnose', 'ruinously, so as to cause loss; to the injury of (L+S); excessively', 'adverb', null, false),
 ('damnula, damnulae, f.', 'damnula', 'little deer (as a small and harmless animal); little fallow deer (L+S)', 'noun', null, false),
 ('dampnum, dampni, n.', 'dampnum', 'financial/property/physical loss/damage/injury; forfeiture/fine; lost possession', 'noun', null, false),
 ('dampno, dampnare, dampnavi, dampnatus', 'dampno', 'pass/pronounce judgment, find guilty; deliver/condemn/sentence; harm/damn/doom', 'verb', null, false),
@@ -14540,7 +14558,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('defulguro, defulgurare, defulguravi, defulguratus', 'defulguro', 'flash away', 'verb', null, false),
 ('defuncta, defunctae, f.', 'defuncta', 'dead person (female)', 'noun', null, false),
 ('defunctus, defuncti, c.', 'defunctus', 'dead person; (usu. male); the dead (pl.) (L+S)', 'noun', null, false),
-('defunctum, defuncti, n.', 'defunctum', 'things (pl.) which are dead and gone', 'noun', null, false),
+('defunctum, defuncti, n.', 'defunctum', 'things (pl.) which are dead and gone', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('defunctus, defunctus, m.', 'defunctus', 'death', 'noun', null, false),
 ('defunctus, defuncta, defunctum', 'defunctus', 'dead, deceased; defunct', 'adjective', null, false),
 ('defunctio, defunctionis, f.', 'defunctio', 'execution, performance; death', 'noun', null, false),
@@ -14558,9 +14578,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('degero, degerere, degessi, degestus', 'degero', 'remove; carry off/away (to a destination)', 'verb', null, false),
 ('deglabro, deglabrare, deglabravi, deglabratus', 'deglabro', 'make smooth; (remove bark from trees/logs); smooth off (L+S)', 'verb', null, false),
 ('deglubo, deglubere, deglupsi, degluptus', 'deglubo', 'skin, flay; strip (w/ABL) (of a coating); peel/skin/husk (L+S)', 'verb', null, false),
-('deglutio, deglutire, deglutivi, deglutitus', 'deglutio', 'swallow down; overwhelm, abolish (L+S)', 'verb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('deglutio, deglutire, deglutivi, deglutitus', 'deglutio', 'swallow down; overwhelm, abolish (L+S)', 'verb', null, false),
 ('deglutino, deglutinare, deglutinavi, deglutinatus', 'deglutino', 'unglue; separate by moistening (L+S)', 'verb', null, false),
 ('degluttio, degluttire, degluttivi, degluttitus', 'degluttio', 'swallow down; overwhelm, abolish (L+S)', 'verb', null, false),
 ('degrado, degradare, degradavi, degradatus', 'degrado', 'reduce in rank; deprive of office; degrade', 'verb', null, false),
@@ -14962,6 +14980,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('deperditum, deperditi, n.', 'deperditum', 'that which is permanently lost', 'noun', null, false),
 ('deperditus, deperdita, deperditum', 'deperditus', 'corrupt, abandoned', 'adjective', null, false),
 ('deperditio, deperditionis, f.', 'deperditio', 'loss', 'noun', null, false),
+('depereo, deperire, deperivi, deperitus', 'depereo', 'perish/die; be lost/totally destroyed; be much in love with/love to distraction', 'verb', null, false),
 ('depetigo, depetiginis, f.', 'depetigo', 'kind of skin eruption; leprosy, scab (L+S)', 'noun', null, false),
 ('depictio, depictionis, f.', 'depictio', 'description, delineation; characterization', 'noun', null, false),
 ('depilis, depile', 'depilis', 'hairless; without hair; plucked', 'adjective', null, false),
@@ -15041,7 +15060,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('deprehensio, deprehensionis, f.', 'deprehensio', 'detection, act of coming upon and catching; surprising (L+S); seizing', 'noun', null, false),
 ('deprendo, deprendere, deprendi, deprensus', 'deprendo', 'seize/catch; catch napping/redhanded; surprise/pounce on; arrest; intercept', 'verb', null, false),
 ('deprensa, deprensae, f.', 'deprensa', 'species of military punishment; (more than castigatio, less than ignominia)', 'noun', null, false),
-('depressus, depressa, depressum', 'depressus', 'low/low-lying, deep down; at/having low elevation; low-pitched/subdued (sound)', 'adjective', null, false),
+('depressus, depressa, depressum', 'depressus', 'low/low-lying, deep down; at/having low elevation; low-pitched/subdued (sound)', 'adjective', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('depresse', 'depresse', 'deeply; deep/way down', 'adverb', null, false),
 ('depressio, depressionis, f.', 'depressio', 'lowering, sinking down (action of); depression (L+S); nervous breakdown (Cal)', 'noun', null, false),
 ('depretio, depretiare, depretiavi, depretiatus', 'depretio', 'depreciate, lower the value of', 'verb', null, false),
@@ -15060,9 +15081,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('depudesco, depudescere, depudui', 'depudesco', 'put off all shame; become shameless (L+S)', 'verb', null, false),
 ('depudico, depudicare, depudicavi, depudicatus', 'depudico', 'violate, dishonor; deflower, deprive of virginity (Sex)', 'verb', null, false),
 ('depugis, depuge', 'depugis', 'having meager/skinny/thin buttocks', 'adjective', null, false),
-('depugno, depugnare, depugnavi, depugnatus', 'depugno', 'fight hard/it out, do battle; fight against and kill (in arena); stop fighting', 'verb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('depugno, depugnare, depugnavi, depugnatus', 'depugno', 'fight hard/it out, do battle; fight against and kill (in arena); stop fighting', 'verb', null, false),
 ('depugnatio, depugnationis, f.', 'depugnatio', 'method of fighting a battle; violent fighting (L+S); eager contest', 'noun', null, false),
 ('depuio, depuire, depuivi', 'depuio', 'beat thoroughly; strike, beat', 'verb', null, false),
 ('depulpo, depulpare, depulpavi, depulpatus', 'depulpo', 'grow lean/thin; lose flesh', 'verb', null, false),
@@ -15543,7 +15562,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('dialogus, dialogi, m.', 'dialogus', 'discussion, philosophical conversation; dispute; composition in dialog form', 'noun', null, false),
 ('dialogista, dialogistae, m.', 'dialogista', 'able disputant; good arguer/reasoner', 'noun', null, false),
 ('dialutensis, dialutense', 'dialutensis', 'that lives partly in mud; (like a mussel)', 'adjective', null, false),
-('dialysis, dialysis, f.', 'dialysis', 'resolution/dialysis (of diphthong); making two short syllables from long one', 'noun', null, false),
+('dialysis, dialysis, f.', 'dialysis', 'resolution/dialysis (of diphthong); making two short syllables from long one', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('diamastigosis, diamastigosis, f.', 'diamastigosis', 'severe scourging', 'noun', null, false),
 ('diametrum, diametri, n.', 'diametrum', 'loss; want of; that is wanting to the measure', 'noun', null, false),
 ('Diana, Dianae, f.', 'Diana', 'Diana (virgin goddess of light/moon/hunt); (identified w/Artimis); moon', 'noun', null, false),
@@ -15562,9 +15583,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('diaporesis, diaporesis, f.', 'diaporesis', 'perplexity, doubting; sweating it out?; (not pure sweat in classical)', 'noun', null, false),
 ('diapsalma, diapsalmatis, n.', 'diapsalma', 'pause in music', 'noun', null, false),
 ('diapsoricum, diapsorici, n.', 'diapsoricum', 'eye-salve', 'noun', null, false),
-('diarium, diarii, n.', 'diarium', 'diary, daily record, journal; daily allowance/ration; newspaper (Cal)', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('diarium, diarii, n.', 'diarium', 'diary, daily record, journal; daily allowance/ration; newspaper (Cal)', 'noun', null, false),
 ('diarrhoea, diarrhoeae, f.', 'diarrhoea', 'diarrhea/diarrhoea; the flux', 'noun', null, false),
 ('diastema, diastematis, n.', 'diastema', 'space; distance; interval (L+S); space between; D:interval (in music)', 'noun', null, false),
 ('diastematicus, diastematica, diastematicum', 'diastematicus', 'having pauses/spaces/intervals', 'adjective', null, false),
@@ -16024,6 +16043,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('dispensatorius, dispensatoria, dispensatorium', 'dispensatorius', 'dispensing; administering', 'adjective', null, false),
 ('disperdo, disperdere, disperdi, disperditus', 'disperdo', 'destroy/ruin utterly; ruin (property/fortunes/persons)', 'verb', null, false),
 ('disperdo, disperdere, disperdidi, disperditus', 'disperdo', 'destroy/ruin utterly; ruin (property/fortunes/persons)', 'verb', null, false),
+('dispereo, disperire, disperivi, disperitus', 'dispereo', 'perish/die; be destroyed; be ruined/lost/undone (completely) (L+S); disappear', 'verb', null, false),
 ('dispergo, dispergere, dispersi, dispersus', 'dispergo', 'scatter (about), disperse', 'verb', null, true),
 ('disperse', 'disperse', 'sporadically; here and there', 'adverb', null, false),
 ('dispersim', 'dispersim', 'sporadically; here and there', 'adverb', null, false),
@@ -16044,7 +16064,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('dispungo, dispungere, dispunxi, dispunctus', 'dispungo', 'check-off (accounts); examine; balance (accounts)', 'verb', null, false),
 ('disputo, disputare, disputavi, disputatus', 'disputo', 'discuss, debate, argue', 'verb', null, false),
 ('disputatio, disputationis, f.', 'disputatio', 'discussion, debate, dispute, argument', 'noun', null, false),
-('disquiro, disquirere', 'disquiro', 'inquire into, investigate', 'verb', null, false),
+('disquiro, disquirere', 'disquiro', 'inquire into, investigate', 'verb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('disquisitio, disquisitionis, f.', 'disquisitio', 'inquiry', 'noun', null, false),
 ('disraro, disrarare, disraravi, disraratus', 'disraro', 'thin out (vegetation); chop, hoe', 'verb', null, false),
 ('disrumpo, disrumpere, disrupi, disruptus', 'disrumpo', 'cause to break apart/off, shatter/burst/split, disrupt/sever; (PASS) get broken', 'verb', null, false),
@@ -16064,9 +16086,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('dissereno, disserenare', 'dissereno', 'it is clearing up all round; (of the weather)', 'verb', null, false),
 ('disserto, dissertare, dissertavi, dissertatus', 'disserto', 'discuss', 'verb', null, false),
 ('dissico, dissicare, dissicavi, dissicatus', 'dissico', 'cut apart; cut in pieces; dismember, dissect', 'verb', null, false),
-('dissicio, dissicere, dissjeci, dissjectus', 'dissicio', 'break up; scatter; drive apart; separate into two halves, halve, divide', 'verb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('dissicio, dissicere, dissjeci, dissjectus', 'dissicio', 'break up; scatter; drive apart; separate into two halves, halve, divide', 'verb', null, false),
 ('dissideo, dissidere, dissedi, dissessus', 'dissideo', 'disagree, be at variance; be separated', 'verb', null, false),
 ('dissidium, dissidii, n.', 'dissidium', 'separation, divorce, discord; disagreement, quarrel; tearing apart', 'noun', null, false),
 ('dissigno, dissignare, dissignavi, dissignatus', 'dissigno', 'mark; point/mark/trace out, outline/describe; indicate/designate/denote', 'verb', null, false),
@@ -16253,6 +16273,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('donatrix, donatricis, f.', 'donatrix', 'female donor', 'noun', null, false),
 ('donec', 'donec', 'while, as long as, until', 'conjunction', null, true),
 ('dorcus, dorci, c.', 'dorcus', 'gazelle; antelope', 'noun', null, false),
+('dormeo, dormire, dormivi, dormitus', 'dormeo', 'sleep, rest; go to sleep, be/fall asleep; be idle, do nothing; (form for FUT)', 'verb', null, false),
 ('dormito, dormitare, dormitavi, dormitatus', 'dormito', 'feel sleepy, drowsy; do nothing', 'verb', null, false),
 ('dormitio, dormitionis, f.', 'dormitio', 'sleep, act of sleeping', 'noun', null, false),
 ('dormitorius, dormitoria, dormitorium', 'dormitorius', 'for sleeping', 'adjective', null, false),
@@ -16427,7 +16448,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('edus, edi, m.', 'edus', 'kid, young goat; two stars in constellation Auriga (Charioteer), "The Kid"', 'noun', null, false),
 ('edo, edere, edi, esus', 'edo', 'eat/consume/devour; eat away (fire/water/disease); destroy; spend money on food', 'verb', null, false),
 ('edo, edere, edi, essus', 'edo', 'eat/consume/devour; eat away (fire/water/disease); destroy; spend money on food', 'verb', null, false),
-('edo, edare, edidi, editus', 'edo', 'eject/emit; put/give forth (buds); beget; bear (fruit); display/evince/exhibit', 'verb', null, true),
+('edo, edere, edidi, editus', 'edo', 'eject/emit; put/give forth (buds); beget; bear (fruit); display/evince/exhibit', 'verb', null, true),
 ('edax, edacis', 'edax', 'greedy, rapacious, voracious, gluttonous; devouring, consuming, destructive', 'adjective', null, false),
 ('edentulus, edentula, edentulum', 'edentulus', 'toothless; matured', 'adjective', null, false),
 ('edepol', 'edepol', 'by Pollux!', 'other', null, false),
@@ -16469,7 +16490,8 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('effemino, effeminare, effeminavi, effeminatus', 'effemino', 'weaken, enervate, make effeminate, emasculate, unman', 'verb', null, false),
 ('effeminatus, effeminata, effeminatum', 'effeminatus', 'womanish, effeminate', 'adjective', null, false),
 ('efferus, effera, efferum', 'efferus', 'savage, cruel, barbarous', 'adjective', null, false),
-('effero, efferare, efferavi, efferatus', 'effero', 'make wild/savage/barbaric; brutalize; exasperate', 'verb', null, true),
+('effero, efferare, efferavi, efferatus', 'effero', 'make wild/savage/barbaric; brutalize; exasperate', 'verb', null, false),
+('effero, efferre, extuli, elatus', 'effero', 'carry out; bring out; carry out for burial; raise', 'verb', null, true),
 ('efferatus, efferata, efferatum', 'efferatus', 'wild, savage, bestial, fierce, raging; resembling/typical of wild animal', 'adjective', null, false),
 ('effercio, effercire, effertus', 'effercio', 'stuff full', 'verb', null, false),
 ('effertus, efferta, effertum', 'effertus', 'stuffed', 'adjective', null, false),
@@ -16544,7 +16566,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('ejusmodi', 'ejusmodi', 'of this sort; of such kind; [et ~ => and the like]', 'adverb', null, false),
 ('ektheta, ekthetae, f.', 'ektheta', 'balcony; gallery (Douay)', 'noun', null, false),
 ('elabor, elabi, elapsus sum', 'elabor', 'slip away; escape; elapse', 'verb', null, true),
-('elaboro, elaborare, elaboravi, elaboratus', 'elaboro', 'take pains, exert oneself; bestow care on', 'verb', null, false),
+('elaboro, elaborare, elaboravi, elaboratus', 'elaboro', 'take pains, exert oneself; bestow care on', 'verb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('elaboratio, elaborationis, f.', 'elaboratio', 'painstaking/persevering effort; elaboration (Ecc)', 'noun', null, false),
 ('elamentabilis, elamentabile', 'elamentabilis', 'very lamentable', 'adjective', null, false),
 ('elanguens, elanguentis', 'elanguens', 'growing weak; drooping, flagging; slackening, relaxing', 'adjective', null, false),
@@ -16566,9 +16590,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('eleganter', 'eleganter', 'elegantly, attractively; properly/rightly, w/correct taste/conduct; neatly', 'adverb', null, false),
 ('elegantia, elegantiae, f.', 'elegantia', 'elegance; niceness; taste; politeness', 'noun', null, false),
 ('elegeia, elegeiae, f.', 'elegeia', 'elegy', 'noun', null, false),
-('elegia, elegiae, f.', 'elegia', 'elegy', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('elegia, elegiae, f.', 'elegia', 'elegy', 'noun', null, false),
 ('elementaris, elementare', 'elementaris', 'elementary, rudimentary; engaged in learning rudiments', 'adjective', null, false),
 ('elementarius, elementaria, elementarium', 'elementarius', 'elementary, rudimentary; engaged in learning rudiments', 'adjective', null, false),
 ('elemosina, elemosinae, f.', 'elemosina', 'alms, almshouse; gift to a church, religious foundation; pity; (act of) mercy', 'noun', null, false),
@@ -17046,7 +17068,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('exantlo, exantlare, exantlavi, exantlatus', 'exantlo', 'exhaust; endure; bar; suffer much from toil', 'verb', null, false),
 ('exaperio, exaperire, exaperui, exapertus', 'exaperio', 'disclose; explain; disentangle', 'verb', null, false),
 ('exaro, exarare, exaravi, exaratus', 'exaro', 'plow or dig up; plow; note down (by scratching the wax on the tablets)', 'verb', null, false),
-('exarchus, exarchi, m.', 'exarchus', 'exarch; (Eastern Church bishop governing exarchy)', 'noun', null, false),
+('exarchus, exarchi, m.', 'exarchus', 'exarch; (Eastern Church bishop governing exarchy)', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('exarchia, exarchiae, f.', 'exarchia', 'exarchy; (Eastern Church people not in eparchy, committed to exarch bishop)', 'noun', null, false),
 ('exardo, exardere, exarsi, exarsus', 'exardo', 'kindle; inflame; break out', 'verb', null, false),
 ('exardesco, exardescere, exarsi, exarsus', 'exardesco', 'flare/blaze up; break out; glow; rage; be provoked, enraged; be exasperated', 'verb', null, false),
@@ -17068,9 +17092,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('excalceo, excalceare, excalceavi, excalceatus', 'excalceo', 'remove the shoes from', 'verb', null, false),
 ('excalceor, excalceari, excalceatus sum', 'excalceor', 'remove the shoes from', 'verb', null, false),
 ('excalceatus, excalceata, excalceatum', 'excalceatus', 'barefoot; unshod', 'adjective', null, false),
-('excalcio, excalciare, excalciavi, excalciatus', 'excalcio', 'remove the shoes from', 'verb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('excalcio, excalciare, excalciavi, excalciatus', 'excalcio', 'remove the shoes from', 'verb', null, false),
 ('excalfactorius, excalfactoria, excalfactorium', 'excalfactorius', 'warming; heating (Pliny)', 'adjective', null, false),
 ('excandesco, excandescere, excandui', 'excandesco', 'catch fire, burst into flame; blaze (w/light); flare up, burn w/rage/anger', 'verb', null, false),
 ('excandescentia, excandescentiae, f.', 'excandescentia', 'heat, irascibility', 'noun', null, false),
@@ -17548,7 +17570,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('faenum, faeni, n.', 'faenum', 'hay; [~ Graecum => fenugreek]', 'noun', null, false),
 ('faeneus, faenea, faeneum', 'faeneus', 'of hay; [w/homines => men of straw]', 'adjective', null, false),
 ('faenebris, faenebre', 'faenebris', 'pertaining to usury; lent at interest', 'adjective', null, false),
-('faenero, faenerare, faeneravi, faeneratus', 'faenero', 'lend money at interest; make interest/profit; invest/finance/supply; borrow', 'verb', null, false),
+('faenero, faenerare, faeneravi, faeneratus', 'faenero', 'lend money at interest; make interest/profit; invest/finance/supply; borrow', 'verb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('faeneror, faenerari, faeneratus sum', 'faeneror', 'lend money at interest; make interest/profit; invest/finance/supply; borrow', 'verb', null, false),
 ('faeneratio, faenerationis, f.', 'faeneratio', 'usury, money-lending', 'noun', null, false),
 ('faenerator, faeneratoris, m.', 'faenerator', 'usurer, money-lender', 'noun', null, false),
@@ -17570,9 +17594,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('fagineus, faginea, fagineum', 'fagineus', 'of the beech tree; of beech-wood, beechen', 'adjective', null, false),
 ('fala, falae, f.', 'fala', 'wooden tower or pillar', 'noun', null, false),
 ('falarica, falaricae, f.', 'falarica', 'heavy missile (orig. by siege tower catapult w/tow+pitch+fire); like hand spear', 'noun', null, false),
-('falcanus, falcani, m.', 'falcanus', 'sickle-maker, scythe-maker', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('falcanus, falcani, m.', 'falcanus', 'sickle-maker, scythe-maker', 'noun', null, false),
 ('falcarius, falcarii, m.', 'falcarius', 'sickle-maker, scythe-maker', 'noun', null, false),
 ('falcatus, falcata, falcatum', 'falcatus', 'armed with scythes; sickle-shaped, curved, hooked', 'adjective', null, false),
 ('Falcidia, Falcidiae, f.', 'Falcidia', 'portion (1/4) of estate secured to legal heir by Falcidian law of 40 BC', 'noun', null, false),
@@ -18050,7 +18072,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('forda, fordae, f.', 'forda', 'one who is pregnant/with young; cow in/with calf', 'noun', null, false),
 ('fordus, forda, fordum', 'fordus', 'pregnant; with young', 'adjective', null, false),
 ('fordeum, fordei, n.', 'fordeum', 'barley (the plant or the grain from it); barley-corn', 'noun', null, false),
-('fordeaceus, fordeacea, fordeaceum', 'fordeaceus', 'barley-, of/connected to barley; (used as term of contempt)', 'adjective', null, false),
+('fordeaceus, fordeacea, fordeaceum', 'fordeaceus', 'barley-, of/connected to barley; (used as term of contempt)', 'adjective', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('fordearius, fordearia, fordearium', 'fordearius', 'barley-, of/connected to barley; [~ pira => pears ripening w/barley]', 'adjective', null, false),
 ('fordiaceus, fordiacea, fordiaceum', 'fordiaceus', 'barley-, of/connected to barley; (used as term of contempt)', 'adjective', null, false),
 ('fordiarius, fordiaria, fordiarium', 'fordiarius', 'barley-, of/connected to barley; [~ pira => pears ripening w/barley]', 'adjective', null, false),
@@ -18072,9 +18096,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('formidolose', 'formidolose', 'terribly, dreadfully; alarming; in a frightening manner; fearfully/timorously', 'adverb', null, false),
 ('formidulosus, formidulosa, formidulosum', 'formidulosus', 'terrible, scary; dangerous, alarming; formidable; fearful/timorous/frightened', 'adjective', null, false),
 ('formidulose', 'formidulose', 'terribly, dreadfully; alarming; in a frightening manner; fearfully/timorously', 'adverb', null, false),
-('formonsus, formonsa, formonsum', 'formonsus', 'beautiful, finely formed, handsome, fair; having fine appearance/form', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('formonsus, formonsa, formonsum', 'formonsus', 'beautiful, finely formed, handsome, fair; having fine appearance/form', 'adjective', null, false),
 ('formonse', 'formonse', 'beautifully, in a beautiful manner', 'adverb', null, false),
 ('formonsulus, formonsula, formonsulum', 'formonsulus', 'pretty', 'adjective', null, false),
 ('formosus, formosa, formosum', 'formosus', 'beautiful, finely formed, handsome, fair; having fine appearance/form', 'adjective', null, false),
@@ -18552,7 +18574,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('glaucus, glauca, glaucum', 'glaucus', 'bluish gray', 'adjective', null, false),
 ('glaucom, glaucomis, n.', 'glaucom', 'disease of the eye, cataract', 'noun', null, false),
 ('glaucoma, glaucomatis, n.', 'glaucoma', 'disease of the eye, cataract; "mist before the eyes" (Erasmus)', 'noun', null, false),
-('gleba, glebae, f.', 'gleba', 'clod/lump of earth/turf; land, soil; hard soil; piece, lump, mass', 'noun', null, false),
+('gleba, glebae, f.', 'gleba', 'clod/lump of earth/turf; land, soil; hard soil; piece, lump, mass', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('glebula, glebulae, f.', 'glebula', 'little clod or lump; a little farm or estate', 'noun', null, false),
 ('glesum, glesi, n.', 'glesum', 'amber', 'noun', null, false),
 ('gleucinus, gleucina, gleucinum', 'gleucinus', 'made-from-must', 'adjective', null, false),
@@ -18574,9 +18598,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('glosarium, glosarii, n.', 'glosarium', 'unusual word requiring explanation (contemptuous diminutive)', 'noun', null, false),
 ('glosema, glosematis, n.', 'glosema', 'unusual word requiring interpretation; collection/list (pl.) of such words', 'noun', null, false),
 ('glossa, glossae, f.', 'glossa', 'glossary, collection/list of unfamiliar/unusual words (needing interpretation)', 'noun', null, false),
-('glossema, glossematis, n.', 'glossema', 'unusual word requiring interpretation; collection/list (pl.) of such words', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('glossema, glossematis, n.', 'glossema', 'unusual word requiring interpretation; collection/list (pl.) of such words', 'noun', null, false),
 ('glubo, glubere, glupsi, gluptus', 'glubo', 'peel; strip the bark from; rob', 'verb', null, false),
 ('glubeo, glubere', 'glubeo', 'shed its bark; (of a tree)', 'verb', null, false),
 ('gluma, glumae, f.', 'gluma', 'husks of grain; barley husks (pl.) (L+S)', 'noun', null, false),
@@ -19054,7 +19076,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('hisopus, hisopi, f.', 'hisopus', 'aromatic herb; (perh. various species of origanum); Hyssopus officinalis (L+S)', 'noun', null, false),
 ('hisopum, hisopi, n.', 'hisopum', 'aromatic herb; (perh. various species of origanum); Hyssopus officinalis (L+S)', 'noun', null, false),
 ('Hispanus, Hispana, Hispanum', 'Hispanus', 'Spanish, of Spain', 'adjective', null, false),
-('Hispane', 'Hispane', 'in Spanish manner', 'adverb', null, false),
+('Hispane', 'Hispane', 'in Spanish manner', 'adverb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('Hispania, Hispaniae, f.', 'Hispania', 'Spain; Spanish peninsula', 'noun', null, false),
 ('hispidus, hispida, hispidum', 'hispidus', 'rough, shaggy, hairy; bristly; dirty', 'adjective', null, false),
 ('hissopus, hissopi, f.', 'hissopus', 'aromatic herb; (perh. various species of origanum); Hyssopus officinalis (L+S)', 'noun', null, false),
@@ -19076,9 +19100,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('hoedulus, hoeduli, m.', 'hoedulus', 'little kid, little young goat', 'noun', null, false),
 ('holisatrum, holisatri, n.', 'holisatrum', 'HOLISATR; (some kind of foodstuff, eg herb)', 'noun', null, false),
 ('holitorius, holitoria, holitorium', 'holitorius', 'of herbs; [w/forum => vegetable market]', 'adjective', null, false),
-('holocaustum, holocausti, n.', 'holocaustum', 'whole burnt offering, sacrifice wholly consumed by fire; holocaust; (Hebrew)', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('holocaustum, holocausti, n.', 'holocaustum', 'whole burnt offering, sacrifice wholly consumed by fire; holocaust; (Hebrew)', 'noun', null, false),
 ('holocaustoma, holocaustomatis, n.', 'holocaustoma', 'whole burnt offering, sacrifice wholly consumed by fire; holocaust; (Hebrew)', 'noun', null, false),
 ('holocautom, holocautomatis, n.', 'holocautom', 'whole burnt offering, sacrifice wholly consumed by fire; holocaust; (Hebrew)', 'noun', null, false),
 ('holoverus, holovera, holoverum', 'holoverus', 'quite real; wholly of purple', 'adjective', null, false),
@@ -19556,7 +19578,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('impoene', 'impoene', 'without punishment; safely; (= impune)', 'adverb', null, false),
 ('impolitus, impolita, impolitum', 'impolitus', 'rough, unpolished', 'adjective', null, false),
 ('impolite', 'impolite', 'roughly, crudely', 'adverb', null, false),
-('impollutus, impolluta, impollutum', 'impollutus', 'undefiled', 'adjective', null, false),
+('impollutus, impolluta, impollutum', 'impollutus', 'undefiled', 'adjective', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('importo, importare, importavi, importatus', 'importo', 'bring in, convey; import; bring about, cause', 'verb', null, false),
 ('importunus, importuna, importunum', 'importunus', 'inconvenient; annoying; rude; monstrous, unnatural; ruthless, cruel, hard', 'adjective', null, false),
 ('importunitas, importunitatis, f.', 'importunitas', 'persistent lack of consideration for others; relentlessness', 'noun', null, false),
@@ -19578,9 +19602,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('imprimis', 'imprimis', 'in the first place, first, chiefly; especially, above all, more than any other', 'adverb', null, false),
 ('improbus, improba, improbum', 'improbus', 'wicked/flagrant; morally unsound; greedy/rude; immoderate; disloyal; shameless', 'adjective', null, true),
 ('improbo, improbare, improbavi, improbatus', 'improbo', 'disapprove of, express disapproval of, condemn; reject', 'verb', null, false),
-('improbitas, improbitatis, f.', 'improbitas', 'wickedness unscrupulousness, dishonesty; shamelessness; want of principle', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('improbitas, improbitatis, f.', 'improbitas', 'wickedness unscrupulousness, dishonesty; shamelessness; want of principle', 'noun', null, false),
 ('improbulus, improbula, improbulum', 'improbulus', 'somewhat audacious/impudent; somewhat wicked (Cas)', 'adjective', null, false),
 ('improcerus, improcera, improcerum', 'improcerus', 'small, low of stature', 'adjective', null, false),
 ('improdictus, improdicta, improdictum', 'improdictus', 'not postponed', 'adjective', null, false),
@@ -20058,7 +20080,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('inebrio, inebriare, inebriavi, inebriatus', 'inebrio', 'intoxicate, make drunk; saturate/drench (with any liquid)', 'verb', null, false),
 ('inedia, inediae, f.', 'inedia', 'fasting, starvation', 'noun', null, false),
 ('ineditus, inedita, ineditum', 'ineditus', 'not published, unknown', 'adjective', null, false),
-('ineffabilis, ineffabile', 'ineffabilis', 'indescribable, ineffable, cannot be described/expressed w/words; unpronouncable', 'adjective', null, false),
+('ineffabilis, ineffabile', 'ineffabilis', 'indescribable, ineffable, cannot be described/expressed w/words; unpronouncable', 'adjective', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('inefficax, inefficacis', 'inefficax', 'useless, ineffectual, unavailing, achieving nothing', 'adjective', null, false),
 ('inelegans, inelegantis', 'inelegans', 'lacking in taste; clumsy, infelicitous', 'adjective', null, false),
 ('ineluctabilis, ineluctabile', 'ineluctabilis', 'from which there is no escape', 'adjective', null, false),
@@ -20080,9 +20104,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('ineruditio, ineruditionis, f.', 'ineruditio', 'want/lack of learning/education; ignorance (Vulgate Sirach 4:25/30)', 'noun', null, false),
 ('inesco, inescare, inescavi, inescatus', 'inesco', 'entice; fill with food', 'verb', null, false),
 ('inevitabilis, inevitabile', 'inevitabilis', 'unavoidable', 'adjective', null, false),
-('inevolutus, inevoluta, inevolutum', 'inevolutus', 'unopened, not rolled out (papyrus scroll); unread', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('inevolutus, inevoluta, inevolutum', 'inevolutus', 'unopened, not rolled out (papyrus scroll); unread', 'adjective', null, false),
 ('inevulsibilis, inevulsibile', 'inevulsibilis', 'inseparable; that cannot be torn away', 'adjective', null, false),
 ('inexcitus, inexcita, inexcitum', 'inexcitus', 'unmoved, quiet', 'adjective', null, false),
 ('inexcusabilis, inexcusabile', 'inexcusabilis', 'inexcusable', 'adjective', null, false),
@@ -20560,7 +20582,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('inrigatio, inrigationis, f.', 'inrigatio', 'watering, irrigation', 'noun', null, false),
 ('inriguus, inrigua, inriguum', 'inriguus', 'watering, irrigating; refreshing; watered, soaked', 'adjective', null, false),
 ('inrisio, inrisionis, f.', 'inrisio', 'derision; mockery', 'noun', null, false),
-('inritus, inrita, inritum', 'inritus', 'ineffective, useless, invalid; in vain', 'adjective', null, false),
+('inritus, inrita, inritum', 'inritus', 'ineffective, useless, invalid; in vain', 'adjective', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('inritamentum, inritamenti, n.', 'inritamentum', 'incitement, incentive', 'noun', null, false),
 ('inritator, inritatoris, m.', 'inritator', 'instigator, prompter; provoker, inciter', 'noun', null, false),
 ('inritatrix, inritatricis, f.', 'inritatrix', 'inciter, she who incites', 'noun', null, false),
@@ -20582,9 +20606,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('insatiatus, insatiata, insatiatum', 'insatiatus', 'unsatisfied', 'adjective', null, false),
 ('inscendo, inscendere, inscendi, inscensus', 'inscendo', 'climb on, ascend, mount', 'verb', null, false),
 ('inscius, inscia, inscium', 'inscius', 'not knowing, ignorant; unskilled', 'adjective', null, true),
-('insciens, inscientis', 'insciens', 'unknowing, unaware', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('insciens, inscientis', 'insciens', 'unknowing, unaware', 'adjective', null, false),
 ('inscientia, inscientiae, f.', 'inscientia', 'ignorance', 'noun', null, false),
 ('inscitus, inscita, inscitum', 'inscitus', 'ignorant; uninformed', 'adjective', null, false),
 ('inscitia, inscitiae, f.', 'inscitia', 'ignorance', 'noun', null, false),
@@ -20792,6 +20814,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('interdius', 'interdius', 'in the daytime; by day; (archaic form of interdiu)', 'adverb', null, false),
 ('interductus, interductus, m.', 'interductus', 'interpunctuation; point inserted in writing; hyphen (Cal)', 'noun', null, false),
 ('interdum', 'interdum', 'sometimes, now and then', 'adverb', null, true),
+('intereo, interire, interivi, interitus', 'intereo', 'perish, die; be ruined; cease', 'verb', null, true),
 ('interea', 'interea', 'meanwhile', 'adverb', null, true),
 ('interemo, interemere, interemi, interemptus', 'interemo', 'do away with; kill, cut off from life; extinguish; put an end to, destroy', 'verb', null, false),
 ('interequito, interequitare, interequitavi, interequitatus', 'interequito', 'ride among or between', 'verb', null, false),
@@ -20931,6 +20954,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('intro', 'intro', 'within, in; to the inside, indoors', 'adverb', null, false),
 ('introcedo, introcedere, introcessi, introcessus', 'introcedo', 'enter', 'verb', null, false),
 ('introduco, introducere, introduxi, introductus', 'introduco', 'introduce, bring/lead in', 'verb', null, true),
+('introeo, introire, introivi, introitus', 'introeo', 'enter, go in or into; invade', 'verb', null, false),
 ('introgredior, introgredi, introgressus sum', 'introgredior', 'enter; go in; step in (L+S)', 'verb', null, false),
 ('introitus, introitus, m.', 'introitus', 'entrance; going in, invasion', 'noun', null, false),
 ('intromitto, intromittere, intromisi, intromissus', 'intromitto', 'admit, let into, allow to come in; send/put in; introduce', 'verb', null, false),
@@ -21060,7 +21084,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('irneacus, irneaca, irneacum', 'irneacus', 'having hernia/rupture/enlarged scrotum', 'adjective', null, false),
 ('irneosus, irneosa, irneosum', 'irneosus', 'having hernia/rupture/enlarged scrotum', 'adjective', null, false),
 ('ironia, ironiae, f.', 'ironia', 'irony', 'noun', null, false),
-('irradiatio, irradiationis, f.', 'irradiatio', 'illumination; irradiation (Cal)', 'noun', null, false),
+('irradiatio, irradiationis, f.', 'irradiatio', 'illumination; irradiation (Cal)', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('irrationabilis, irrationabile', 'irrationabilis', 'irrational, unreasoning', 'adjective', null, false),
 ('irrationabile, irrationabilis, n.', 'irrationabile', 'unreasoning creatures; dumb animals', 'noun', null, false),
 ('irrationabiliter', 'irrationabiliter', 'irrationally, unreasoningly', 'adverb', null, false),
@@ -21084,9 +21110,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('irremeabilis, irremeabile', 'irremeabilis', 'along or across which one cannot return', 'adjective', null, false),
 ('irremediabilis, irremediabile', 'irremediabilis', 'fatal; irredeemable; beyond cure; for which there is no remedy', 'adjective', null, false),
 ('irremissibilis, irremissibile', 'irremissibilis', 'unpardonable, irremissible; unremitting; of which there is no remission/pardon', 'adjective', null, false),
-('irremunerabilis, irremunerabile', 'irremunerabilis', 'that cannot be repaid/compensated/remunerated', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('irremunerabilis, irremunerabile', 'irremunerabilis', 'that cannot be repaid/compensated/remunerated', 'adjective', null, false),
 ('irremuneratus, irremunerata, irremuneratum', 'irremuneratus', 'unrewarded; unremunerated; unpaid', 'adjective', null, false),
 ('irrepo, irrepere, irrepsi', 'irrepo', 'creep in or into; steal into; insinuate oneself (into)', 'verb', null, false),
 ('irreparabilis, irreparabile', 'irreparabilis', 'irreparable, irrecoverable (loss/damage); irretrievable', 'adjective', null, false),
@@ -21562,7 +21586,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('later, lateris, m.', 'later', 'brick; brickwork/bricks; block; bar/ingot; tile (L+S); [~ lictro => mercury]', 'noun', null, false),
 ('laterus, latera, laterum', 'laterus', 'having X sides (only with numerical prefix)', 'adjective', null, false),
 ('lateralis, laterale', 'lateralis', 'lateral, of/on side of body', 'adjective', null, false),
-('lateramen, lateraminis, n.', 'lateramen', 'pottery', 'noun', null, false),
+('lateramen, lateraminis, n.', 'lateramen', 'pottery', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('laterculus, laterculi, m.', 'laterculus', 'small brick, tile; (brick-shaped) block; hard cake/biscuit; parcel of land', 'noun', null, false),
 ('latericium, latericii, n.', 'latericium', 'brickwork', 'noun', null, false),
 ('latericius, latericia, latericium', 'latericius', 'made of bricks', 'adjective', null, false),
@@ -21586,9 +21612,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('latio, lationis, f.', 'latio', 'right; proposal (of law); entering (payment); [suffragii ~ => right to vote]]', 'noun', null, false),
 ('latito, latitare, latitavi, latitatus', 'latito', 'keep hiding oneself, remain in hiding, be hidden; lie low; lurk', 'verb', null, false),
 ('latomus, latomi, m.', 'latomus', 'quarryman; stonemason; hewer of stone (Douay)', 'noun', null, false),
-('lator, latoris, m.', 'lator', 'mover or proposer (of a law)', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('lator, latoris, m.', 'lator', 'mover or proposer (of a law)', 'noun', null, false),
 ('latro, latrare, latravi, latratus', 'latro', 'bark, bark at', 'verb', null, false),
 ('latraus, latraus, m.', 'latraus', 'barking', 'noun', null, false),
 ('latratus, latratus, m.', 'latratus', 'barking/baying (of dogs); shouting, bawling; roaring (of the sea)', 'noun', null, false),
@@ -22064,7 +22088,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('lumbarium, lumbarii, n.', 'lumbarium', 'loin-cloth', 'noun', null, false),
 ('lumen, luminis, n.', 'lumen', 'light; lamp, torch; eye (of a person); life; day, daylight', 'noun', null, true),
 ('lumino, luminare, luminavi, luminatus', 'lumino', 'illuminate, give light to; light up; reveal/throw light on; brighten (w/color)', 'verb', null, false),
-('luminare, luminaris, n.', 'luminare', 'window-shutter, window', 'noun', null, false),
+('luminare, luminaris, n.', 'luminare', 'window-shutter, window', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('luminosus, luminosa, luminosum', 'luminosus', 'bright', 'adjective', null, false),
 ('luno, lunare, lunavi, lunatus', 'luno', 'make crescent-shaped, curve', 'verb', null, false),
 ('lunaris, lunare', 'lunaris', 'lunar; pertaining to the moon', 'adjective', null, false),
@@ -22088,9 +22114,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('lurchor, lurchari, lurchatus sum', 'lurchor', 'eat greedily; guzzle, gorge; devour (Ecc); eat voraciously (L+S)', 'verb', null, false),
 ('lurchinabundus, lurchinabunda, lurchinabundum', 'lurchinabundus', 'eating greedily; guzzling, gorging; devouring', 'adjective', null, false),
 ('lurcho, lurchonis, m.', 'lurcho', 'glutton; gourmand; (also general form of abuse)', 'noun', null, false),
-('lurcinabundus, lurcinabunda, lurcinabundum', 'lurcinabundus', 'eating greedily; guzzling, gorging; devouring', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('lurcinabundus, lurcinabunda, lurcinabundum', 'lurcinabundus', 'eating greedily; guzzling, gorging; devouring', 'adjective', null, false),
 ('lurco, lurconis, m.', 'lurco', 'glutton; gourmand; (also general form of abuse)', 'noun', null, false),
 ('luridus, lurida, luridum', 'luridus', 'sallow, wan, ghastly', 'adjective', null, false),
 ('luror, luroris, m.', 'luror', 'ghastliness, paleness', 'noun', null, false),
@@ -22566,7 +22590,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('melodia, melodiae, f.', 'melodia', 'melody; pleasant song', 'noun', null, false),
 ('melota, melotae, f.', 'melota', 'sheepskin', 'noun', null, false),
 ('melotes, melotedis, f.', 'melotes', 'sheepskin', 'noun', null, false),
-('melotis, melotidis, f.', 'melotis', 'sheepskin', 'noun', null, false),
+('melotis, melotidis, f.', 'melotis', 'sheepskin', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('mem', 'mem', 'mem; (13th letter of Hebrew alphabet); (transliterate as M)', 'noun', null, false),
 ('membrum, membri, n.', 'membrum', 'member, limb, organ; (esp.) male genital member; apartment, room; section', 'noun', null, true),
 ('membrana, membranae, f.', 'membrana', 'membrane; skin; parchment', 'noun', null, false),
@@ -22590,9 +22616,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('mendax, mendacis', 'mendax', 'lying, false; deceitful; counterfeit', 'adjective', null, false),
 ('mendicus, mendica, mendicum', 'mendicus', 'poor as a beggar, beggarly; paltry, pitiful', 'adjective', null, false),
 ('mendico, mendicare, mendicavi, mendicatus', 'mendico', 'beg for; be a beggar, go begging', 'verb', null, false),
-('mendicor, mendicari, mendicatus sum', 'mendicor', 'beg for; be a beggar, go begging', 'verb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('mendicor, mendicari, mendicatus sum', 'mendicor', 'beg for; be a beggar, go begging', 'verb', null, false),
 ('mendicatio, mendicationis, f.', 'mendicatio', 'begging', 'noun', null, false),
 ('mendicitas, mendicitatis, f.', 'mendicitas', 'beggary', 'noun', null, false),
 ('mendosus, mendosa, mendosum', 'mendosus', 'full of faults, faulty; erroneous; prone to error', 'adjective', null, false),
@@ -23068,7 +23092,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('mundanus, mundani, m.', 'mundanus', 'inhabitant of the world; worldly person, cosmopolitan', 'noun', null, false),
 ('mundanus, mundana, mundanum', 'mundanus', 'worldly; of/belonging to the world/universe; mundane; of this world (Bee)', 'adjective', null, false),
 ('mundialis, mundiale', 'mundialis', 'worldly, belonging to the world; mundane; of sacred vault of Ceres (OLD)', 'adjective', null, false),
-('mundialiter', 'mundialiter', 'in the manner of the world', 'adverb', null, false),
+('mundialiter', 'mundialiter', 'in the manner of the world', 'adverb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('munditia, munditiae, f.', 'munditia', 'cleanness, elegance of appearance, manners or taste', 'noun', null, false),
 ('mundities, munditiei, f.', 'mundities', 'cleanness, elegance of appearance, manners or taste', 'noun', null, false),
 ('munero, munerare, muneravi, muneratus', 'munero', 'give, present', 'verb', null, false),
@@ -23092,9 +23118,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('munitiuncula, munitiunculae, f.', 'munitiuncula', 'small/little fortification/stronghold', 'noun', null, false),
 ('munitor, munitoris, m.', 'munitor', 'one who builds fortifications', 'noun', null, false),
 ('munus, muneris, n.', 'munus', 'service; duty, office, function; gift; tribute, offering; bribes (pl.)', 'noun', null, true),
-('munusculum, munusculi, n.', 'munusculum', 'small present or favor', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('munusculum, munusculi, n.', 'munusculum', 'small present or favor', 'noun', null, false),
 ('muraena, muraenae, f.', 'muraena', 'kind of eel, the moray or lamprey', 'noun', null, false),
 ('muralis, murale', 'muralis', 'of walls; of a (city) wall; turreted; mural', 'adjective', null, false),
 ('muratus, murata, muratum', 'muratus', 'walled, surrounded by walls', 'adjective', null, false),
@@ -23360,6 +23384,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('nequaquam', 'nequaquam', 'by no means', 'adverb', null, false),
 ('neque', 'neque', 'nor; and not, not, neither', 'adverb', null, false),
 ('neque', 'neque', 'nor [neque..neque=>neither..nor; neque solum..sed etiam=>not only..but also]', 'conjunction', null, true),
+('nequeo, nequire, nequivi, nequitus', 'nequeo', 'be unable, cannot', 'verb', null, false),
 ('nequedum', 'nequedum', 'and/but not yet', 'conjunction', null, false),
 ('nequicquam', 'nequicquam', 'in vain', 'adverb', null, false),
 ('nequiquam', 'nequiquam', 'in vain', 'adverb', null, true),
@@ -23569,7 +23594,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('Numerius, Numerii, m.', 'Numerius', 'Numerius (Roman praenomen); (abb. N./Num.)', 'noun', null, false),
 ('numero', 'numero', 'quickly, rapidly; prematurely, too soon; too much(?)', 'adverb', null, false),
 ('numerosus, numerosa, numerosum', 'numerosus', 'numerous/many, of many units/parts/people; multiple; manifold/varied; prolific', 'adjective', null, false),
-('numerose', 'numerose', 'plentifully, in/with large numbers; into many parts; in many ways; rhythmically', 'adverb', null, false),
+('numerose', 'numerose', 'plentifully, in/with large numbers; into many parts; in many ways; rhythmically', 'adverb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('numerositas, numerositatis, f.', 'numerositas', 'multitude, great number; rhythm, harmony', 'noun', null, false),
 ('numisma, numismatis, n.', 'numisma', 'coin/piece of money; coinage; token/voucher; medal (L+S); stamp; image on coin', 'noun', null, false),
 ('nummus, nummi, m.', 'nummus', 'coin; cash; money; sesterce', 'noun', null, false),
@@ -23594,9 +23621,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('nuncupatio, nuncupationis, f.', 'nuncupatio', 'solemn pronouncement (vow); naming/declaring; ramification; nomination; name', 'noun', null, false),
 ('nundina, nundinae, f.', 'nundina', 'market day (pl.); traffic; [novem+dies => held every ninth day]', 'noun', null, false),
 ('nundinum, nundini, n.', 'nundinum', 'period from one market-day to the next', 'noun', null, false),
-('nundinor, nundinari, nundinatus sum', 'nundinor', 'buy or sell in the market; practice trade of a discreditable kind', 'verb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('nundinor, nundinari, nundinatus sum', 'nundinor', 'buy or sell in the market; practice trade of a discreditable kind', 'verb', null, false),
 ('nunnullus, nunnulli, m.', 'nunnullus', 'some (pl.), several, a few', 'noun', null, false),
 ('nunquam', 'nunquam', 'at no time, never; not in any circumstances', 'adverb', null, false),
 ('nunquid', 'nunquid', 'is it possible, surely ... not; can it be that; (question  expecting negative)', 'adverb', null, false),
@@ -23645,6 +23670,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('obductio, obductionis, f.', 'obductio', 'act of covering/veiling/enveloping; affliction/distress (Souter)', 'noun', null, false),
 ('obduro, obdurare, obduravi, obduratus', 'obduro', 'be hard, persist, endure', 'verb', null, false),
 ('obduresco, obdurescere, obdurui', 'obduresco', 'be persistent, endure', 'verb', null, false),
+('obeo, obire, obivi, obitus', 'obeo', 'go to meet; attend to; fall; die', 'verb', null, true),
 ('obedens, obedentis', 'obedens', 'obedient, compliant, submissive to authority/commands/word (of); under orders', 'adjective', null, false),
 ('obedio, obedire, obedivi, obeditus', 'obedio', 'obey; listen/harken/submit (to); be subject/obedient/responsible/a slave (to)', 'verb', null, false),
 ('obedienter', 'obedienter', 'obediently, compliantly, without demur; willingly, readily (L+S)', 'adverb', null, false),
@@ -23925,6 +23951,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('octuplicatus, octuplicata, octuplicatum', 'octuplicatus', 'increased eightfold', 'adjective', null, false),
 ('octussis, octussis, m.', 'octussis', 'eight asses (money)', 'noun', null, false),
 ('oculatus, oculata, oculatum', 'oculatus', 'having eyes; catching the eye, conspicuous', 'adjective', null, false),
+('odeo, odire, odivi', 'odeo', 'hate; dislike; be disinclined/reluctant/adverse to; (usu. PREFDEF)', 'verb', null, false),
 ('odium, odii, n.', 'odium', 'hate/hatred/dislike/antipathy; odium, unpopularity; boredom/impatience', 'noun', null, true),
 ('odibilis, odibile', 'odibilis', 'odious, hateful; that deserves to be hated', 'adjective', null, false),
 ('odiosus, odiosa, odiosum', 'odiosus', 'distasteful. disagreeable, offensive; tiresome, boring, troublesome, annoying', 'adjective', null, false),
@@ -23958,6 +23985,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('offensus, offensa, offensum', 'offensus', 'offensive, odious', 'adjective', null, false),
 ('offensio, offensionis, f.', 'offensio', 'displeasure; accident', 'noun', null, false),
 ('offensiuncula, offensiunculae, f.', 'offensiuncula', 'slight displeasure or check', 'noun', null, false),
+('offero, offerre, obtuli, oblatus', 'offero', 'offer; present; cause; bestow', 'verb', null, true),
 ('offertorium, offertorii, n.', 'offertorium', 'offertory; place where offerings were brought; linen cloth for holding paten', 'noun', null, false),
 ('offerumenta, offerumentae, f.', 'offerumenta', 'present; gift', 'noun', null, false),
 ('officio, officere, offeci, offectus', 'officio', 'block the path (of ), check, impede', 'verb', null, false),
@@ -24068,7 +24096,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('ophiomachus, ophiomachi, m.', 'ophiomachus', 'kind of locust; beetle; cricket; (interpretations of different Bibles)', 'noun', null, false),
 ('opicus, opica, opicum', 'opicus', 'coarse; boorish', 'adjective', null, false),
 ('opifer, opifera, opiferum', 'opifer', 'bringing help', 'adjective', null, false),
-('opifex, opificis, m.', 'opifex', 'workman', 'noun', null, false),
+('opifex, opificis, m.', 'opifex', 'workman', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('opilio, opilionis, m.', 'opilio', 'shepherd, herdsman (for sheep/goats); kind of bird', 'noun', null, false),
 ('opimus, opima, opimum', 'opimus', 'rich, fertile; abundant; fat, plump; [opima spolia => spoils from a general]', 'adjective', null, true),
 ('opinor, opinari, opinatus sum', 'opinor', 'suppose, imagine', 'verb', null, true),
@@ -24096,9 +24126,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('oppidanus, oppidana, oppidanum', 'oppidanus', 'provincial; of a small town', 'adjective', null, false),
 ('oppidaneus, oppidanea, oppidaneum', 'oppidaneus', 'of a town', 'adjective', null, false),
 ('oppido', 'oppido', 'exceedingly, utterly, altogether', 'adverb', null, false),
-('oppidulum, oppiduli, n.', 'oppidulum', 'small town', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('oppidulum, oppiduli, n.', 'oppidulum', 'small town', 'noun', null, false),
 ('oppilo, oppilare, oppilavi, oppilatus', 'oppilo', 'stop up, block', 'verb', null, false),
 ('oppleo, opplere, opplevi, oppletus', 'oppleo', 'fill (completely); overspread', 'verb', null, false),
 ('oppono, opponere, opposui, oppositus', 'oppono', 'oppose; place opposite', 'verb', null, true),
@@ -24570,7 +24598,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('pastinatum, pastinati, n.', 'pastinatum', 'plants (pl.) cultivated by preparing (ground) by digging and leveling', 'noun', null, false),
 ('pastoforius, pastoforii, m.', 'pastoforius', 'priest (of Isis) who carried image of deity in little shrine to collect alms', 'noun', null, false),
 ('pastoforium, pastoforii, n.', 'pastoforium', 'place in temple where image of deity was preserved and his servants abode', 'noun', null, false),
-('pastophorius, pastophorii, m.', 'pastophorius', 'priest (of Isis) who carried image of deity in little shrine to collect alms', 'noun', null, false),
+('pastophorius, pastophorii, m.', 'pastophorius', 'priest (of Isis) who carried image of deity in little shrine to collect alms', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('pastophorium, pastophorii, n.', 'pastophorium', 'place in temple where image of deity was preserved and his servants abode', 'noun', null, false),
 ('pastor, pastoris, m.', 'pastor', 'shepherd, herdsman', 'noun', null, true),
 ('pastoralis, pastorale', 'pastoralis', 'pastoral', 'adjective', null, false),
@@ -24598,9 +24628,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('patrius, patria, patrium', 'patrius', 'father''s, paternal; ancestral', 'adjective', null, true),
 ('patriarcha, patriarchae, m.', 'patriarcha', 'patriarch; father/chief of a tribe; chief bishop, Patriarch', 'noun', null, false),
 ('patricius, patricii, m.', 'patricius', 'patrician; aristocrat', 'noun', null, false),
-('patricius, patricia, patricium', 'patricius', 'patrician, noble', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('patricius, patricia, patricium', 'patricius', 'patrician, noble', 'adjective', null, false),
 ('patriciatus, patriciatus, m.', 'patriciatus', 'patrician status/dignity; patriciate; dignity of imperial court', 'noun', null, false),
 ('patricida, patricidae, m.', 'patricida', 'patricide, one who kills his father; murderer of his own father', 'noun', null, false),
 ('patrimus, patrima, patrimum', 'patrimus', 'having father still living', 'adjective', null, false),
@@ -24917,6 +24945,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('perduellio, perduellionis, f.', 'perduellio', 'treason; hostile action against one''s country', 'noun', null, false),
 ('perduellis, perduellis, m.', 'perduellis', 'national enemy; enemy; adherent of country with which one''s own is at war', 'noun', null, false),
 ('perduro, perdurare, perduravi, perduratus', 'perduro', 'last long, endure', 'verb', null, false),
+('pereo, perire, perivi, peritus', 'pereo', 'die, pass away; be ruined, be destroyed; go to waste', 'verb', null, true),
 ('peredo, peredere, peredi, peresus', 'peredo', 'eat up, consume, waste', 'verb', null, false),
 ('peregre', 'peregre', 'to/from abroad', 'adverb', null, false),
 ('peregri', 'peregri', 'abroad; away from home', 'adverb', null, false),
@@ -24949,6 +24978,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('perfectio, perfectionis, f.', 'perfectio', 'perfection, completion; bringing to completion/perfection; ideal/completed form', 'noun', null, false),
 ('perfectissimus, perfectissimi, m.', 'perfectissimus', 'most-perfect man', 'noun', null, false),
 ('perfectissimatus, perfectissimatus, m.', 'perfectissimatus', 'emperor''s office; office of perfectissimus', 'noun', null, false),
+('perfero, perferre, pertuli, perlatus', 'perfero', 'carry through; bear, endure to the end, suffer; announce', 'verb', null, true),
 ('perficio, perficere, perfeci, perfectus', 'perficio', 'complete, finish; execute; bring about, accomplish; do thoroughly', 'verb', null, true),
 ('perfidia, perfidiae, f.', 'perfidia', 'faithlessness, treachery, perfidy', 'noun', null, false),
 ('perfidiosus, perfidiosa, perfidiosum', 'perfidiosus', 'treacherous', 'adjective', null, false),
@@ -25070,7 +25100,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('permissus, permissus, m.', 'permissus', 'permission, authorization', 'noun', null, false),
 ('permissio, permissionis, f.', 'permissio', 'yielding (to another); permission', 'noun', null, false),
 ('permistus, permista, permistum', 'permistus', 'confused; disordered; (=permixtus, = alt. vpar of permisceo)', 'adjective', null, false),
-('permities, permitiei, f.', 'permities', 'destruction, annihilation', 'noun', null, false),
+('permities, permitiei, f.', 'permities', 'destruction, annihilation', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('permitialis, permitiale', 'permitialis', 'destructive, annihilating', 'adjective', null, false),
 ('permitto, permittere, permisi, permissus', 'permitto', 'let through; let go through; relinquish; permit, allow; entrust; hurl', 'verb', null, true),
 ('permixtus, permixta, permixtum', 'permixtus', 'promiscuous; confused', 'adjective', null, false),
@@ -25100,9 +25132,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('pernot, pernotis', 'pernot', 'very well known; very familiar', 'adjective', null, false),
 ('pernotesco, pernotescere, pernotui', 'pernotesco', 'become generally/well/everywhere known', 'verb', null, false),
 ('pernox, pernoctis', 'pernox', 'lasting all night; continuing throughout the night', 'adjective', null, false),
-('pernumero, pernumerare, pernumeravi, pernumeratus', 'pernumero', 'count up; reckon', 'verb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('pernumero, pernumerare, pernumeravi, pernumeratus', 'pernumero', 'count up; reckon', 'verb', null, false),
 ('pero, peronis, m.', 'pero', 'thick boot of raw hide', 'noun', null, false),
 ('perobscurus, perobscura, perobscurum', 'perobscurus', 'very obscure, very vague', 'adjective', null, false),
 ('perodiosus, perodiosa, perodiosum', 'perodiosus', 'very troublesome', 'adjective', null, false),
@@ -25255,6 +25285,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('pertorqueo, pertorquere', 'pertorqueo', 'distort', 'verb', null, false),
 ('pertractatio, pertractationis, f.', 'pertractatio', 'thorough handling, detailed treatment', 'noun', null, false),
 ('pertraho, pertrahere, pertraxi, pertractus', 'pertraho', 'draw or drag through or to, bring or conduct forcibly to; draw on, lure', 'verb', null, false),
+('pertranseo, pertransire, pertransivi, pertransitus', 'pertranseo', 'pass right through; go/pass by (L+S); pass away; cross (Bee)', 'verb', null, false),
 ('pertricosus, pertricosa, pertricosum', 'pertricosus', 'very confused; very strange; completely taken up with trifles', 'adjective', null, false),
 ('pertristis, pertriste', 'pertristis', 'very sad; very morose', 'adjective', null, false),
 ('pertundo, pertundere, pertudi, pertusus', 'pertundo', 'bore through, perforate', 'verb', null, false),
@@ -25571,7 +25602,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('plaudo, plaudere, plausi, plausus', 'plaudo', 'clap, strike (w/flat hand), pat; beat (wings); applaud; express (dis)approval', 'verb', null, false),
 ('plausus, plausus, m.', 'plausus', 'clapping/applause; approval; striking w/palm/flat surface; beating of wings', 'noun', null, false),
 ('plausibilis, plausibile', 'plausibilis', 'worthy of applause', 'adjective', null, false),
-('plausor, plausoris, m.', 'plausor', 'applauder', 'noun', null, false),
+('plausor, plausoris, m.', 'plausor', 'applauder', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('plaustrum, plaustri, n.', 'plaustrum', 'wagon, cart, wain; constellation of Great Bear/Big Dipper', 'noun', null, false),
 ('plebes, plebei, f.', 'plebes', 'common people, general citizens, commons/plebeians; lower class/ranks; mob/mass', 'noun', null, true),
 ('plebecula, plebeculae, f.', 'plebecula', 'mob, common people', 'noun', null, false),
@@ -25602,9 +25635,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('Plinius, Plinii, m.', 'Plinius', 'Pliny; (Roman gens name); (C. Plinius Secundus, author of Natural History)', 'noun', null, false),
 ('Plinius, Plinia, Plinium', 'Plinius', 'Plinius; (Roman gens); (C. Plinius Secundus/Pliny, author of Natural History)', 'adjective', null, false),
 ('plio, plionis, f.', 'plio', 'X times the amount (only with numerical prefix), X times as much', 'noun', null, false),
-('plipio, plipiare, plipiavi, plipiatus', 'plipio', 'screech; (emit the cry of the hawk)', 'verb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('plipio, plipiare, plipiavi, plipiatus', 'plipio', 'screech; (emit the cry of the hawk)', 'verb', null, false),
 ('plodo, plodere, plosi, plosus', 'plodo', 'clap, strike (w/flat hand), pat; beat (wings); applaud; express (dis)approval', 'verb', null, false),
 ('ploro, plorare, ploravi, ploratus', 'ploro', 'cry over, cry aloud; lament, weep; deplore', 'verb', null, false),
 ('ploratus, ploratus, m.', 'ploratus', 'wailing, crying', 'noun', null, false),
@@ -25826,6 +25857,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('posteritas, posteritatis, f.', 'posteritas', 'future time; posterity', 'noun', null, false),
 ('posterius', 'posterius', 'later, at a later day; by and by', 'adverb', null, false),
 ('postfactus, postfacta, postfactum', 'postfactus', 'done afterwards', 'adjective', null, false),
+('postfero, postferre, posttuli, postlatus', 'postfero', 'consider of less account', 'verb', null, false),
 ('postgenitus, postgeniti, m.', 'postgenitus', 'posterity (pl.), descendants', 'noun', null, false),
 ('posthabeo, posthabere, posthabui, posthabitus', 'posthabeo', 'esteem less, subordinate (to); postpone', 'verb', null, false),
 ('posthac', 'posthac', 'after this, in the future, hereafter, from now on; thereafter, from then on', 'adverb', null, false),
@@ -25945,7 +25977,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('praecurrentium, praecurrentii, n.', 'praecurrentium', 'antecedent', 'noun', null, false),
 ('praecursor, praecursoris, m.', 'praecursor', 'forerunner; member of advance-guard', 'noun', null, false),
 ('praecutio, praecutere, praecussi, praecussus', 'praecutio', 'shake before, brandish before', 'verb', null, false),
-('praedo, praedare, praedavi, praedatus', 'praedo', 'pillage, despoil, plunder; rob/ravish/take; acquire loot (robbery/war); catch', 'verb', null, true),
+('praedo, praedare, praedavi, praedatus', 'praedo', 'pillage, despoil, plunder; rob/ravish/take; acquire loot (robbery/war); catch', 'verb', null, false),
 ('praedor, praedari, praedatus sum', 'praedor', 'acquire loot (by robbery/war/depredation); obtain food by hunting/preying', 'verb', null, true),
 ('praedabundus, praedabunda, praedabundum', 'praedabundus', 'pillaging', 'adjective', null, false),
 ('praedator, praedatoris, m.', 'praedator', 'plunderer, pillager; hunter', 'noun', null, false),
@@ -25973,6 +26005,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('praedulcis, praedulce', 'praedulcis', 'very sweet', 'adjective', null, false),
 ('praedurus, praedura, praedurum', 'praedurus', 'very hard; very strong', 'adjective', null, false),
 ('praeduro, praedurare, praeduravi, praeduratus', 'praeduro', 'harden; make very hard', 'verb', null, false),
+('praeeo, praeire, praeivi, praeitus', 'praeeo', 'go before, precede; dictate', 'verb', null, false),
 ('praefor, praefari, praefatus sum', 'praefor', 'say/utter/mention beforehand/in advance; recite (preliminary formula)', 'verb', null, false),
 ('praefatio, praefationis, f.', 'praefatio', 'preliminary form of words, formula of announcement; preface', 'noun', null, false),
 ('praefecus, praefeci, m.', 'praefecus', 'director, president, chief, governor', 'noun', null, false),
@@ -25980,6 +26013,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('praefectianus, praefectiani, m.', 'praefectianus', 'praetorian prefect', 'noun', null, false),
 ('praefectianus, praefectiana, praefectianum', 'praefectianus', 'praetorian-perfectly; of the praetorian prefect', 'adjective', null, false),
 ('praefectura, praefecturae, f.', 'praefectura', 'command; office of praefectus', 'noun', null, false),
+('praefero, praeferre, praetuli, praelatus', 'praefero', 'carry in front; prefer; display; offer; give preference to', 'verb', null, true),
 ('praeferox, praeferocis', 'praeferox', 'very high-spirited', 'adjective', null, false),
 ('praeferratus, praeferrata, praeferratum', 'praeferratus', 'tipped with iron', 'adjective', null, false),
 ('praefervidus, praefervida, praefervidum', 'praefervidus', 'burning hot, very hot', 'adjective', null, false),
@@ -26070,7 +26104,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('praenotio, praenotionis, f.', 'praenotio', 'preconception, innate idea', 'noun', null, false),
 ('praenubilus, praenubila, praenubilum', 'praenubilus', 'very cloudy or dark', 'adjective', null, false),
 ('praenuntius, praenuntia, praenuntium', 'praenuntius', 'acting as harbinger; heralding', 'adjective', null, false),
-('praenuntio, praenuntiare, praenuntiavi, praenuntiatus', 'praenuntio', 'announce in advance', 'verb', null, false),
+('praenuntio, praenuntiare, praenuntiavi, praenuntiatus', 'praenuntio', 'announce in advance', 'verb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('praeoccupo, praeoccupare, praeoccupavi, praeoccupatus', 'praeoccupo', 'seize upon beforehand; anticipate', 'verb', null, false),
 ('praeolio, praeolere', 'praeolio', 'pre-perceive; perceive before', 'verb', null, false),
 ('praeopto, praeoptare, praeoptavi, praeoptatus', 'praeopto', 'prefer', 'verb', null, false),
@@ -26104,9 +26140,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('praeripio, praeripere, praeripui, praereptus', 'praeripio', 'snatch away (before the proper time); seize first; forestall', 'verb', null, false),
 ('praerodo, praerodere, praerosi, praerosus', 'praerodo', 'bite off end; nibble off', 'verb', null, false),
 ('praerogo, praerogare, praerogavi, praerogatus', 'praerogo', 'ask first; pay in advance', 'verb', null, false),
-('praerogatus, praerogata, praerogatum', 'praerogatus', 'pre-asked; asked before', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('praerogatus, praerogata, praerogatum', 'praerogatus', 'pre-asked; asked before', 'adjective', null, false),
 ('praerogatio, praerogationis, f.', 'praerogatio', 'pre-distribution', 'noun', null, false),
 ('praerogativa, praerogativae, f.', 'praerogativa', 'tribe/centuria which voted first; its verdict; omen; prior right/prerogative', 'noun', null, false),
 ('praerogativus, praerogativa, praerogativum', 'praerogativus', 'asked before others (for vote, opinion, etc.)', 'adjective', null, false),
@@ -26193,6 +26227,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('praeterago, praeteragere, praeteractus', 'praeterago', 'drive past/by', 'verb', null, false),
 ('praeterbito, praeterbitere', 'praeterbito', 'pass by; drive past/by', 'verb', null, false),
 ('praeterduco, praeterducere, praeterduxi, praeterductus', 'praeterduco', 'lead past', 'verb', null, false),
+('praetereo, praeterire, praeterivi, praeteritus', 'praetereo', 'pass/go by; disregard/neglect/omit/miss; surpass/excel; go overdue; pass over', 'verb', null, true),
 ('praeterequitans, praeterequitantis', 'praeterequitans', 'riding past', 'adjective', null, false),
 ('praeterfluo, praeterfluere', 'praeterfluo', 'flow past', 'verb', null, false),
 ('praetergredior, praetergredi, praetergressus sum', 'praetergredior', 'march or go past', 'verb', null, false),
@@ -26412,6 +26447,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('procursator, procursatoris, m.', 'procursator', 'skirmisher; fore-runner', 'noun', null, false),
 ('procurvus, procurva, procurvum', 'procurvus', 'curved outwards or forwards', 'adjective', null, false),
 ('prodo, prodere, prodidi, proditus', 'prodo', 'project, thrust forward; bring forth, produce, give birth to; create; nominate', 'verb', null, true),
+('prodeo, prodire, prodivi, proditus', 'prodeo', 'go/come forth/out, advance; appear; sprout/spring up; issue/extend/project', 'verb', null, true),
 ('prodeambulo, prodeambulare, prodeambulavi, prodeambulatus', 'prodeambulo', 'take a walk', 'verb', null, false),
 ('prodio, prodire, prodivi, proditus', 'prodio', 'go/come forth/out, advance; appear; sprout/spring up; issue/extend/project', 'verb', null, false),
 ('prodio, prodiere', 'prodio', 'go/come forth/forward/out; appear, spring up; advance/proceed; extend, project', 'verb', null, false),
@@ -26439,6 +26475,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('profecticius, profecticia, profecticium', 'profecticius', 'derived in ordinary course of law from bride''s family (dowry); deriving from', 'adjective', null, false),
 ('profectitius, profectitia, profectitium', 'profectitius', 'derived in ordinary course of law from bride''s family (dowry); deriving from', 'adjective', null, false),
 ('profecto', 'profecto', 'surely, certainly', 'adverb', null, true),
+('profero, proferre, protuli, prolatus', 'profero', 'bring forward; advance; defer; discover; mention', 'verb', null, true),
 ('professio, professionis, f.', 'professio', 'declaration/avowal/profession; formal declaration/return; profession/occupation', 'noun', null, false),
 ('professorius, professoria, professorium', 'professorius', 'authoritative', 'adjective', null, false),
 ('profestus, profesta, profestum', 'profestus', 'not kept as a holiday, common, ordinary', 'adjective', null, false),
@@ -26569,7 +26606,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('propemodum', 'propemodum', 'just about, pretty well', 'adverb', null, false),
 ('propendeo, propendere, propendi, propensus', 'propendeo', 'hand down; weigh more; be inclined', 'verb', null, false),
 ('propensus, propensa, propensum', 'propensus', 'ready, eager, willing; favorably disposed', 'adjective', null, false),
-('propensio, propensionis, f.', 'propensio', 'inclination, propensity; consideration (Latham)', 'noun', null, false),
+('propensio, propensionis, f.', 'propensio', 'inclination, propensity; consideration (Latham)', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('properus, propera, properum', 'properus', 'quick, speedy', 'adjective', null, false),
 ('propero, properare, properavi, properatus', 'propero', 'hurry, speed up; be quick', 'verb', null, true),
 ('properanter', 'properanter', 'hurriedly, hastily; in a hurried manner; speedily', 'adverb', null, false),
@@ -26606,9 +26645,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('propositio, propositionis, f.', 'propositio', 'proposition, premise/case for discussion; statement of facts/case; notion/image', 'noun', null, false),
 ('propraetor, propraetoris, m.', 'propraetor', 'ex-praetor; one sent to govern a province as praetor', 'noun', null, false),
 ('proprius, propria, proprium', 'proprius', 'own, very own; individual; special, particular, characteristic', 'adjective', null, true),
-('proprie', 'proprie', 'particularly, specifically, especially; properly, appropriately, rightly', 'adverb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('proprie', 'proprie', 'particularly, specifically, especially; properly, appropriately, rightly', 'adverb', null, false),
 ('proprietas, proprietatis, f.', 'proprietas', 'quality; special character; ownership', 'noun', null, false),
 ('propritim', 'propritim', 'peculiarly, specially', 'adverb', null, false),
 ('propterea', 'propterea', 'therefore, for this reason; [propterea quod => because]', 'adverb', null, true),
@@ -27071,7 +27108,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('quantusvis', 'quantusvis', 'to as great a degree as you like, as much/long as you like; however; although', 'adverb', null, false),
 ('quapropter', 'quapropter', 'wherefore, why, for what?', 'adverb', null, false),
 ('quaqua', 'quaqua', 'wherever; in every place/point at/through which; [~ versus => on all sides]', 'adverb', null, false),
-('quare', 'quare', 'in what way? how? by which means, whereby; why; wherefore, therefore, hence', 'adverb', null, false),
+('quare', 'quare', 'in what way? how? by which means, whereby; why; wherefore, therefore, hence', 'adverb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('quartadecimamus, quartadecimami, m.', 'quartadecimamus', 'man of fourteenth legion; heretic celebrating Easter 14th day of 1st moon', 'noun', null, false),
 ('quartadecimanus, quartadecimani, m.', 'quartadecimanus', '14th legion soldier; (see also quartadecuman-)', 'noun', null, false),
 ('quartadecumamus, quartadecumami, m.', 'quartadecumamus', 'man of fourteenth legion; heretic celebrating Easter 14th day of 1st moon', 'noun', null, false),
@@ -27095,6 +27134,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('quatriduum, quatridui, n.', 'quatriduum', 'period of four days; [~o => in the four days from now, within four day of]', 'noun', null, false),
 ('quattuorvir, quattuorviri, m.', 'quattuorvir', 'body of four men/officials (pl.); board of chief magistrates', 'noun', null, false),
 ('quattuorviratus, quattuorviratus, m.', 'quattuorviratus', 'quattuorvir''s office', 'noun', null, false),
+('queo, quire, quivi, quitus', 'queo', 'be able', 'verb', null, false),
 ('quemadmodum', 'quemadmodum', 'in what way, how; as, just as; to the extent that', 'adverb', null, false),
 ('queror, queri, questus sum', 'queror', 'complain; protest, grumble, gripe; make formal complaint in court of law', 'verb', null, true),
 ('quercus, quercus, f.', 'quercus', 'oak, oak-tree; oak wood/timber/object; oak leaf garland (honor); sea-oak', 'noun', null, false),
@@ -27108,9 +27148,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('quernus, querna, quernum', 'quernus', 'of oak, made of oak wood', 'adjective', null, false),
 ('querneus, quernea, querneum', 'querneus', 'oaken', 'adjective', null, false),
 ('querquerus, querquera, querquerum', 'querquerus', 'shivering', 'adjective', null, false),
-('querquetulanus, querquetulana, querquetulanum', 'querquetulanus', 'of an oak forest', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('querquetulanus, querquetulana, querquetulanum', 'querquetulanus', 'of an oak forest', 'adjective', null, false),
 ('querulus, querula, querulum', 'querulus', 'complaining, querulous; giving forth a mournful sound', 'adjective', null, false),
 ('questus, questus, m.', 'questus', 'complaint', 'noun', null, false),
 ('qui', 'qui', 'how?; how so; in what way; by what/which means; whereby; at whatever price', 'adverb', null, false),
@@ -27572,7 +27610,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('remisse', 'remisse', 'loosely; without vehemence/passion; placidly; unconstrainedly; light-heartedly', 'adverb', null, false),
 ('remissio, remissionis, f.', 'remissio', 'sending back/away, returning, releasing; abating; forgiveness; remiss', 'noun', null, false),
 ('remitto, remittere, remisi, remissus', 'remitto', 'send back, remit; throw back, relax, diminish', 'verb', null, true),
-('remolior, remoliri, remolitus sum', 'remolior', 'push/press/heave back/away', 'verb', null, false),
+('remolior, remoliri, remolitus sum', 'remolior', 'push/press/heave back/away', 'verb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('remollesco, remollescere', 'remollesco', 'become soft again; grow soft', 'verb', null, false),
 ('remollio, remollire, remollivi, remollitus', 'remollio', 'resoften; make soft again; weaken', 'verb', null, false),
 ('remora, remorae, f.', 'remora', 'hindrance; delay', 'noun', null, false),
@@ -27610,9 +27650,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('renuntiatio, renuntiationis, f.', 'renuntiatio', 'report (official); official election return; notice (Cal)', 'noun', null, false),
 ('renuto, renutare, renutavi, renutatus', 'renuto', 'refuse; decline', 'verb', null, false),
 ('repo, repere, repsi, reptus', 'repo', 'creep, crawl', 'verb', null, false),
-('repagulum, repaguli, n.', 'repagulum', 'door-bars (pl.)', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('repagulum, repaguli, n.', 'repagulum', 'door-bars (pl.)', 'noun', null, false),
 ('repandus, repanda, repandum', 'repandus', 'spread out, flattened back', 'adjective', null, false),
 ('reparo, reparare, reparavi, reparatus', 'reparo', 'prepare again; renew, revive', 'verb', null, false),
 ('reparabilis, reparabile', 'reparabilis', 'capable of being recovered or restored', 'adjective', null, false),
@@ -28074,7 +28112,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('sacrosanctus, sacrosancta, sacrosanctum', 'sacrosanctus', 'consecrated by religious ceremony, sacred, inviolable, most holy; venerable', 'adjective', null, false),
 ('sade', 'sade', 'sade; (18th letter of Hebrew alphabet); (transliterate as TS)', 'noun', null, false),
 ('saeclum, saecli, n.', 'saeclum', 'age; generation, people born at a time; breed, race; present time/age; century', 'noun', null, false),
-('saeclaris, saeclare', 'saeclaris', 'of/belonging to saeculum/century/generation; of Roman century games/hymns', 'adjective', null, false),
+('saeclaris, saeclare', 'saeclaris', 'of/belonging to saeculum/century/generation; of Roman century games/hymns', 'adjective', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('saeculum, saeculi, n.', 'saeculum', 'age; generation, people born at a time; breed, race; present time/age; century', 'noun', null, true),
 ('saecularis, saeculare', 'saecularis', 'secular, of world not church; ecclesiastics not member of order (Bee); gentile', 'adjective', null, false),
 ('saepenumero', 'saepenumero', 'repeatedly; on many occasions', 'adverb', null, false),
@@ -28112,9 +28152,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('salaco, salaconis, m.', 'salaco', 'swaggerer, braggart', 'noun', null, false),
 ('salaputium, salaputii, n.', 'salaputium', 'little man, manikin', 'noun', null, false),
 ('salarium, salarii, n.', 'salarium', 'regular official payment to the holder of a civil or military post', 'noun', null, false),
-('salarius, salaria, salarium', 'salarius', 'of salt, salt', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('salarius, salaria, salarium', 'salarius', 'of salt, salt', 'adjective', null, false),
 ('salax, salacis', 'salax', 'lecherous/lustful; highly sexed, eager for sex, lascivious; aphrodisiac; hot', 'adjective', null, false),
 ('salebra, salebrae, f.', 'salebra', 'rut, irregularity; roughness (of style or speech)', 'noun', null, false),
 ('salebrosus, salebrosa, salebrosum', 'salebrosus', 'rugged, rough', 'adjective', null, false),
@@ -28576,7 +28614,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('segmentum, segmenti, n.', 'segmentum', 'cutting, shred; borders/patches (pl.) of purple or gold', 'noun', null, false),
 ('segmentatus, segmentata, segmentatum', 'segmentatus', 'adorned with borders or patches', 'adjective', null, false),
 ('segnis, segne', 'segnis', 'slow, sluggish, torpid, inactive; slothful, unenergetic; slow moving, slow', 'adjective', null, false),
-('segnipes, segnipedis', 'segnipes', 'slow-footed', 'adjective', null, false),
+('segnipes, segnipedis', 'segnipes', 'slow-footed', 'adjective', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('segnitas, segnitatis, f.', 'segnitas', 'sloth, sluggishness', 'noun', null, false),
 ('segniter', 'segniter', 'half-heartedly; without spirit/energy, feebly; [nihlo ~ius => no less actively]', 'adverb', null, false),
 ('segnitia, segnitiae, f.', 'segnitia', 'sloth, sluggishness, inertia; weakness, feebleness; disinclination for action', 'noun', null, false),
@@ -28614,9 +28654,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('sementivus, sementiva, sementivum', 'sementivus', 'of sowing/seed-time; [feriae ~ => festival after sowing; pirum ~ => late pear]', 'adjective', null, false),
 ('semermus, semerma, semermum', 'semermus', 'half-armed; badly equipped', 'adjective', null, false),
 ('semermis, semerme', 'semermis', 'half-armed; badly equipped', 'adjective', null, false),
-('semesus, semesa, semesum', 'semesus', 'half-eaten', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('semesus, semesa, semesum', 'semesus', 'half-eaten', 'adjective', null, false),
 ('semestris, semestre', 'semestris', 'half-yearly; of six months'' duration', 'adjective', null, false),
 ('semiadapertus, semiadaperta, semiadapertum', 'semiadapertus', 'half-open', 'adjective', null, false),
 ('semianimus, semianima, semianimum', 'semianimus', 'half-alive', 'adjective', null, false),
@@ -29078,7 +29116,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('sinuo, sinuare, sinuavi, sinuatus', 'sinuo', 'bend into a curve; bend; billow out', 'verb', null, false),
 ('sinuosus, sinuosa, sinuosum', 'sinuosus', 'characterized by bending, winding; sinuous; full of folds/recesses', 'adjective', null, false),
 ('sipus, sipi, m.', 'sipus', 'pipe/tube (for distributing water)', 'noun', null, false),
-('sipo, sipare, sipavi, sipatus', 'sipo', 'throw; pour; strew, scatter; (usu. only in compounds)', 'verb', null, false),
+('sipo, sipare, sipavi, sipatus', 'sipo', 'throw; pour; strew, scatter; (usu. only in compounds)', 'verb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('siparum, sipari, n.', 'siparum', 'linen garment (for women); topsail', 'noun', null, false),
 ('siparium, siparii, n.', 'siparium', 'curtain; a drop-scene at a theater', 'noun', null, false),
 ('siphus, siphi, m.', 'siphus', 'pipe/tube (for distributing water)', 'noun', null, false),
@@ -29116,9 +29156,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('sitella, sitellae, f.', 'sitella', 'urn for drawing lots', 'noun', null, false),
 ('sitio, sitire, sitivi', 'sitio', 'be thirsty', 'verb', null, false),
 ('siticulosus, siticulosa, siticulosum', 'siticulosus', 'very dry, parched', 'adjective', null, false),
-('sitiens, sitientis', 'sitiens', 'thirsting, producing thirst, arid, dry, parched, thirsty (for)', 'adjective', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('sitiens, sitientis', 'sitiens', 'thirsting, producing thirst, arid, dry, parched, thirsty (for)', 'adjective', null, false),
 ('sitthim', 'sitthim', 'shittim/setim wood, wood of shittah tree/acacia wood; (not the tree); (Hebrew)', 'noun', null, false),
 ('sittybus, sittybi, m.', 'sittybus', 'strip of parchment showing the title of a book', 'noun', null, false),
 ('situla, situlae, f.', 'situla', 'basin/urn/jar; bucket, vessel for drawing/holding water; urn/basin on monument', 'noun', null, false),
@@ -29580,7 +29618,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('storia, storiae, f.', 'storia', 'matting of rushes', 'noun', null, false),
 ('strabo, strabonis, m.', 'strabo', 'squinter', 'noun', null, false),
 ('strages, stragis, f.', 'strages', 'overthrow; massacre, slaughter, cutting down; havoc; confused heap', 'noun', null, false),
-('stragulum, straguli, n.', 'stragulum', 'covering; rug, carpet; bedspread, bed-cover', 'noun', null, false),
+('stragulum, straguli, n.', 'stragulum', 'covering; rug, carpet; bedspread, bed-cover', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('stragulus, stragula, stragulum', 'stragulus', 'covering', 'adjective', null, false),
 ('stramen, straminis, n.', 'stramen', 'straw for bedding, etc, litter', 'noun', null, false),
 ('stramentum, stramenti, n.', 'stramentum', 'thatch; litter/trash (Cal)', 'noun', null, false),
@@ -29618,9 +29658,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('stropha, strophae, f.', 'stropha', 'trick, artifice', 'noun', null, false),
 ('strophium, strophii, n.', 'strophium', 'twisted breast-band; head-band; bra (Cal)', 'noun', null, false),
 ('strophiarius, strophiarii, m.', 'strophiarius', 'breast-bands dealer', 'noun', null, false),
-('struo, struere, struxi, structus', 'struo', 'build, construct', 'verb', null, true)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('struo, struere, struxi, structus', 'struo', 'build, construct', 'verb', null, true),
 ('structilis, structile', 'structilis', 'used in building', 'adjective', null, false),
 ('structor, structoris, m.', 'structor', 'builder, carver', 'noun', null, false),
 ('structura, structurae, f.', 'structura', 'building, construction; structure, masonry, concrete', 'noun', null, false),
@@ -29726,6 +29764,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('subdolus, subdola, subdolum', 'subdolus', 'sly, deceitful, treacherous', 'adjective', null, false),
 ('subduco, subducere, subduxi, subductus', 'subduco', 'lead up, carry off; transfer; haul', 'verb', null, true),
 ('subductio, subductionis, f.', 'subductio', 'hauling up of a ship onto the beach', 'noun', null, false),
+('subeo, subire, subivi, subitus', 'subeo', 'go/move/pass/sink/extend underneath/into; climb/come/go up, ascend; steal in on', 'verb', null, true),
 ('subedo, subedere, subedi', 'subedo', 'eat away below', 'verb', null, false),
 ('suber, suberis, n.', 'suber', 'cork-tree; cork', 'noun', null, false),
 ('subex, subicis, f.', 'subex', 'supports (pl.), underlying parts; underlayer (L+S)', 'noun', null, false),
@@ -29744,6 +29783,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('subinsulsus, subinsulsa, subinsulsum', 'subinsulsus', 'somewhat insipid', 'adjective', null, false),
 ('subintellego, subintellegere, subintellexi, subintellectus', 'subintellego', 'understand a little', 'verb', null, false),
 ('subintro, subintrare, subintravi, subintratus', 'subintro', 'go into secretly, enter by stealth', 'verb', null, false),
+('subintroeo, subintroire, subintroivi, subintroitus', 'subintroeo', 'go into, enter', 'verb', null, false),
 ('subinvideo, subinvidere, subinvisus', 'subinvideo', 'envy a little; be somewhat envious', 'verb', null, false),
 ('subinvisus, subinvisa, subinvisum', 'subinvisus', 'somewhat odious', 'adjective', null, false),
 ('subinvito, subinvitare, subinvitavi, subinvitatus', 'subinvito', 'invite vaguely', 'verb', null, false),
@@ -29986,6 +30026,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('sufes, sufetis, m.', 'sufes', 'chief magistrate of Carthage', 'noun', null, false),
 ('suffamen, suffaminis, n.', 'suffamen', 'clog, brake, drag chain; hindrance', 'noun', null, false),
 ('suffarcino, suffarcinare, suffarcinavi, suffarcinatus', 'suffarcino', 'stuff, cram', 'verb', null, false),
+('suffero, sufferre, sustuli, sublatus', 'suffero', 'bear, endure, suffer', 'verb', null, false),
 ('suffervefacio, suffervefacere, suffervefeci, suffervefactus', 'suffervefacio', 'simmer, bring/keep almost to a boil; warm from below (L+S)', 'verb', null, false),
 ('suffes, suffetis, m.', 'suffes', 'chief magistrate of Carthage', 'noun', null, false),
 ('suffio, suffire, suffivi, suffitus', 'suffio', 'fumigate; perfume, scent', 'verb', null, false),
@@ -30079,7 +30120,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('superum, superi, n.', 'superum', 'heaven (pl.); heavenly bodies; heavenly things; higher places', 'noun', null, false),
 ('superabilis, superabile', 'superabilis', 'that may be got over or surmounted; that may be conquered', 'adjective', null, false),
 ('superabundo, superabundare, superabundavi, superabundatus', 'superabundo', 'be very abundant', 'verb', null, false),
-('superabundanter', 'superabundanter', 'very abundantly', 'adverb', null, false),
+('superabundanter', 'superabundanter', 'very abundantly', 'adverb', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('superabundantia, superabundantiae, f.', 'superabundantia', 'superabundance', 'noun', null, false),
 ('superaddo, superaddere, superaddidi, superadditus', 'superaddo', 'add or affix on the surface', 'verb', null, false),
 ('superadicio, superadicere, superadieci, superadiectus', 'superadicio', 'add besides', 'verb', null, false),
@@ -30120,9 +30163,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('superincubans, superincubantis', 'superincubans', 'lying on top', 'adjective', null, false),
 ('superincumbo, superincumbere, superincumbui', 'superincumbo', 'lean over', 'verb', null, false),
 ('superingo, superingere, superingestus', 'superingo', 'bring upon; pour down (eg sun-rays)', 'verb', null, false),
-('superinicio, superinicere, superinjeci, superinjectus', 'superinicio', 'throw/scatter on/upon/over the surface', 'verb', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('superinicio, superinicere, superinjeci, superinjectus', 'superinicio', 'throw/scatter on/upon/over the surface', 'verb', null, false),
 ('superinjicio, superinjicere, superinjeci, superinjectus', 'superinjicio', 'throw/scatter on/upon/over the surface', 'verb', null, false),
 ('superinpendo, superinpendere, superinpendi, superinpensus', 'superinpendo', 'spend, exhaust; (upon any thing)', 'verb', null, false),
 ('superinsterno, superinsternere, superinstravi, superinstratus', 'superinsterno', 'spread/lay on over the surface', 'verb', null, false),
@@ -30581,7 +30622,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('tescum, tesci, n.', 'tescum', 'wastes (pl.), deserts', 'noun', null, false),
 ('tesella, tesellae, f.', 'tesella', 'small cube of stone', 'noun', null, false),
 ('tesquum, tesqui, n.', 'tesquum', 'wastes (pl.), deserts', 'noun', null, false),
-('tessella, tessellae, f.', 'tessella', 'small cube, die; tile, shingle (Latham); pane (Erasmus)', 'noun', null, false),
+('tessella, tessellae, f.', 'tessella', 'small cube, die; tile, shingle (Latham); pane (Erasmus)', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('tessellatus, tessellata, tessellatum', 'tessellatus', 'mosaic', 'adjective', null, false),
 ('tessellatim', 'tessellatim', 'in checkered form', 'adverb', null, false),
 ('tessera, tesserae, f.', 'tessera', 'die; square tablet marked with watchword, countersign; token, ticket', 'noun', null, false),
@@ -30622,9 +30665,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('tetrans, tetrantis, m.', 'tetrans', 'quarter; quadrant; place where two lines meet', 'noun', null, false),
 ('tetrao, tetraonis, m.', 'tetrao', 'wood/black grouse/capercailye/capercailzie; other game bird/heathcock/moorfowl', 'noun', null, false),
 ('tetrarchia, tetrarchiae, f.', 'tetrarchia', 'tetrarchy', 'noun', null, false),
-('tetrardus, tetrardi, m.', 'tetrardus', 'interval of four notes; fourth note in plain-song', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('tetrardus, tetrardi, m.', 'tetrardus', 'interval of four notes; fourth note in plain-song', 'noun', null, false),
 ('tetricus, tetrica, tetricum', 'tetricus', 'harsh, gloomy, severe', 'adjective', null, false),
 ('Teucer, Teucri, m.', 'Teucer', 'Trojan; originally brother of Ajax', 'noun', null, false),
 ('Teucria, Teucriae, f.', 'Teucria', 'Troy; ancient city taken by the Greeks', 'noun', null, false),
@@ -30862,6 +30903,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('traductor, traductoris, m.', 'traductor', 'transferor; conveyer', 'noun', null, false),
 ('tradux, traducis, m.', 'tradux', 'vine-layer', 'noun', null, false),
 ('Traex, Treacis, m.', 'Traex', 'Thracian, native of Thrace; gladiator armed with saber and short shield', 'noun', null, false),
+('trafero, traferre, tratuli, tralatus', 'trafero', 'transport/convey/transfer/shift; transpose; carry/bring across/over; transplant', 'verb', null, false),
 ('tragum, tragi, n.', 'tragum', 'porridge', 'noun', null, false),
 ('tragelaphus, tragelaphi, m.', 'tragelaphus', 'kind of wild goat or antelope; stag with beard like goat (horse-stag) (L+S)', 'noun', null, false),
 ('tragicus, tragica, tragicum', 'tragicus', 'tragic; suitable to tragedy, a, i, m  tragic poet, tragic actor', 'adjective', null, false),
@@ -30885,6 +30927,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('tranquillus, tranquilla, tranquillum', 'tranquillus', 'quiet, calm', 'adjective', null, false),
 ('tranquillo, tranquillare, tranquillavi, tranquillatus', 'tranquillo', 'calm, quiet', 'verb', null, false),
 ('tranquillitas, tranquillitatis, f.', 'tranquillitas', 'stillness; tranquility', 'noun', null, false),
+('transabeo, transabire, transabivi, transabitus', 'transabeo', 'go away beyond', 'verb', null, false),
 ('transactio, transactionis, f.', 'transactio', 'transaction; deal, business arrangement, negotiated settlement', 'noun', null, false),
 ('transactor, transactoris, m.', 'transactor', 'manager', 'noun', null, false),
 ('transadigo, transadigere, transadegi, transadactus', 'transadigo', 'pierce through, thrust through', 'verb', null, false),
@@ -30900,6 +30943,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('transduco, transducere, transduxi, transductus', 'transduco', 'bring across/over, move/transfer; convert; cause to cross/to extend across area', 'verb', null, false),
 ('transenna, transennae, f.', 'transenna', 'lattice-work, grating', 'noun', null, false),
 ('transeunter', 'transeunter', 'in passing; cursorily', 'adverb', null, false),
+('transfero, transferre, transtuli, translatus', 'transfero', 'transport/convey/transfer/shift; transpose; carry/bring across/over; transplant', 'verb', null, false),
 ('transfiguro, transfigurare, transfiguravi, transfiguratus', 'transfiguro', 'transform, change form/appearance', 'verb', null, false),
 ('transfluo, transfluere, transfluxi, transfluxus', 'transfluo', 'flow through', 'verb', null, false),
 ('transfodio, transfodere, transfodi, transfossus', 'transfodio', 'transfix, pierce, impale', 'verb', null, false),
@@ -31080,7 +31124,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('trigonus, trigona, trigonum', 'trigonus', 'triangular; having three angles/corners', 'adjective', null, false),
 ('trigonium, trigonii, n.', 'trigonium', 'triangle; three sided figure; triangular pill/tablet; 3 player ball game', 'noun', null, false),
 ('trilibris, trilibre', 'trilibris', 'of three pounds weight', 'adjective', null, false),
-('trilinguis, trilingue', 'trilinguis', 'that has three tongues', 'adjective', null, false),
+('trilinguis, trilingue', 'trilinguis', 'that has three tongues', 'adjective', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('trilix, trilicis', 'trilix', 'having triple thread', 'adjective', null, false),
 ('trimus, trima, trimum', 'trimus', 'three, three years old', 'adjective', null, false),
 ('trimenstris, trimenstre', 'trimenstris', 'three months old; lasting/acting for 3 months; ripening in 3 months (crops)', 'adjective', null, false),
@@ -31124,9 +31170,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('trisulcus, trisulca, trisulcum', 'trisulcus', 'divided into three forks or prongs', 'adjective', null, false),
 ('tritus, trita, tritum', 'tritus', 'well-trodden, well-worn, worn; common; familiar', 'adjective', null, false),
 ('tritavia, tritaviae, f.', 'tritavia', 'remote ancestor''s mother; mother of atavus or atavia', 'noun', null, false),
-('triticum, tritici, n.', 'triticum', 'wheat', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('triticum, tritici, n.', 'triticum', 'wheat', 'noun', null, false),
 ('triticeus, triticea, triticeum', 'triticeus', 'of wheat', 'adjective', null, false),
 ('triticius, triticia, triticium', 'triticius', 'of wheat', 'adjective', null, false),
 ('tritura, triturae, f.', 'tritura', 'rubbing, friction; threshing', 'noun', null, false),
@@ -31582,7 +31626,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('vapide', 'vapide', 'in a flat/vapid manner; [vapide se habere => be poorly - Augustus]', 'adverb', null, false),
 ('vapor, vaporis, m.', 'vapor', 'steam/vapor; exhalation;  heat/warmth (of sun); fever, body heat; excited state', 'noun', null, false),
 ('vaporo, vaporare, vaporavi, vaporatus', 'vaporo', 'cover or fill with vapor; heat, warm; be hot', 'verb', null, false),
-('vaporarium, vaporarii, n.', 'vaporarium', 'room for circulating steam heating bath suite; steam-pipe (for baths L+S)', 'noun', null, false),
+('vaporarium, vaporarii, n.', 'vaporarium', 'room for circulating steam heating bath suite; steam-pipe (for baths L+S)', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('vappa, vappae, m.', 'vappa', 'worthless person; good-for-nothing', 'noun', null, false),
 ('vappa, vappae, f.', 'vappa', 'flat wine, wine that has gone flat', 'noun', null, false),
 ('vapulo, vapulare, vapulavi, vapulatus', 'vapulo', 'be beaten', 'verb', null, false),
@@ -31626,9 +31672,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('vectigalis, vectigale', 'vectigalis', 'yielding taxes, subject to taxation', 'adjective', null, false),
 ('vectio, vectionis, f.', 'vectio', 'conveyance; transport', 'noun', null, false),
 ('vectis, vectis, m.', 'vectis', 'crowbar, lever', 'noun', null, false),
-('vector, vectoris, m.', 'vector', 'passenger; one that carries or transports', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('vector, vectoris, m.', 'vector', 'passenger; one that carries or transports', 'noun', null, false),
 ('vectorius, vectoria, vectorium', 'vectorius', 'for carrying; [vectorium navigium => transport/cargo ship]', 'adjective', null, false),
 ('vectura, vecturae, f.', 'vectura', 'transportation, carriage', 'noun', null, false),
 ('vegeo, vegere', 'vegeo', 'stir up, excite', 'verb', null, false),
@@ -31687,6 +31731,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('venditio, venditionis, f.', 'venditio', 'sale, action/process of selling; document recording a sale', 'noun', null, false),
 ('venditor, venditoris, m.', 'venditor', 'seller/vendor; one who sells for bribes or corrupt payments', 'noun', null, false),
 ('venditrix, venditricis, f.', 'venditrix', 'female seller', 'noun', null, false),
+('veneo, venire, venivi, venitus', 'veneo', 'go for sale, be sold (as slave), be disposed of for (dishonorable/venal) gain', 'verb', null, true),
 ('venefica, veneficae, f.', 'venefica', 'witch, sorceress, enchantress; hag; jade; poisoner (female); mixer of poisons', 'noun', null, false),
 ('veneficus, venefici, m.', 'veneficus', 'sorcerer, wizard, enchanter; poisoner; mixer of poisons; rogue', 'noun', null, false),
 ('veneficus, venefica, veneficum', 'veneficus', 'of/connected with sorcery/charms, sorcerous, magic; poisoning, poisonous', 'adjective', null, false),
@@ -32083,7 +32128,9 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('vitula, vitulae, f.', 'vitula', 'calf, young cow', 'noun', null, false),
 ('vitulus, vituli, m.', 'vitulus', 'calf', 'noun', null, false),
 ('vitulamen, vitulaminis, n.', 'vitulamen', 'shoot, sucker, sprig', 'noun', null, false),
-('vitulina, vitulinae, f.', 'vitulina', 'veal', 'noun', null, false),
+('vitulina, vitulinae, f.', 'vitulina', 'veal', 'noun', null, false)
+on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
+insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
 ('vitulinus, vitulina, vitulinum', 'vitulinus', 'of a calf; [w/assum => roast veal]', 'adjective', null, false),
 ('vitupero, vituperare, vituperavi, vituperatus', 'vitupero', 'find fault with, blame, reproach, disparage, scold, censure', 'verb', null, false),
 ('vituperabilis, vituperabile', 'vituperabilis', 'blamable; can be censured', 'adjective', null, false),
@@ -32128,9 +32175,7 @@ insert into public.lexicon (headword, lemma, definition, pos, frequency, core) v
 ('volo, volonis, m.', 'volo', 'volunteers (pl.); (in the Second Punic War)', 'noun', null, false),
 ('volpes, volpis, f.', 'volpes', 'fox', 'noun', null, false),
 ('volsella, volsellae, f.', 'volsella', 'pair of tweezers', 'noun', null, false),
-('voltus, voltus, m.', 'voltus', 'face, expression; looks', 'noun', null, false)
-on conflict (headword, pos) where owner_id is null do update set lemma = excluded.lemma, definition = excluded.definition, frequency = excluded.frequency, core = excluded.core;
-insert into public.lexicon (headword, lemma, definition, pos, frequency, core) values
+('voltus, voltus, m.', 'voltus', 'face, expression; looks', 'noun', null, false),
 ('voltur, volturis, m.', 'voltur', 'vulture', 'noun', null, false),
 ('volturius, volturii, m.', 'volturius', 'vulture', 'noun', null, false),
 ('volubilis, volubile', 'volubilis', 'winding, twisting', 'adjective', null, false),

@@ -11,7 +11,7 @@ import { parseDooge } from './lexicon/dooge';
 import { adjectivesModule, coreAdjectives, parseWhitakerAdjectives } from './lexicon/adjectives';
 import { coreNouns, nounsModule, parseWhitakerNouns } from './lexicon/nouns';
 import { coreTrainerVerbs, parseWhitakerVerbs, verbsModule } from './lexicon/verbs';
-import { parseDictline } from './lexicon/whitaker';
+import { applyDictlineFixes, parseDictline } from './lexicon/whitaker';
 
 export { lemmaOf };
 
@@ -68,7 +68,7 @@ function main() {
   writeFileSync('supabase/seed.sql', out.join('\n'));
   console.log(`seed.sql: ${MODULES.length} modules, ${MODULES.reduce((n, m) => n + m.questions.length, 0)} questions`);
 
-  const dictline = readFileSync('content/sources/whitaker/DICTLINE.GEN', 'utf8');
+  const dictline = applyDictlineFixes(readFileSync('content/sources/whitaker/DICTLINE.GEN', 'utf8'));
   const { rows, unmatchedLodge } = composeLexicon(
     parseDooge(readFileSync('content/sources/dooge-latin-english.txt', 'utf8')),
     parseDictline(dictline),

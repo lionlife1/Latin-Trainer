@@ -101,16 +101,20 @@ export function shortGloss(definition: string): string {
 const GLOSS_OVERRIDES: Record<string, string> = {
   surgo: 'to rise', muto: 'to change', perago: 'to complete', libo: 'to pour as an offering',
   tueor: 'to watch over', cerno: 'to discern', fallo: 'to deceive', differo: 'to put off', ruo: 'to rush',
+  edo: 'to give out, publish', veneo: 'to be sold', aufero: 'to carry away', subeo: 'to go under, undergo',
 };
 
 /** Compounds of ire that take a direct object, so they have a passive (by 1st principal part). */
-const TRANSITIVE_IRE = new Set(['transeo', 'adeo', 'circumeo', 'ineo']);
+const TRANSITIVE_IRE = new Set(['transeo', 'adeo', 'circumeo', 'ineo', 'obeo', 'praetereo', 'subeo']);
 
 /** Lexicon headwords whose 2nd principal part is wrong. fruor's core row says "fruari" (Whitaker's 1st-conjugation line); it is 3rd conjugation, frui. */
 const SECOND_PART_OVERRIDES: Record<string, string> = { fruor: 'i' };
 
-/** Defective or duplicate verbs left out, keyed `${pp1}|${conj}`: fari, and the archaic 3rd-conjugation sonere. */
-const EXCLUDED_VERBS = new Set(['for|1', 'sono|3']);
+/**
+ * Defective or duplicate verbs left out, keyed `${pp1}|${conj}` (`irr` for irregulars): fari, the archaic
+ * 3rd-conjugation sonere, and D'Ooge's unassimilated adferre, which duplicates Lodge's afferre.
+ */
+const EXCLUDED_VERBS = new Set(['for|1', 'sono|3', 'adfero|irr']);
 
 /**
  * Core verbs with no personal passive that Whitaker doesn't mark INTRANS (by 1st principal part,
@@ -124,7 +128,26 @@ const INTRANSITIVE = new Set([
   'pergo', 'permaneo', 'pertineo', 'pervenio', 'placeo', 'procedo', 'procumbo', 'procurro', 'propero',
   'quiesco', 'recedo', 'regno', 'remaneo', 'salio', 'sedeo', 'serpo', 'servio', 'sono', 'spiro', 'spumo',
   'sto', 'succedo', 'succurro', 'surgo', 'triumpho', 'vaco', 'valeo', 'venio', 'vigilo', 'vivo', 'volito',
+  'ambulo', 'certo', 'confligo', 'doleo', 'dormio', 'ignosco', 'laboro', 'persuadeo', 'pugno',
 ]);
+
+/**
+ * Transitive core verbs that have no 4th principal part in Whitaker (by 1st principal part). They keep a
+ * passive: the present system needs no supine, and the perfect passive is dropped by the engine.
+ */
+const TRANSITIVE_NO_SUPINE = new Set(['arceo', 'deposco', 'horreo', 'incolo', 'metuo', 'pertimesco', 'posco', 'timeo', 'urgeo']);
+
+/**
+ * Rows where Whitaker's chosen line is wrong (by 1st principal part). A `ppp` of null removes the
+ * 4th principal part.
+ */
+const STEM_OVERRIDES: Record<string, { perf?: string; ppp?: string | null }> = {
+  eicio: { perf: 'eiec', ppp: 'eiect' }, // Whitaker's first line "eici eic eic eict" is a bogus entry
+  depono: { ppp: 'deposit' }, // the best-frequency line has the syncopated "depost"
+  avello: { ppp: 'avuls' }, // not the archaic "avols"
+  pertineo: { ppp: null }, // "pertent" is not a real supine; it only produced "pertenturus"
+  disco: { ppp: null }, // "discitus" is not classical; D'Ooge gives disco, -ere, didici
+};
 
 /** Core lexicon verbs -> trainer verbs; rows with no matching Whitaker verb are returned as unmatched headwords. */
 export function coreTrainerVerbs(rows: LexiconRow[], whitaker: WhitakerVerb[]): { verbs: Verb[]; unmatched: string[] } {
@@ -151,7 +174,7 @@ export function coreTrainerVerbs(rows: LexiconRow[], whitaker: WhitakerVerb[]): 
       continue;
     }
     const verb: Verb = { ...match.verb, trans: shortGloss(r.definition) };
-    if (EXCLUDED_VERBS.has(`${verb.pp1}|${verb.conj}`)) continue;
+    if (EXCLUDED_VERBS.has(`${verb.pp1}|${verb.irregular ? 'irr' : verb.conj}`)) continue;
     const override = GLOSS_OVERRIDES[verb.pp1 ?? ''];
     if (override) verb.trans = override;
     if (verb.base === 'ire' && TRANSITIVE_IRE.has(verb.pp1 ?? '')) {
@@ -166,6 +189,13 @@ export function coreTrainerVerbs(rows: LexiconRow[], whitaker: WhitakerVerb[]): 
     }
     if (!verb.deponent && (INTRANSITIVE.has(lemmaKey(verb.pp1 ?? '')) || (fourth && lemmaKey(fourth).endsWith('urus')))) {
       verb.noPassive = true;
+    }
+    if (TRANSITIVE_NO_SUPINE.has(lemmaKey(verb.pp1 ?? ''))) delete verb.noPassive;
+    const fix = STEM_OVERRIDES[lemmaKey(verb.pp1 ?? '')];
+    if (fix) {
+      if (fix.perf) verb.perf = fix.perf;
+      if (fix.ppp === null) delete verb.ppp;
+      else if (fix.ppp) verb.ppp = fix.ppp;
     }
     if (!verbs.has(verbKey(verb))) verbs.set(verbKey(verb), verb);
   }

@@ -40,6 +40,17 @@ const freqRank = (f: string): number => {
   return i < 0 ? 6 : i;
 };
 
+/**
+ * Lodge marks lemmas, not entries, so every best-frequency Whitaker row of a Lodge lemma is core. For
+ * an ambiguous lemma, this lists the exact headwords that are core instead (whatever their frequency).
+ * Lodge 1389 `praedo` is the noun praedo, praedonis (robber), not the verb praedare.
+ */
+const CORE_OVERRIDES: Record<string, string[]> = {
+  // Lodge 559 is efferre, extuli, elatus (carry out), not the 1st-conjugation efferare (make wild).
+  effero: ['effero, efferre, extuli, elatus'],
+  praedo: ['praedo, praedonis, m.'],
+};
+
 export function composeLexicon(
   dooge: SourceRow[],
   whitaker: WhitakerRow[],
@@ -82,7 +93,8 @@ export function composeLexicon(
   }
   for (const r of survivors) {
     const key = lemmaKey(r.lemma);
-    const core = bestFreq.get(key) === freqRank(r.freq) && bestFreq.has(key);
+    const only = CORE_OVERRIDES[key];
+    const core = bestFreq.has(key) && (only ? only.includes(r.headword) : bestFreq.get(key) === freqRank(r.freq));
     rows.push({
       headword: r.headword, lemma: r.lemma, definition: r.definition, pos: r.pos,
       frequency: null, core,
