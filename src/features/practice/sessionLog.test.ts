@@ -36,6 +36,25 @@ describe('sessionLog', () => {
     expect(kept.some(x => x.id === 'id0')).toBe(false);
   });
 
+  it('keeps an old completed session through 205 newer plain ones', () => {
+    const t = (i: number) => new Date(Date.UTC(2026, 0, 1, 0, i)).toISOString();
+    const old = s('done', t(0), { completed: true, xp: 40 });
+    const plain = Array.from({ length: 205 }, (_, i) => s(`p${i}`, t(i + 1)));
+    saveSessions([old, ...plain]);
+    const kept = loadSessions();
+    expect(kept).toHaveLength(200);
+    expect(kept.some(x => x.id === 'done')).toBe(true);
+    expect(kept.some(x => x.id === 'p0')).toBe(false);
+  });
+
+  it('falls back to dropping the oldest droppable when every session carries progress', () => {
+    const t = (i: number) => new Date(Date.UTC(2026, 0, 1, 0, i)).toISOString();
+    saveSessions(Array.from({ length: 201 }, (_, i) => s(`c${i}`, t(i), { completed: true, xp: 5 })));
+    const kept = loadSessions();
+    expect(kept).toHaveLength(200);
+    expect(kept.some(x => x.id === 'c0')).toBe(false);
+  });
+
   it('keeps set_id on vocab sessions', () => {
     appendSession({ kind: 'vocab', module_id: null, set_id: 's1', correct: 3, total: 4, xp: 0, completed: false });
     expect(loadSessions()[0]).toMatchObject({ kind: 'vocab', set_id: 's1', synced: false });

@@ -1,4 +1,4 @@
-import { legacyImports, loadProgress, loadStreak, loadTotalXP, rebuildFromSessions, recordSession, streakFrom, updateStreak, isUnlocked } from './progressStore';
+import { legacyImports, loadProgress, loadStreak, loadTotalXP, rebuildFromSessions, recordSession, streakFrom, updateStreak, isUnlocked, prevDay, todayISO, liveStreak } from './progressStore';
 import { loadSessions, type PracticeSession } from '../practice/sessionLog';
 import type { ModuleContent } from '../../lib/types';
 
@@ -18,6 +18,27 @@ describe('streak', () => {
   });
 });
 
+describe('prevDay and local days', () => {
+  it('prevDay crosses month, year and leap boundaries', () => {
+    expect(prevDay('2026-11-01')).toBe('2026-10-31');
+    expect(prevDay('2026-01-01')).toBe('2025-12-31');
+    expect(prevDay('2024-03-01')).toBe('2024-02-29');
+  });
+  it('todayISO uses the local calendar day', () => {
+    expect(todayISO(new Date(2026, 10, 16, 23, 30))).toBe('2026-11-16');
+    expect(todayISO(new Date(2026, 10, 16, 0, 5))).toBe('2026-11-16');
+  });
+  it('updateStreak leaves a streak whose lastDate is ahead of today', () => {
+    localStorage.setItem('latiniq_streak', JSON.stringify({ lastDate: '2026-10-03', count: 4 }));
+    expect(updateStreak('2026-10-02')).toEqual({ lastDate: '2026-10-03', count: 4 });
+  });
+  it('liveStreak is the stored count only for today or yesterday (or later)', () => {
+    localStorage.setItem('latiniq_streak', JSON.stringify({ lastDate: '2026-10-09', count: 4 }));
+    expect(liveStreak('2026-10-10')).toBe(4);
+    expect(liveStreak('2026-10-11')).toBe(0);
+  });
+});
+
 describe('legacy compatibility', () => {
   it('reads progress written by the legacy app', () => {
     localStorage.setItem('latiniq_progress', JSON.stringify({ forms_bootcamp: { completed: true, xp: 50, wrong_ids: ['f001'] } }));
@@ -34,7 +55,7 @@ describe('recordSession', () => {
     const m = mod('m0', 20);
     const results = Array.from({ length: 10 }, (_, i) => ({ q: m.questions[i], given: 'x', correct: i < 8 }));
     const out = recordSession(m, results);
-    expect(out).toEqual({ completed: true, earnedXP: 50, pct: 80 });
+    expect(out).toEqual({ completed: true, earnedXP: 50, pct: 80, alreadyComplete: false });
     expect(loadTotalXP()).toBe(50);
     expect(loadProgress().m0.wrong_ids).toEqual(['m08', 'm09']);
   });
@@ -43,6 +64,19 @@ describe('recordSession', () => {
     const out = recordSession(m, [{ q: m.questions[0], given: 'x', correct: true }]);
     expect(out.completed).toBe(false);
     expect(loadTotalXP()).toBe(0);
+  });
+  it('keeps wrong_ids from a first failed session', () => {
+    const m = mod('m0', 20);
+    const out = recordSession(m, [{ q: m.questions[0], given: 'x', correct: false }, { q: m.questions[1], given: 'x', correct: true }]);
+    expect(out.alreadyComplete).toBe(false);
+    expect(loadProgress().m0).toEqual({ wrong_ids: ['m00'] });
+  });
+  it('reports alreadyComplete for a module completed earlier', () => {
+    const m = mod('m0', 20);
+    localStorage.setItem('latiniq_progress', JSON.stringify({ m0: { completed: true, xp: 50 } }));
+    const out = recordSession(m, [{ q: m.questions[0], given: 'x', correct: true }]);
+    expect(out).toMatchObject({ completed: false, alreadyComplete: true });
+    expect(loadProgress().m0.completed).toBe(true);
   });
 });
 

@@ -43,15 +43,29 @@ export function loadSessions(): PracticeSession[] {
   }
 }
 
-/** Keeps the newest CAP entries, but never drops an unsynced one while synced or local-only ones remain. */
+const carriesProgress = (s: PracticeSession) => s.completed || s.xp > 0;
+
+/**
+ * Keeps CAP entries. Drops sessions that carry no progress first, and never an unsynced one while synced
+ * or local-only ones remain, so a module's completing session outlives hundreds of plain ones.
+ */
 export function saveSessions(sessions: PracticeSession[]) {
   let list = [...sessions].sort(newestFirst);
+  const droppable = (s: PracticeSession) => s.synced || !syncsToServer(s);
   while (list.length > CAP) {
     let drop = -1;
     for (let i = list.length - 1; i >= 0; i--) {
-      if (list[i].synced || !syncsToServer(list[i])) {
+      if (droppable(list[i]) && !carriesProgress(list[i])) {
         drop = i;
         break;
+      }
+    }
+    if (drop === -1) {
+      for (let i = list.length - 1; i >= 0; i--) {
+        if (droppable(list[i])) {
+          drop = i;
+          break;
+        }
       }
     }
     list.splice(drop === -1 ? list.length - 1 : drop, 1);

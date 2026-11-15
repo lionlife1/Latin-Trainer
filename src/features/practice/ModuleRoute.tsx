@@ -40,6 +40,8 @@ export function ModuleRoute() {
           const min = Math.min(10, mod.questions.length);
           const note = out.completed
             ? `Module complete. You earned ${out.earnedXP} XP.`
+            : out.alreadyComplete
+            ? 'This module is already complete.'
             : `Score 70% or more on ${min}+ questions to complete this module.`;
           setView({ kind: 'done', results, note });
         }}

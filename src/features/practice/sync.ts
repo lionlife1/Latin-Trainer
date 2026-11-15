@@ -32,10 +32,21 @@ export async function syncSessions(sb: SupabaseClient, userId: string): Promise<
       .order('finished_at', { ascending: false })
       .limit(200);
     if (error) throw new Error(error.message);
+    // Completions and XP must survive a long history, so also pull every row that carries progress.
+    const { data: progressRows, error: progressError } = await sb
+      .from('practice_sessions')
+      .select(COLS)
+      .eq('user_id', userId)
+      .or('completed.eq.true,xp.gt.0')
+      .order('finished_at', { ascending: false })
+      .limit(1000);
+    if (progressError) throw new Error(progressError.message);
     // Postgres returns "+00:00" offsets; normalise so string sorting matches local entries.
-    const remote = ((data ?? []) as PracticeSession[]).map(s => ({ ...s, finished_at: new Date(s.finished_at).toISOString() }));
-    const merged = mergeSessions(loadSessions(), remote);
+    const normalise = (rows: unknown) =>
+      ((rows ?? []) as PracticeSession[]).map(s => ({ ...s, finished_at: new Date(s.finished_at).toISOString() }));
+    const merged = mergeSessions(mergeSessions(loadSessions(), normalise(data)), normalise(progressRows));
     saveSessions(merged);
+    // Rebuild from everything fetched, not the capped local copy.
     rebuildFromSessions(merged);
   } catch (e) {
     console.warn('Practice sync failed; will retry', e);
