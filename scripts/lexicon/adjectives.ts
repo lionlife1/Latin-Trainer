@@ -18,6 +18,7 @@ export interface WhitakerAdjective {
 const COMPARISON_FIXES: Record<string, { comp: string; sup: string }> = {
   malus: { comp: 'pei', sup: 'pessi' },
   multus: { comp: 'plur', sup: 'pluri' },
+  vetus: { comp: 'vetusti', sup: 'veterri' },
 };
 
 /** Other per-word corrections Whitaker's codes get wrong, by nominative. */
@@ -25,8 +26,8 @@ const ADJECTIVE_FIXES: Record<string, Partial<Adjective>> = {
   iuvenis: { terminations: 1 },
 };
 
-/** Separate headwords that duplicate another adjective's comparative (plus, pluris is multus). */
-const EXCLUDED = new Set(['plus']);
+/** Separate headwords that duplicate another adjective's comparative (plus, pluris is multus; polus is Whitaker's spurious entry for the noun). */
+const EXCLUDED = new Set(['plus', 'polus']);
 
 /** Whitaker lists these as i-stems, but they decline with consonant-stem endings. */
 const CONSONANT_ADJ = new Set(['vetus', 'pauper', 'dives', 'princeps', 'particeps', 'compos', 'superstes', 'senex', 'memor', 'uber', 'pubes', 'iuvenis']);
