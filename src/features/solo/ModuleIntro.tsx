@@ -11,6 +11,8 @@ interface Props {
   onBack: () => void;
   onStart: (count: number | 'all') => void;
   onLesson?: () => void;
+  /** Starts a drill of this module's stored mistakes. */
+  onReview?: () => void;
 }
 
 export function sessionLengthOptions(totalQ: number): { value: number | 'all'; label: string }[] {
@@ -21,12 +23,13 @@ export function sessionLengthOptions(totalQ: number): { value: number | 'all'; l
   return opts;
 }
 
-export function ModuleIntro({ mod, progress, onBack, onStart, onLesson }: Props) {
+export function ModuleIntro({ mod, progress, onBack, onStart, onLesson, onReview }: Props) {
   const totalQ = mod.questions.length;
   const options = sessionLengthOptions(totalQ);
   const recommended = totalQ > 20 ? 20 : totalQ > 10 ? 10 : 'all';
   const [count, setCount] = useState<number | 'all'>(recommended);
-  const wrongCount = progress?.wrong_ids?.length ?? 0;
+  const questionIds = new Set(mod.questions.map(q => q.id));
+  const wrongCount = (progress?.wrong_ids ?? []).filter(id => questionIds.has(id)).length;
 
   return (
     <div className="screen active">
@@ -67,6 +70,11 @@ export function ModuleIntro({ mod, progress, onBack, onStart, onLesson }: Props)
         {onLesson && lessonFor(mod.id) && (
           <button className="btn-secondary" onClick={onLesson}>
             {hasReadLesson(mod.id) ? 'Review the lesson' : 'Read the lesson'}
+          </button>
+        )}
+        {onReview && wrongCount > 0 && (
+          <button className="btn-secondary" onClick={onReview}>
+            Review {wrongCount} mistake{wrongCount !== 1 ? 's' : ''}
           </button>
         )}
         <button className="btn-primary" onClick={() => onStart(count)}>Start session</button>

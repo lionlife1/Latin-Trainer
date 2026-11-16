@@ -7,13 +7,13 @@ import { DrillSession } from '../drill/DrillSession';
 import { SessionSummary } from '../drill/SessionSummary';
 import type { DrillResult } from '../drill/useDrill';
 import { ModuleIntro } from '../solo/ModuleIntro';
-import { loadProgress, recordSession, todayISO, updateStreak } from '../solo/progressStore';
+import { loadProgress, recordSession, streakMilestone, todayISO, updateStreak } from '../solo/progressStore';
 import { requestSync } from './useSessionSync';
 
 type View =
   | { kind: 'intro' }
   | { kind: 'drill'; questions: DrillQuestion[]; run: number }
-  | { kind: 'done'; results: DrillResult[]; note: string };
+  | { kind: 'done'; results: DrillResult[]; note: string; streakDay: number | null };
 
 /** One grammar module: intro, then drill, then summary. Rendered without the shell (focus mode). */
 export function ModuleRoute() {
@@ -35,7 +35,7 @@ export function ModuleRoute() {
         onExit={() => setView({ kind: 'intro' })}
         onFinish={results => {
           const out = recordSession(mod, results);
-          updateStreak(todayISO());
+          const streakDay = streakMilestone(() => updateStreak(todayISO()));
           requestSync();
           const min = Math.min(10, mod.questions.length);
           const note = out.completed
@@ -43,7 +43,7 @@ export function ModuleRoute() {
             : out.alreadyComplete
             ? 'This module is already complete.'
             : `Score 70% or more on ${min}+ questions to complete this module.`;
-          setView({ kind: 'done', results, note });
+          setView({ kind: 'done', results, note, streakDay });
         }}
       />
     );
@@ -52,7 +52,7 @@ export function ModuleRoute() {
   if (view.kind === 'done') {
     const wrong = view.results.filter(r => !r.correct).map(r => r.q);
     return (
-      <SessionSummary results={view.results} onRetryWrong={() => start(shuffle(wrong))} onBack={toPath}>
+      <SessionSummary results={view.results} onRetryWrong={() => start(shuffle(wrong))} onBack={toPath} streakDay={view.streakDay}>
         {view.note}
       </SessionSummary>
     );
@@ -65,6 +65,10 @@ export function ModuleRoute() {
         progress={loadProgress()[mod.id]}
         onBack={toPath}
         onLesson={() => navigate(`/practice/grammar/${mod.id}/lesson`)}
+        onReview={() => {
+          const wrongIds = loadProgress()[mod.id]?.wrong_ids ?? [];
+          start(shuffle(mod.questions.filter(q => wrongIds.includes(q.id))));
+        }}
         onStart={count => {
           const qs = shuffle(mod.questions);
           start(count === 'all' ? qs : qs.slice(0, count));

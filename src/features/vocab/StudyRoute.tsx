@@ -4,7 +4,7 @@ import { DrillSession } from '../drill/DrillSession';
 import { SessionSummary } from '../drill/SessionSummary';
 import type { DrillResult } from '../drill/useDrill';
 import { appendSession } from '../practice/sessionLog';
-import { todayISO, updateStreak } from '../solo/progressStore';
+import { streakMilestone, todayISO, updateStreak } from '../solo/progressStore';
 import type { DrillQuestion, TypeInQuestion } from '../../lib/types';
 import { FlashcardSession } from './FlashcardSession';
 import { flashcardQuestion, learnSession, reviewQuestion } from './questions';
@@ -59,6 +59,7 @@ function Study({ set, mode }: { set: StudySet; mode: StudyMode }) {
     return mode === 'review' ? queue.map(i => reviewQuestion(i, set)) : queue.map(flashcardQuestion);
   });
   const [summary, setSummary] = useState<DrillResult[] | null>(null);
+  const [streakDay, setStreakDay] = useState<number | null>(null);
   const [retry, setRetry] = useState<{ qs: DrillQuestion[]; key: number } | null>(null);
   const before = useRef(new Map<string, SrsRecord | undefined>());
 
@@ -71,7 +72,7 @@ function Study({ set, mode }: { set: StudySet; mode: StudyMode }) {
   }
 
   const finish = (results: DrillResult[]) => {
-    logVocab(set.id, results);
+    setStreakDay(streakMilestone(() => logVocab(set.id, results)));
     setSummary(results);
   };
   const exit = (results: DrillResult[]) => {
@@ -87,7 +88,8 @@ function Study({ set, mode }: { set: StudySet; mode: StudyMode }) {
         results={summary}
         backLabel="Back to set"
         onBack={back}
-        onRetryWrong={mode === 'flashcards' ? undefined : () => { setRetry({ qs: wrong, key: Date.now() }); setSummary(null); }}
+        streakDay={streakDay}
+        onRetryWrong={mode === 'flashcards' ? undefined : () => { setRetry({ qs: wrong, key: Date.now() }); setSummary(null); setStreakDay(null); }}
       >
         {mode === 'learn' ? LEARN_NOTE : `${counts.due} still due today · ${counts.learned} learned`}
       </SessionSummary>
