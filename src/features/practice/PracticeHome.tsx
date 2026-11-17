@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Cards, ChevronRight, Layers, Table, Translate } from '../../components/icons';
-import { MODULES } from '../../content/modules';
+import { MODULE_INDEX } from '../../content/moduleIndex';
 import { setCounts } from '../vocab/scheduler';
 import { getSet, loadSets, loadSrs } from '../vocab/storage';
 import { liveStreak, loadProgress, loadTotalXP } from '../solo/progressStore';
@@ -9,7 +9,7 @@ import { loadSessions, pct, type PracticeSession } from './sessionLog';
 import { useSyncVersion } from './useSessionSync';
 
 const RECENT: Record<PracticeSession['kind'], { title: (s: PracticeSession) => string; path: (s: PracticeSession) => string }> = {
-  module: { title: s => MODULES.find(m => m.id === s.module_id)?.title ?? 'Grammar module', path: s => `/practice/grammar/${s.module_id}` },
+  module: { title: s => MODULE_INDEX.find(m => m.id === s.module_id)?.title ?? 'Grammar module', path: s => `/practice/grammar/${s.module_id}` },
   endless: { title: () => 'Endless Train', path: () => '/practice/endless' },
   forms: { title: () => 'Forms', path: () => '/practice/forms' },
   vocab: { title: s => getSet(s.set_id ?? '')?.name ?? 'Vocab set', path: s => `/practice/vocab/${s.set_id}` },
@@ -23,7 +23,7 @@ export function PracticeHome() {
   useSyncVersion();
   const navigate = useNavigate();
   const progress = loadProgress();
-  const done = MODULES.filter(m => progress[m.id]?.completed).length;
+  const done = MODULE_INDEX.filter(m => progress[m.id]?.completed).length;
   const recents = loadSessions().filter(s => s.kind !== 'import').slice(0, 5);
   const streak = liveStreak();
   const sets = loadSets();
@@ -43,7 +43,7 @@ export function PracticeHome() {
       <div className="stats">
         <div className="stat"><div className="stat-val">{streak}</div><div className="stat-label">Day streak</div></div>
         <div className="stat"><div className="stat-val">{loadTotalXP()}</div><div className="stat-label">XP</div></div>
-        <div className="stat"><div className="stat-val">{done}/{MODULES.length}</div><div className="stat-label">Modules done</div></div>
+        <div className="stat"><div className="stat-val">{done}/{MODULE_INDEX.length}</div><div className="stat-label">Modules done</div></div>
       </div>
 
       <section className="section">
@@ -83,7 +83,7 @@ export function PracticeHome() {
           <Link className="subject" to="/practice/grammar">
             <span className="subject-icon"><Layers /></span>
             <span className="subject-title">Grammar</span>
-            <span className="subject-sub">{done} of {MODULES.length} modules complete</span>
+            <span className="subject-sub">{done} of {MODULE_INDEX.length} modules complete</span>
           </Link>
           <Link className="subject" to="/practice/forms">
             <span className="subject-icon"><Table /></span>

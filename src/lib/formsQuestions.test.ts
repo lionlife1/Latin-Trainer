@@ -117,3 +117,33 @@ describe('generateFormsQuestion', () => {
         expect(new Set(qs.map(q => q.type + q.prompt)).size).toBe(10);
     });
 });
+
+describe('plural-only nouns', () => {
+    it('200 questions from arma and fauces are well-formed and plural only', () => {
+        const nouns: Noun[] = [
+            { nom: 'arma', stem: 'arm', decl: 2, gender: 'n', pluralOnly: true, trans: 'arms' },
+            { nom: 'fauces', stem: 'fauc', decl: 3, gender: 'f', iStem: true, pluralOnly: true, trans: 'jaws' },
+        ];
+        const pools = { verbs: [], nouns, adjectives: [], pronouns: [] };
+        const cfg: FormsConfig = { ...DEFAULT_FORMS_CONFIG, kinds: ['nouns'] };
+        const rng = seededRng(7);
+        for (let i = 0; i < 200; i++) {
+            const q = generateFormsQuestion(cfg, rng, pools)!;
+            expect(q).not.toBeNull();
+            expect(q.prompt).not.toBe('');
+            if (q.type === 'typein') {
+                expect(q.prompt).toContain('plural');
+                expect(q.prompt).not.toContain('singular');
+                expect(q.answers.length).toBeGreaterThanOrEqual(1);
+                for (const a of q.answers) expect(a).toMatch(/^[a-z]+$/);
+            } else {
+                expect(new Set(q.choices).size).toBe(4);
+                expect(q.choices).toContain(q.correct);
+                for (const c of q.choices) {
+                    expect(c).toContain('plural');
+                    expect(c).not.toContain('singular');
+                }
+            }
+        }
+    });
+});

@@ -1,6 +1,6 @@
 // Question generators for the Forms trainer: "make the form" (type-in) and "identify the form" (multiple choice).
 import {
-    PRONOUNS, cellFeatures, cellLabel, cellsOf, entryOf, formsOf, meaningOf, parse,
+    PRONOUNS, cellFeatures, cellLabel, cellsOf, entryOf, formsOf, genderVariants, meaningOf, parse,
     type Adjective, type Cell, type Degree, type MorphWord, type Noun, type Pronoun, type Verb, type VerbCell, type VerbTense, type Voice,
 } from './morph';
 import { trainerPool } from './conjugator';
@@ -125,16 +125,6 @@ export function pickDistractorCells(w: MorphWord, correct: Cell, valid: Cell[], 
         if (out.length === 3) break;
     }
     return out;
-}
-
-/** `amatus est` also accepts `amata est` and `amatum est`; the prompt only ever shows the masculine. */
-function genderVariants(form: string): string[] {
-    const [first, ...rest] = form.split(' ');
-    if (!rest.length || form.endsWith(' iri')) return [];
-    const tail = rest.join(' ');
-    if (first.endsWith('us')) return [`${first.slice(0, -2)}a ${tail}`, `${first.slice(0, -2)}um ${tail}`];
-    if (first.endsWith('i')) return [`${first.slice(0, -1)}ae ${tail}`, `${first.slice(0, -1)}a ${tail}`];
-    return [];
 }
 
 function takesGender(w: MorphWord, cell: Cell): boolean {

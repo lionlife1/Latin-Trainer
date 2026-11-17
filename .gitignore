@@ -40,3 +40,6 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 *.swp
+
+# Claude Code agent worktrees
+.claude/worktrees/

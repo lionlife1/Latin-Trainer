@@ -1,4 +1,5 @@
 import { VERBS, generateSubjunctiveForm, generateRandomQuestion, trainerPool, verbKey, type Verb } from './conjugator';
+import { CORE_VERBS } from '../content/verbs.generated';
 
 const verb = (inf: string) => {
   const v = VERBS.find(v => v.inf === inf);
@@ -117,6 +118,22 @@ describe('trainerPool', () => {
   const pool = trainerPool();
   it('adds the generated core verbs', () => expect(pool.length).toBeGreaterThan(600));
   it('has each verb once', () => expect(new Set(pool.map(verbKey)).size).toBe(pool.length));
+  it('keeps afferre and drops the duplicate adferre', () => {
+    expect(pool.some(v => v.inf === 'afferre')).toBe(true);
+    expect(pool.some(v => v.inf === 'adferre')).toBe(false);
+  });
+  it('gives the transitive ire compounds a passive', () => {
+    for (const inf of ['subire', 'obire', 'praeterire']) {
+      const v = pool.find(x => x.inf === inf);
+      expect(v?.noPassive, inf).toBeUndefined();
+      expect(v?.ppp, inf).toBe(v!.prefix + 'it');
+    }
+    expect(pool.find(x => x.inf === 'perire')?.noPassive).toBe(true);
+  });
+  it('labels both venire verbs by their 1st principal part', () => {
+    const venires = pool.filter(v => v.inf === 'venire');
+    expect(venires.map(v => v.pp1).sort()).toEqual(['veneo', 'venio']);
+  });
   it('keeps the hand-written entry over a generated one', () => {
     expect(pool.find(v => v.inf === 'amare')).toBe(VERBS.find(v => v.inf === 'amare'));
     expect(pool.find(v => v.inf === 'ferre')).toBe(VERBS.find(v => v.inf === 'ferre'));
@@ -151,5 +168,68 @@ describe('semi-deponents in Endless', () => {
   });
   it('is not drawn without the deponent option', () => {
     expect(generateRandomQuestion({ stdAct: true, stdPass: true, dep: false, irr: true }, seeded(3), [audeo])).toBeNull();
+  });
+});
+
+describe('Endless only asks cells the verb has', () => {
+  const timeo: Verb = { inf: 'timere', conj: 2, pres: 'tim', perf: 'timu', pp1: 'timeo', trans: 'to fear' };
+  it('never asks a perfect or pluperfect passive of a verb with no 4th principal part', () => {
+    const rng = seeded(11);
+    for (let i = 0; i < 200; i++) {
+      const q = generateRandomQuestion({ stdAct: false, stdPass: true, dep: false, irr: false }, rng, [timeo]);
+      if (!q || q.type !== 'typein') throw new Error('expected a typein question');
+      expect(q.answers[0], q.prompt).toBeTruthy();
+      expect(q.prompt).not.toMatch(/· (perfect|pluperfect) passive/);
+    }
+  });
+});
+
+describe('Endless accepts feminine and neuter perfect passives', () => {
+  const cfg = { stdAct: false, stdPass: true, dep: false, irr: false };
+  const draw = (verbs: Verb[], dep: boolean, wanted: RegExp) => {
+    const rng = seeded(5);
+    for (let i = 0; i < 500; i++) {
+      const q = generateRandomQuestion({ ...cfg, stdPass: !dep, dep }, rng, verbs);
+      if (q && q.type === 'typein' && wanted.test(q.prompt)) return q;
+    }
+    throw new Error('no matching question');
+  };
+  it('perfect passive of amare', () => {
+    const q = draw([verb('amare')], false, /· perfect passive/);
+    const first = q.answers[0];
+    expect(first).toMatch(/^amat[ui]s? s/);
+    const [w, aux] = first.split(' ');
+    const fem = w.endsWith('us') ? w.slice(0, -2) + 'a' : w.slice(0, -1) + 'ae';
+    expect(q.answers).toContain(`${fem} ${aux}`);
+    expect(new Set(q.answers).size).toBe(q.answers.length);
+    expect(q.explanation).toContain(first);
+  });
+  it('deponent perfect', () => {
+    for (let i = 0; i < 500; i++) {
+      const q = generateRandomQuestion({ ...cfg, stdPass: false, dep: true }, seeded(i), [verb('sequi')]);
+      if (q && q.type === 'typein' && q.answers[0] === 'secutus sim') {
+        expect(q.answers).toEqual(['secutus sim', 'secuta sim', 'secutum sim']);
+        return;
+      }
+    }
+    throw new Error('no secutus sim question came up');
+  });
+  it('a single-word form gets no variants', () => {
+    const q = generateRandomQuestion({ ...cfg, stdAct: true, stdPass: false }, seeded(3), [verb('amare')]);
+    if (!q || q.type !== 'typein') throw new Error('expected typein');
+    expect(q.answers).toHaveLength(1);
+  });
+});
+
+describe('hand-written verbs follow the generated intransitive list', () => {
+  // convenire is transitive in the sense "meet", so it keeps its passive.
+  const allowed = new Set(['convenire']);
+  it('has noPassive wherever the generated verb with the same key has it', () => {
+    const generated = new Map(CORE_VERBS.map(v => [verbKey(v), v]));
+    const offenders = VERBS
+      .filter(v => !v.deponent && !v.semiDeponent && !v.irregular && !v.noPassive && !allowed.has(v.inf))
+      .filter(v => generated.get(verbKey(v))?.noPassive)
+      .map(v => v.inf);
+    expect(offenders).toEqual([]);
   });
 });

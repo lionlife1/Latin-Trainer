@@ -43,6 +43,24 @@ describe('clampRow', () => {
 });
 
 describe('composeLexicon', () => {
+  it('CORE_OVERRIDES: effero is the ferre compound, not the 1st-conjugation verb', () => {
+    const { rows } = composeLexicon(
+      [],
+      [w('effero, efferare, efferavi, efferatus', 'verb', 'B'), w('effero, efferre, extuli, elatus', 'verb', 'D')],
+      new Map([['effero', 559]]),
+    );
+    expect(rows.find(r => r.headword === 'effero, efferare, efferavi, efferatus')?.core).toBe(false);
+    expect(rows.find(r => r.headword === 'effero, efferre, extuli, elatus')?.core).toBe(true);
+  });
+  it('CORE_OVERRIDES: only the listed headword of an ambiguous Lodge lemma is core, whatever its frequency', () => {
+    const { rows } = composeLexicon(
+      [],
+      [w('praedo, praedare, praedavi, praedatus', 'verb', 'A'), w('praedo, praedonis, m.', 'noun', 'D')],
+      new Map([['praedo', 1389]]),
+    );
+    expect(rows.find(r => r.pos === 'verb')?.core).toBe(false);
+    expect(rows.find(r => r.pos === 'noun')?.core).toBe(true);
+  });
   it('prefers the D\'Ooge row over a matching Whitaker row', () => {
     const { rows } = composeLexicon(
       [d('amō, amāre, amāvī, amātum', 'verb', 'love')],

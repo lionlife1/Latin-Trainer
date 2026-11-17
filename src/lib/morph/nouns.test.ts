@@ -121,3 +121,66 @@ describe('entries and cells', () => {
         }
     });
 });
+
+describe('accusative in -im and ablative in -i', () => {
+    const f = (n: Noun, c: 'accusative' | 'ablative' | 'dative' | 'genitive', number: GrammaticalNumber = 'singular') => nounForms(n, { case: c, number });
+    const sitis = mk('sitis', 'sit', 3, 'f', { iStem: true, iForms: 'pure' });
+    const turris = mk('turris', 'turr', 3, 'f', { iStem: true, iForms: 'mixed' });
+    const navis = mk('navis', 'nav', 3, 'f', { iStem: true, iForms: 'abl' });
+    const imber = mk('imber', 'imbr', 3, 'm', { iStem: true, iForms: 'abl' });
+    it('sitis: -im and -i only', () => {
+        expect(f(sitis, 'accusative')).toEqual(['sitim']);
+        expect(f(sitis, 'ablative')).toEqual(['siti']);
+        expect(f(sitis, 'dative')).toEqual(['siti']);
+    });
+    it('turris: -em or -im, -e or -i', () => {
+        expect(f(turris, 'accusative')).toEqual(['turrem', 'turrim']);
+        expect(f(turris, 'ablative')).toEqual(['turre', 'turri']);
+    });
+    it('navis: -em, -e or -i', () => {
+        expect(f(navis, 'accusative')).toEqual(['navem']);
+        expect(f(navis, 'ablative')).toEqual(['nave', 'navi']);
+        expect(f(navis, 'dative')).toEqual(['navi']);
+    });
+    it('imber: ablative variants and -ium', () => {
+        expect(f(imber, 'ablative')).toEqual(['imbre', 'imbri']);
+        expect(f(imber, 'genitive', 'plural')).toEqual(['imbrium']);
+    });
+    it('plural is unchanged', () => { expect(f(navis, 'accusative', 'plural')).toEqual(['naves', 'navis']); });
+});
+
+describe('plural-only nouns', () => {
+    const arma = mk('arma', 'arm', 2, 'n', { pluralOnly: true });
+    const thermae = mk('thermae', 'therm', 1, 'f', { pluralOnly: true });
+    const liberi = mk('liberi', 'liber', 2, 'm', { pluralOnly: true });
+    const fauces = mk('fauces', 'fauc', 3, 'f', { iStem: true, pluralOnly: true });
+    const maiores = mk('maiores', 'maior', 3, 'm', { pluralOnly: true });
+    const moenia = mk('moenia', 'moen', 3, 'n', { iStem: true, pluralOnly: true });
+    const cases: [string, Noun, string][] = [
+        ['arma', arma, 'arma, armorum, armis, arma, armis, arma'],
+        ['thermae', thermae, 'thermae, thermarum, thermis, thermas, thermis, thermae'],
+        ['liberi', liberi, 'liberi, liberorum, liberis, liberos, liberis, liberi'],
+        ['maiores', maiores, 'maiores, maiorum, maioribus, maiores, maioribus, maiores'],
+        ['moenia', moenia, 'moenia, moenium, moenibus, moenia, moenibus, moenia'],
+    ];
+    for (const [name, n, pl] of cases) {
+        it(`${name} plural cells`, () => {
+            expect(col(n, 'plural')).toEqual(t(pl));
+            expect(col(n, 'singular')).toEqual([undefined, undefined, undefined, undefined, undefined, undefined]);
+            expect(nounCells(n)).toHaveLength(6);
+        });
+    }
+    it('fauces has both accusative plurals', () => {
+        expect(col(fauces, 'plural')).toEqual(t('fauces, faucium, faucibus, fauces, faucibus, fauces'));
+        expect(nounForms(fauces, { case: 'accusative', number: 'plural' })).toEqual(['fauces', 'faucis']);
+        expect(nounCells(fauces)).toHaveLength(6);
+    });
+    it('entries', () => {
+        expect(nounEntry(arma)).toBe('arma, armorum, n. pl.');
+        expect(nounEntry(thermae)).toBe('thermae, thermarum, f. pl.');
+        expect(nounEntry(liberi)).toBe('liberi, liberorum, m. pl.');
+        expect(nounEntry(fauces)).toBe('fauces, faucium, f. pl.');
+        expect(nounEntry(maiores)).toBe('maiores, maiorum, m. pl.');
+        expect(nounEntry(moenia)).toBe('moenia, moenium, n. pl.');
+    });
+});

@@ -2,7 +2,7 @@ import type { Noun, NounGender } from '../../src/lib/morph/nouns';
 import type { LexiconRow } from '../build-seed';
 import { lemmaKey } from './compose';
 import { clipGloss, firstSense } from './gloss';
-import { freqRank, headwordGenders, matchHeadword } from './match';
+import { freqRank, headwordGenders, headwordGenitive, matchHeadword } from './match';
 import { dictlineFields, have } from './whitaker';
 
 export interface WhitakerNoun {
@@ -60,12 +60,22 @@ export function parseWhitakerNouns(dictline: string): WhitakerNoun[] {
 }
 
 /** Defective or irregular nouns we don't model, by lemma key of the nominative. */
-const EXCLUDED = new Set(['nemo', 'nihil', 'bos']);
+const EXCLUDED = new Set(['nemo', 'nihil', 'bos', 'fors', 'vicis']);
 
 const IRREGULAR: Record<string, NonNullable<Noun['irregular']>> = { domus: 'domus', vis: 'vis', deus: 'deus' };
 
 /** Whitaker marks these i-stems, but A&G gives the consonant-stem genitive plural (canum, iuvenum). */
-const CONSONANT_STEMS = new Set(['canis', 'iuvenis']);
+const CONSONANT_STEMS = new Set(['canis', 'iuvenis', 'vates']);
+
+/** i-stems Whitaker codes as consonant stems (A&G 78: imber, linter, uter, venter have -ium; caro has carnium). */
+const I_STEMS = new Set(['imber', 'caro']);
+
+/** Accusative in -im and ablative in -i (A&G 75-76), by lemma key. */
+const I_FORMS: Record<string, NonNullable<Noun['iForms']>> = {
+  sitis: 'pure',
+  turris: 'mixed', securis: 'mixed', puppis: 'mixed',
+  navis: 'abl', ignis: 'abl', civis: 'abl', avis: 'abl', classis: 'abl', finis: 'abl', amnis: 'abl', imber: 'abl',
+};
 
 function genderFor(row: LexiconRow, w: WhitakerNoun): NounGender {
   if (w.noun.gender === 'n') return 'n';
@@ -75,12 +85,44 @@ function genderFor(row: LexiconRow, w: WhitakerNoun): NounGender {
   return w.noun.gender;
 }
 
+/** Corrections to D'Ooge's plural-only rows: fasces is masculine (fascis, m.); D'Ooge prints "f." and glosses it "fasces". */
+const PLURAL_FIXES: Record<string, { gender?: NounGender; trans?: string }> = {
+  fasces: { gender: 'm', trans: 'rods (fasces)' },
+};
+
+/**
+ * A plural-only noun built from its D'Ooge headword ("arma, -ōrum, n. plur."), or null when the row isn't one.
+ * The genitive plural ending gives the declension; Whitaker has no usable line for these.
+ */
+function pluralOnlyNoun(row: LexiconRow): Noun | null {
+  const gen = headwordGenitive(row.headword);
+  const nom = lemmaKey(row.headword.split(',')[0]);
+  const ending = gen?.match(/(?:orum|arum|ium|um)$/)?.[0];
+  if (!ending) return null;
+  if (!row.headword.includes('plur.') && !/(i|ae|a|es)$/.test(nom)) return null;
+  const fix = PLURAL_FIXES[nom];
+  const gender = fix?.gender ?? (headwordGenders(row.headword)[0] as NounGender | undefined);
+  if (!gender) return null;
+  const strip = (suffixes: string[]) => nom.replace(new RegExp(`(?:${suffixes.join('|')})$`), '');
+  const trans = fix?.trans ?? clipGloss(firstSense(row.definition));
+  if (ending === 'arum') return { nom, stem: strip(['ae']), decl: 1, gender, trans, pluralOnly: true };
+  if (ending === 'orum') return { nom, stem: strip(['i', 'a']), decl: 2, gender, trans, pluralOnly: true };
+  return { nom, stem: strip(['ia', 'a', 'es']), decl: 3, gender, ...(ending === 'ium' ? { iStem: true } : {}), trans, pluralOnly: true };
+}
+
 /** Core lexicon nouns -> trainer nouns; rows with no matching Whitaker noun are returned as unmatched headwords. */
 export function coreNouns(rows: LexiconRow[], whitaker: WhitakerNoun[]): { nouns: Noun[]; unmatched: string[] } {
   const nouns = new Map<string, Noun>();
   const unmatched: string[] = [];
   for (const r of rows) {
-    if (!r.core || r.pos !== 'noun' || r.headword.includes('plur.')) continue;
+    if (!r.core || r.pos !== 'noun') continue;
+    const plural = pluralOnlyNoun(r);
+    if (plural) {
+      const id = `${plural.nom}|${plural.stem}|${plural.decl}`;
+      if (!nouns.has(id)) nouns.set(id, plural);
+      continue;
+    }
+    if (r.headword.includes('plur.')) continue;
     const match = matchHeadword(r, whitaker, w => w.noun.nom, w => w.gens);
     if (!match) {
       unmatched.push(r.headword);
@@ -91,6 +133,8 @@ export function coreNouns(rows: LexiconRow[], whitaker: WhitakerNoun[]): { nouns
     const noun: Noun = { ...match.noun, gender: genderFor(r, match), trans: clipGloss(firstSense(r.definition)) };
     if (IRREGULAR[key]) noun.irregular = IRREGULAR[key];
     if (CONSONANT_STEMS.has(key)) delete noun.iStem;
+    if (I_STEMS.has(key)) noun.iStem = true;
+    if (I_FORMS[key]) noun.iForms = I_FORMS[key];
     const id = `${noun.nom}|${noun.stem}|${noun.decl}`;
     if (!nouns.has(id)) nouns.set(id, noun);
   }

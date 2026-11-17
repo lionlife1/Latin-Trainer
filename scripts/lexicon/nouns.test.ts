@@ -1,5 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { composeLexicon, parseLodge } from './compose';
+import type { LexiconRow } from '../build-seed';
+import type { Noun } from '../../src/lib/morph/nouns';
 import { parseDooge } from './dooge';
 import { coreNouns, nounsModule, parseWhitakerNouns } from './nouns';
 import { parseDictline } from './whitaker';
@@ -59,8 +61,19 @@ describe('coreNouns on the vendored sources', () => {
     expect(get('canis')).toBeDefined();
     expect(get('canis')).not.toHaveProperty('iStem');
   });
-  it('leaves out plural-only and defective nouns', () => {
-    for (const nom of ['arma', 'nemo', 'bos', 'nihil']) expect(get(nom), nom).toBeUndefined();
+  it('leaves out defective nouns', () => {
+    for (const nom of ['nemo', 'bos', 'nihil', 'fors', 'vicis']) expect(get(nom), nom).toBeUndefined();
+  });
+  it('flags imber and caro as i-stems, vates as consonant stem', () => {
+    expect(get('imber')).toMatchObject({ iStem: true });
+    expect(get('caro')).toMatchObject({ iStem: true });
+    expect(get('vates')).not.toHaveProperty('iStem');
+  });
+  it('sets iForms', () => {
+    expect(get('sitis')).toMatchObject({ iForms: 'pure' });
+    for (const nom of ['turris', 'securis', 'puppis']) expect(get(nom), nom).toMatchObject({ iForms: 'mixed' });
+    for (const nom of ['navis', 'ignis', 'civis', 'avis', 'classis', 'finis', 'amnis', 'imber']) expect(get(nom), nom).toMatchObject({ iForms: 'abl' });
+    expect(get('rex')).not.toHaveProperty('iForms');
   });
   it('gives every noun a short gloss', () => {
     for (const n of nouns) {
@@ -68,6 +81,38 @@ describe('coreNouns on the vendored sources', () => {
       expect(n.trans.length, n.nom).toBeLessThanOrEqual(40);
       expect(n.trans.startsWith('to '), n.nom).toBe(false);
     }
+  });
+});
+
+describe('coreNouns plural-only', () => {
+  const row = (headword: string): LexiconRow => ({ lemma: headword.split(',')[0], headword, pos: 'noun', definition: 'x thing', core: true } as unknown as LexiconRow);
+  const cases: [string, Partial<Noun>][] = [
+    ['arma, -ōrum, n. plur.', { nom: 'arma', stem: 'arm', decl: 2, gender: 'n' }],
+    ['cibāria, -ōrum, n. plur.', { nom: 'cibaria', stem: 'cibari', decl: 2, gender: 'n' }],
+    ['līberī, -ōrum, m.', { nom: 'liberi', stem: 'liber', decl: 2, gender: 'm' }],
+    ['sertae, -ārum, f. plur.', { nom: 'sertae', stem: 'sert', decl: 1, gender: 'f' }],
+    ['thermae, -ārum, f. plur.', { nom: 'thermae', stem: 'therm', decl: 1, gender: 'f' }],
+    ['faucēs, -ium, f. plur.', { nom: 'fauces', stem: 'fauc', decl: 3, gender: 'f', iStem: true }],
+    ['maiōrēs, -um, m. plur.', { nom: 'maiores', stem: 'maior', decl: 3, gender: 'm' }],
+    ['moenia, -ium, n. plur.', { nom: 'moenia', stem: 'moen', decl: 3, gender: 'n', iStem: true }],
+  ];
+  for (const [headword, expected] of cases) {
+    it(headword, () => {
+      const { nouns, unmatched } = coreNouns([row(headword)], []);
+      expect(unmatched).toEqual([]);
+      expect(nouns).toHaveLength(1);
+      expect(nouns[0]).toMatchObject({ ...expected, pluralOnly: true, trans: 'x thing' });
+      if (!expected.iStem) expect(nouns[0]).not.toHaveProperty('iStem');
+    });
+  }
+  it("corrects D'Ooge's fasces: masculine, with a real gloss", () => {
+    const { nouns } = coreNouns([row('fascēs, -ium, f.')], []);
+    expect(nouns[0]).toMatchObject({ nom: 'fasces', decl: 3, gender: 'm', iStem: true, trans: 'rods (fasces)', pluralOnly: true });
+  });
+  it('a singular row is unaffected', () => {
+    const { nouns, unmatched } = coreNouns([row('castrum, -ī, n.')], []);
+    expect(nouns).toEqual([]);
+    expect(unmatched).toEqual(['castrum, -ī, n.']);
   });
 });
 
