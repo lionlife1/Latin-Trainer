@@ -16,15 +16,27 @@ The Endless trainer draws about 870 verbs: the 130 hand-written `VERBS` in `src/
 - *effugere* no longer gets a passive participle.
 - *fruor* is handled.
 
+## Done (2026-11-15)
+
+See `docs/superpowers/plans/2026-11-15-verb-data-audit.md` and `2026-11-15-noun-data-fixes.md`.
+
+- Intransitive list reviewed: *ambulō, certō, cōnflīgō, doleō, dormiō, ignōscō, labōrō, persuādeō, pugnō* added; the hand-written `VERBS` (*venīre, stāre, currere, cadere, ...*) now follow it, checked by a test.
+- Transitive verbs with no supine (*poscō, timeō, metuō, urgeō, ...*) keep a present-system passive; the perfect passive needs a 4th principal part.
+- Endless accepts feminine and neuter perfect passives.
+- Future participles: *ruitūrus, paritūrus, iuvātūrus, nascitūrus, secātūrus, fruitūrus*.
+- The 14 missing core *ferō* and *eō* compounds are in; *efferō* is *efferre*; *ēdō, ēdere* is 3rd conjugation; stem fixes for *ēiciō, dēpōnō, āvellō, pertineō, discō*.
+- Nouns: *imber, carō* are i-stems; *vātēs* has *vātum*; *fors, vicis* dropped; acc. *-im* and abl. *-ī* accepted where A&G allow them (*turrim, nāvī, sitim*). Plural-only nouns (*arma, faucēs, moenia, līberī, fascēs, ...*) are in Forms.
+- Adjectives: *vetus* compares *vetustior*; the spurious adjective *polus* is gone.
+
 ## Still open
 
-1. **Review the intransitive list.** `INTRANSITIVE` in `scripts/lexicon/verbs.ts` was put together by hand from the generated list. Whitaker's `X` kind (unspecified) still allows the passive. Spot-check the verbs that still allow it for any more intransitives.
-2. **Verbs with no perfect** (*quatiō, feriō, vergō, attollō, distō, furō, immineō, impendeō, revīsō, excellō*) are excluded. They could be drilled in the present and imperfect only, if the trainer ever supports a per-verb tense list.
-3. ***poscere*** is `noPassive` because Whitaker has no participle stem, though the verb is transitive. Allow the present and imperfect passive, or leave it (no wrong form is drilled).
+1. **Verbs with no perfect** (*quatiō, feriō, vergō, attollō, distō, furō, immineō, impendeō, revīsō, excellō*) are excluded. Task 1 of the verb audit makes a passive without a 4th part work; these still need a per-verb tense list for the active.
+2. **Lodge plural-only nouns** (*insidiae, tenebrae, angustiae, reliquiae, minae, furiae, epulae, exuviae, altāria*) are missing from the core lexicon. Plan: `docs/superpowers/plans/2026-11-15-lodge-plural-nouns.md`.
+3. **Strict / exceptions mode** (requested 2026-11-15). Students who apply the regular rule to an exception (*vatium* for *vātum*, *rutūrus* for *ruitūrus*, *sitem* for *sitim*) are marked wrong, and not everyone has learned every exception. Separate the exceptions from the normal drills: normal Forms and Endless runs draw only regular forms, and a separate strict mode, which a student or teacher switches on, forces the exceptions in and grades them strictly. This needs an `exception` flag on the words and cells that come from the override tables (`FUT_PART_STEM`, `CONSONANT_STEMS`, `I_STEMS`, `iForms`, irregular comparison, *-ius* genitives and similar), a filter in the Forms and Endless question pickers, and a setting in the UI. Needs its own spec.
 
 ## Known limits
 
-- Endless accepts only masculine perfect passives (*amātus est*). Forms accepts the feminine and neuter too.
-- Future participles of *iuvō, ruō, pariō* and similar verbs come from the 4th principal part. *adiūtūrus* is right, *ruitūrus* is not.
-- Plural-only nouns (*arma, castra*), numerals, *nēmō, nihil* and *bōs* are not in Forms.
+- Plural-only nouns are in Forms. Numerals, *nēmō, nihil* and *bōs* are not.
 - Locatives are not generated.
+- *memor* takes abl. *memorī*; the engine gives *memore* (it is flagged as a consonant stem).
+- Two verbs share the unmarked infinitive *venire* (*veniō* "come" and *vēneō* "be sold"); Endless labels both by their 1st principal part.

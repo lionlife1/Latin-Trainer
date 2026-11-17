@@ -6,15 +6,21 @@ interface Props {
   /** MC choices may contain markup from built-in content; typed answers are plain text. */
   answerIsHtml?: boolean;
   explanation?: string;
+  /** Grid and parse items: "7/10 correct", shown instead of the answer. */
+  summary?: string;
   onNext: () => void;
   /** Vocab review only: re-rate the answer as easy and move on. */
   onEasy?: () => void;
 }
 
-export function Feedback({ correct, answer, answerIsHtml, explanation, onNext, onEasy }: Props) {
+export function Feedback({ correct, answer, answerIsHtml, explanation, summary, onNext, onEasy }: Props) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') onNext();
+      if (e.key !== 'Enter') return;
+      // Holding Enter must not skip past the card, and a focused control does only its own action.
+      if (e.repeat) return;
+      if (e.target instanceof Element && e.target.closest('button, a, input, textarea, select')) return;
+      onNext();
     };
     // Defer so the Enter that submitted the answer doesn't also advance.
     const t = setTimeout(() => document.addEventListener('keydown', onKey), 0);
@@ -28,10 +34,16 @@ export function Feedback({ correct, answer, answerIsHtml, explanation, onNext, o
     <div className="feedback-overlay" role="dialog" aria-live="polite">
       <div className={`feedback-card ${correct ? 'is-correct' : 'is-wrong'}`}>
         <div className="feedback-verdict">{correct ? 'Correct' : 'Not quite'}</div>
-        <div className="feedback-correct">
-          {correct ? 'Answer: ' : 'Correct answer: '}
-          {answerIsHtml ? <strong dangerouslySetInnerHTML={{ __html: answer }} /> : <strong>{answer}</strong>}
-        </div>
+        {summary !== undefined ? (
+          <div className="feedback-correct">
+            <strong>{summary}</strong>
+          </div>
+        ) : !correct && (
+          <div className="feedback-correct">
+            Correct answer:{' '}
+            {answerIsHtml ? <strong dangerouslySetInnerHTML={{ __html: answer }} /> : <strong>{answer}</strong>}
+          </div>
+        )}
         {explanation && <div className="feedback-explanation">{explanation}</div>}
         {onEasy ? (
           <div className="feedback-actions">

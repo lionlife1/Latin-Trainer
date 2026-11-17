@@ -13,6 +13,10 @@ export interface Noun {
     /** 3rd declension i-stem. */
     iStem?: boolean;
     irregular?: 'domus' | 'vis' | 'deus';
+    /** Singular accusative and ablative: 'pure' -im/-i only, 'mixed' -em or -im and -e or -i, 'abl' -em and -e or -i. */
+    iForms?: 'pure' | 'mixed' | 'abl';
+    /** Plural only (arma, fauces): `nom` holds the nominative plural and there are no singular forms. */
+    pluralOnly?: boolean;
     trans: string;
 }
 
@@ -60,6 +64,7 @@ function paradigmKey(n: Noun): string {
     switch (n.decl) {
         case 1: return 'first';
         case 2:
+            if (n.pluralOnly) return n.gender === 'n' ? 'secondUm' : 'secondUs';
             if (n.nom.endsWith('um')) return 'secondUm';
             return n.nom.endsWith('us') ? 'secondUs' : 'secondEr';
         case 3:
@@ -71,6 +76,7 @@ function paradigmKey(n: Noun): string {
 }
 
 export function nounForms(n: Noun, cell: NounCell): string[] {
+    if (n.pluralOnly && cell.number === 'singular') return [];
     const index = CASES.indexOf(cell.case) + (cell.number === 'plural' ? 6 : 0);
     if (n.irregular) {
         const slot = IRREGULAR[n.irregular][index];
@@ -80,6 +86,12 @@ export function nounForms(n: Noun, cell: NounCell): string[] {
     const slot = PARADIGMS[key][index];
     if (slot === null) return [];
     if (slot === NOM) return [n.nom];
+    if (n.iForms && cell.number === 'singular' && (cell.case === 'accusative' || cell.case === 'ablative') && key === 'thirdI') {
+        const acc = cell.case === 'accusative';
+        if (n.iForms === 'pure') return [n.stem + (acc ? 'im' : 'i')];
+        if (n.iForms === 'mixed') return acc ? [n.stem + 'em', n.stem + 'im'] : [n.stem + 'e', n.stem + 'i'];
+        return acc ? [n.stem + 'em'] : [n.stem + 'e', n.stem + 'i'];
+    }
     if (Array.isArray(slot)) return slot.map(e => n.stem + e);
     // Second declension: -ius / -ium stems have a contracted genitive singular too, and filius / genius a vocative in -i.
     if (key === 'secondUs' && cell.case === 'vocative' && cell.number === 'singular' && (n.nom === 'filius' || n.nom === 'genius')) return [n.stem];
@@ -97,6 +109,7 @@ const GENDER_TEXT: Record<NounGender, string> = { m: 'm.', f: 'f.', n: 'n.', c: 
 
 /** Dictionary entry: nominative, genitive singular, gender (no genitive for vis). */
 export function nounEntry(n: Noun): string {
+    if (n.pluralOnly) return `${n.nom}, ${nounForms(n, { case: 'genitive', number: 'plural' })[0]}, ${GENDER_TEXT[n.gender]} pl.`;
     const gen = nounForms(n, { case: 'genitive', number: 'singular' })[0];
     return gen ? `${n.nom}, ${gen}, ${GENDER_TEXT[n.gender]}` : `${n.nom}, ${GENDER_TEXT[n.gender]}`;
 }

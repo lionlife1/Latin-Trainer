@@ -57,3 +57,21 @@ describe('offlineQueue', () => {
     expect(pending().map(j => j.poolId)).toEqual(['p2', 'p3']);
   });
 });
+
+describe('offlineQueue structured answers', () => {
+  it('flushes a job saved by the old client with a string given, and one with a cell map', async () => {
+    localStorage.setItem('latiniq_queue', JSON.stringify([
+      { userId: 'u1', attemptId: 'a', poolId: 'old', given: 'amem', ms: 1 },
+    ]));
+    enqueue({ userId: 'u1', attemptId: 'a', poolId: 'new', given: { c1: 'amo', c2: 'amas' }, ms: 2 });
+    enqueue({ userId: 'u1', attemptId: 'a', poolId: 'new2', given: { c1: 'amo', c2: 'amas' }, ms: 3 });
+    const sent: unknown[] = [];
+    const res = await flush(async j => {
+      sent.push(j.given);
+      if (j.poolId === 'new2') throw new Error('offline');
+    });
+    expect(sent).toEqual(['amem', { c1: 'amo', c2: 'amas' }, { c1: 'amo', c2: 'amas' }]);
+    expect(res).toEqual({ sent: 2, remaining: 1 });
+    expect(pending().map(j => j.poolId)).toEqual(['new2']);
+  });
+});

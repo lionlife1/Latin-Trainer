@@ -1,12 +1,13 @@
 // Question generators for the Forms trainer: "make the form" (type-in) and "identify the form" (multiple choice).
 import {
-    PRONOUNS, cellFeatures, cellLabel, cellsOf, entryOf, formsOf, meaningOf, parse,
+    PRONOUNS, cellFeatures, cellLabel, cellParts, cellsOf, entryOf, formsOf, genderVariants, meaningOf, parse,
     type Adjective, type Cell, type Degree, type MorphWord, type Noun, type Pronoun, type Verb, type VerbCell, type VerbTense, type Voice,
 } from './morph';
 import { trainerPool } from './conjugator';
 import { CORE_NOUNS } from '../content/nouns.generated';
 import { CORE_ADJECTIVES } from '../content/adjectives.generated';
 import { escapeHtml } from './html';
+import { formChipsHtml } from './formChips';
 import { shuffle } from './shuffle';
 import type { DrillQuestion, MCQuestion, TypeInQuestion } from './types';
 
@@ -127,16 +128,6 @@ export function pickDistractorCells(w: MorphWord, correct: Cell, valid: Cell[], 
     return out;
 }
 
-/** `amatus est` also accepts `amata est` and `amatum est`; the prompt only ever shows the masculine. */
-function genderVariants(form: string): string[] {
-    const [first, ...rest] = form.split(' ');
-    if (!rest.length || form.endsWith(' iri')) return [];
-    const tail = rest.join(' ');
-    if (first.endsWith('us')) return [`${first.slice(0, -2)}a ${tail}`, `${first.slice(0, -2)}um ${tail}`];
-    if (first.endsWith('i')) return [`${first.slice(0, -1)}ae ${tail}`, `${first.slice(0, -1)}a ${tail}`];
-    return [];
-}
-
 function takesGender(w: MorphWord, cell: Cell): boolean {
     if (w.kind !== 'verb') return false;
     const c = cell as VerbCell;
@@ -146,19 +137,27 @@ function takesGender(w: MorphWord, cell: Cell): boolean {
 
 const nextId = (rng: () => number) => `forms_${Date.now()}_${Math.floor(rng() * 1e9)}`;
 
-export function makeFormQuestion(w: MorphWord, cell: Cell, rng: () => number): TypeInQuestion {
+/** Every form a student may type for a cell: the engine's forms, plus feminine and neuter participle variants. */
+export function acceptedForms(w: MorphWord, cell: Cell): string[] {
     const forms = formsOf(w, cell);
     const answers = [...forms];
     if (takesGender(w, cell)) for (const f of forms) for (const v of genderVariants(f)) if (!answers.includes(v)) answers.push(v);
+    return answers;
+}
+
+export function makeFormQuestion(w: MorphWord, cell: Cell, rng: () => number): TypeInQuestion {
+    const forms = formsOf(w, cell);
+    const answers = acceptedForms(w, cell);
     const variants = forms.slice(1);
     return {
         id: nextId(rng),
         type: 'typein',
         badge: 'MAKE THE FORM',
-        prompt: `<span class='latin-word' style='font-size: 1.4em;'>${escapeHtml(entryOf(w))}</span><br><span style='font-size: 0.8em; color: var(--text-secondary);'>${cellLabel(w, cell)}</span>`,
+        prompt: `<span class='latin-word' style='font-size: 1.4em;'>${escapeHtml(entryOf(w))}</span>${formChipsHtml(cellParts(w, cell))}`,
         hint: escapeHtml(meaningOf(w)),
+        hintKind: 'definition',
         answers,
-        explanation: `The form is ${answers[0]}.${variants.length ? ` Also accepted: ${variants.join(', ')}.` : ''}`,
+        explanation: variants.length ? `Also accepted: ${variants.join(', ')}.` : undefined,
     };
 }
 
@@ -176,9 +175,10 @@ export function identifyFormQuestion(w: MorphWord, cell: Cell, rng: () => number
         badge: 'IDENTIFY THE FORM',
         prompt: `<span class='latin-word' style='font-size: 1.4em;'>${escapeHtml(form)}</span><br><span style='font-size: 0.8em; color: var(--text-secondary);'>from ${escapeHtml(entryOf(w))}</span>`,
         hint: escapeHtml(meaningOf(w)),
+        hintKind: 'definition',
         choices: [correct, ...distractors.map(c => cellLabel(w, c))],
         correct,
-        explanation: labels.length > 1 ? `${form} can be any of these: ${labels.join('; ')}.` : `${form}: ${correct}.`,
+        explanation: labels.length > 1 ? `${form} can be any of these: ${labels.join('; ')}.` : undefined,
     };
 }
 

@@ -352,3 +352,55 @@ describe('semi-deponents, principal parts and the fugere family', () => {
         expect(verbForms(prosum, inf('future', 'active'))).toEqual(['profuturus esse', 'profore']);
     });
 });
+
+describe('a regular verb with no 4th principal part', () => {
+    const timeo: Verb = { inf: 'timere', conj: 2, pres: 'tim', perf: 'timu', pp1: 'timeo', trans: 'to fear' };
+    const finite3 = (mood: 'indicative' | 'subjunctive', tense: VerbTense, voice: Voice): VerbCell =>
+        ({ mood, tense, voice, person: 3, number: 'singular' }) as VerbCell;
+    it('keeps the present-system passive and the gerundive', () => {
+        expect(one(timeo, finite3('indicative', 'present', 'passive'))).toBe('timetur');
+        expect(one(timeo, finite3('subjunctive', 'imperfect', 'passive'))).toBe('timeretur');
+        expect(one(timeo, part('future', 'passive'))).toBe('timendus');
+    });
+    it('has no perfect-system passive', () => {
+        for (const tense of ['perfect', 'pluperfect', 'futurePerfect'] as const)
+            expect(hasVerbCell(timeo, finite3('indicative', tense, 'passive')), tense).toBe(false);
+        for (const tense of ['perfect', 'pluperfect'] as const)
+            expect(hasVerbCell(timeo, finite3('subjunctive', tense, 'passive')), tense).toBe(false);
+        expect(hasVerbCell(timeo, inf('perfect', 'passive'))).toBe(false);
+        expect(hasVerbCell(timeo, part('perfect', 'passive'))).toBe(false);
+    });
+    it('still has the perfect active', () => {
+        expect(one(timeo, finite3('subjunctive', 'perfect', 'active'))).toBe('timuerit');
+    });
+});
+
+describe('principal parts of the hand-written deponents', () => {
+    it.each([
+        ['vereri', 'vereor, vereri, veritus sum'],
+        ['mori', 'morior, mori, mortuus sum'],
+        ['pati', 'patior, pati, passus sum'],
+        ['egredi', 'egredior, egredi, egressus sum'],
+        ['oriri', 'orior, oriri, ortus sum'],
+        ['sequi', 'sequor, sequi, secutus sum'],
+        ['hortari', 'hortor, hortari, hortatus sum'],
+    ])('%s', (inf, expected) => {
+        const { pp1: _pp1, ...v } = VERBS.find(x => x.inf === inf)!;
+        expect(principalParts(v)).toBe(expected);
+    });
+});
+
+describe('future active participles that the stems cannot give', () => {
+    it.each([
+        ['ruere', 'ruiturus'],
+        ['parere', 'pariturus'],
+        ['iuvare', 'iuvaturus'],
+        ['nasci', 'nasciturus'],
+        ['secare', 'secaturus'],
+        ['frui', 'fruiturus'],
+        ['adiuvare', 'adiuturus'],
+    ])('%s', (infinitive, expected) => {
+        const v: Verb = { inf: infinitive, conj: 3, pres: 'x', perf: 'x', ppp: 'adiut', trans: 't' };
+        expect(one(v, part('future', 'active'))).toBe(expected);
+    });
+});

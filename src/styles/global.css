@@ -142,6 +142,8 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 }
 
 /* ---- Drill ---- */
+@keyframes rise-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 .drill-topbar {
   display: flex; align-items: center; gap: 16px; padding: 14px 20px;
   background: var(--surface); border-bottom: 1px solid var(--line);
@@ -153,12 +155,13 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-back-small:hover { background: var(--surface-subtle); color: var(--ink); }
 .drill-progress-wrap { flex: 1; display: flex; align-items: center; gap: 12px; min-width: 0; }
 .drill-progress-bar { flex: 1; height: 8px; background: var(--surface-subtle); border-radius: 99px; overflow: hidden; }
-.drill-progress-fill { height: 100%; background: var(--primary); border-radius: 99px; transition: width 0.3s; }
+.drill-progress-fill { height: 100%; background: var(--primary); border-radius: 99px; transition: width 0.3s ease-out; }
 .drill-progress-label { font-size: 0.85rem; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
 .drill-score { font-size: 0.85rem; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
 .drill-body {
   flex: 1; display: flex; flex-direction: column; align-items: center;
   padding: 32px 16px 120px; gap: 20px; width: 100%; max-width: 680px; margin: 0 auto;
+  animation: fade-in 0.18s ease-out;
 }
 .question-card {
   width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card);
@@ -167,6 +170,13 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .q-type-badge { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 12px; }
 .q-prompt { font-size: 1.35rem; line-height: 1.45; font-weight: 500; }
 .q-prompt strong, .q-prompt .latin-word { font-weight: 700; color: var(--primary); }
+.form-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.form-chip {
+  display: flex; flex-direction: column; align-items: flex-start; padding: 6px 10px;
+  border: 1px solid var(--line); border-radius: 10px; background: var(--surface-subtle);
+}
+.form-chip-k { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.form-chip-v { font-size: 1rem; font-weight: 600; color: var(--ink); }
 .q-hint { margin-top: 16px; font-size: 0.9rem; color: var(--ink-2); min-height: 1.4em; }
 .answer-area { width: 100%; }
 .input-wrap { display: flex; gap: 10px; width: 100%; }
@@ -198,6 +208,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   pointer-events: auto; width: 100%; max-width: 680px; background: var(--surface);
   border: 1px solid var(--line); border-radius: var(--r-card); box-shadow: var(--shadow-raised);
   padding: 20px 24px; border-top: 4px solid var(--line-strong);
+  animation: rise-in 0.2s ease-out;
 }
 .feedback-card.is-correct { border-top-color: var(--success); }
 .feedback-card.is-wrong { border-top-color: var(--error); }
@@ -216,11 +227,22 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); box-shadow: var(--shadow);
   padding: 32px; max-width: 560px; width: 100%; margin: 48px auto; text-align: center;
 }
+.complete-card, .intro-card { animation: rise-in 0.25s ease-out; }
 .complete-title { margin-bottom: 20px; }
 .complete-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
 .c-stat { background: var(--surface-subtle); border-radius: var(--r-control); padding: 12px 8px; }
 .c-stat-val { font-size: 1.5rem; font-weight: 700; }
 .c-stat-label { font-size: 0.8rem; color: var(--ink-2); }
+.complete-streak { color: var(--primary); font-weight: 600; margin-bottom: 16px; }
 .complete-breakdown { color: var(--ink-2); margin-bottom: 20px; }
 .complete-breakdown strong { color: var(--ink); }
 .complete-buttons { display: flex; flex-direction: column; gap: 10px; }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

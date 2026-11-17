@@ -24,6 +24,23 @@ const dist = (a: Cell, b: Cell) => {
     return [...new Set([...Object.keys(fa), ...Object.keys(fb)])].filter(k => fa[k] !== fb[k]).length;
 };
 
+describe('explanations and prompt', () => {
+    it('make: chips in the prompt, definition hint, no restated answer', () => {
+        const cell = find(amo, c => c.mood === 'indicative' && c.tense === 'present' && c.voice === 'active' && (c as { person: number }).person === 1 && (c as { number: string }).number === 'singular');
+        const q = makeFormQuestion(amo, cell, seededRng(1));
+        expect(q.prompt).toContain("class='form-chips'");
+        expect(q.prompt).toContain("form-chip-k'>Person");
+        expect(q.hintKind).toBe('definition');
+        expect(q.explanation).toBeUndefined();
+    });
+    it('identify: no explanation when only one parse', () => {
+        const nomSg = find(puella, c => c.case === 'genitive' && c.number === 'plural');
+        const q = identifyFormQuestion(puella, nomSg, seededRng(1))!;
+        expect(q.hintKind).toBe('definition');
+        expect(q.explanation).toBeUndefined();
+    });
+});
+
 describe('identifyFormQuestion', () => {
     it('never offers another valid parse as a distractor', () => {
         const q = identifyFormQuestion(puella, genSg, seededRng(1))!;
@@ -61,7 +78,7 @@ describe('makeFormQuestion', () => {
         const q = makeFormQuestion(amo, c, seededRng(1));
         expect(q.answers).toEqual(['amatus est', 'amata est', 'amatum est']);
         expect(q.prompt).toContain('amo, amare, amavi, amatus');
-        expect(q.prompt).toContain('3rd sg. perfect passive indicative');
+        for (const v of ['3rd sg.', 'perfect', 'passive', 'indicative']) expect(q.prompt).toContain(`form-chip-v'>${v}<`);
         const fut = find(amo, c => c.mood === 'infinitive' && c.tense === 'future' && c.voice === 'passive');
         expect(makeFormQuestion(amo, fut, seededRng(1)).answers).toEqual(['amatum iri']);
         const ip = find(ire, c => c.mood === 'indicative' && c.tense === 'perfect' && c.voice === 'active' && c.person === 3 && c.number === 'singular');
@@ -104,7 +121,7 @@ describe('generateFormsQuestion', () => {
             if (q.type === 'typein') {
                 expect(q.answers.length).toBeGreaterThanOrEqual(1);
                 for (const a of q.answers) expect(a).toMatch(/^[a-z]+( [a-z]+)?$/);
-            } else {
+            } else if (q.type === 'mc') {
                 expect(new Set(q.choices).size).toBe(4);
                 expect(q.choices).toContain(q.correct);
             }
@@ -115,5 +132,35 @@ describe('generateFormsQuestion', () => {
         const qs = buildFormsSession({ ...DEFAULT_FORMS_CONFIG, kinds: ['verbs', 'nouns'] }, 10, seededRng(3));
         expect(qs).toHaveLength(10);
         expect(new Set(qs.map(q => q.type + q.prompt)).size).toBe(10);
+    });
+});
+
+describe('plural-only nouns', () => {
+    it('200 questions from arma and fauces are well-formed and plural only', () => {
+        const nouns: Noun[] = [
+            { nom: 'arma', stem: 'arm', decl: 2, gender: 'n', pluralOnly: true, trans: 'arms' },
+            { nom: 'fauces', stem: 'fauc', decl: 3, gender: 'f', iStem: true, pluralOnly: true, trans: 'jaws' },
+        ];
+        const pools = { verbs: [], nouns, adjectives: [], pronouns: [] };
+        const cfg: FormsConfig = { ...DEFAULT_FORMS_CONFIG, kinds: ['nouns'] };
+        const rng = seededRng(7);
+        for (let i = 0; i < 200; i++) {
+            const q = generateFormsQuestion(cfg, rng, pools)!;
+            expect(q).not.toBeNull();
+            expect(q.prompt).not.toBe('');
+            if (q.type === 'typein') {
+                expect(q.prompt).toContain('plural');
+                expect(q.prompt).not.toContain('singular');
+                expect(q.answers.length).toBeGreaterThanOrEqual(1);
+                for (const a of q.answers) expect(a).toMatch(/^[a-z]+$/);
+            } else if (q.type === 'mc') {
+                expect(new Set(q.choices).size).toBe(4);
+                expect(q.choices).toContain(q.correct);
+                for (const c of q.choices) {
+                    expect(c).toContain('plural');
+                    expect(c).not.toContain('singular');
+                }
+            }
+        }
     });
 });

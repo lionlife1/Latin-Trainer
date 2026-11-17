@@ -53,6 +53,7 @@
   background: var(--bg-surface); color: var(--text-primary); cursor: pointer;
 }
 .q-nav button.answered { border-color: var(--gold-dim); color: var(--gold); }
+.q-nav button.partial { border-style: dashed; border-color: var(--gold-dim); color: var(--gold); }
 .q-nav button.current { outline: 2px solid var(--gold); }
 .timer { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--primary); }
 .timer.low { color: var(--red); }
@@ -78,6 +79,8 @@
 .print-answer-line { border-bottom: 1px solid #000; height: 1.8em; max-width: 26em; }
 .print-key { padding-left: 1.6em; columns: 2; column-gap: 32px; }
 .print-key li { break-inside: avoid; margin-bottom: 4px; }
+.print-key.print-key-block { columns: 1; }
+.print-points { font-weight: 600; white-space: nowrap; }
 @media print {
   .app-header, .no-print { display: none !important; }
   body { background: #fff; }
@@ -95,3 +98,80 @@
   background: var(--bg-surface); color: var(--text-primary); cursor: pointer;
 }
 .macron-bar button:hover, .macron-bar button:focus-visible { border-color: var(--primary); }
+
+/* Grid and parse items (solo drills, tests, review, print). */
+.grid-item { border-collapse: collapse; width: 100%; max-width: 100%; }
+.grid-item th, .grid-item td { padding: 6px 8px; text-align: left; vertical-align: top; }
+.grid-item thead th { font-weight: 600; color: var(--text-secondary); }
+.grid-item tbody th { font-weight: 600; white-space: nowrap; }
+.grid-given { color: var(--text-secondary); opacity: 0.7; }
+.grid-none { color: var(--text-secondary); }
+.grid-input {
+  width: 100%; min-width: 0; box-sizing: border-box; padding: 6px 8px; font: inherit;
+  border: 1px solid var(--border); border-radius: 6px; background: var(--bg-surface); color: var(--text-primary);
+}
+.grid-input.correct, .grid-answer.correct { border-color: var(--green); }
+.grid-input.wrong, .grid-answer.wrong { border-color: var(--red); }
+.grid-answer.correct { color: var(--green); }
+.grid-answer.wrong { color: var(--red); text-decoration: line-through; }
+.grid-correct { display: block; font-size: 0.85rem; color: var(--green); }
+.grid-answer, .grid-correct { overflow-wrap: anywhere; }
+.grid-actions { margin-top: 12px; }
+/* Phone layout: one card per row, column label beside its input. Wide grids (four or more columns) are
+   handled below. */
+@media (max-width: 640px) {
+  .grid-item, .grid-item tbody, .grid-item tr, .grid-item th, .grid-item td { display: block; width: 100%; box-sizing: border-box; }
+  .grid-item thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .grid-item tr { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 10px; padding: 6px; }
+  .grid-item tbody th { white-space: normal; }
+  .grid-item td[data-col] { display: flex; align-items: center; gap: 8px; }
+  .grid-item td[data-col]::before { content: attr(data-col); flex: 0 0 5.5em; font-size: 0.8rem; color: var(--text-secondary); }
+  .grid-item .grid-cell { flex: 1 1 0; min-width: 0; }
+}
+/* Practice and test pages cap content at 680px, so inside .drill-body a wide grid (4+ columns) is always cards. */
+.drill-body .grid-item[data-wide], .drill-body .grid-item[data-wide] tbody, .drill-body .grid-item[data-wide] tr, .drill-body .grid-item[data-wide] th, .drill-body .grid-item[data-wide] td { display: block; width: 100%; box-sizing: border-box; }
+.drill-body .grid-item[data-wide] thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.drill-body .grid-item[data-wide] tr { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 10px; padding: 6px; }
+.drill-body .grid-item[data-wide] tbody th { white-space: normal; }
+.drill-body .grid-item[data-wide] td[data-col] { display: flex; align-items: center; gap: 8px; }
+.drill-body .grid-item[data-wide] td[data-col]::before { content: attr(data-col); flex: 0 0 5.5em; font-size: 0.8rem; color: var(--text-secondary); }
+.drill-body .grid-item[data-wide] .grid-cell { flex: 1 1 0; min-width: 0; }
+/* Elsewhere (the review page) wide grids are cards up to 900px, a table above. */
+@media (max-width: 900px) {
+  .grid-item[data-wide], .grid-item[data-wide] tbody, .grid-item[data-wide] tr, .grid-item[data-wide] th, .grid-item[data-wide] td { display: block; width: 100%; box-sizing: border-box; }
+  .grid-item[data-wide] thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .grid-item[data-wide] tr { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 10px; padding: 6px; }
+  .grid-item[data-wide] tbody th { white-space: normal; }
+  .grid-item[data-wide] td[data-col] { display: flex; align-items: center; gap: 8px; }
+  .grid-item[data-wide] td[data-col]::before { content: attr(data-col); flex: 0 0 5.5em; font-size: 0.8rem; color: var(--text-secondary); }
+  .grid-item[data-wide] .grid-cell { flex: 1 1 0; min-width: 0; }
+}
+.grid-field { display: flex; align-items: center; gap: 6px; }
+.grid-field .grid-input { flex: 1 1 auto; }
+.grid-field .grid-answer { min-width: 0; }
+.grid-mark { flex: none; font-weight: 700; }
+.grid-mark.ok { color: var(--green); }
+.grid-mark.bad { color: var(--red); }
+
+.parse-item { display: flex; flex-direction: column; gap: 12px; }
+.parse-field { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.parse-label { min-width: 6em; font-weight: 600; }
+.parse-options { display: flex; flex-wrap: wrap; gap: 6px; }
+.parse-option {
+  padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--bg-surface); color: var(--text-primary); cursor: pointer; font: inherit;
+}
+.parse-option.picked { border-color: var(--primary); background: var(--primary); color: #fff; }
+.parse-field.right .parse-option.picked { background: var(--green); border-color: var(--green); }
+.parse-field.wrong .parse-option.picked { background: var(--red); border-color: var(--red); }
+.parse-correct { font-size: 0.9rem; color: var(--green); }
+.parse-review { margin: 4px 0; padding-left: 1.2em; }
+
+.print-grid { border-collapse: collapse; width: 100%; margin-top: 6px; }
+.print-grid th, .print-grid td { border: 1px solid #000; padding: 4px 8px; text-align: left; }
+.print-grid td { height: 2em; }
+.print-grid .grid-given { color: #000; opacity: 1; }
+.print-grid .grid-none { background: #ddd; }
+.print-grid-blank { display: block; min-height: 1.8em; }
+.print-parse-field { margin: 8px 0; }
+@media print { .print-grid .grid-none { background: #ddd; print-color-adjust: exact; -webkit-print-color-adjust: exact; } }

@@ -14,6 +14,17 @@ describe('DrillSession', () => {
     expect(screen.getByText('Because.')).toBeInTheDocument();
   });
 
+  it('does not repeat the answer when right, and names it when wrong', async () => {
+    const { unmount } = render(<DrillSession questions={[typein]} mode="practice" onFinish={() => {}} onExit={() => {}} />);
+    await userEvent.type(screen.getByPlaceholderText(/type your answer/i), 'amēm{Enter}');
+    expect(screen.queryByText(/Answer:/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Correct answer:/)).not.toBeInTheDocument();
+    unmount();
+    render(<DrillSession questions={[typein]} mode="practice" onFinish={() => {}} onExit={() => {}} />);
+    await userEvent.type(screen.getByPlaceholderText(/type your answer/i), 'nope{Enter}');
+    expect(screen.getByText(/Correct answer:/)).toBeInTheDocument();
+  });
+
   it('marks a wrong mc choice and reveals the correct one', async () => {
     render(<DrillSession questions={[mc]} mode="practice" onFinish={() => {}} onExit={() => {}} />);
     await userEvent.click(screen.getByRole('button', { name: 'x' }));
@@ -28,6 +39,27 @@ describe('DrillSession', () => {
     await userEvent.click(screen.getByRole('button', { name: 'y' }));
     await userEvent.click(screen.getByRole('button', { name: /continue/i }));
     expect(onFinish).toHaveBeenCalledWith([expect.objectContaining({ correct: true, given: 'y' })]);
+  });
+});
+
+describe('DrillSession progress bar', () => {
+  const fill = () => document.querySelector('.drill-progress-fill') as HTMLElement;
+  const mc2: DrillQuestion = { ...mc, id: 'c' };
+
+  it('moves when an answer is given and fills on the last one', async () => {
+    render(<DrillSession questions={[mc, mc2]} mode="practice" onFinish={() => {}} onExit={() => {}} />);
+    expect(fill().style.width).toBe('0%');
+    await userEvent.click(screen.getByRole('button', { name: 'y' }));
+    expect(fill().style.width).toBe('50%');
+    await userEvent.click(screen.getByRole('button', { name: /continue/i }));
+    expect(fill().style.width).toBe('50%');
+    await userEvent.click(screen.getByRole('button', { name: 'y' }));
+    expect(fill().style.width).toBe('100%');
+  });
+
+  it('stays full in an endless session', () => {
+    render(<DrillSession questions={[mc]} mode="practice" generate={() => null} onFinish={() => {}} onExit={() => {}} />);
+    expect(fill().style.width).toBe('100%');
   });
 });
 

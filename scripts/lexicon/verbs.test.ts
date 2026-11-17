@@ -121,7 +121,8 @@ describe('coreTrainerVerbs on the vendored sources', () => {
     for (const inf of ['agere', 'amare', 'capere', 'concedere']) expect(get(inf)?.noPassive, inf).toBeUndefined();
   });
   it('uses the lexicon\'s own perfect when it spells it out', () => {
-    expect(get('adferre')).toMatchObject({ perf: 'attul' });
+    expect(get('afferre')).toMatchObject({ perf: 'attul', ppp: 'allat' });
+    expect(get('adferre')).toBeUndefined(); // D'Ooge's unassimilated duplicate of afferre
     expect(get('tollere')).toMatchObject({ perf: 'sustul' });
   });
   it('includes the semi-deponents', () => {
@@ -159,6 +160,49 @@ describe('coreTrainerVerbs on the vendored sources', () => {
   });
   it('glosses every verb', () => {
     for (const v of verbs) expect(v.trans).toMatch(/^to \S/);
+  });
+});
+
+describe('coreTrainerVerbs data fixes, on a small DICTLINE fixture', () => {
+  const row = (headword: string) => ({
+    headword, lemma: headword.split(',')[0], definition: 'x', pos: 'verb', frequency: null, core: true,
+  });
+  const run = (lines: number[], ...headwords: string[]) =>
+    coreTrainerVerbs(headwords.map(row), parseWhitakerVerbs(fixture(...lines))).verbs;
+  const only = (lines: number[], headword: string) => {
+    const [v] = run(lines, headword);
+    if (!v) throw new Error(`no verb for ${headword}`);
+    return v;
+  };
+
+  it('gives the added intransitive verbs no passive', () => {
+    // Whitaker marks conflig "X", not INTRANS; the list is what takes the passive away
+    expect(only([12520], 'confligo, confligere, conflixi, conflictus')).toMatchObject({ inf: 'confligere', noPassive: true });
+  });
+  it('lets transitive verbs with no supine keep their passive', () => {
+    const v = only([37313], 'timeo, timere, timui');
+    expect(v.noPassive).toBeUndefined();
+    expect(v.ppp).toBeUndefined();
+  });
+  it('replaces the bogus eicio line', () => {
+    expect(only([18871, 18872], 'eicio, eicere, eieci, eiectus')).toMatchObject({ inf: 'eicere', perf: 'eiec', ppp: 'eiect' });
+  });
+  it('uses deposit, not the syncopated depost', () => {
+    expect(only([16791, 16792, 16793, 16794], 'depono, deponere, deposui, depositus')).toMatchObject({ inf: 'deponere', ppp: 'deposit' });
+  });
+  it('uses avuls, not avols', () => {
+    expect(only([5856, 5857, 5858], 'avello, avellere, avelli, avulsus')).toMatchObject({ inf: 'avellere', ppp: 'avuls' });
+  });
+  it('drops the pertineo supine', () => {
+    const v = only([30266], 'pertineo, pertinere, pertinui');
+    expect(v.ppp).toBeUndefined();
+    expect(v.noPassive).toBe(true);
+  });
+  it('drops the disco supine and keeps the passive', () => {
+    const v = only([18046], 'disco, discere, didici');
+    expect(v).toMatchObject({ inf: 'discere', conj: 3, perf: 'didic' });
+    expect(v.ppp).toBeUndefined();
+    expect(v.noPassive).toBeUndefined();
   });
 });
 

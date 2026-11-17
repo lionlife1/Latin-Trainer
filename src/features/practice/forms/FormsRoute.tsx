@@ -6,7 +6,7 @@ import type { DrillQuestion } from '../../../lib/types';
 import { DrillSession } from '../../drill/DrillSession';
 import { SessionSummary } from '../../drill/SessionSummary';
 import type { DrillResult } from '../../drill/useDrill';
-import { todayISO, updateStreak } from '../../solo/progressStore';
+import { streakMilestone, todayISO, updateStreak } from '../../solo/progressStore';
 import { appendSession } from '../sessionLog';
 import { FormsSetup } from './FormsSetup';
 import { loadFormsSettings, saveFormsSettings, type FormsSettings } from './formsSettings';
@@ -25,7 +25,7 @@ export function logForms(results: DrillResult[]): boolean {
 type View =
   | { kind: 'setup' }
   | { kind: 'drill'; settings: FormsSettings; questions: DrillQuestion[]; run: number }
-  | { kind: 'done'; settings: FormsSettings; results: DrillResult[] };
+  | { kind: 'done'; settings: FormsSettings; results: DrillResult[]; streakDay: number | null };
 
 /** Forms trainer: setup, then drill, then summary. Rendered without the shell (focus mode). */
 export default function FormsRoute() {
@@ -47,8 +47,8 @@ export default function FormsRoute() {
         generate={endless ? () => generateFormsQuestion(config) : undefined}
         onFinish={results => {
           if (endless) return;
-          logForms(results);
-          setView({ kind: 'done', settings: view.settings, results });
+          const streakDay = streakMilestone(() => logForms(results));
+          setView({ kind: 'done', settings: view.settings, results, streakDay });
         }}
         onExit={results => {
           if (endless) {
@@ -70,6 +70,7 @@ export default function FormsRoute() {
         onRetryWrong={() => begin(view.settings, shuffle(wrong))}
         onBack={toPractice}
         backLabel="Back to Practice"
+        streakDay={view.streakDay}
       />
     );
   }

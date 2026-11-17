@@ -7,9 +7,11 @@ interface Props {
   onRetryWrong?: () => void;
   onBack: () => void;
   backLabel?: string;
+  /** Set when this session made today a streak day of 2 or more. */
+  streakDay?: number | null;
 }
 
-export function SessionSummary({ results, children, onRetryWrong, onBack, backLabel = 'Back to path' }: Props) {
+export function SessionSummary({ results, children, onRetryWrong, onBack, backLabel = 'Back to path', streakDay }: Props) {
   const correct = results.filter(r => r.correct).length;
   const wrong = results.length - correct;
   const pct = results.length ? Math.round((correct / results.length) * 100) : 0;
@@ -21,7 +23,8 @@ export function SessionSummary({ results, children, onRetryWrong, onBack, backLa
           <div className="c-stat"><div className="c-stat-val" style={{ color: 'var(--green)' }}>{correct}</div><div className="c-stat-label">Correct</div></div>
           <div className="c-stat"><div className="c-stat-val" style={{ color: 'var(--red)' }}>{wrong}</div><div className="c-stat-label">Wrong</div></div>
           <div className="c-stat"><div className="c-stat-val">{pct}%</div><div className="c-stat-label">Accuracy</div></div>
-                  </div>
+        </div>
+        {typeof streakDay === 'number' && <p className="complete-streak">Day {streakDay} of your streak.</p>}
         {children && <div className="complete-breakdown">{children}</div>}
         <div className="complete-buttons">
           {onRetryWrong && (

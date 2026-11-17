@@ -15,6 +15,17 @@ const sui: MorphWord = { kind: 'pronoun', pronoun: PRONOUNS.find(p => p.id === '
 
 const labels = (form: string, words: MorphWord[]) => parse(form, words).map(a => cellLabel(a.word, a.cell)).sort();
 
+describe('parse: -im and -i variants', () => {
+    const navis: MorphWord = { kind: 'noun', noun: { nom: 'navis', stem: 'nav', decl: 3, gender: 'f', iStem: true, iForms: 'abl', trans: 'ship' } as Noun };
+    const turris: MorphWord = { kind: 'noun', noun: { nom: 'turris', stem: 'turr', decl: 3, gender: 'f', iStem: true, iForms: 'mixed', trans: 'tower' } as Noun };
+    it('navi is dative and ablative singular', () => {
+        expect(labels('navi', [navis])).toEqual(['ablative singular', 'dative singular']);
+    });
+    it('turrim is accusative singular', () => {
+        expect(labels('turrim', [turris])).toEqual(['accusative singular']);
+    });
+});
+
 describe('parse', () => {
     it('puellae', () => {
         expect(labels('puellae', [puella])).toEqual(['dative singular', 'genitive singular', 'nominative plural', 'vocative plural']);

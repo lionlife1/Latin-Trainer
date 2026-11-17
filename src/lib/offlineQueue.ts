@@ -1,12 +1,15 @@
 // Practice responses that failed to reach the server, retried later. Survives reloads.
 // Shared devices are common in classrooms, so jobs carry their user and flushes are filtered.
+import type { Given } from './types';
+
 const KEY = 'latiniq_queue';
 
 export interface QueueJob {
   userId: string;
   attemptId: string;
   poolId: string;
-  given: string;
+  /** A string, or a cell map for grid/parse items. Jobs saved by older clients hold a string. */
+  given: Given;
   ms: number;
 }
 
@@ -52,7 +55,7 @@ export async function flush(
   // Re-read so jobs enqueued while flushing aren't lost.
   const current = pending();
   const isDone = (j: QueueJob) =>
-    [...done].some(d => d.userId === j.userId && d.attemptId === j.attemptId && d.poolId === j.poolId && d.given === j.given);
+    [...done].some(d => d.userId === j.userId && d.attemptId === j.attemptId && d.poolId === j.poolId && JSON.stringify(d.given) === JSON.stringify(j.given));
   const rest = current.filter(j => !isDone(j));
   save(rest);
   return { sent, remaining: rest.filter(match).length };

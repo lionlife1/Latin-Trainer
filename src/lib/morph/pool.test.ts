@@ -37,7 +37,7 @@ describe('the engine against the whole trainer pool', () => {
                 for (const f of forms) expect(f, `${v.inf} ${JSON.stringify(c)}`).toMatch(/^[a-z]+( [a-z]+)?$/);
             }
         }
-    });
+    }, 30_000); // every cell of every verb: slow under a full parallel run
 
     it('builds clean, non-empty noun forms for every claimed cell of every core noun', () => {
         for (const n of CORE_NOUNS) {

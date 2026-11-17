@@ -1,7 +1,7 @@
 # Archive: finished specs and plans
 
-Everything here is implemented and merged to `main`. The checkboxes inside the plans were never ticked;
-this table is the record. Open work is in [`docs/OPEN-WORK.md`](../../OPEN-WORK.md).
+Everything here is implemented and, unless the table says otherwise, merged to `main`. The checkboxes
+inside the older plans were never ticked; this table is the record. Open work is in [`docs/OPEN-WORK.md`](../../OPEN-WORK.md).
 
 | Plan | Spec | Merged |
 |---|---|---|
@@ -12,6 +12,7 @@ this table is the record. Open work is in [`docs/OPEN-WORK.md`](../../OPEN-WORK.
 | `plans/2026-11-06-morphology-forms.md` | `specs/2026-11-06-forms-vocab-modules-design.md` (A) | Tasks 1 to 6 in PR #6, Tasks 7 to 15 direct to `main` (2026-11-08) |
 | `plans/2026-11-06-practice-vocab-srs.md` | same spec (B) | direct to `main` (2026-11-09) |
 | `plans/2026-11-06-grammar-modules.md` | same spec (C) | direct to `main` (2026-11-09) |
+| `plans/2026-11-14-teacher-tools-phase2.md` | `specs/2026-11-14-teacher-tools-phase2-design.md` | not merged: branch `claude/eager-mayer-rsdbnr` (2026-11-14); its migration is not applied yet |
 
 `handoff-student-redesign.md` is the chat handoff that led to the student redesign spec. Its deployment
 section is the origin of the backend item in the open-work list.

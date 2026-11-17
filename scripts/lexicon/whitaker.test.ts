@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { parseDictline, parseDictlineLine } from './whitaker';
+import { applyDictlineFixes, parseDictline, parseDictlineLine } from './whitaker';
 
 const line = (stems: string[], posFields: string, age = 'X', freq = 'A', meaning = 'x') =>
   stems.map((s) => s.padEnd(19)).join('').padEnd(76) + posFields.padEnd(24) + `${age} X X ${freq} O ${meaning}`;
@@ -73,5 +73,45 @@ describe('parseDictline (whole file)', () => {
     expect(rows.some((r) => /zzz/.test(r.headword))).toBe(false);
     expect(rows.some((r) => /(^|, ),|,\s*$|^\s*$/.test(r.headword))).toBe(false);
     expect(rows.some((r) => r.pos === 'pronoun')).toBe(false);
+  });
+});
+
+describe('applyDictlineFixes', () => {
+  const edid = line(['ed', 'ed', 'edid', 'edit'], 'V      1 1 TRANS');
+  it('recodes edo, edere from 1st to 3rd conjugation, keeping the column widths', () => {
+    const fixed = applyDictlineFixes(edid);
+    expect(fixed).toHaveLength(edid.length);
+    expect(fixed).toBe(edid.replace('V      1 1', 'V      3 1'));
+    expect(parseDictlineLine(edid)?.headword).toBe('edo, edare, edidi, editus');
+    expect(parseDictlineLine(fixed)?.headword).toBe('edo, edere, edidi, editus');
+  });
+  it('leaves every other line alone', () => {
+    const others = [
+      line(['ed', 'ed', 'ed', 'es'], 'V      3 1 TRANS'),
+      line(['am', 'am', 'amav', 'amat'], 'V      1 1 TRANS'),
+      line(['ed', 'ed', 'edid', 'edit'], 'V      3 1 TRANS'),
+    ].join('\n');
+    expect(applyDictlineFixes(others)).toBe(others);
+  });
+  it('fixes only the matching lines of a longer text', () => {
+    const text = [line(['am', 'am', 'amav', 'amat'], 'V      1 1 TRANS'), edid, ''].join('\n');
+    expect(applyDictlineFixes(text)).toBe(text.replace(edid, edid.replace('V      1 1', 'V      3 1')));
+  });
+});
+
+describe('irregular compound verb headwords', () => {
+  it('3 2 fer compounds', () => {
+    expect(parseDictlineLine(line(['effer', 'effer', 'extul', 'elat'], 'V      3 2 X'))?.headword).toBe('effero, efferre, extuli, elatus');
+    expect(parseDictlineLine(line(['abfer', 'abfer', 'zzz', 'zzz'], 'V      3 2 TRANS'))?.headword).toBe('abfero, abferre');
+  });
+  it('other 3 2 lines give nothing', () => {
+    expect(parseDictlineLine(line(['x', 'x', 'y', 'z'], 'V      3 2 X'))).toBeNull();
+  });
+  it('6 1 ire compounds', () => {
+    expect(parseDictlineLine(line(['abe', 'abi', 'abiv', 'abit'], 'V      6 1 INTRANS'))?.headword).toBe('abeo, abire, abivi, abitus');
+    expect(parseDictlineLine(line(['sube', 'subi', 'subiv', 'zzz'], 'V      6 1 INTRANS'))?.headword).toBe('subeo, subire, subivi');
+  });
+  it('leaves 5 1 esse compounds alone', () => {
+    expect(parseDictlineLine(line(['ab', 'abes', 'afu', 'zzz'], 'V      5 1 X'))).toBeNull();
   });
 });

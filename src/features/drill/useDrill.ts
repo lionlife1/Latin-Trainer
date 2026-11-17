@@ -1,17 +1,19 @@
 import { useCallback, useRef, useState } from 'react';
-import { isCorrect } from '../../lib/grading';
-import type { AssignmentMode, DrillQuestion } from '../../lib/types';
+import { grade, isCorrect, type Grade } from '../../lib/grading';
+import type { AssignmentMode, DrillQuestion, Given } from '../../lib/types';
 
 export interface DrillResult {
   q: DrillQuestion;
-  given: string;
+  given: Given;
+  /** undefined in test mode. `correct` is full credit only. */
+  grade?: Grade;
   /** undefined in test mode: grading happens on the server. */
   correct: boolean | undefined;
 }
 
 export interface DrillOptions {
   mode: AssignmentMode;
-  onAnswer?: (q: DrillQuestion, given: string, correct: boolean | undefined, ms: number) => void;
+  onAnswer?: (q: DrillQuestion, given: Given, correct: boolean | undefined, ms: number) => void;
   /** Endless mode: called to append a new question whenever the learner advances. */
   generate?: () => DrillQuestion | null;
 }
@@ -28,10 +30,11 @@ export function useDrill(initial: DrillQuestion[], opts: DrillOptions) {
   const score = results.filter(r => r.correct === true).length;
 
   const answer = useCallback(
-    (given: string) => {
+    (given: Given) => {
       if (!current || results.length > index) return;
-      const correct = opts.mode === 'practice' ? isCorrect(current, given) : undefined;
-      setResults(r => [...r, { q: current, given, correct }]);
+      const practice = opts.mode === 'practice';
+      const correct = practice ? isCorrect(current, given) : undefined;
+      setResults(r => [...r, { q: current, given, correct, grade: practice ? grade(current, given) : undefined }]);
       opts.onAnswer?.(current, given, correct, Date.now() - shownAt.current);
     },
     [current, index, results.length, opts],

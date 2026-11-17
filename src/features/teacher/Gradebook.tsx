@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { downloadCsv, toCsv } from '../../lib/csv';
+import { fmtPoints } from '../../lib/grading';
 import { useAsync } from '../../lib/useAsync';
 import { getClass, gradebook, listAssignments, type AssignmentRow, type GradebookRow } from './api';
 
@@ -22,7 +23,7 @@ export function gradebookCsv(rows: GradebookRow[], assignments: AssignmentRow[])
       s.name,
       ...cols.map(a => {
         const c = cellOf(rows, s.id, a.id);
-        return c && c.attempts > 0 ? `${c.best_score}/${c.total}${c.any_late ? ' (late)' : ''}` : null;
+        return c && c.attempts > 0 ? `${fmtPoints(c.best_score ?? 0)}/${fmtPoints(c.total ?? 0)}${c.any_late ? ' (late)' : ''}` : null;
       }),
     ]),
   ]);
@@ -68,7 +69,7 @@ export function Gradebook() {
                 {assignments.map(a => {
                   const c = cellOf(rows, s.id, a.id);
                   if (!c || c.attempts === 0) return <td key={a.id} className="muted">—</td>;
-                  const label = `${c.best_score}/${c.total}${c.any_late ? ' ⏰' : ''}`;
+                  const label = `${fmtPoints(c.best_score ?? 0)}/${fmtPoints(c.total ?? 0)}${c.any_late ? ' ⏰' : ''}`;
                   const attemptId = c.best_attempt_id ?? c.latest_attempt_id;
                   return (
                     <td key={a.id}>

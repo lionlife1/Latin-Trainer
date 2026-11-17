@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
-import { correctDisplay } from '../../lib/grading';
-import type { DrillQuestion } from '../../lib/types';
+import { fmtPoints, isRevealed } from '../../lib/grading';
 import { useAsync } from '../../lib/useAsync';
+import { rendererFor } from '../items/registry';
 import { getAttempt, getAttemptItems, getResponses } from './api';
 
 export function AttemptReview({ attemptId }: { attemptId: string }) {
@@ -16,23 +16,13 @@ export function AttemptReview({ attemptId }: { attemptId: string }) {
       {data.data.items.map(i => {
         const r = data.data!.responses.get(i.pool_id);
         const q = i.question;
-        const revealed = 'answers' in q || 'correct' in q;
+        const { Review } = rendererFor(q);
+        const revealed = isRevealed(q);
         return (
           <li key={i.pool_id} className="card">
             <div className="q-prompt small" dangerouslySetInnerHTML={{ __html: q.prompt }} />
-            <p>
-              <span className={`tag ${r?.correct ? 'ok' : 'bad'}`}>{r?.correct ? 'Right' : 'Wrong'}</span> Your answer: <strong>{r?.given || '(blank)'}</strong>
-            </p>
-            {revealed && !r?.correct && (
-              <p className="muted">
-                Correct:{' '}
-                {q.type === 'mc' ? (
-                  <strong dangerouslySetInnerHTML={{ __html: correctDisplay(q as DrillQuestion) }} />
-                ) : (
-                  <strong>{correctDisplay(q as DrillQuestion)}</strong>
-                )}
-              </p>
-            )}
+            {r && r.possible !== 1 && <p className="muted small">{fmtPoints(r.earned)}/{fmtPoints(r.possible)} points</p>}
+            <Review q={q} given={r?.given_json ?? r?.given ?? undefined} parts={r?.parts ?? undefined} correct={r?.correct} revealed={revealed} />
           </li>
         );
       })}
@@ -53,7 +43,7 @@ export function AttemptResult() {
       <div className="complete-card" style={{ margin: '0 auto 24px' }}>
         <h1 className="complete-title">{t.submitted_at ? 'Submitted' : 'In progress'}</h1>
         <div className="complete-stats" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
-          <div className="c-stat"><div className="c-stat-val">{t.score ?? 0}/{t.total}</div><div className="c-stat-label">Score</div></div>
+          <div className="c-stat"><div className="c-stat-val">{fmtPoints(t.score ?? 0)}/{fmtPoints(t.total)}</div><div className="c-stat-label">Score</div></div>
           <div className="c-stat"><div className="c-stat-val">{pct}%</div><div className="c-stat-label">Accuracy</div></div>
         </div>
         <div className="row" style={{ justifyContent: 'center' }}>

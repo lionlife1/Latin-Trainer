@@ -65,7 +65,10 @@ const SUBJ_PERF_ACT = ['erim', 'eris', 'erit', 'erimus', 'eritis', 'erint'];
 const SUBJ_PLUP_ACT = ['issem', 'isses', 'isset', 'issemus', 'issetis', 'issent'];
 
 /** Future active participle stems that cannot be derived from the principal parts. */
-const FUT_PART_STEM: Record<string, string> = { mori: 'moritur', oriri: 'oritur' };
+const FUT_PART_STEM: Record<string, string> = {
+    mori: 'moritur', oriri: 'oritur',
+    ruere: 'ruitur', parere: 'paritur', iuvare: 'iuvatur', nasci: 'nascitur', secare: 'secatur', frui: 'fruitur',
+};
 
 const CASES = ['genitive', 'dative', 'accusative', 'ablative'] as const;
 const ENDS_G = { genitive: 'ndi', dative: 'ndo', accusative: 'ndum', ablative: 'ndo' };
@@ -117,11 +120,13 @@ export function hasVerbCell(verb: Verb, cell: VerbCell): boolean {
     const passive = !verb.deponent && !verb.noPassive;
     switch (cell.mood) {
         case 'indicative':
-            return cell.voice === 'active' || passive;
+            if (cell.voice === 'active') return true;
+            return passive && (!perfectTense(cell.tense) || !!verb.ppp);
         case 'subjunctive':
             // A deponent's imperfect subjunctive is built on `impfBase`; without it there is no form.
             if (cell.tense === 'imperfect' && verb.deponent && !verb.impfBase) return false;
-            return cell.voice === 'active' || passive;
+            if (cell.voice === 'active') return true;
+            return passive && (!perfectTense(cell.tense) || !!verb.ppp);
         case 'imperative':
             if (cell.tense === 'future') return cell.voice === 'active' && !verb.deponent;
             return cell.voice === 'active' || passive;
@@ -451,10 +456,27 @@ function firstPart(verb: Verb): string {
     return verb.pres + 'o'; // 1st and 3rd
 }
 
+/** First principal part of a deponent: veror is `ver` + eor, patior is `pat` + ior. */
+function deponentFirstPart(verb: Verb): string {
+    if (verb.conj === 2) return verb.pres + 'eor';
+    if (verb.conj === 3.5 || verb.conj === 4) return verb.pres + 'ior';
+    return verb.pres + 'or'; // 1st and 3rd
+}
+
 /** The principal parts as a student writes them (`amo, amare, amavi, amatus`), with no label. */
 export function principalParts(verb: Verb): string {
     if (verb.semiDeponent) return `${verb.pp1 ?? firstPart(verb)}, ${verb.inf}, ${verb.perf}us sum`;
-    if (verb.deponent) return `${verb.pp1 ?? verb.pres + 'or'}, ${verb.inf}, ${verb.perf}us sum`;
+    if (verb.deponent) return `${verb.pp1 ?? deponentFirstPart(verb)}, ${verb.inf}, ${verb.perf}us sum`;
     if (verb.irregular && !verb.pp1 && IRREGULAR_PARTS[verb.inf]) return IRREGULAR_PARTS[verb.inf];
     return `${verb.pp1 ?? firstPart(verb)}, ${verb.inf}, ${verb.perf}i` + (verb.ppp && !verb.noPassive ? `, ${verb.ppp}us` : '');
+}
+
+/** `amatus est` also accepts `amata est` and `amatum est`; the prompt only ever shows the masculine. */
+export function genderVariants(form: string): string[] {
+    const [first, ...rest] = form.split(' ');
+    if (!rest.length || form.endsWith(' iri')) return [];
+    const tail = rest.join(' ');
+    if (first.endsWith('us')) return [`${first.slice(0, -2)}a ${tail}`, `${first.slice(0, -2)}um ${tail}`];
+    if (first.endsWith('i')) return [`${first.slice(0, -1)}ae ${tail}`, `${first.slice(0, -1)}a ${tail}`];
+    return [];
 }

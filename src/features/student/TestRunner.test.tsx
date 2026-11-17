@@ -42,3 +42,36 @@ describe('TestRunner', () => {
     expect(onSubmit).toHaveBeenCalledWith([{ pool_id: 'p2', given: 'x' }]);
   });
 });
+
+describe('TestRunner structured answers', () => {
+  const gridItem: TestItem = {
+    pool_id: 'g1',
+    question: {
+      id: 'qg', type: 'grid', badge: 'B', prompt: 'Fill the grid', columns: ['Sg'],
+      rows: [{ label: 'Nom', cells: [{ id: 'c1' }] }, { label: 'Acc', cells: [{ id: 'c2' }] }],
+    } as TestItem['question'],
+  };
+  const props = (attemptId: string, onSubmit = vi.fn()) =>
+    ({ attemptId, startedAt: new Date().toISOString(), timeLimitSec: null, items: [gridItem], onSubmit });
+
+  it('saves a cell map to sessionStorage, marks the item partial, and submits an object', async () => {
+    const onSubmit = vi.fn();
+    vi.spyOn(window, 'confirm').mockReturnValue(true);
+    render(<TestRunner {...props('att4', onSubmit)} />);
+    await userEvent.type(screen.getByLabelText('Nom, Sg'), 'rosa');
+    expect(JSON.parse(sessionStorage.getItem('latiniq_test_att4')!)).toEqual({ g1: { c1: 'rosa' } });
+    expect(screen.getByRole('button', { name: 'Question 1' })).toHaveClass('partial');
+    expect(screen.getByRole('button', { name: 'Question 1' })).not.toHaveClass('answered');
+    await userEvent.type(screen.getByLabelText('Acc, Sg'), 'rosam');
+    expect(screen.getByRole('button', { name: 'Question 1' })).toHaveClass('answered');
+    await userEvent.click(screen.getByRole('button', { name: /submit test/i }));
+    expect(onSubmit).toHaveBeenCalledWith([{ pool_id: 'g1', given: { c1: 'rosa', c2: 'rosam' } }]);
+    vi.mocked(window.confirm).mockRestore();
+  });
+
+  it('still loads answers an older client saved as strings', () => {
+    sessionStorage.setItem('latiniq_test_att5', JSON.stringify({ p1: 'amem' }));
+    render(<TestRunner {...{ ...props('att5'), items }} />);
+    expect(screen.getByPlaceholderText(/type your answer/i)).toHaveValue('amem');
+  });
+});
