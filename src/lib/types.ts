@@ -3,6 +3,8 @@ interface QuestionBase {
   badge: string;
   prompt: string;
   hint?: string;
+  /** What the hint is; 'definition' relabels it. Defaults to a plain hint. */
+  hintKind?: 'definition';
   explanation?: string;
 }
 

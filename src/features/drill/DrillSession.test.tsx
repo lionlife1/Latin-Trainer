@@ -14,6 +14,17 @@ describe('DrillSession', () => {
     expect(screen.getByText('Because.')).toBeInTheDocument();
   });
 
+  it('does not repeat the answer when right, and names it when wrong', async () => {
+    const { unmount } = render(<DrillSession questions={[typein]} mode="practice" onFinish={() => {}} onExit={() => {}} />);
+    await userEvent.type(screen.getByPlaceholderText(/type your answer/i), 'amēm{Enter}');
+    expect(screen.queryByText(/Answer:/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Correct answer:/)).not.toBeInTheDocument();
+    unmount();
+    render(<DrillSession questions={[typein]} mode="practice" onFinish={() => {}} onExit={() => {}} />);
+    await userEvent.type(screen.getByPlaceholderText(/type your answer/i), 'nope{Enter}');
+    expect(screen.getByText(/Correct answer:/)).toBeInTheDocument();
+  });
+
   it('marks a wrong mc choice and reveals the correct one', async () => {
     render(<DrillSession questions={[mc]} mode="practice" onFinish={() => {}} onExit={() => {}} />);
     await userEvent.click(screen.getByRole('button', { name: 'x' }));

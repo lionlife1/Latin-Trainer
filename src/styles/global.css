@@ -170,6 +170,13 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .q-type-badge { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 12px; }
 .q-prompt { font-size: 1.35rem; line-height: 1.45; font-weight: 500; }
 .q-prompt strong, .q-prompt .latin-word { font-weight: 700; color: var(--primary); }
+.form-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.form-chip {
+  display: flex; flex-direction: column; align-items: flex-start; padding: 6px 10px;
+  border: 1px solid var(--line); border-radius: 10px; background: var(--surface-subtle);
+}
+.form-chip-k { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.form-chip-v { font-size: 1rem; font-weight: 600; color: var(--ink); }
 .q-hint { margin-top: 16px; font-size: 0.9rem; color: var(--ink-2); min-height: 1.4em; }
 .answer-area { width: 100%; }
 .input-wrap { display: flex; gap: 10px; width: 100%; }

@@ -95,6 +95,8 @@ describe('generateRandomQuestion with a custom pool', () => {
       const q = generateRandomQuestion({ stdAct: true, stdPass: true, dep: false, irr: false }, rng, [cado]);
       if (q?.type !== 'typein') throw new Error('expected typein');
       expect(q.prompt).not.toContain('passive');
+      expect(q.prompt).not.toContain('>Voice<');
+      expect(q.explanation).toBeUndefined();
       expect(q.answers[0]).not.toMatch(/ |r$|ris$|tur$|mur$|mini$|ntur$/);
     }
   });
@@ -105,7 +107,7 @@ describe('generateRandomQuestion with a custom pool', () => {
       const q = generateRandomQuestion({ stdAct: true, stdPass: false, dep: false, irr: true }, rng, [redeo]);
       if (q?.type !== 'typein') throw new Error('expected typein');
       expect(q.hint).toBe('Principal parts: redeo, redire, redivi');
-      if (q.prompt.includes('1st sg. · pluperfect')) {
+      if (q.prompt.includes("form-chip-v'>pluperfect") && q.prompt.includes("form-chip-v'>1st sg.")) {
         seen++;
         expect(q.answers).toEqual(expect.arrayContaining(['redivissem', 'rediissem', 'redissem']));
       }
@@ -179,7 +181,7 @@ describe('Endless only asks cells the verb has', () => {
       const q = generateRandomQuestion({ stdAct: false, stdPass: true, dep: false, irr: false }, rng, [timeo]);
       if (!q || q.type !== 'typein') throw new Error('expected a typein question');
       expect(q.answers[0], q.prompt).toBeTruthy();
-      expect(q.prompt).not.toMatch(/· (perfect|pluperfect) passive/);
+      expect(q.prompt).not.toMatch(/form-chip-v'>(perfect|pluperfect)<.*form-chip-v'>passive</);
     }
   });
 });
@@ -195,14 +197,13 @@ describe('Endless accepts feminine and neuter perfect passives', () => {
     throw new Error('no matching question');
   };
   it('perfect passive of amare', () => {
-    const q = draw([verb('amare')], false, /· perfect passive/);
+    const q = draw([verb('amare')], false, /form-chip-v'>perfect<.*form-chip-v'>passive</);
     const first = q.answers[0];
     expect(first).toMatch(/^amat[ui]s? s/);
     const [w, aux] = first.split(' ');
     const fem = w.endsWith('us') ? w.slice(0, -2) + 'a' : w.slice(0, -1) + 'ae';
     expect(q.answers).toContain(`${fem} ${aux}`);
     expect(new Set(q.answers).size).toBe(q.answers.length);
-    expect(q.explanation).toContain(first);
   });
   it('deponent perfect', () => {
     for (let i = 0; i < 500; i++) {

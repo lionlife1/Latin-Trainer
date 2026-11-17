@@ -34,16 +34,16 @@ export function Feedback({ correct, answer, answerIsHtml, explanation, summary, 
     <div className="feedback-overlay" role="dialog" aria-live="polite">
       <div className={`feedback-card ${correct ? 'is-correct' : 'is-wrong'}`}>
         <div className="feedback-verdict">{correct ? 'Correct' : 'Not quite'}</div>
-        <div className="feedback-correct">
-          {summary !== undefined ? (
+        {summary !== undefined ? (
+          <div className="feedback-correct">
             <strong>{summary}</strong>
-          ) : (
-            <>
-              {correct ? 'Answer: ' : 'Correct answer: '}
-              {answerIsHtml ? <strong dangerouslySetInnerHTML={{ __html: answer }} /> : <strong>{answer}</strong>}
-            </>
-          )}
-        </div>
+          </div>
+        ) : !correct && (
+          <div className="feedback-correct">
+            Correct answer:{' '}
+            {answerIsHtml ? <strong dangerouslySetInnerHTML={{ __html: answer }} /> : <strong>{answer}</strong>}
+          </div>
+        )}
         {explanation && <div className="feedback-explanation">{explanation}</div>}
         {onEasy ? (
           <div className="feedback-actions">

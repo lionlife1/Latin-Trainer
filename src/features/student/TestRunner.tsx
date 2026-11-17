@@ -98,7 +98,7 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
       </div>
 
       <div className="drill-body" key={item.pool_id}>
-        <QuestionCard badge={q.badge} prompt={q.prompt} hint={q.hint} />
+        <QuestionCard badge={q.badge} prompt={q.prompt} hint={q.hint} hintKind={q.hintKind} />
         <Test
           q={q}
           value={answers[item.pool_id]}

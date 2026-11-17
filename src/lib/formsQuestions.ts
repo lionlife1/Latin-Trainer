@@ -1,12 +1,13 @@
 // Question generators for the Forms trainer: "make the form" (type-in) and "identify the form" (multiple choice).
 import {
-    PRONOUNS, cellFeatures, cellLabel, cellsOf, entryOf, formsOf, genderVariants, meaningOf, parse,
+    PRONOUNS, cellFeatures, cellLabel, cellParts, cellsOf, entryOf, formsOf, genderVariants, meaningOf, parse,
     type Adjective, type Cell, type Degree, type MorphWord, type Noun, type Pronoun, type Verb, type VerbCell, type VerbTense, type Voice,
 } from './morph';
 import { trainerPool } from './conjugator';
 import { CORE_NOUNS } from '../content/nouns.generated';
 import { CORE_ADJECTIVES } from '../content/adjectives.generated';
 import { escapeHtml } from './html';
+import { formChipsHtml } from './formChips';
 import { shuffle } from './shuffle';
 import type { DrillQuestion, MCQuestion, TypeInQuestion } from './types';
 
@@ -152,10 +153,11 @@ export function makeFormQuestion(w: MorphWord, cell: Cell, rng: () => number): T
         id: nextId(rng),
         type: 'typein',
         badge: 'MAKE THE FORM',
-        prompt: `<span class='latin-word' style='font-size: 1.4em;'>${escapeHtml(entryOf(w))}</span><br><span style='font-size: 0.8em; color: var(--text-secondary);'>${cellLabel(w, cell)}</span>`,
+        prompt: `<span class='latin-word' style='font-size: 1.4em;'>${escapeHtml(entryOf(w))}</span>${formChipsHtml(cellParts(w, cell))}`,
         hint: escapeHtml(meaningOf(w)),
+        hintKind: 'definition',
         answers,
-        explanation: `The form is ${answers[0]}.${variants.length ? ` Also accepted: ${variants.join(', ')}.` : ''}`,
+        explanation: variants.length ? `Also accepted: ${variants.join(', ')}.` : undefined,
     };
 }
 
@@ -173,9 +175,10 @@ export function identifyFormQuestion(w: MorphWord, cell: Cell, rng: () => number
         badge: 'IDENTIFY THE FORM',
         prompt: `<span class='latin-word' style='font-size: 1.4em;'>${escapeHtml(form)}</span><br><span style='font-size: 0.8em; color: var(--text-secondary);'>from ${escapeHtml(entryOf(w))}</span>`,
         hint: escapeHtml(meaningOf(w)),
+        hintKind: 'definition',
         choices: [correct, ...distractors.map(c => cellLabel(w, c))],
         correct,
-        explanation: labels.length > 1 ? `${form} can be any of these: ${labels.join('; ')}.` : `${form}: ${correct}.`,
+        explanation: labels.length > 1 ? `${form} can be any of these: ${labels.join('; ')}.` : undefined,
     };
 }
 
