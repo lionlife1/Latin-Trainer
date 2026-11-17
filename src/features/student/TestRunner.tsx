@@ -1,15 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { PublicQuestion } from '../../lib/types';
-import { MCAnswer } from '../drill/MCAnswer';
+import type { Given, PublicQuestion } from '../../lib/types';
+import type { TestResponse } from './api';
 import { QuestionCard } from '../drill/QuestionCard';
+import { rendererFor } from '../items/registry';
 
 export interface TestItem {
   pool_id: string;
   question: PublicQuestion;
-}
-export interface TestResponse {
-  pool_id: string;
-  given: string;
 }
 
 interface Props {
@@ -25,7 +22,7 @@ interface Props {
 
 const storageKey = (attemptId: string) => `latiniq_test_${attemptId}`;
 
-function loadAnswers(attemptId: string): Record<string, string> {
+function loadAnswers(attemptId: string): Record<string, Given> {
   try {
     return JSON.parse(sessionStorage.getItem(storageKey(attemptId)) ?? '{}') ?? {};
   } catch {
@@ -45,7 +42,7 @@ function remainingSec(startedAt: string, limit: number | null): number | null {
 const fmtClock = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 
 export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit, error }: Props) {
-  const [answers, setAnswers] = useState<Record<string, string>>(() => loadAnswers(attemptId));
+  const [answers, setAnswers] = useState<Record<string, Given>>(() => loadAnswers(attemptId));
   const [index, setIndex] = useState(0);
   const [left, setLeft] = useState(() => remainingSec(startedAt, timeLimitSec));
   const [submitting, setSubmitting] = useState(false);
@@ -55,7 +52,9 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
     if (submitted.current) return;
     submitted.current = true;
     setSubmitting(true);
-    const responses = items.filter(i => answers[i.pool_id]?.trim()).map(i => ({ pool_id: i.pool_id, given: answers[i.pool_id] }));
+    const responses: TestResponse[] = items
+      .filter(i => rendererFor(i.question).answered(i.question, answers[i.pool_id]) !== 'none')
+      .map(i => ({ pool_id: i.pool_id, given: answers[i.pool_id] }));
     try {
       await onSubmit(responses);
     } catch {
@@ -81,8 +80,10 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
   const item = items[index];
   if (!item) return null;
   const q = item.question;
-  const setAnswer = (v: string) => setAnswers(a => ({ ...a, [item.pool_id]: v }));
-  const answeredCount = items.filter(i => answers[i.pool_id]?.trim()).length;
+  const { Test } = rendererFor(q);
+  const setAnswer = (v: Given) => setAnswers(a => ({ ...a, [item.pool_id]: v }));
+  const state = (i: TestItem) => rendererFor(i.question).answered(i.question, answers[i.pool_id]);
+  const answeredCount = items.filter(i => state(i) !== 'none').length;
 
   return (
     <div className="screen active">
@@ -98,29 +99,12 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
 
       <div className="drill-body" key={item.pool_id}>
         <QuestionCard badge={q.badge} prompt={q.prompt} hint={q.hint} />
-        {q.type === 'typein' ? (
-          <div className="answer-area">
-            <div className="input-wrap">
-              <input
-                className="answer-input"
-                placeholder="Type your answer…"
-                autoFocus
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                spellCheck={false}
-                value={answers[item.pool_id] ?? ''}
-                onChange={e => setAnswer(e.target.value)}
-                onKeyDown={e => {
-                  if (e.key === 'Enter' && index < items.length - 1) setIndex(index + 1);
-                }}
-              />
-            </div>
-            <div className="macron-toolbar"><span className="macron-hint">Macrons optional</span></div>
-          </div>
-        ) : (
-          <MCAnswer choices={q.choices} picked={answers[item.pool_id]} onPick={setAnswer} />
-        )}
+        <Test
+          q={q}
+          value={answers[item.pool_id]}
+          onChange={setAnswer}
+          onEnter={() => { if (index < items.length - 1) setIndex(index + 1); }}
+        />
 
         <div className="row" style={{ justifyContent: 'space-between', width: '100%' }}>
           <button className="btn-secondary" disabled={index === 0} onClick={() => setIndex(index - 1)}>Previous</button>
@@ -135,7 +119,7 @@ export function TestRunner({ attemptId, startedAt, timeLimitSec, items, onSubmit
           {items.map((it, i) => (
             <button
               key={it.pool_id}
-              className={`${answers[it.pool_id]?.trim() ? 'answered' : ''} ${i === index ? 'current' : ''}`}
+              className={`${state(it) === 'full' ? 'answered' : state(it) === 'partial' ? 'partial' : ''} ${i === index ? 'current' : ''}`}
               aria-label={`Question ${i + 1}`}
               onClick={() => setIndex(i)}
             >

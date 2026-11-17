@@ -22,6 +22,8 @@ teachers create classes, assign practice or tests, and see a gradebook and per-q
   searching a built-in Latin dictionary (macrons optional), can override a definition to match their
   textbook, and can add their own words. Lists can be **imported** by pasting lines (Quizlet export, CSV,
   "latin - english") and **exported** to Quizlet, Gimkit and Blooket. Latin fields have a macron helper.
+- **Forms assignments**: synopsis, declension or conjugation chart, principal parts, parse-the-form and
+  make-the-form, generated from the built-in words and graded cell by cell with partial credit.
 - **Print** any assignment as a student copy plus answer key, in versions A/B/C with shuffled questions
   and choices.
 - Two modes:

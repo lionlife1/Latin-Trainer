@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { fmtPoints } from '../../lib/grading';
 import { useAsync } from '../../lib/useAsync';
 import { listMyAssignments } from './api';
 
@@ -40,7 +41,7 @@ function AssignmentRow({ row }: { row: Row }) {
         <span className="row-side">
           {best && (
             <span className="score">
-              {best.score}/{best.total}{p !== null && ` · ${p}%`}
+              {fmtPoints(best.score ?? 0)}/{fmtPoints(best.total)}{p !== null && ` · ${p}%`}
               {best.is_late && <> <span className="tag warn">Late</span></>}
             </span>
           )}

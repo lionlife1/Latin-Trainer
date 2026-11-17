@@ -1,5 +1,5 @@
 import fixtures from '../../tests/fixtures/normalize.json';
-import { normalize, isCorrect, correctDisplay } from './grading';
+import { normalize, isCorrect, correctDisplay, grade, fmtPoints } from './grading';
 import type { DrillQuestion } from './types';
 
 const typein: DrillQuestion = { id: 't', type: 'typein', badge: 'B', prompt: 'p', answers: ['amem', 'amātus sim'] };
@@ -30,5 +30,86 @@ describe('isCorrect', () => {
   it('correctDisplay shows first answer or mc correct', () => {
     expect(correctDisplay(typein)).toBe('amem');
     expect(correctDisplay(mc)).toBe('Imperfect active subjunctive');
+  });
+});
+
+describe('grade', () => {
+  const ti: DrillQuestion = { id: 't', type: 'typein', badge: 'B', prompt: 'p', answers: ['amem'] };
+  const mc1: DrillQuestion = { id: 'm', type: 'mc', badge: 'B', prompt: 'p', choices: ['x', 'y'], correct: 'y' };
+  const grid: DrillQuestion = {
+    id: 'g', type: 'grid', badge: 'B', prompt: 'p', columns: ['c1'],
+    rows: [
+      { label: 'r1', cells: [{ id: 'a' }] },
+      { label: 'r2', cells: [{ id: 'b' }] },
+      { label: 'r3', cells: [{ id: 'c' }, { id: 'd', given: 'amo' }, null] },
+    ],
+    key: { a: ['amo'], b: ['amas'], c: ['amatus est', 'amata est'] },
+  };
+  const parse: DrillQuestion = {
+    id: 'p', type: 'parse', badge: 'B', prompt: 'p',
+    fields: [
+      { id: 'case', label: 'Case', options: [
+        { value: 'genitive', label: 'genitive' }, { value: 'dative', label: 'dative' },
+        { value: 'nominative', label: 'nominative' }, { value: 'ablative', label: 'ablative' }] },
+      { id: 'number', label: 'Number', options: [
+        { value: 'singular', label: 'singular' }, { value: 'plural', label: 'plural' }] },
+    ],
+    key: [
+      { case: 'genitive', number: 'singular' },
+      { case: 'dative', number: 'singular' },
+      { case: 'nominative', number: 'plural' },
+    ],
+  };
+  const ro = (q: DrillQuestion, g: Parameters<typeof grade>[1]) => {
+    const r = grade(q, g);
+    return [r.right, r.outOf];
+  };
+
+  it('typein and mc', () => {
+    expect(ro(ti, ' Amēm ')).toEqual([1, 1]);
+    expect(ro(ti, '')).toEqual([0, 1]);
+    expect(ro(ti, '   ')).toEqual([0, 1]);
+    expect(ro(ti, { a: 'amem' })).toEqual([0, 1]);
+    expect(ro(mc1, 'x')).toEqual([0, 1]);
+    expect(grade(mc1, 'y').parts).toEqual([{ id: 'answer', ok: true }]);
+  });
+
+  it('grid', () => {
+    const g = grade(grid, { a: 'amo', b: 'amat', c: 'AMATA  est' });
+    expect([g.right, g.outOf]).toEqual([2, 3]);
+    expect(g.parts).toEqual([{ id: 'a', ok: true }, { id: 'b', ok: false }, { id: 'c', ok: true }]);
+    expect(ro(grid, {})).toEqual([0, 3]);
+    expect(ro(grid, 'amo')).toEqual([0, 3]);
+    expect(ro(grid, { a: '  ' })).toEqual([0, 3]);
+  });
+
+  it('parse', () => {
+    expect(ro(parse, { case: 'dative', number: 'singular' })).toEqual([2, 2]);
+    expect(ro(parse, { case: 'nominative', number: 'singular' })).toEqual([1, 2]);
+    expect(ro(parse, { case: 'ablative', number: 'plural' })).toEqual([1, 2]);
+    expect(ro(parse, {})).toEqual([0, 2]);
+    expect(ro(parse, 'dative')).toEqual([0, 2]);
+  });
+
+  it('isCorrect means all parts right', () => {
+    expect(isCorrect(parse, { case: 'genitive', number: 'singular' })).toBe(true);
+    expect(isCorrect(grid, { a: 'amo', b: 'amas', c: 'amata est' })).toBe(true);
+    expect(isCorrect(grid, { a: 'amo' })).toBe(false);
+  });
+
+  it('correctDisplay for grid and parse', () => {
+    expect(correctDisplay(grid)).toBe('amo, amas, amatus est');
+    expect(correctDisplay(parse)).toBe('genitive singular / dative singular / nominative plural');
+  });
+});
+
+describe('fmtPoints', () => {
+  it('shows integers as they are and trims decimals to 2 places', () => {
+    expect(fmtPoints(24)).toBe('24');
+    expect(fmtPoints(0)).toBe('0');
+    expect(fmtPoints(18.5)).toBe('18.5');
+    expect(fmtPoints(6.6667)).toBe('6.67');
+    expect(fmtPoints(2.25)).toBe('2.25');
+    expect(fmtPoints(3.001)).toBe('3');
   });
 });

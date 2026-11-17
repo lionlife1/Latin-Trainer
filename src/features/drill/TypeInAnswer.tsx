@@ -26,6 +26,7 @@ export function TypeInAnswer({ disabled, verdict, onSubmit }: Props) {
         <input
           ref={ref}
           type="text"
+          maxLength={200}
           className={`answer-input ${verdict === true ? 'correct' : verdict === false ? 'wrong' : ''}`}
           placeholder="Type your answer…"
           autoComplete="off"

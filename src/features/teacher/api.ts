@@ -1,3 +1,4 @@
+import type { FormsAssignmentConfig } from '../../lib/formsItems';
 import { normalize } from '../../lib/grading';
 import { lemmaOf } from '../../lib/lexicon';
 import { rankLexicon } from '../../lib/lexiconRank';
@@ -7,9 +8,17 @@ import type { PoolItem, VocabDirection, VocabItem } from '../../lib/vocab';
 
 export interface ClassRow { id: string; name: string; join_code: string; created_at: string }
 export interface RosterRow { student_id: string; display_name: string; joined_at: string }
+export interface StoredWord { key: string; entry: string }
+/** A FormsAssignmentConfig with each word replaced by its key and dictionary entry. */
+export type StoredFormsConfig =
+  | Omit<Extract<FormsAssignmentConfig, { kind: 'synopsis' }>, 'words'> & { words: StoredWord[] }
+  | Omit<Extract<FormsAssignmentConfig, { kind: 'paradigm' }>, 'words'> & { words: StoredWord[] }
+  | Omit<Extract<FormsAssignmentConfig, { kind: 'principalParts' }>, 'words'> & { words: StoredWord[] }
+  | Omit<Extract<FormsAssignmentConfig, { kind: 'parse' | 'make' }>, 'words'> & { words?: StoredWord[] };
 export type AssignmentSource =
   | { kind: 'modules'; moduleIds: string[]; badges?: string[]; types?: ('typein' | 'mc')[] }
-  | { kind: 'vocab'; listId: string; directions: VocabDirection[] };
+  | { kind: 'vocab'; listId: string; directions: VocabDirection[] }
+  | { kind: 'forms'; config: StoredFormsConfig };
 export interface AssignmentRow {
   id: string; class_id: string; title: string; mode: AssignmentMode; source: AssignmentSource;
   question_count: number; due_at: string | null; time_limit_sec: number | null; max_attempts: number | null;
@@ -49,7 +58,7 @@ export const getAssignment = async (id: string) =>
   must<AssignmentRow>(await sb().from('assignments').select('*').eq('id', id).single());
 /** The published question snapshot. RLS (pool_teacher) limits it to the class's teacher. */
 export const getAssignmentPool = async (assignmentId: string) =>
-  must<PoolItem[]>(await sb().from('assignment_pool').select('item_key, question').eq('assignment_id', assignmentId).order('item_key'));
+  must<PoolItem[]>(await sb().from('assignment_pool').select('item_key, question, points').eq('assignment_id', assignmentId).order('item_key'));
 export async function deleteAssignment(id: string) {
   must(await sb().from('assignments').delete().eq('id', id));
 }
@@ -72,7 +81,7 @@ export async function publishAssignment(input: PublishInput, pool: PoolItem[]): 
     .single();
   if (error || !data) return { ok: false, error: error?.message ?? 'Could not create assignment' };
   for (let i = 0; i < pool.length; i += 500) {
-    const chunk = pool.slice(i, i + 500).map(p => ({ assignment_id: data.id, item_key: p.item_key, question: p.question }));
+    const chunk = pool.slice(i, i + 500).map(p => ({ assignment_id: data.id, item_key: p.item_key, question: p.question, points: p.points ?? 1 }));
     const res = await sb().from('assignment_pool').insert(chunk);
     if (res.error) {
       await sb().from('assignments').delete().eq('id', data.id);

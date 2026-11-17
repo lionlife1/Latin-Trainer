@@ -6,6 +6,7 @@ let resolveRecord: () => void = () => {};
 const finishPractice = vi.fn();
 const flushPracticeQueue = vi.fn();
 const submitTest = vi.fn();
+const recordPractice = vi.fn();
 const getResponses = vi.fn();
 let mode: 'practice' | 'test' = 'practice';
 const item = (n: number) => ({ pool_id: `p${n}`, position: n - 1, question: { id: `q${n}`, type: 'typein', badge: 'B', prompt: `Q${n}`, answers: ['amem'] } });
@@ -16,7 +17,7 @@ vi.mock('./api', () => ({
   getAttempt: () => Promise.resolve({ id: 'att', started_at: new Date().toISOString() }),
   getAttemptItems: () => Promise.resolve(items),
   getResponses: (...a: unknown[]) => getResponses(...a),
-  recordPractice: () => new Promise<void>(r => (resolveRecord = r)),
+  recordPractice: (...a: unknown[]) => { recordPractice(...a); return new Promise<void>(r => (resolveRecord = r)); },
   flushPracticeQueue: (...a: unknown[]) => flushPracticeQueue(...a),
   finishPractice: (...a: unknown[]) => finishPractice(...a),
   submitTest: (...a: unknown[]) => submitTest(...a),
@@ -49,6 +50,7 @@ beforeEach(() => {
   sessionStorage.clear();
   getResponses.mockReset().mockResolvedValue([]);
   submitTest.mockReset();
+  recordPractice.mockReset();
   finishPractice.mockReset().mockResolvedValue({ score: 1, total: 1 });
   flushPracticeQueue.mockReset().mockResolvedValue({ sent: 0, remaining: 0 });
 });
@@ -112,4 +114,20 @@ it('shows the error on the test screen when submitting fails', async () => {
   await userEvent.click(screen.getByRole('button', { name: /submit test/i }));
   expect(await screen.findByText('RESULT')).toBeInTheDocument();
   vi.mocked(window.confirm).mockRestore();
+});
+
+it('records a parse answer as an object', async () => {
+  items = [{
+    pool_id: 'pp', position: 0,
+    question: {
+      id: 'qp', type: 'parse', badge: 'B', prompt: 'Parse it', hint: undefined,
+      fields: [{ id: 'num', label: 'Number', options: [{ value: 's', label: 'singular' }, { value: 'p', label: 'plural' }] }],
+      key: [{ num: 's' }],
+    },
+  }] as unknown as typeof items;
+  renderRun();
+  await userEvent.click(await screen.findByRole('button', { name: /begin/i }));
+  await userEvent.click(await screen.findByRole('button', { name: 'singular' }));
+  await userEvent.click(screen.getByRole('button', { name: /check/i }));
+  expect(recordPractice).toHaveBeenCalledWith(expect.objectContaining({ poolId: 'pp', given: { num: 's' } }));
 });

@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { Close } from '../../components/icons';
-import { correctDisplay } from '../../lib/grading';
+import { correctDisplay, grade } from '../../lib/grading';
 import type { DrillQuestion } from '../../lib/types';
+import { rendererFor } from '../items/registry';
 import { Feedback } from './Feedback';
-import { MCAnswer } from './MCAnswer';
 import { QuestionCard } from './QuestionCard';
-import { TypeInAnswer } from './TypeInAnswer';
 import { useDrill, type DrillOptions, type DrillResult } from './useDrill';
 
 interface Props {
@@ -34,6 +33,8 @@ export function DrillSession({ questions, mode, onAnswer, generate, onEasy, onFi
   }, [finished]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!current) return null;
+  const { Practice, answerIsHtml, showsScore } = rendererFor(current);
+  const scoreText = (g: { right: number; outOf: number }) => `${g.right}/${g.outOf} correct`;
   const endless = Boolean(generate);
 
   return (
@@ -62,18 +63,19 @@ export function DrillSession({ questions, mode, onAnswer, generate, onEasy, onFi
 
       <div className="drill-body" key={current.id + index}>
         <QuestionCard badge={current.badge} prompt={current.prompt} hint={current.hint} />
-        {current.type === 'typein' ? (
-          <TypeInAnswer disabled={!!lastResult} verdict={lastResult?.correct} onSubmit={drill.answer} />
-        ) : (
-          <MCAnswer choices={current.choices} correct={current.correct} picked={lastResult?.given} onPick={drill.answer} />
-        )}
+        <Practice
+          q={current}
+          result={lastResult ? { given: lastResult.given, grade: grade(current, lastResult.given) } : undefined}
+          onSubmit={drill.answer}
+        />
       </div>
 
       {lastResult && (
         <Feedback
           correct={lastResult.correct === true}
           answer={correctDisplay(current)}
-          answerIsHtml={current.type === 'mc'}
+          answerIsHtml={answerIsHtml}
+          summary={showsScore ? scoreText(grade(current, lastResult.given)) : undefined}
           explanation={current.explanation}
           onNext={drill.next}
           onEasy={onEasy && lastResult.correct ? () => { onEasy(current); drill.next(); } : undefined}

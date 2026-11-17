@@ -1,6 +1,8 @@
+import { bestAttempt } from '../../lib/bestAttempt';
 import { flush, PermanentError, type QueueJob } from '../../lib/offlineQueue';
 import { requireSupabase } from '../../lib/supabase';
-import type { AssignmentMode, DrillQuestion, PublicQuestion } from '../../lib/types';
+import type { PartResult } from '../../lib/grading';
+import type { AssignmentMode, DrillQuestion, Given, PublicQuestion } from '../../lib/types';
 
 export interface StudentAssignment {
   id: string; title: string; mode: AssignmentMode; question_count: number; due_at: string | null;
@@ -10,8 +12,15 @@ export interface AttemptRow {
   id: string; assignment_id: string; started_at: string; submitted_at: string | null; score: number | null;
   total: number; is_late: boolean; over_time: boolean;
 }
-export interface AttemptItem { pool_id: string; position: number; question: DrillQuestion | PublicQuestion }
-export interface ResponseRow { pool_id: string; given: string; correct: boolean }
+export interface AttemptItem { pool_id: string; position: number; question: DrillQuestion | PublicQuestion;
+  /** Points this item is worth; may be fractional. */
+  points: number;
+}
+export interface ResponseRow {
+  pool_id: string; given: Given | null; given_json: Given | null; correct: boolean;
+  earned: number; possible: number; parts: PartResult[] | null;
+}
+export interface TestResponse { pool_id: string; given: Given }
 
 const sb = () => requireSupabase();
 function must<T>(res: { data: unknown; error: { message: string } | null }): T {
@@ -32,8 +41,7 @@ export async function listMyAssignments() {
   return as.map(a => {
     const mine = ts.filter(t => t.assignment_id === a.id);
     const done = mine.filter(t => t.submitted_at);
-    // Newest first, so a tie keeps the latest attempt.
-    const best = done.reduce<AttemptRow | null>((b, t) => (!b || (t.score ?? 0) > (b.score ?? 0) ? t : b), null);
+    const best = bestAttempt(done);
     return { assignment: a, attempts: mine, best, open: mine.find(t => !t.submitted_at) ?? null };
   });
 }
@@ -47,11 +55,11 @@ export const startAttempt = async (assignmentId: string) =>
 export const getAttemptItems = async (attemptId: string) =>
   must<AttemptItem[]>(await sb().rpc('get_attempt_items', { p_attempt_id: attemptId }));
 export const getResponses = async (attemptId: string) =>
-  must<ResponseRow[]>(await sb().from('responses').select('pool_id, given, correct').eq('attempt_id', attemptId));
+  must<ResponseRow[]>(await sb().from('responses').select('pool_id, given, given_json, correct, earned, possible, parts').eq('attempt_id', attemptId));
 
 /** Throws PermanentError when the server rejects the answer for good (not your attempt, already submitted). */
 export async function recordPractice(job: QueueJob): Promise<void> {
-  const { error } = await sb().rpc('record_practice_response', {
+  const { error } = await sb().rpc('record_practice_response_v2', {
     p_attempt_id: job.attemptId, p_pool_id: job.poolId, p_given: job.given, p_ms: job.ms,
   });
   if (!error) return;
@@ -65,5 +73,5 @@ export const flushPracticeQueue = (userId: string, attemptId?: string) =>
 
 export const finishPractice = async (attemptId: string) =>
   must<{ score: number; total: number }>(await sb().rpc('finish_practice', { p_attempt_id: attemptId }));
-export const submitTest = async (attemptId: string, responses: { pool_id: string; given: string }[]) =>
+export const submitTest = async (attemptId: string, responses: TestResponse[]) =>
   must<{ score: number; total: number }>(await sb().rpc('submit_test', { p_attempt_id: attemptId, p_responses: responses }));
