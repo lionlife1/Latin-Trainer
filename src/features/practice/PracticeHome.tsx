@@ -3,7 +3,7 @@ import { Cards, ChevronRight, Layers, Table, Translate } from '../../components/
 import { MODULES } from '../../content/modules';
 import { setCounts } from '../vocab/scheduler';
 import { getSet, loadSets, loadSrs } from '../vocab/storage';
-import { loadProgress, loadStreak, loadTotalXP, todayISO } from '../solo/progressStore';
+import { liveStreak, loadProgress, loadTotalXP } from '../solo/progressStore';
 import { relativeDay } from './relativeDay';
 import { loadSessions, pct, type PracticeSession } from './sessionLog';
 import { useSyncVersion } from './useSessionSync';
@@ -18,14 +18,6 @@ const RECENT: Record<PracticeSession['kind'], { title: (s: PracticeSession) => s
 const FALLBACK = { title: () => 'Practice', path: () => '/practice' };
 
 const scoreClass = (p: number) => (p >= 80 ? 'good' : p >= 60 ? 'mid' : 'low');
-
-/** A streak only counts if its last day is today or yesterday. */
-function liveStreak() {
-  const s = loadStreak();
-  const y = new Date();
-  y.setUTCDate(y.getUTCDate() - 1);
-  return s.lastDate === todayISO() || s.lastDate === todayISO(y) ? s.count : 0;
-}
 
 export function PracticeHome() {
   useSyncVersion();

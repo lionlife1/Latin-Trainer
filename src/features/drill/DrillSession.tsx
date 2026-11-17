@@ -52,7 +52,7 @@ export function DrillSession({ questions, mode, onAnswer, generate, onEasy, onFi
           <div className="drill-progress-bar">
             <div
               className="drill-progress-fill"
-              style={{ width: endless ? '100%' : `${(index / total) * 100}%` }}
+              style={{ width: endless ? '100%' : `${(results.length / total) * 100}%` }}
             />
           </div>
           <span className="drill-progress-label">{endless ? `Endless · ${results.length} answered` : `${index + 1} / ${total}`}</span>

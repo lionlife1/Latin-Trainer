@@ -30,18 +30,54 @@ export const loadProgress = (): Progress => readJSON<Progress>(KEY_PROGRESS, {})
 export const loadStreak = (): Streak => readJSON<Streak>(KEY_STREAK, { lastDate: '', count: 0 });
 export const loadTotalXP = (): number => parseInt(localStorage.getItem(KEY_XP) ?? '0', 10) || 0;
 
+/** The local calendar day as YYYY-MM-DD. Streak days are the student's own days, not UTC days. */
 export function todayISO(d = new Date()): string {
-  return d.toISOString().slice(0, 10);
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+/** The calendar day before an ISO day. Built from local parts, so it is safe across DST. */
+export function prevDay(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number);
+  return todayISO(new Date(y, m - 1, d - 1));
+}
+
+/** The calendar day n days after an ISO day (n may be negative). Built from local parts, so it is safe across DST. */
+export function addDays(iso: string, n: number): string {
+  const [y, m, d] = iso.split('-').map(Number);
+  return todayISO(new Date(y, m - 1, d + n));
+}
+
+/** Whole days from day a to day b. */
+export function dayDiff(a: string, b: string): number {
+  const utc = (iso: string) => {
+    const [y, m, d] = iso.split('-').map(Number);
+    return Date.UTC(y, m - 1, d);
+  };
+  return Math.round((utc(b) - utc(a)) / 86_400_000);
 }
 
 export function updateStreak(today: string): Streak {
   const s = loadStreak();
-  if (s.lastDate === today) return s;
-  const y = new Date(today + 'T00:00:00Z');
-  y.setUTCDate(y.getUTCDate() - 1);
-  const next = { lastDate: today, count: s.lastDate === todayISO(y) ? s.count + 1 : 1 };
+  // Same day, or a lastDate written under the old UTC rule that is a day ahead of the local day.
+  if (s.lastDate >= today) return s;
+  const next = { lastDate: today, count: s.lastDate === prevDay(today) ? s.count + 1 : 1 };
   localStorage.setItem(KEY_STREAK, JSON.stringify(next));
   return next;
+}
+
+/** Runs `log` (which records a session and counts today) and returns the streak count if that made today a new streak day of 2 or more, else null. */
+export function streakMilestone(log: () => void): number | null {
+  const before = loadStreak();
+  log();
+  const after = loadStreak();
+  return after.lastDate !== before.lastDate && after.count >= 2 ? after.count : null;
+}
+
+/** A streak only counts if its last day is today or yesterday. */
+export function liveStreak(today = todayISO()): number {
+  const s = loadStreak();
+  return s.lastDate >= prevDay(today) ? s.count : 0;
 }
 
 export function isUnlocked(mod: ModuleMeta, progress: Progress): boolean {
@@ -56,39 +92,37 @@ export function recordSession(mod: ModuleContent, results: DrillResult[]) {
   const pct = total ? Math.round((correct / total) * 100) : 0;
   const earnedXP = Math.round(mod.xp_reward * (total / mod.questions.length));
   const qualifies = total >= Math.min(10, mod.questions.length) && pct >= 70;
-  const wrongIds = results.filter(r => !r.correct).map(r => r.q.id);
+  const inModule = new Set(mod.questions.map(q => q.id));
+  const answeredRight = new Set(results.filter(r => r.correct).map(r => r.q.id));
+  const alreadyComplete = progress[mod.id]?.completed === true;
 
+  const p = (progress[mod.id] ??= {});
+  // Mistakes accumulate: only a correct answer (or a question removed from the module) clears one.
+  const wrongIds = (p.wrong_ids ?? []).filter(id => inModule.has(id) && !answeredRight.has(id));
+  for (const r of results) if (!r.correct && !wrongIds.includes(r.q.id)) wrongIds.push(r.q.id);
+  p.wrong_ids = wrongIds;
   if (qualifies) {
-    const p = (progress[mod.id] ??= {});
     p.completed = true;
     p.xp = (p.xp ?? 0) + earnedXP;
-    p.wrong_ids = wrongIds;
     localStorage.setItem(KEY_XP, String(loadTotalXP() + earnedXP));
-  } else if (progress[mod.id]) {
-    progress[mod.id].wrong_ids = wrongIds;
   }
   localStorage.setItem(KEY_PROGRESS, JSON.stringify(progress));
   appendSession({
     kind: 'module', module_id: mod.id, correct, total, xp: qualifies ? earnedXP : 0, completed: qualifies,
   });
-  return { completed: qualifies, earnedXP: qualifies ? earnedXP : 0, pct };
+  return { completed: qualifies, earnedXP: qualifies ? earnedXP : 0, pct, alreadyComplete };
 }
 
 /** Consecutive days with practice, ending today or yesterday. */
 export function streakFrom(dates: string[], today = todayISO()): Streak {
   const days = new Set(dates);
-  const prev = (iso: string) => {
-    const d = new Date(iso + 'T00:00:00Z');
-    d.setUTCDate(d.getUTCDate() - 1);
-    return todayISO(d);
-  };
-  let day = days.has(today) ? today : prev(today);
+  let day = days.has(today) ? today : prevDay(today);
   if (!days.has(day)) return { lastDate: [...days].sort().pop() ?? '', count: 0 };
   const lastDate = day;
   let count = 0;
   while (days.has(day)) {
     count++;
-    day = prev(day);
+    day = prevDay(day);
   }
   return { lastDate, count };
 }
@@ -114,9 +148,25 @@ export function rebuildFromSessions(sessions: PracticeSession[], today = todayIS
     p.xp = (p.xp ?? 0) + s.xp;
   }
   const dates = sessions.filter(s => s.kind !== 'import').map(s => todayISO(new Date(s.finished_at)));
+  const rebuilt = streakFrom(dates, today);
+  const stored = loadStreak(); // read before anything is written
+  let streak = rebuilt;
+  // The log is capped and legacy learners have none, so a live stored streak must not be cut short.
+  if (stored.count > 0 && stored.lastDate >= prevDay(today)) {
+    if (!dates.length) {
+      streak = stored;
+    } else if (rebuilt.count > 0) {
+      const oldest = [...dates].sort()[0];
+      const runStart = addDays(rebuilt.lastDate, -(rebuilt.count - 1));
+      const storedStart = addDays(stored.lastDate, -(stored.count - 1));
+      if (runStart === oldest && storedStart < oldest && stored.lastDate >= prevDay(oldest)) {
+        streak = { lastDate: rebuilt.lastDate, count: dayDiff(storedStart, rebuilt.lastDate) + 1 };
+      }
+    }
+  }
   localStorage.setItem(KEY_PROGRESS, JSON.stringify(progress));
   localStorage.setItem(KEY_XP, String(total));
-  localStorage.setItem(KEY_STREAK, JSON.stringify(streakFrom(dates, today)));
+  localStorage.setItem(KEY_STREAK, JSON.stringify(streak));
 }
 
 export function resetAll() {

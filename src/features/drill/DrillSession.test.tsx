@@ -31,6 +31,27 @@ describe('DrillSession', () => {
   });
 });
 
+describe('DrillSession progress bar', () => {
+  const fill = () => document.querySelector('.drill-progress-fill') as HTMLElement;
+  const mc2: DrillQuestion = { ...mc, id: 'c' };
+
+  it('moves when an answer is given and fills on the last one', async () => {
+    render(<DrillSession questions={[mc, mc2]} mode="practice" onFinish={() => {}} onExit={() => {}} />);
+    expect(fill().style.width).toBe('0%');
+    await userEvent.click(screen.getByRole('button', { name: 'y' }));
+    expect(fill().style.width).toBe('50%');
+    await userEvent.click(screen.getByRole('button', { name: /continue/i }));
+    expect(fill().style.width).toBe('50%');
+    await userEvent.click(screen.getByRole('button', { name: 'y' }));
+    expect(fill().style.width).toBe('100%');
+  });
+
+  it('stays full in an endless session', () => {
+    render(<DrillSession questions={[mc]} mode="practice" generate={() => null} onFinish={() => {}} onExit={() => {}} />);
+    expect(fill().style.width).toBe('100%');
+  });
+});
+
 describe('DrillSession onEasy', () => {
   it('offers That was easy only after a right answer', async () => {
     const onEasy = vi.fn();

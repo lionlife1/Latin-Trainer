@@ -14,7 +14,11 @@ interface Props {
 export function Feedback({ correct, answer, answerIsHtml, explanation, onNext, onEasy }: Props) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') onNext();
+      if (e.key !== 'Enter') return;
+      // Holding Enter must not skip past the card, and a focused control does only its own action.
+      if (e.repeat) return;
+      if (e.target instanceof Element && e.target.closest('button, a, input, textarea, select')) return;
+      onNext();
     };
     // Defer so the Enter that submitted the answer doesn't also advance.
     const t = setTimeout(() => document.addEventListener('keydown', onKey), 0);
