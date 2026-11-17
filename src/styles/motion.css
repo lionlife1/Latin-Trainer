@@ -1,0 +1,94 @@
+/* Motion: tokens, keyframes, utilities. Later tasks add rules in their own sections. */
+
+/* ---- tokens ---- */
+:root {
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+  --dur-4: 500ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---- keyframes ---- */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+/* The one keyframe that is not transform/opacity: a short, two-iteration decoration. */
+@keyframes halo {
+  from { box-shadow: 0 0 0 0 var(--primary-tint); }
+  to { box-shadow: 0 0 0 10px transparent; }
+}
+@keyframes flip-in {
+  from { opacity: 0; transform: rotateX(80deg); }
+  to { opacity: 1; transform: rotateX(0); }
+}
+
+/* ---- utilities ---- */
+.m-fade-up {
+  animation: fade-up var(--dur-2) var(--ease-out) both;
+}
+/* Set --i inline on each child, 0..12 only, so the total delay stays short. */
+.m-stagger > * {
+  animation: fade-up var(--dur-2) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 30ms);
+}
+
+/* ---- progress ring ---- */
+.ring {
+  position: relative;
+  display: inline-block;
+  flex: none;
+}
+.ring svg {
+  display: block;
+}
+.ring-track {
+  stroke: var(--line);
+}
+.ring-arc {
+  stroke: var(--primary);
+  transition: stroke-dashoffset var(--dur-4) var(--ease-out);
+}
+.ring-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- drill ---- */
+
+/* ---- summary ---- */
+
+/* ---- path / home ---- */
+
+/* ---- reduced motion (keep LAST; extend the selector list as sections grow) ---- */
+@media (prefers-reduced-motion: reduce) {
+  .m-fade-up,
+  .m-stagger > *,
+  .ring-arc {
+    animation: none !important;
+    transition: none !important;
+  }
+}
